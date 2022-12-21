@@ -1,0 +1,1 @@
+echo "HellowWorld"  | cat -e | head -1 | wc -w || echo fail
