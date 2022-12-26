@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/26 14:25:38 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 21:14:59 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <unistd.h>
 # include "readline/readline.h"
 # include "readline/history.h"
-# include "../get_next_line/includes/get_next_line.h"
-# include "../doubly_linked_list/includes/doubly_linked_list.h"
+# include "../libraries/libft/includes/libft.h"
+# include "../libraries/get_next_line/includes/get_next_line.h"
+# include "../libraries/doubly_linked_list/includes/doubly_linked_list.h"
 
 // define lexer status
 typedef enum e_lex_status
@@ -32,37 +33,40 @@ typedef enum e_lex_status
 	LEX_DGREAT,
 	LEX_QUOTE,
 	LEX_DQUOTE,
-	LEX_MAKE_TOKEN,
 	LEX_FINISH
 }	t_lex_status;
 
-# define TOTAL_LEX_STATUS	11
+# define TOTAL_LEX_STATUS	10
 
-typedef void	(*t_lex_status_fp)(char **line, char **buffer);
+typedef void	(*t_lex_status_fp)(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 
 // define token type as enum
 typedef enum e_type
 {
 	WORD,
+	QUOTE_WORD,
+	DQUOTE_WORD,
 	PIPE,
-	REDIRECT
-}	t_type;
-
-// define token as node
-typedef struct s_token
-{
-	t_type	type;
-	char	*value;
-}	t_token;
-
-// define redirect as enum
-typedef enum e_redirect
-{
 	LESS,
 	GREAT,
 	DLESS,
 	DGREAT
-}	t_redirect;
+}	t_type;
+
+typedef enum e_quote_type
+{
+	NONE,
+	SINGLE,
+	DOUBLE
+}	t_quote_type;
+
+// define token as node
+typedef struct s_token
+{
+	t_type			type;
+	t_quote_type	quote_type;
+	char			*value;
+}	t_token;
 
 // define command as node
 typedef struct s_command
@@ -77,16 +81,15 @@ typedef struct s_data
 	t_list	token_lst;
 }	t_data;
 
-void	lex_start(char **line, char **buffer);
-void	lex_word(char **line, char **buffer);
-void	lex_pipe(char **line, char **buffer);
-void	lex_less(char **line, char **buffer);
-void	lex_dless(char **line, char **buffer);
-void	lex_great(char **line, char **buffer);
-void	lex_dgreat(char **line, char **buffer);
-void	lex_quote(char **line, char **buffer);
-void	lex_dquote(char **line, char **buffer);
-void	lex_make_token(char **line, char **buffer);
-void	lex_finish(char **line, char **buffer);
+void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type);
+void	lex_start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_quote(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	lex_dquote(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 
 #endif
