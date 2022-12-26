@@ -8,31 +8,28 @@ LIBC		=	ar rcs
 CFLAGS		=	-Wall -Wextra -Werror
 #DIRS
 LFTDIR		=	libft
+DLLDIR		=	doubly_linked_list
+GNLDIR		=	get_next_line
 SRCDIR		=	
 BONUSDIR	=	
 #FILES
-LIBS		=	$(LFTDIR)/libft.a
+LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR)
 SRCS		=	main.c
 OBJS		=	${SRCS:.c=.o}
-BSRCS		=	
-BOBJS		=	${BSRCS:.c=.o}
 
 all : $(NAME)
 
-ifeq ($(filter bonus, $(MAKECMDGOALS)), bonus)
-$(NAME) : $(BOBJS)
-	$(MAKE) -C $(LFTDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(BOBJS) $(LIBS)
-else
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LFTDIR)
+	$(MAKE) -C $(DLLDIR)
+	$(MAKE) -C $(GNLDIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-endif
 
 bonus : $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(LFTDIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
 
 clean :
 	$(MAKE) -C $(LFTDIR) clean
