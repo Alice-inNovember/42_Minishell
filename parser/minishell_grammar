@@ -1,0 +1,32 @@
+/*	--------------------------------------------------------
+	Minishell Grammar - Thanks to 현클데굴님
+	-------------------------------------------------------- */
+
+%start program
+
+Program		::= Data_list
+Data_list 	::= cmd
+			| Data_list '|' cmd
+cmd 		::= simple_cmd
+simple_cmd  ::= cmd_prefix cmd_name cmd_suffix
+simple_cmd  ::= cmd_prefix cmd_name
+simple_cmd  ::= cmd_prefix
+simple_cmd  ::= cmd_name
+simple_cmd  ::= cmd_name cmd_suffix
+cmd_name    ::= WORD
+cmd_suffix  ::= io_redir
+cmd_suffix  ::= cmd_suffix io_redir
+cmd_suffix  ::= WORD
+cmd_suffix  ::= cmd_suffix WORD
+cmd_prefix  ::= io_redir
+cmd_prefix  ::= cmd_prefix io_redir
+redir_list  ::= io_redir
+redir_list  ::= redir_list io_redir
+io_redir 	::= io_file
+			| io_here
+io_file  	::= '<' file_name
+		 	| '>' file_name
+		 	| '>>' file_name
+io_here  	::= '<<' end
+file_name 	::= WORD
+end 		::= WORD
