@@ -2,31 +2,67 @@
 	Minishell Grammar - Thanks to 현클데굴님
 	-------------------------------------------------------- */
 
-%start program
-
-Program		::= Data_list
-Data_list 	::= cmd
-			| Data_list '|' cmd
-cmd 		::= simple_cmd
-simple_cmd  ::= cmd_prefix cmd_name cmd_suffix
-simple_cmd  ::= cmd_prefix cmd_name
-simple_cmd  ::= cmd_prefix
-simple_cmd  ::= cmd_name
-simple_cmd  ::= cmd_name cmd_suffix
-cmd_name    ::= WORD
-cmd_suffix  ::= io_redir
-cmd_suffix  ::= cmd_suffix io_redir
+/* 수정 */
+program		::= expression
+			;
+expression 	::= simple_cmd
+			| expression '|' simple_cmd
+			;
+simple_cmd  ::= WORD
+			| cmd_prefix
+  			| cmd_prefix simple_cmd
+			| simple_cmd cmd_suffix
+			;
 cmd_suffix  ::= WORD
-cmd_suffix  ::= cmd_suffix WORD
+			| io_redir
+			| cmd_suffix WORD
+			| cmd_suffix io_redir
+			;
 cmd_prefix  ::= io_redir
-cmd_prefix  ::= cmd_prefix io_redir
-redir_list  ::= io_redir
-redir_list  ::= redir_list io_redir
+			| cmd_prefix io_redir
+			;
 io_redir 	::= io_file
 			| io_here
-io_file  	::= '<' file_name
-		 	| '>' file_name
-		 	| '>>' file_name
-io_here  	::= '<<' end
-file_name 	::= WORD
-end 		::= WORD
+			;
+io_file  	::= '<' WORD
+		 	| '>' WORD
+		 	| '>>' WORD
+			;
+io_here  	::= '<<' WORD
+			;
+
+/* 원본 */
+Program-> Data_list
+Data_list -> cmd
+Data_list -> Data_list PIPE
+Data_list -> Data_list AND
+Data_list -> Data_list OR
+PIPE -> '|' cmd
+OR -> '||' cmd
+AND -> '&&' cmd
+cmd -> simple_comd
+cmd -> subshell
+cmd -> subshell redir_list
+subshell -> '(' Data_list ')'
+simple_comd -> cmd_prefix cmd_name cmd_suffix
+simple_comd -> cmd_prefix cmd_name
+simple_comd -> cmd_prefix
+simple_comd -> cmd_name
+simple_comd -> cmd_name cmd_suffix
+cmd_name -> 'word'
+cmd_suffix -> io_redir
+cmd_suffix -> cmd_suffix io_redir
+cmd_suffix -> 'word'
+cmd_suffix -> cmd_suffix 'word'
+cmd_prefix -> io_redir
+cmd_prefix -> cmd_prefix io_redir
+redir_list -> io_redir
+redir_list -> redir_list io_redir
+io_redir -> io_file
+io_redir -> io_here
+io_file  -> '<' f_name
+io_file   ->  '>' f_name
+io_file   ->  '>>' f_name
+io_here  -> '<<' end
+f_name -> 'word'
+end -> 'word'
