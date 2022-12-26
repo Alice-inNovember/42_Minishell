@@ -1,6 +1,7 @@
 /*	--------------------------------------------------------
 	Minishell Grammar
-	https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_10 <- 2.10.2 Shell Grammar Rules 참고할 것
+	https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_10 참고
+	규칙의 경우 2.10.2 Shell Grammar Rules 참고할 것
 	-------------------------------------------------------- */
 
 program		: expression
