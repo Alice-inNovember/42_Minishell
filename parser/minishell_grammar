@@ -1,68 +1,41 @@
 /*	--------------------------------------------------------
-	Minishell Grammar - Thanks to 현클데굴님
+	Minishell Grammar
+	https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_10 <- 2.10.2 Shell Grammar Rules 참고할 것
 	-------------------------------------------------------- */
 
-/* 수정 */
-program		::= expression
+program		: expression
 			;
-expression 	::= simple_cmd
-			| expression '|' simple_cmd
+expression 	: simple_command
+			| expression '|' simple_command
 			;
-simple_cmd  ::= WORD
-			| cmd_prefix
-  			| cmd_prefix simple_cmd
-			| simple_cmd cmd_suffix
+simple_cmd  : cmd_prefix cmd_word cmd_suffix
+			| cmd_prefix cmd_word
+  			| cmd_prefix
+			| cmd_name cmd_suffix
+			| cmd_name
 			;
-cmd_suffix  ::= WORD
-			| io_redir
+cmd_name	: WORD						/* Apply rule 7a */
+			;
+cmd_word	: WORD						/* Apply rule 7b */
+			;
+cmd_prefix  : io_redirect
+			| cmd_prefix io_redirect
+			;
+cmd_suffix  : io_redirect
+			| cmd_suffix io_redirect
+			| WORD
 			| cmd_suffix WORD
-			| cmd_suffix io_redir
 			;
-cmd_prefix  ::= io_redir
-			| cmd_prefix io_redir
-			;
-io_redir 	::= io_file
+io_redirect : io_file
 			| io_here
 			;
-io_file  	::= '<' WORD
-		 	| '>' WORD
-		 	| '>>' WORD
+io_file  	: '<' filename
+		 	| '>' filename
+		 	| '>>' filename
 			;
-io_here  	::= '<<' WORD
+filename	: WORD						/* Apply rule 2 */
 			;
-
-/* 원본 */
-Program-> Data_list
-Data_list -> cmd
-Data_list -> Data_list PIPE
-Data_list -> Data_list AND
-Data_list -> Data_list OR
-PIPE -> '|' cmd
-OR -> '||' cmd
-AND -> '&&' cmd
-cmd -> simple_comd
-cmd -> subshell
-cmd -> subshell redir_list
-subshell -> '(' Data_list ')'
-simple_comd -> cmd_prefix cmd_name cmd_suffix
-simple_comd -> cmd_prefix cmd_name
-simple_comd -> cmd_prefix
-simple_comd -> cmd_name
-simple_comd -> cmd_name cmd_suffix
-cmd_name -> 'word'
-cmd_suffix -> io_redir
-cmd_suffix -> cmd_suffix io_redir
-cmd_suffix -> 'word'
-cmd_suffix -> cmd_suffix 'word'
-cmd_prefix -> io_redir
-cmd_prefix -> cmd_prefix io_redir
-redir_list -> io_redir
-redir_list -> redir_list io_redir
-io_redir -> io_file
-io_redir -> io_here
-io_file  -> '<' f_name
-io_file   ->  '>' f_name
-io_file   ->  '>>' f_name
-io_here  -> '<<' end
-f_name -> 'word'
-end -> 'word'
+io_here  	: '<<' here_end
+			;
+here_end	: WORD						/* Apply rule 3 */
+			;
