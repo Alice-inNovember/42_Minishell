@@ -5,16 +5,16 @@ CC			=	cc
 RM			=	rm -rf
 LIBC		=	ar rcs
 #FLAGS
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	
 #DIRS
-LFTDIR		=	libft
-DLLDIR		=	doubly_linked_list
-GNLDIR		=	get_next_line
+LFTDIR		=	libraries/libft
+DLLDIR		=	libraries/doubly_linked_list
+GNLDIR		=	libraries/get_next_line
 SRCDIR		=	
 BONUSDIR	=	
 #FILES
 LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
-INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR)
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) 
 SRCS		=	main.c
 OBJS		=	${SRCS:.c=.o}
 
@@ -24,7 +24,7 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(LFTDIR)
 	$(MAKE) -C $(DLLDIR)
 	$(MAKE) -C $(GNLDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) -lreadline
 
 bonus : $(NAME)
 
@@ -33,10 +33,14 @@ bonus : $(NAME)
 
 clean :
 	$(MAKE) -C $(LFTDIR) clean
+	$(MAKE) -C $(DLLDIR) clean
+	$(MAKE) -C $(GNLDIR) clean
 	$(RM) $(OBJS) $(BOBJS)
 
 fclean : clean
 	$(MAKE) -C $(LFTDIR) fclean
+	$(MAKE) -C $(DLLDIR) fclean
+	$(MAKE) -C $(GNLDIR) fclean
 	$(RM) $(NAME)
 
 re : fclean all
