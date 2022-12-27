@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 15:26:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:34:53 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type)
 
 void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("START = %c\n", **line);
 	(void)token_lst;
 	if (**line == '\0')
 	{
@@ -83,6 +84,7 @@ void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_
 
 void	make_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("MAKE_WORD = %c\n", **line);
 	if (ft_strchr(" |<>\'\"", **line))
 	{
 		make_token(token_lst, buffer_lst, T_WORD);
@@ -100,6 +102,7 @@ void	make_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 
 void	make_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("MAKE_PIPE = %c\n", **line);
 	(void)line;
 	make_token(token_lst, buffer_lst, T_PIPE);
 	*status = START;
@@ -107,6 +110,7 @@ void	make_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 
 void	make_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("MAKE_LESS = %c\n", **line);
 	if (**line == '<')
 	{
 		*status = MAKE_DLESS;
@@ -123,6 +127,7 @@ void	make_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 
 void	make_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("MAKE_DLESS = %c\n", **line);
 	(void)line;
 	make_token(token_lst, buffer_lst, T_DLESS);
 	*status = START;
@@ -130,6 +135,7 @@ void	make_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 
 void	make_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("MAKE_GREAT = %c\n", **line);
 	if (**line == '>')
 	{
 		*status = MAKE_DGREAT;
@@ -146,6 +152,7 @@ void	make_great(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 
 void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("MAKE_DGREAT = %c\n", **line);
 	(void)line;
 	make_token(token_lst, buffer_lst, T_DGREAT);
 	*status = START;
@@ -153,7 +160,7 @@ void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 
 void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
-	printf("!!!!%c\n", **line);
+	printf("QUOTE_OPEN = %c\n", **line);
 	if (**line == '\'')
 	{
 		*status = QUOTE_CLOSE;
@@ -171,13 +178,8 @@ void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 
 void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
-	printf("!!!!%c\n", **line);
-	if (**line == '\'')
-	{
-		*status = QUOTE_OPEN;
-		(*line)++;
-	}
-	else if (**line == '\"')
+	printf("QUOTE_CLOSE = %c\n", **line);
+	if (**line == '\'' || **line == '\"')
 	{
 		*status = START;
 		(*line)++;
@@ -193,7 +195,7 @@ void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 
 void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
-	printf("!!!!%c\n", **line);
+	printf("DQUOTE_OPEN = %c\n", **line);
 	if (**line == '\"')
 	{
 		*status = DQUOTE_CLOSE;
@@ -211,13 +213,8 @@ void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 
 void	dquote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
-	printf("!!!!%c\n", **line);
-	if (**line == '\'')
-	{
-		*status = QUOTE_OPEN;
-		(*line)++;
-	}
-	else if (**line == '\"')
+	printf("DQUOTE_CLOSE = %c\n", **line);
+	if (**line == '\'' || **line == '\"')
 	{
 		*status = START;
 		(*line)++;
