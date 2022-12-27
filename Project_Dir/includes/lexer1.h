@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 15:17:17 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:42:30 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
-# include "readline/readline.h"
-# include "readline/history.h"
-# include "../libraries/libft/includes/libft.h"
-# include "../libraries/get_next_line/includes/get_next_line.h"
-# include "../libraries/doubly_linked_list/includes/doubly_linked_list.h"
+# include "data.h"
 
 // define lexer status
 typedef enum e_lex_status
@@ -60,18 +56,6 @@ typedef struct s_token
 	char			*value;
 }	t_token;
 
-// define command as node
-typedef struct s_command
-{
-	char	**cmd_vector;
-	t_list	infile_lst;
-	t_list	outfile_lst;
-}	t_command;
-
-typedef struct s_data
-{
-	t_list	token_lst;
-}	t_data;
 
 void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type);
 void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
