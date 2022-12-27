@@ -6,14 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 15:17:47 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 11:15:52 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:44:48 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "includes/minishell.h"
 #include "includes/lexer2.h"
-#include "libraries/doubly_linked_list/includes/doubly_linked_list.h"
-#include "libraries/libft/includes/libft.h"
-#include <stdlib.h>
 
 void	lex_make_token2(t_list *buffer, t_type type, t_data *data)
 {
@@ -76,34 +74,63 @@ void	lex_pipe2(char **line, t_list *buffer, t_data *data)
 	return (lex_make_token2(buffer, T_PIPE, data));
 }
 
+void	lex_dquote2(char **line, t_list *buffer, t_data *data);
+
 void	lex_quote2(char **line, t_list *buffer, t_data *data)
 {
+	lex_addbuff(buffer, *line);
 	(*line)++;
 	while ('\'' != **line && **line)
 	{
 		lex_addbuff(buffer, *line);
 		(*line)++;
 	}
-	(*line)++;
-	return (lex_make_token2(buffer, T_WORD, data));
+	if (**line)
+	{
+		lex_addbuff(buffer, *line);
+		(*line)++;
+	}
+	if ('\'' == **line)
+		lex_quote2(line, buffer, data);
+	else if ('\"' == **line)
+		lex_dquote2(line, buffer, data);
+	else
+		return (lex_make_token2(buffer, T_WORD, data));
 }
 
 void	lex_dquote2(char **line, t_list *buffer, t_data *data)
 {
+	lex_addbuff(buffer, *line);
 	(*line)++;
 	while ('\"' != **line && **line)
 	{
 		lex_addbuff(buffer, *line);
 		(*line)++;
 	}
-	(*line)++;
-	return (lex_make_token2(buffer, T_WORD, data));
+	if (**line)
+	{
+		lex_addbuff(buffer, *line);
+		(*line)++;
+	}
+	if ('\'' == **line)
+		lex_quote2(line, buffer, data);
+	else if ('\"' == **line)
+		lex_dquote2(line, buffer, data);
+	else
+		return (lex_make_token2(buffer, T_WORD, data));
 }
 
 void	lex_word2(char **line, t_list *buffer, t_data *data)
 {
-	while (!ft_strchr("<>|\'\" ", **line) && **line)
+	while (**line)
 	{
+		if ('\\' == **line)
+		{
+			if ((*line)[1])
+				(*line)++;
+		}
+		else if (ft_strchr("<>|\'\" ", **line))
+			break ;
 		lex_addbuff(buffer, *line);
 		(*line)++;
 	}

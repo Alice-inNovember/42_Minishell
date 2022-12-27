@@ -1,11 +1,26 @@
+Rule 1. [Command Name]
+
+	When the TOKEN is exactly a reserved word, the token identifier for that reserved word shall result. Otherwise, the token WORD shall be returned.
+	Also, if the parser is in any state where only a reserved word could be the next correct token, proceed as above.
+
+	Note:
+	Because at this point <quotation-mark> characters are retained in the token, quoted strings cannot be recognized as reserved words. 
+	This rule also implies that reserved words are not recognized except in certain positions in the input, 
+	such as after a <newline> or <semicolon>; the grammar presumes that if the reserved word is intended, 
+	it is properly delimited by the user, and does not attempt to reflect that requirement directly. 
+	Also note that line joining is done before tokenization, as described in Escape Character (Backslash), 
+	so escaped <newline> characters are already removed at this point.
+
 Rule 2. [Redirection to or from filename]
 
-The expansions specified in Redirection shall occur. As specified there, exactly one field can result (or the result is unspecified), and there are additional requirements on pathname expansion. 
+	The expansions specified in Redirection shall occur. As specified there, exactly one field can result (or the result is unspecified), 
+	and there are additional requirements on pathname expansion. 
 
 
 Rule 3. [Redirection from here-document]
 
-Quote removal shall be applied to the word to determine the delimiter that is used to find the end of the here-document that begins after the next <newline>.
+	Quote removal shall be applied to the word to determine the delimiter that is used to find the end of the here-document that begins 
+	after the next <newline>.
 
 
 Rule 7. [Assignment preceding command name]
