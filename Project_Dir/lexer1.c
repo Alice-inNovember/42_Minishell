@@ -6,12 +6,13 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 15:34:53 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 18:52:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lexer1.h"
 #include "includes/minishell.h"
+#include "libraries/dllist/includes/dllist.h"
 
 void	del(void *content)
 {
@@ -48,7 +49,9 @@ void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type)
 		token->value = NULL;
 	else
 		token->value = merge_buffer(buffer_lst);
+	printf("make_token = %s\n", token->value);
 	lst_append(token_lst, new_node(token));
+	lst_init(buffer_lst);
 }
 
 void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
@@ -60,7 +63,6 @@ void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_
 		*status = FINISH;
 		return ;
 	}
-	lst_init(buffer_lst);
 	if (**line == ' ')
 		*status = START;
 	else if (**line == '|')
@@ -162,7 +164,9 @@ void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("QUOTE_OPEN = %c\n", **line);
-	if (**line == '\'')
+	if (**line == '\0')
+		*status = FINISH;
+	else if (**line == '\'')
 	{
 		*status = QUOTE_CLOSE;
 		(*line)++;
@@ -197,7 +201,9 @@ void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("DQUOTE_OPEN = %c\n", **line);
-	if (**line == '\"')
+	if (**line == '\0')
+		*status = FINISH;
+	else if (**line == '\"')
 	{
 		*status = DQUOTE_CLOSE;
 		(*line)++;
@@ -239,9 +245,11 @@ void	make_token_list(t_list *token_lst, char *line)
 	};
 	t_list					buffer_lst;
 
+	lst_init(&buffer_lst);
 	status = START;
 	while (status != FINISH)
 		(*lex_status_fp[status])(&status, token_lst, &line, &buffer_lst);
+	lst_clear(&buffer_lst, NULL);
 }
 
 void	print_enum(t_type type)
