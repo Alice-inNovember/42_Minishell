@@ -6,20 +6,15 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 15:22:50 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:40:46 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER2_H
 # define LEXER2_H
 
-# include <stdio.h>
 # include <unistd.h>
-# include "readline/readline.h"
-# include "readline/history.h"
-# include "../libraries/libft/includes/libft.h"
-# include "../libraries/get_next_line/includes/get_next_line.h"
-# include "../libraries/doubly_linked_list/includes/doubly_linked_list.h"
+# include "data.h"
 
 // define token type as enum
 typedef enum e_type

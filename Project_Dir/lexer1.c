@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/lexer1.h"
+#include "includes/minishell.h"
 
 void	del(void *content)
 {
