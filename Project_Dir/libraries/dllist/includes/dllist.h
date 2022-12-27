@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doubly_linked_list.h                               :+:      :+:    :+:   */
+/*   dllist.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:38:14 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/26 14:25:19 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:30:38 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOUBLY_LINKED_LIST_H
-# define DOUBLY_LINKED_LIST_H
+#ifndef DLLIST_H
+# define DLLIST_H
 
 # include "../../libft/includes/libft.h"
 
