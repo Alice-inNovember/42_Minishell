@@ -1,4 +1,4 @@
-/*	--------------------------------------------------------
+*	--------------------------------------------------------
 	Minishell Grammar
 	https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_10 참고
 	규칙의 경우 2.10.2 Shell Grammar Rules 참고할 것
@@ -22,10 +22,10 @@ cmd_word	: WORD						/* Apply rule 7b */
 cmd_prefix  : io_redirect
 			| cmd_prefix io_redirect
 			;
-cmd_suffix  : io_redirect cmd_suffix
-			| io_redirect
-			| WORD cmd_suffix
+cmd_suffix  : io_redirect
+			| cmd_suffix io_redirect
 			| WORD
+			| cmd_suffix WORD
 			;
 io_redirect : io_file
 			| io_here
