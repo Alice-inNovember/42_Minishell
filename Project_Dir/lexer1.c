@@ -6,11 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 15:26:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:45:56 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lexer1.h"
+#include "includes/minishell.h"
 
 void	del(void *content)
 {

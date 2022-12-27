@@ -6,10 +6,13 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 15:21:53 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 15:42:53 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include ""
+#include "includes/minishell.h"
 
-void	envp_init()
+void	envp_init(void)
+{
+	return ;
+}
