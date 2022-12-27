@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/27 15:57:35 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:23:06 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,31 @@
  * }
  */
 
+void	parse_cmd_prefix(t_node *first, t_node *last)
+{
+}
+
+void	parse_cmd_suffix(t_node *first, t_node *last)
+{
+}
+
+void	parse_io_redirect(t_node *first, t_node *last)
+{
+}
+
+void	parse_io_file(t_node *first, t_node *last)
+{
+}
+
+void	parse_io_here(t_node *first, t_node *last)
+{
+}
+
 void	parse_simple_cmd(t_node *first, t_node *last)
 {
 }
 
-void	parse_expression(t_node *first, t_node *last)
+void	parse_expression(t_list *proc_lst, t_node *first, t_node *last)
 {
 	t_node	*cur_node;
 	t_token	*token;
