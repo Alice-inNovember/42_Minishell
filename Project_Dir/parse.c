@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/28 04:11:45 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/28 04:17:33 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	parse_simple_cmd(t_list *proc_data_lst, t_node *first, t_node *last)
 	if (first->prev == last) // 재귀로 들어올 때 last == cur_node 인 경우. ex) ls |
 		syntax_err();
 	init_proc_data(proc_data); // calloc 0
-	lst_prepend(proc_data_lst, new_node((void *)proc_data));
+	lst_append(proc_data_lst, new_node((void *)proc_data));
 	cur_node = first;
 	while (is_redir(cur_node))
 		cur_node = cur_node->next->next;
