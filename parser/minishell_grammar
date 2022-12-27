@@ -22,10 +22,10 @@ cmd_word	: WORD						/* Apply rule 7b */
 cmd_prefix  : io_redirect
 			| cmd_prefix io_redirect
 			;
-cmd_suffix  : io_redirect cmd_suffix
-			| io_redirect
-			| WORD cmd_suffix
+cmd_suffix  : io_redirect
+			| cmd_suffix io_redirect
 			| WORD
+			| cmd_suffix WORD
 			;
 io_redirect : io_file
 			| io_here
