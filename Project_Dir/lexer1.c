@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 10:44:07 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:17:56 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	del(void *content)
 char	*merge_buffer(t_list *buffer_lst)
 {
 	char	*buffer;
-	char	*c;
 	t_node	*cur_node;
 	int		i;
 
@@ -31,8 +30,7 @@ char	*merge_buffer(t_list *buffer_lst)
 	i = 0;
 	while (cur_node->next != NULL)
 	{
-		c = cur_node->content;
-		buffer[i++] = *c;
+		buffer[i++] = *(char *)(cur_node->next);
 		cur_node = cur_node->next;
 	}
 	lst_clear(buffer_lst, NULL);
@@ -52,155 +50,196 @@ void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type)
 	lst_append(token_lst, new_node(token));
 }
 
-void	lex_start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)token_lst;
 	if (**line == '\0')
 	{
-		*status = LEX_FINISH;
+		*status = FINISH;
 		return ;
 	}
 	lst_init(buffer_lst);
 	if (**line == ' ')
-		*status = LEX_START;
+		*status = START;
 	else if (**line == '|')
-		*status = LEX_PIPE;
+		*status = MAKE_PIPE;
 	else if (**line == '<')
-		*status = LEX_LESS;
+		*status = MAKE_LESS;
 	else if (**line == '>')
-		*status = LEX_GREAT;
+		*status = MAKE_GREAT;
 	else if (**line == '\'')
-		*status = LEX_QUOTE;
+		*status = QUOTE_OPEN;
 	else if (**line == '\"')
-		*status = LEX_DQUOTE;
+		*status = DQUOTE_OPEN;
 	else if (ft_isprint(**line))
 	{
 		lst_append(buffer_lst, new_node(*line));
-		*status = LEX_WORD;
+		*status = MAKE_WORD;
 	}
 	else
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 	(*line)++;
 }
 
-void	lex_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	if (ft_strchr(" |<>\'\"", **line))
 	{
 		make_token(token_lst, buffer_lst, T_WORD);
-		*status = LEX_START;
+		*status = START;
 	}
 	else if (ft_isprint(**line))
 	{
 		lst_append(buffer_lst, new_node(*line));
-		*status = LEX_WORD;
+		*status = MAKE_WORD;
 		(*line)++;
 	}
 	else
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	lex_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)line;
 	make_token(token_lst, buffer_lst, T_PIPE);
-	*status = LEX_START;
+	*status = START;
 }
 
-void	lex_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	if (**line == '<')
 	{
-		*status = LEX_DLESS;
+		*status = MAKE_DLESS;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
 		make_token(token_lst, buffer_lst, T_LESS);
-		*status = LEX_START;
+		*status = START;
 	}
 	else
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	lex_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)line;
 	make_token(token_lst, buffer_lst, T_DLESS);
-	*status = LEX_START;
+	*status = START;
 }
 
-void	lex_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	if (**line == '>')
 	{
-		*status = LEX_DGREAT;
+		*status = MAKE_DGREAT;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
 		make_token(token_lst, buffer_lst, T_GREAT);
-		*status = LEX_START;
+		*status = START;
 	}
 	else
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	lex_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)line;
 	make_token(token_lst, buffer_lst, T_DGREAT);
-	*status = LEX_START;
+	*status = START;
 }
 
-void	lex_quote(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	if (**line == '\'')
 	{
-		make_token(token_lst, buffer_lst, T_WORD);
-		*status = LEX_START;
+		*status = QUOTE_CLOSE;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
 		lst_append(buffer_lst, new_node(*line));
-		*status = LEX_QUOTE;
+		*status = QUOTE_OPEN;
 		(*line)++;
 	}
 	else
-		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+		ft_exit("3Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	lex_dquote(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+{
+	if (**line == '\'')
+	{
+		*status = QUOTE_OPEN;
+		(*line)++;
+	}
+	else if (**line == '\"')
+	{
+		*status = START;
+		(*line)++;
+	}
+	else if (ft_isprint(**line))
+	{
+		make_token(token_lst, buffer_lst, T_WORD);
+		*status = START;
+	}
+	else
+		ft_exit("2Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+}
+
+void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	if (**line == '\"')
 	{
-		make_token(token_lst, buffer_lst, T_WORD);
-		*status = LEX_START;
+		*status = DQUOTE_CLOSE;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
 		lst_append(buffer_lst, new_node(*line));
-		*status = LEX_DQUOTE;
+		*status = DQUOTE_OPEN;
 		(*line)++;
 	}
 	else
-		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+		ft_exit("1Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+}
+
+void	dquote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+{
+	printf("!!!!%c\n", **line);
+	if (**line == '\'')
+	{
+		*status = QUOTE_OPEN;
+		(*line)++;
+	}
+	else if (**line == '\"')
+	{
+		*status = START;
+		(*line)++;
+	}
+	else if (ft_isprint(**line))
+	{
+		make_token(token_lst, buffer_lst, T_WORD);
+		*status = START;
+	}
+	else
+		ft_exit("0Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
 void	make_token_list(t_list *token_lst, char *line)
 {
 	t_lex_status			status;
 	const t_lex_status_fp	lex_status_fp[TOTAL_LEX_STATUS - 1] = {
-		lex_start, lex_word, lex_pipe, \
-		lex_less, lex_dless, lex_great, lex_dgreat, \
-		lex_quote, lex_dquote
+		start, make_word, make_pipe, \
+		make_less, make_dless, make_great, make_dgreat, \
+		quote_open, quote_close, dquote_open, dquote_close
 	};
 	t_list					buffer_lst;
 
-	status = LEX_START;
-	while (status != LEX_FINISH)
+	status = START;
+	while (status != FINISH)
 		(*lex_status_fp[status])(&status, token_lst, &line, &buffer_lst);
 }
 
@@ -208,10 +247,6 @@ void	print_enum(t_type type)
 {
 	if (type == T_WORD)
 		printf("WORD");
-	else if (type == T_QUOTE_WORD)
-		printf("QUOTE_WORD");
-	else if (type == T_DQUOTE_WORD)
-		printf("DQUOTE_WORD");
 	else if (type == T_PIPE)
 		printf("PIPE");
 	else if (type == T_LESS)
@@ -250,8 +285,8 @@ int	main(void)
 	{
 		lst_init(&data.token_lst);
 		line = readline("minishell>");
-		//make_token_list(&data.token_lst, line);
-		make_token_list2(&data, line);
+		printf("line = %s\nlen = %d\n", line, (int)ft_strlen(line));
+		make_token_list(&data.token_lst, line);
 		print_token_list(&data.token_lst);
 		lst_clear(&data.token_lst, del);
 	}
