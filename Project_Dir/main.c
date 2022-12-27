@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/26 22:29:39 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:20:24 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,26 @@ void	make_token_list(t_list *token_lst, char *line)
 		(*lex_status_fp[status])(&status, token_lst, &line, &buffer_lst);
 }
 
+void	print_enum(t_type type)
+{
+	if (type == WORD)
+		printf("WORD");
+	else if (type == QUOTE_WORD)
+		printf("QUOTE_WORD");
+	else if (type == DQUOTE_WORD)
+		printf("DQUOTE_WORD");
+	else if (type == PIPE)
+		printf("PIPE");
+	else if (type == LESS)
+		printf("LESS");
+	else if (type == GREAT)
+		printf("GREAT");
+	else if (type == DLESS)
+		printf("DLESS");
+	else if (type == DGREAT)
+		printf("DGREAT");
+}
+
 void	print_token_list(t_list *token_lst)
 {
 	t_node	*cur_node;
@@ -199,7 +219,10 @@ void	print_token_list(t_list *token_lst)
 	while (cur_node->next != NULL)
 	{
 		token = cur_node->content;
-		printf("<token>\ntoken type = %d\ntoken value = %s\n\n", token->type, token->value);
+		printf("<token>\n");
+		printf("token type = ");
+		print_enum(token->type);
+		printf("\ntoken value = %s\n\n", token->value);
 		cur_node = cur_node->next;
 	}
 }
@@ -213,7 +236,8 @@ int	main(void)
 	{
 		lst_init(&data.token_lst);
 		line = readline("minishell>");
-		make_token_list(&data.token_lst, line);
+		//make_token_list(&data.token_lst, line);
+		make_token_list2(&data, line);
 		print_token_list(&data.token_lst);
 		lst_clear(&data.token_lst, del);
 	}

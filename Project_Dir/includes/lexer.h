@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/26 21:14:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:12:54 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ void	lex_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 void	lex_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 void	lex_quote(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 void	lex_dquote(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+
+void	make_token_list2(t_data *data, char *line);
 
 #endif
