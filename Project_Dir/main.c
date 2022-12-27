@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 10:18:13 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:24:14 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,21 +206,21 @@ void	make_token_list(t_list *token_lst, char *line)
 
 void	print_enum(t_type type)
 {
-	if (type == WORD)
+	if (type == T_WORD)
 		printf("WORD");
-	else if (type == QUOTE_WORD)
+	else if (type == T_QUOTE_WORD)
 		printf("QUOTE_WORD");
-	else if (type == DQUOTE_WORD)
+	else if (type == T_DQUOTE_WORD)
 		printf("DQUOTE_WORD");
-	else if (type == PIPE)
+	else if (type == T_PIPE)
 		printf("PIPE");
-	else if (type == LESS)
+	else if (type == T_LESS)
 		printf("LESS");
-	else if (type == GREAT)
+	else if (type == T_GREAT)
 		printf("GREAT");
-	else if (type == DLESS)
+	else if (type == T_DLESS)
 		printf("DLESS");
-	else if (type == DGREAT)
+	else if (type == T_DGREAT)
 		printf("DGREAT");
 }
 
@@ -250,8 +250,7 @@ int	main(void)
 	{
 		lst_init(&data.token_lst);
 		line = readline("minishell>");
-		//make_token_list(&data.token_lst, line);
-		make_token_list2(&data, line);
+		make_token_list(&data.token_lst, line);
 		print_token_list(&data.token_lst);
 		lst_clear(&data.token_lst, del);
 	}
