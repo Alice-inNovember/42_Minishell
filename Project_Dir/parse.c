@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/27 17:23:06 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:03:23 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,44 @@
  * 		t_quote_type	quote_type;
  * 		char			*value;
  * }
+ *
+ * t_command
+ * {
+ * 		char	**cmd_vector;
+ * 		t_list	infile_lst;
+ * 		t_list	outfile_lst;
+ * }
  */
 
-void	parse_cmd_prefix(t_node *first, t_node *last)
+void	parse_cmd_prefix(t_proc_data *proc_data, t_node *first, t_node *last)
 {
 }
 
-void	parse_cmd_suffix(t_node *first, t_node *last)
+void	parse_cmd_suffix(t_proc_data *proc_data, t_node *first, t_node *last)
 {
 }
 
-void	parse_io_redirect(t_node *first, t_node *last)
+void	parse_io_redirect(t_proc_data *proc_data, t_node *first, t_node *last)
 {
 }
 
-void	parse_io_file(t_node *first, t_node *last)
+void	parse_io_file(t_proc_data *proc_data, t_node *first, t_node *last)
 {
 }
 
-void	parse_io_here(t_node *first, t_node *last)
+void	parse_io_here(t_proc_data *proc_data, t_node *first, t_node *last)
 {
 }
 
-void	parse_simple_cmd(t_node *first, t_node *last)
+void	parse_simple_cmd(t_list *proc_data_lst, t_node *first, t_node *last)
 {
+	t_proc_data	*proc_data;
+
+	init_proc_data(proc_data);
+	lst_prepend(proc_data_lst, new_node((void *)proc_data));
 }
 
-void	parse_expression(t_list *proc_lst, t_node *first, t_node *last)
+void	parse_expression(t_list *proc_data_lst, t_node *first, t_node *last)
 {
 	t_node	*cur_node;
 	t_token	*token;
@@ -68,7 +79,7 @@ void	parse_expression(t_list *proc_lst, t_node *first, t_node *last)
 		token = (t_token *)node->content;
 		if (token->type == T_PIPE)
 		{
-			parse_simple_cmd(cur_node->next, last);
+			parse_simple_cmd(proc_data_lst, cur_node->next, last);
 			parse_expression(first, cur_node->prev);
 			return ;
 		}
@@ -76,4 +87,3 @@ void	parse_expression(t_list *proc_lst, t_node *first, t_node *last)
 	}
 	parse_simple_cmd(first, last);
 }
-
