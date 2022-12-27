@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+         #
+#    By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 11:00:34 by minseok2          #+#    #+#              #
-#    Updated: 2022/11/10 20:31:26 by minseok2         ###   ########.fr        #
+#    Updated: 2022/12/27 17:48:47 by junlee2          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS = ft_isalpha.c \
 		ft_strlen.c \
 		ft_strlcpy.c \
 		ft_strlcat.c \
+		ft_strcmp.c \
 		ft_strncmp.c \
 		ft_strchr.c \
 		ft_strrchr.c \
