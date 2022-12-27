@@ -14,8 +14,8 @@ SRCDIR		=
 BONUSDIR	=	
 #FILES
 LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
-INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) 
-SRCS		=	main.c lexer.c
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR)
+SRCS		=	main.c lexer2.c
 OBJS		=	${SRCS:.c=.o}
 
 all : $(NAME)

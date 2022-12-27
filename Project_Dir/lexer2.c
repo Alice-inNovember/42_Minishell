@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 15:17:47 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 10:41:51 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/27 11:15:52 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libraries/libft/includes/libft.h"
 #include <stdlib.h>
 
-void	lex_make_token2(t_list *buffer, t_type type, t_list *token_lst)
+void	lex_make_token2(t_list *buffer, t_type type, t_data *data)
 {
 	t_node	*buf;
 	t_token	*token;
@@ -35,17 +35,15 @@ void	lex_make_token2(t_list *buffer, t_type type, t_list *token_lst)
 	token = ft_calloc(1, sizeof(t_token));
 	token->type = type;
 	token->value = str;
+	lst_append(&data->token_lst, new_node(token));
 }
 
 void	lex_addbuff(t_list *buffer, void *value)
 {
-	t_node	*node;
-
-	node = new_node(value);
-	lst_append(buffer, node);
+	lst_append(buffer, new_node(value));
 }
 
-void	lex_less2(char **line, t_list *buffer, t_list *token_lst)
+void	lex_less2(char **line, t_list *buffer, t_data *data)
 {
 	lex_addbuff(buffer, *line);
 	(*line)++;
@@ -53,32 +51,32 @@ void	lex_less2(char **line, t_list *buffer, t_list *token_lst)
 	{
 		lex_addbuff(buffer, *line);
 		(*line)++;
-		return (lex_make_token2(buffer, T_DLESS, token_lst));
+		return (lex_make_token2(buffer, T_DLESS, data));
 	}
-	return (lex_make_token2(buffer, T_LESS, token_lst));
+	return (lex_make_token2(buffer, T_LESS, data));
 }
 
-void	lex_great2(char **line, t_list *buffer, t_list *token_lst)
+void	lex_great2(char **line, t_list *buffer, t_data *data)
 {
 	lex_addbuff(buffer, *line);
 	(*line)++;
-	if ('>' == (*line)[1])
+	if ('>' == **line)
 	{
 		lex_addbuff(buffer, *line);
 		(*line)++;
-		return (lex_make_token2(buffer, T_GREAT, token_lst));
+		return (lex_make_token2(buffer, T_DGREAT, data));
 	}
-	return (lex_make_token2(buffer, T_DGREAT, token_lst));
+	return (lex_make_token2(buffer, T_GREAT, data));
 }
 
-void	lex_pipe2(char **line, t_list *buffer, t_list *token_lst)
+void	lex_pipe2(char **line, t_list *buffer, t_data *data)
 {
 	lex_addbuff(buffer, *line);
 	(*line)++;
-	return (lex_make_token2(buffer, T_PIPE, token_lst));
+	return (lex_make_token2(buffer, T_PIPE, data));
 }
 
-void	lex_quote2(char **line, t_list *buffer, t_list *token_lst)
+void	lex_quote2(char **line, t_list *buffer, t_data *data)
 {
 	(*line)++;
 	while ('\'' != **line && **line)
@@ -87,10 +85,10 @@ void	lex_quote2(char **line, t_list *buffer, t_list *token_lst)
 		(*line)++;
 	}
 	(*line)++;
-	return (lex_make_token2(buffer, T_WORD, token_lst));
+	return (lex_make_token2(buffer, T_WORD, data));
 }
 
-void	lex_dquote2(char **line, t_list *buffer, t_list *token_lst)
+void	lex_dquote2(char **line, t_list *buffer, t_data *data)
 {
 	(*line)++;
 	while ('\"' != **line && **line)
@@ -99,17 +97,17 @@ void	lex_dquote2(char **line, t_list *buffer, t_list *token_lst)
 		(*line)++;
 	}
 	(*line)++;
-	return (lex_make_token2(buffer, T_WORD, token_lst));
+	return (lex_make_token2(buffer, T_WORD, data));
 }
 
-void	lex_word2(char **line, t_list *buffer, t_list *token_lst)
+void	lex_word2(char **line, t_list *buffer, t_data *data)
 {
 	while (!ft_strchr("<>|\'\" ", **line) && **line)
 	{
 		lex_addbuff(buffer, *line);
 		(*line)++;
 	}
-	return (lex_make_token2(buffer, T_WORD, token_lst));
+	return (lex_make_token2(buffer, T_WORD, data));
 }
 
 void	make_token_list2(t_data *data, char *line)
@@ -120,19 +118,19 @@ void	make_token_list2(t_data *data, char *line)
 	{
 		lst_init(&buffer);
 		if ('<' == *line)
-			lex_less2(&line, &buffer, &data->token_lst);
+			lex_less2(&line, &buffer, data);
 		else if ('>' == *line)
-			lex_great2(&line, &buffer, &data->token_lst);
+			lex_great2(&line, &buffer, data);
 		else if ('|' == *line)
-			lex_pipe2(&line, &buffer, &data->token_lst);
+			lex_pipe2(&line, &buffer, data);
 		else if ('\'' == *line)
-			lex_quote2(&line, &buffer, &data->token_lst);
+			lex_quote2(&line, &buffer, data);
 		else if ('\"' == *line)
-			lex_dquote2(&line, &buffer, &data->token_lst);
+			lex_dquote2(&line, &buffer, data);
+		else if (' ' == *line)
+			line++;
 		else
-			lex_word2(&line, &buffer, &data->token_lst);
-		ft_putstr_fd("start\n", 1);
+			lex_word2(&line, &buffer, data);
 		lst_clear(&buffer, NULL);
-		ft_putstr_fd("end\n", 1);
 	}
 }
