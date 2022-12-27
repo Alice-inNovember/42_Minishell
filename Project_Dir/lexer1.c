@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 15:17:56 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:26:59 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*merge_buffer(t_list *buffer_lst)
 	i = 0;
 	while (cur_node->next != NULL)
 	{
-		buffer[i++] = *(char *)(cur_node->next);
+		buffer[i++] = *(char *)(cur_node->content);
 		cur_node = cur_node->next;
 	}
 	lst_clear(buffer_lst, NULL);
@@ -153,6 +153,7 @@ void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 
 void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("!!!!%c\n", **line);
 	if (**line == '\'')
 	{
 		*status = QUOTE_CLOSE;
@@ -170,6 +171,7 @@ void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 
 void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("!!!!%c\n", **line);
 	if (**line == '\'')
 	{
 		*status = QUOTE_OPEN;
@@ -191,6 +193,7 @@ void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 
 void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
+	printf("!!!!%c\n", **line);
 	if (**line == '\"')
 	{
 		*status = DQUOTE_CLOSE;
