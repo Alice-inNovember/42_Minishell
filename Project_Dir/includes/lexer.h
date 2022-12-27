@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/26 21:14:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 09:43:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ typedef void	(*t_lex_status_fp)(t_lex_status *status, t_list *token_lst, char **
 // define token type as enum
 typedef enum e_type
 {
-	WORD,
-	QUOTE_WORD,
-	DQUOTE_WORD,
-	PIPE,
-	LESS,
-	GREAT,
-	DLESS,
-	DGREAT
+	T_WORD,
+	T_QUOTE_WORD,
+	T_DQUOTE_WORD,
+	T_PIPE,
+	T_LESS,
+	T_GREAT,
+	T_DLESS,
+	T_DGREAT
 }	t_type;
 
 typedef enum e_quote_type

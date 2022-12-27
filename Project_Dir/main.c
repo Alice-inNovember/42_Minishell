@@ -6,12 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/26 22:29:39 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:18:13 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/lexer.h"
-#include "libraries/doubly_linked_list/includes/doubly_linked_list.h"
 
 void	del(void *content)
 {
@@ -20,23 +19,37 @@ void	del(void *content)
 	ft_free(token->value);
 }
 
-void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type)
+char	*merge_buffer(t_list *buffer_lst)
 {
-	t_token	token;
+	char	*buffer;
+	char	*c;
 	t_node	*cur_node;
 	int		i;
 
-	token.value = (char *)ft_calloc(buffer_lst->size, sizeof(char));
+	buffer = (char *)ft_calloc(buffer_lst->size + 1, sizeof(char));
 	cur_node = buffer_lst->head->next;
 	i = 0;
 	while (cur_node->next != NULL)
 	{
-		token.value[i++] = *(char *)(cur_node->content);
-		token.type = type;
-		lst_append(token_lst, new_node(&token));
+		c = cur_node->content;
+		buffer[i++] = *c;
 		cur_node = cur_node->next;
 	}
 	lst_clear(buffer_lst, NULL);
+	return (buffer);
+}
+
+void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type)
+{
+	t_token	*token;
+
+	token = (t_token *)ft_calloc(1, sizeof(t_token));
+	token->type = type;
+	if (type != T_WORD)
+		token->value = NULL;
+	else
+		token->value = merge_buffer(buffer_lst);
+	lst_append(token_lst, new_node(token));
 }
 
 void	lex_start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
@@ -61,7 +74,10 @@ void	lex_start(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 	else if (**line == '\"')
 		*status = LEX_DQUOTE;
 	else if (ft_isprint(**line))
+	{
+		lst_append(buffer_lst, new_node(*line));
 		*status = LEX_WORD;
+	}
 	else
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 	(*line)++;
@@ -71,12 +87,12 @@ void	lex_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buff
 {
 	if (ft_strchr(" |<>\'\"", **line))
 	{
-		make_token(token_lst, buffer_lst, WORD);
+		make_token(token_lst, buffer_lst, T_WORD);
 		*status = LEX_START;
 	}
 	else if (ft_isprint(**line))
 	{
-		lst_append(buffer_lst, new_node(line));
+		lst_append(buffer_lst, new_node(*line));
 		*status = LEX_WORD;
 		(*line)++;
 	}
@@ -87,7 +103,7 @@ void	lex_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buff
 void	lex_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)line;
-	make_token(token_lst, buffer_lst, PIPE);
+	make_token(token_lst, buffer_lst, T_PIPE);
 	*status = LEX_START;
 }
 
@@ -95,13 +111,12 @@ void	lex_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buff
 {
 	if (**line == '<')
 	{
-		lst_append(buffer_lst, new_node(line));
 		*status = LEX_DLESS;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
-		make_token(token_lst, buffer_lst, LESS);
+		make_token(token_lst, buffer_lst, T_LESS);
 		*status = LEX_START;
 	}
 	else
@@ -111,21 +126,20 @@ void	lex_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buff
 void	lex_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)line;
-	make_token(token_lst, buffer_lst, DLESS);
+	make_token(token_lst, buffer_lst, T_DLESS);
 	*status = LEX_START;
 }
 
 void	lex_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
-	if (**line == '<')
+	if (**line == '>')
 	{
-		lst_append(buffer_lst, new_node(line));
-		*status = LEX_DLESS;
+		*status = LEX_DGREAT;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
-		make_token(token_lst, buffer_lst, GREAT);
+		make_token(token_lst, buffer_lst, T_GREAT);
 		*status = LEX_START;
 	}
 	else
@@ -135,7 +149,7 @@ void	lex_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 void	lex_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	(void)line;
-	make_token(token_lst, buffer_lst, DGREAT);
+	make_token(token_lst, buffer_lst, T_DGREAT);
 	*status = LEX_START;
 }
 
@@ -143,13 +157,13 @@ void	lex_quote(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 {
 	if (**line == '\'')
 	{
-		make_token(token_lst, buffer_lst, WORD);
+		make_token(token_lst, buffer_lst, T_WORD);
 		*status = LEX_START;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
-		lst_append(buffer_lst, new_node(line));
+		lst_append(buffer_lst, new_node(*line));
 		*status = LEX_QUOTE;
 		(*line)++;
 	}
@@ -161,13 +175,13 @@ void	lex_dquote(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 {
 	if (**line == '\"')
 	{
-		make_token(token_lst, buffer_lst, WORD);
+		make_token(token_lst, buffer_lst, T_WORD);
 		*status = LEX_START;
 		(*line)++;
 	}
 	else if (ft_isprint(**line))
 	{
-		lst_append(buffer_lst, new_node(line));
+		lst_append(buffer_lst, new_node(*line));
 		*status = LEX_DQUOTE;
 		(*line)++;
 	}
