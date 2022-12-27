@@ -8,7 +8,7 @@ LIBC		=	ar rcs
 CFLAGS		=	
 #DIRS
 LFTDIR		=	libraries/libft
-DLLDIR		=	libraries/doubly_linked_list
+DLLDIR		=	libraries/dllist
 GNLDIR		=	libraries/get_next_line
 SRCDIR		=	
 BONUSDIR	=	
