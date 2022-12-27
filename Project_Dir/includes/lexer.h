@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/26 14:25:38 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/26 15:26:20 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <unistd.h>
 # include "readline/readline.h"
 # include "readline/history.h"
-# include "../get_next_line/includes/get_next_line.h"
-# include "../doubly_linked_list/includes/doubly_linked_list.h"
+# include "../libraries/get_next_line/includes/get_next_line.h"
+# include "../libraries/doubly_linked_list/includes/doubly_linked_list.h"
 
 // define lexer status
 typedef enum e_lex_status
@@ -38,7 +38,7 @@ typedef enum e_lex_status
 
 # define TOTAL_LEX_STATUS	11
 
-typedef void	(*t_lex_status_fp)(char **line, char **buffer);
+typedef void	(*t_lex_status_fp)(t_lex_status *status, char **line, char **buffer);
 
 // define token type as enum
 typedef enum e_type
@@ -77,16 +77,16 @@ typedef struct s_data
 	t_list	token_lst;
 }	t_data;
 
-void	lex_start(char **line, char **buffer);
-void	lex_word(char **line, char **buffer);
-void	lex_pipe(char **line, char **buffer);
-void	lex_less(char **line, char **buffer);
-void	lex_dless(char **line, char **buffer);
-void	lex_great(char **line, char **buffer);
-void	lex_dgreat(char **line, char **buffer);
-void	lex_quote(char **line, char **buffer);
-void	lex_dquote(char **line, char **buffer);
-void	lex_make_token(char **line, char **buffer);
-void	lex_finish(char **line, char **buffer);
+void	lex_start(t_lex_status *status, char **line, char **buffer);
+void	lex_word(t_lex_status *status, char **line, char **buffer);
+void	lex_pipe(t_lex_status *status, char **line, char **buffer);
+void	lex_less(t_lex_status *status, char **line, char **buffer);
+void	lex_dless(t_lex_status *status, char **line, char **buffer);
+void	lex_great(t_lex_status *status, char **line, char **buffer);
+void	lex_dgreat(t_lex_status *status, char **line, char **buffer);
+void	lex_quote(t_lex_status *status, char **line, char **buffer);
+void	lex_dquote(t_lex_status *status, char **line, char **buffer);
+void	lex_make_token(t_lex_status *status, char **line, char **buffer);
+void	lex_finish(t_lex_status *status, char **line, char **buffer);
 
 #endif
