@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 10:24:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:28:55 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,8 @@ int	main(void)
 	{
 		lst_init(&data.token_lst);
 		line = readline("minishell>");
-		make_token_list(&data.token_lst, line);
+		//make_token_list(&data.token_lst, line);
+		make_token_list2(&data, line);
 		print_token_list(&data.token_lst);
 		lst_clear(&data.token_lst, del);
 	}
