@@ -6,11 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:01:14 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/25 15:18:33 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:35:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/doubly_linked_list.h"
+#include "../includes/dllist.h"
 
 void	lst_prepend(t_list *list, t_node *new_node)
 {

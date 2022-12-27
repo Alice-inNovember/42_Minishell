@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_peek.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 15:04:29 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 17:35:50 by minseok2         ###   ########.fr       */
+/*   Created: 2022/07/05 18:28:03 by minseok2          #+#    #+#             */
+/*   Updated: 2022/12/27 17:47:39 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/dllist.h"
+#include "../includes/libft.h"
 
-void	*lst_peek_first(t_list *list)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	return (list->head->next->content);
-}
+	size_t			i;
 
-void	*lst_peek_last(t_list *list)
-{
-	return (list->tail->prev->content);
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
 }

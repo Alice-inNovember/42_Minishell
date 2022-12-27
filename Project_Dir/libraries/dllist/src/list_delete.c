@@ -6,11 +6,11 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:06:46 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/26 19:55:47 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:35:55 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/doubly_linked_list.h"
+#include "../includes/dllist.h"
 
 void	lst_delete(t_node *node, void (*del)(void *))
 {

@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/27 22:57:40 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:57:40 by jincpark         ###   ########.fr       */]
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,3 @@ void	parse_expression(t_list *proc_data_lst, t_node *first, t_node *last)
 	}
 	parse_simple_cmd(first, last);
 }
-
-
