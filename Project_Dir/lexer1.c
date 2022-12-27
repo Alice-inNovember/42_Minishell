@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 18:52:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:28:05 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,24 +178,26 @@ void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 		(*line)++;
 	}
 	else
-		ft_exit("3Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
 void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("QUOTE_CLOSE = %c\n", **line);
-	if (**line == '\'' || **line == '\"')
+	if (**line == '\0')
 	{
-		*status = START;
-		(*line)++;
+		make_token(token_lst, buffer_lst, T_WORD);
+		*status = FINISH;
 	}
+	else if (**line == '\'' || **line == '\"')
+		*status = START;
 	else if (ft_isprint(**line))
 	{
 		make_token(token_lst, buffer_lst, T_WORD);
 		*status = START;
 	}
 	else
-		ft_exit("2Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
 void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
@@ -215,24 +217,26 @@ void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 		(*line)++;
 	}
 	else
-		ft_exit("1Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
 void	dquote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("DQUOTE_CLOSE = %c\n", **line);
-	if (**line == '\'' || **line == '\"')
+	if (**line == '\0')
 	{
-		*status = START;
-		(*line)++;
+		make_token(token_lst, buffer_lst, T_WORD);
+		*status = FINISH;
 	}
+	else if (**line == '\'' || **line == '\"')
+		*status = START;
 	else if (ft_isprint(**line))
 	{
 		make_token(token_lst, buffer_lst, T_WORD);
 		*status = START;
 	}
 	else
-		ft_exit("0Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
+		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
 void	make_token_list(t_list *token_lst, char *line)
@@ -285,7 +289,7 @@ void	print_token_list(t_list *token_lst)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	char	*line;
