@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:29:06 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/28 13:42:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:00:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	 main(int argc, char **argv, char **envp)
 	t_data	data;
 	char	*line;
 
+	envp_init(&data, envp);
 	while (1)
 	{
 		line = readline("minishell>");
