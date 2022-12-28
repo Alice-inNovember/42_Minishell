@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:52:39 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/28 10:42:47 by minseok2         ###   ########.fr       */
+/*   Created: 2022/12/28 10:37:25 by minseok2          #+#    #+#             */
+/*   Updated: 2022/12/28 10:47:05 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/minishell.h"
+#include "../../includes/lexer1.h"
 
-void	ft_free(void *ptr)
+void	del_token(void *content)
 {
-	if (ptr != NULL)
-	{
-		free(ptr);
-		ptr = NULL;
-	}
+	t_token	*token;
+
+	token = content;
+	ft_free(token->value);
+}
+
+void	tokenize(t_list *token_lst, char *line)
+{
+	lst_init(token_lst);
+	lst_clear(token_lst, del_token);
 }
