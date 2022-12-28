@@ -6,16 +6,14 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/28 09:35:19 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:46:51 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER1_H
 # define LEXER1_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include "data.h"
+#include "data.h"
 
 // define lexer status
 typedef enum e_status
@@ -56,8 +54,12 @@ typedef struct s_token
 	char			*value;
 }	t_token;
 
+// main.c
+void	tokenize(t_list *token_lst, char *line);
 
-void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type);
+// print_token_lst.c
+void	print_token_lst(t_list *token_lst);
+
 void	start(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 void	make_word(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 void	make_pipe(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
