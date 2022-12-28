@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:32:30 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 15:35:11 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 10:30:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 # include "data.h"
