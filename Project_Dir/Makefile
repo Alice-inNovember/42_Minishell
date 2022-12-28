@@ -10,12 +10,18 @@ CFLAGS		=
 LFTDIR		=	libraries/libft
 DLLDIR		=	libraries/dllist
 GNLDIR		=	libraries/get_next_line
-SRCDIR		=	
+SRCDIR		=	srcs
+ENVPDIR		=	$(SRCDIR)/envp
+LEXERDIR	=	$(SRCDIR)/lexer
+PARSEDIR	=	$(SRCDIR)/parse
 BONUSDIR	=	
 #FILES
 LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
 INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR)
-SRCS		=	main.c lexer2.c
+SRCS		=	$(SRCDIR)/main.c \
+				$(ENVPDIR)/envp.c \
+				$(LEXERDIR)/lexer2.c \
+				#$(PARSEDIR)/parse.c
 OBJS		=	${SRCS:.c=.o}
 
 all : $(NAME)
