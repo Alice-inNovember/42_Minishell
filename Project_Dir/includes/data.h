@@ -6,14 +6,13 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/27 15:35:18 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 10:29:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
 
-# include <unistd.h>
 # include "../libraries/dllist/includes/dllist.h"
 
 // define command as node

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:52:39 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/28 10:42:47 by minseok2         ###   ########.fr       */
+/*   Created: 2022/12/28 10:29:06 by minseok2          #+#    #+#             */
+/*   Updated: 2022/12/28 10:47:02 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/minishell.h"
+#include "../../includes/lexer1.h"
 
-void	ft_free(void *ptr)
+int	 main(int argc, char **argv, char **envp)
 {
-	if (ptr != NULL)
+	t_data	data;
+	char	*line;
+
+	while (1)
 	{
-		free(ptr);
-		ptr = NULL;
+		line = readline("minishell>");
+		tokenize(&data.token_lst, line);
+		print_token_lst(&data.token_lst);
 	}
+	return (0);
 }
