@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/28 09:47:55 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:36:15 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,36 @@
 #include <stdlib.h>
 #include "../../includes/data.h"
 #include "../../includes/minishell.h"
-#include "../../libraries/dllist/includes/dllist.h"
-#include "../../libraries/libft/includes/libft.h"
 
-size_t	find_keyend(char *key)
+char	*envp_find(t_data *data, const char *key)
 {
-	int	i;
+	t_node	*node;
 
-	i = 0;
-	while (key[i] && key[i] != '=')
-		i++;
-	return (i);
+	node = data->envp_lst.head->next;
+	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
+		node = node->next;
+	if (node->content)
+		return (((t_envp *)node->content)->value);
+	return (NULL);
+}
+
+void	envp_edit(t_data *data, char *key, char *value)
+{
+	t_node	*node;
+
+	node = data->envp_lst.head->next;
+	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
+		node = node->next;
+	free(((t_envp *)node->content)->value);
+	((t_envp *)node->content)->value = ft_strdup(value);
 }
 
 void	envp_add(t_data *data, char *key, char *value)
 {
 	t_envp	*e_node;
 
+	if (envp_find(data, key))
+		return (envp_edit(data, key, value));
 	e_node = ft_calloc(1, sizeof(t_envp *));
 	e_node->key = ft_strdup(key);
 	e_node->value = ft_strdup(value);
@@ -47,7 +60,9 @@ void	envp_init(t_data *data, char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		keyend = find_keyend(envp[i]);
+		keyend = 0;
+		while (key[keyend] && key[keyend] != '=')
+			keyend++;
 		key = ft_substr(envp[i], 0, keyend);
 		envp_add(data, key, ft_strdup(ft_strchr(envp[i], '=') + 1));
 		free(key);
@@ -55,12 +70,18 @@ void	envp_init(t_data *data, char **envp)
 	}
 }
 
-char	*envp_find(t_data *data, const char *key)
+void	envp_dell(t_data *data, const char *key)
 {
 	t_node	*node;
 
 	node = data->envp_lst.head->next;
 	while (ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
-	return (((t_envp *)node->content)->value);
+	if (!node->content)
+		return ;
+	free(((t_envp *)node->content)->value);
+	free(node->content);
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+	free(node);
 }
