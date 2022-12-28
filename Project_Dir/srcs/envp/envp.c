@@ -6,16 +6,16 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 18:04:46 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 09:47:55 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/data.h"
-#include "includes/minishell.h"
-#include "libraries/dllist/includes/dllist.h"
-#include "libraries/libft/includes/libft.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include "../../includes/data.h"
+#include "../../includes/minishell.h"
+#include "../../libraries/dllist/includes/dllist.h"
+#include "../../libraries/libft/includes/libft.h"
 
 size_t	find_keyend(char *key)
 {

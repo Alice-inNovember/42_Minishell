@@ -6,12 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 15:17:47 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 15:44:48 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 09:48:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
-#include "includes/lexer2.h"
+#include "../../includes/minishell.h"
+#include "../../includes/lexer2.h"
 
 void	lex_make_token2(t_list *buffer, t_type type, t_data *data)
 {
