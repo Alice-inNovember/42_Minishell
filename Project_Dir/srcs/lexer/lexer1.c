@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/28 09:39:21 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:31:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ void	make_token_list(t_list *token_lst, char *line)
 	const t_status_fp	lex_status_fp[TOTAL_STATUS - 1] = {
 		start, make_word, make_pipe, \
 		make_less, make_dless, make_great, make_dgreat, \
-		quote_open, quote_close, dquote_open, dquote_close
+		quote_open, quote_close, dquote_open, dquote_close, expand
 	};
 	t_list				buffer_lst;
 
@@ -252,7 +252,6 @@ void	make_token_list(t_list *token_lst, char *line)
 	status = START;
 	while (status != FINISH)
 		(*lex_status_fp[status])(&status, token_lst, &line, &buffer_lst);
-	lst_clear(&buffer_lst, NULL);
 }
 
 void	print_enum(t_type type)
