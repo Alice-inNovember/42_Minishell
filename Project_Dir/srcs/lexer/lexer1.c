@@ -6,13 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 19:28:05 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/28 09:39:21 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lexer1.h"
-#include "includes/minishell.h"
-#include "libraries/dllist/includes/dllist.h"
+#include "../../includes/lexer1.h"
+#include "../../includes/minishell.h"
 
 void	del(void *content)
 {
@@ -54,7 +53,7 @@ void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type)
 	lst_init(buffer_lst);
 }
 
-void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	start(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("START = %c\n", **line);
 	(void)token_lst;
@@ -85,7 +84,7 @@ void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_
 	(*line)++;
 }
 
-void	make_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_word(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("MAKE_WORD = %c\n", **line);
 	if (ft_strchr(" |<>\'\"", **line))
@@ -103,7 +102,7 @@ void	make_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	make_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_pipe(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("MAKE_PIPE = %c\n", **line);
 	(void)line;
@@ -111,7 +110,7 @@ void	make_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 	*status = START;
 }
 
-void	make_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_less(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("MAKE_LESS = %c\n", **line);
 	if (**line == '<')
@@ -128,7 +127,7 @@ void	make_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buf
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	make_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_dless(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("MAKE_DLESS = %c\n", **line);
 	(void)line;
@@ -136,7 +135,7 @@ void	make_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 	*status = START;
 }
 
-void	make_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_great(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("MAKE_GREAT = %c\n", **line);
 	if (**line == '>')
@@ -153,7 +152,7 @@ void	make_great(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	make_dgreat(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("MAKE_DGREAT = %c\n", **line);
 	(void)line;
@@ -161,7 +160,7 @@ void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 	*status = START;
 }
 
-void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	quote_open(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("QUOTE_OPEN = %c\n", **line);
 	if (**line == '\0')
@@ -181,7 +180,7 @@ void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *bu
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	quote_close(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("QUOTE_CLOSE = %c\n", **line);
 	if (**line == '\0')
@@ -200,7 +199,7 @@ void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	dquote_open(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("DQUOTE_OPEN = %c\n", **line);
 	if (**line == '\0')
@@ -220,7 +219,7 @@ void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *b
 		ft_exit("Error: non printable character", STDERR_FILENO, EXIT_FAILURE);
 }
 
-void	dquote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
+void	dquote_close(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst)
 {
 	printf("DQUOTE_CLOSE = %c\n", **line);
 	if (**line == '\0')
@@ -241,13 +240,13 @@ void	dquote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *
 
 void	make_token_list(t_list *token_lst, char *line)
 {
-	t_lex_status			status;
-	const t_lex_status_fp	lex_status_fp[TOTAL_LEX_STATUS - 1] = {
+	t_status			status;
+	const t_status_fp	lex_status_fp[TOTAL_STATUS - 1] = {
 		start, make_word, make_pipe, \
 		make_less, make_dless, make_great, make_dgreat, \
 		quote_open, quote_close, dquote_open, dquote_close
 	};
-	t_list					buffer_lst;
+	t_list				buffer_lst;
 
 	lst_init(&buffer_lst);
 	status = START;

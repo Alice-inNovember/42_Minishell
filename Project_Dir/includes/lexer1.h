@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/27 15:42:30 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/28 09:35:19 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "data.h"
 
 // define lexer status
-typedef enum e_lex_status
+typedef enum e_status
 {
 	START,
 	MAKE_WORD,
@@ -32,11 +32,11 @@ typedef enum e_lex_status
 	DQUOTE_OPEN,
 	DQUOTE_CLOSE,
 	FINISH
-}	t_lex_status;
+}	t_status;
 
-# define TOTAL_LEX_STATUS	12
+# define TOTAL_STATUS	12
 
-typedef void	(*t_lex_status_fp)(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+typedef void	(*t_status_fp)(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 
 // define token type as enum
 typedef enum e_type
@@ -58,16 +58,16 @@ typedef struct s_token
 
 
 void	make_token(t_list *token_lst, t_list *buffer_lst, t_type type);
-void	start(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_word(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_pipe(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_less(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_dless(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_great(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_dgreat(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	quote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	quote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	dquote_open(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	dquote_close(t_lex_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	start(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	make_word(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	make_pipe(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	make_less(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	make_dless(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	make_great(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	make_dgreat(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	quote_open(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	quote_close(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	dquote_open(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+void	dquote_close(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
 
 #endif
