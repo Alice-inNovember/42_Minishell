@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/28 13:57:53 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:09:35 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/data.h"
 #include "../../includes/minishell.h"
 
-char	*envp_find(t_data *data, const char *key)
+char	*envp_find(t_data *data, char *key)
 {
 	t_node	*node;
 
@@ -73,7 +73,7 @@ void	envp_init(t_data *data, char **envp)
 	}
 }
 
-void	envp_delete(t_data *data, const char *key)
+void	envp_delete(t_data *data, char *key)
 {
 	t_node	*node;
 
