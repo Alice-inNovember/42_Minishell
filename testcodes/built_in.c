@@ -6,9 +6,11 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 19:06:49 by tyi               #+#    #+#             */
-/*   Updated: 2022/12/27 19:59:33 by tyi              ###   ########.fr       */
+/*   Updated: 2022/12/28 16:26:00 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <../Project_Dir/includes/data.h>
 
 void	ft_echo(char **cmd_vector, t_list envp_list)
 {
@@ -34,8 +36,13 @@ void	ft_echo(char **cmd_vector, t_list envp_list)
 		ft_printf("\n");
 }
 
-void	ft_cd(char **cmd_vector, t_list envp_list)
+void	ft_cd(char **cmd_vector, t_list *envp_list)
 {
+	t_envp	*pwd_p;
+
+	pwd_p = find_node_type(envp_list, "PWD");
+	pwd_p->value =
+
 
 }
 
