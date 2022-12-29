@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 15:22:01 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:33:46 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	del_s_token(void *token)
 {
-	ft_free((t_token *)token);
+	ft_free(&(t_token *)token);
 }
 
 // t_proc_data {
@@ -24,7 +24,7 @@ void	del_s_token(void *token)
 
 void	del_s_redir(void *redir)
 {
-	free((t_redir *)redir);
+	ft_free(&(t_redir *)redir);
 }
 
 void	del_proc_data(t_proc_data *proc_data)
