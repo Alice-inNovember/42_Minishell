@@ -39,6 +39,7 @@ typedef struct s_data
 	t_list	envp_lst;
 	t_list	builtin_lst;
 	t_list	proc_data_lst;
+	int		syntax_err_flag;
 }	t_data;
 
 #endif

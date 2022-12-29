@@ -6,17 +6,17 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:52:39 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/28 10:42:47 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:27:31 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-void	ft_free(void *ptr)
+void	ft_free(void **ptr)
 {
-	if (ptr != NULL)
+	if (ptr != NULL && *ptr != NULL)
 	{
-		free(ptr);
-		ptr = NULL;
+		free(*ptr);
+		*ptr = NULL;
 	}
 }
