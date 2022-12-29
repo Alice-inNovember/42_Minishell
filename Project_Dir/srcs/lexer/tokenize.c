@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:37:25 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 18:53:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/29 21:14:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	tokenize(t_data *data, char *line)
 	t_list				buffer_lst;
 
 	lst_init(&data->token_lst);
+	lst_init(&buffer_lst);
 	status = START;
 	while (status != FINISH)
 		status_fp[status](&status, data, &line, &buffer_lst);
+	lst_clear(&buffer_lst, NULL);
 }
