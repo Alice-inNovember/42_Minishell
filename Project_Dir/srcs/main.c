@@ -3,73 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/25 16:53:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 19:13:31 by jincpark         ###   ########.fr       */
+/*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
+/*   Updated: 2022/12/29 19:24:49 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/lexer2.h"
+#include "../../includes/minishell.h"
+#include "../../includes/lexer1.h"
 
-/*
-void	del(void *content)
-{
-	const t_token	*token = content;
-
-	ft_free(token->value);
-}
-*/
-
-void	print_enum(t_type type)
-{
-	if (type == T_WORD)
-		printf("WORD");
-	else if (type == T_QUOTE_WORD)
-		printf("QUOTE_WORD");
-	else if (type == T_DQUOTE_WORD)
-		printf("DQUOTE_WORD");
-	else if (type == T_PIPE)
-		printf("PIPE");
-	else if (type == T_LESS)
-		printf("LESS");
-	else if (type == T_GREAT)
-		printf("GREAT");
-	else if (type == T_DLESS)
-		printf("DLESS");
-	else if (type == T_DGREAT)
-		printf("DGREAT");
-}
-
-void	print_token_list(t_list *token_lst)
-{
-	t_node	*cur_node;
-	t_token	*token;
-
-	cur_node = token_lst->head->next;
-	while (cur_node->next != NULL)
-	{
-		token = cur_node->content;
-		printf("<token>\n");
-		printf("token type = ");
-		print_enum(token->type);
-		printf("\ntoken value = %s\n\n", token->value);
-		cur_node = cur_node->next;
-	}
-}
-
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 	char	*line;
 
+	envp_init(&data.envp_lst, envp);
 	while (1)
 	{
-		lst_init(&data.token_lst);
-		line = readline("minishell> ");
-		make_token_list2(&data, line);
-		print_token_list(&data.token_lst);
+		line = readline("minishell>");
+		tokenize(&data, line);
+		print_token_lst(&data.token_lst);
 		lst_init(&data.proc_data_lst);
 		data.syntax_err_flag = 0;
 		parse_expression(&data, data.token_lst.head->next, data.token_lst.tail->prev);
