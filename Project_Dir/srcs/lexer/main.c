@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 10:29:06 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 15:38:17 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
+/*   Updated: 2022/12/29 19:14:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	char	*line;
 
-	envp_init(&data, envp);
+	envp_init(&data.envp_lst, envp);
 	while (1)
 	{
 		line = readline("minishell>");
