@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/28 18:21:52 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:39:46 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	is_redir(t_data *data, t_node *node)
 
 void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_node *first, t_node *last)
 {
-	if (last->next == first) // prefix가 없는 경우
+	if (first == last->next) // prefix가 없는 경우
 		return ;
 	parse_cmd_prefix(data, proc_data, first, last->prev->prev);
 	parse_io_redirect(data, proc_data, last->prev, last);
@@ -81,7 +81,7 @@ void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_node *first, t_nod
 
 void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_node *first, t_node *last)
 {
-	if (first->prev == last) // suffix가 없는 경우
+	if (first == last->next) // suffix가 없는 경우
 		return ;
 	if (is_redir(data, last->prev))
 	{
@@ -93,10 +93,7 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_node *first, t_nod
 	{
 		// last->prev->type == T_WORD 인 경우
 		parse_cmd_suffix(data, proc_data, first, last->prev);
-		if (last->type == T_WORD)
-			parse_cmd_word(data, proc_data, last);
-		else // WORD REDIR 인 경우
-			syntax_error();
+		parse_cmd_word(data, proc_data, last);
 	}
 }
 
@@ -131,6 +128,8 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_node *node)
 {
 	if (node->type == T_WORD)
 		lst_append(&proc_data->cmd_lst, new_node((void *)node->content->value));
+	else
+		syntax_error();
 }
 
 void	parse_simple_cmd(t_data *data, t_node *first, t_node *last)
