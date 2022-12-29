@@ -11,17 +11,21 @@ LFTDIR		=	libraries/libft
 DLLDIR		=	libraries/dllist
 GNLDIR		=	libraries/get_next_line
 SRCDIR		=	srcs
+INCDIR		=	./includes
 ENVPDIR		=	$(SRCDIR)/envp
 LEXERDIR	=	$(SRCDIR)/lexer
-PARSEDIR	=	$(SRCDIR)/parse
+PARSEDIR	=	$(SRCDIR)/parser
+UTILDIR		=	$(SRCDIR)/util
 BONUSDIR	=	
 #FILES
 LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
-INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR)
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(LEXERDIR)/lexer2.c \
-				#$(PARSEDIR)/parse.c
+				$(PARSEDIR)/parser.c \
+				$(UTILDIR)/syntax_err.c \
+				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
 
 all : $(NAME)
