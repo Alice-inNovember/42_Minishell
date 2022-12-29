@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_err.c                                       :+:      :+:    :+:   */
+/*   util.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 18:58:35 by jincpark         ###   ########.fr       */
+/*   Created: 2022/12/29 18:44:41 by jincpark          #+#    #+#             */
+/*   Updated: 2022/12/29 18:46:52 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef UTIL_H
+# define UTIL_H
 
-void	syntax_err(t_data *data)
-{
-	data->syntax_err_flag = 1;
-	lst_clear(&data->token_lst, del_s_token);
-	lst_clear(&data->proc_data_lst, del_proc_data);
-	printf("error : syntax error\n");
-}
+void	del_s_token(void **content);
+void	del_s_cmd(void **content);
+void	del_s_redir(void **content);
+void	del_proc_data(void **content);
+void	del_proc_data(void **content);
+
+#endif

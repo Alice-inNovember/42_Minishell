@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_err.c                                       :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 18:58:35 by jincpark         ###   ########.fr       */
+/*   Created: 2022/12/29 18:23:08 by jincpark          #+#    #+#             */
+/*   Updated: 2022/12/29 18:44:20 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	syntax_err(t_data *data)
-{
-	data->syntax_err_flag = 1;
-	lst_clear(&data->token_lst, del_s_token);
-	lst_clear(&data->proc_data_lst, del_proc_data);
-	printf("error : syntax error\n");
-}
+void	parse_expression(t_data *data, t_node *first, t_node *last);
+void	syntax_err(t_data *data);
+
+#endif

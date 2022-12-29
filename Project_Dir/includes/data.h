@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 14:59:48 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 19:01:00 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DATA_H
 
 # include "../libraries/dllist/includes/dllist.h"
+# include "lexer2.h"
 
 typedef struct s_envp
 {
@@ -26,6 +27,12 @@ typedef struct s_builtin
 	char		*key;
 	void		(*function)(char **, t_list *);
 }	t_builtin;
+
+typedef struct s_redir
+{
+	t_type	type;
+	char	*fname;
+}	t_redir;
 
 typedef struct s_proc_data
 {

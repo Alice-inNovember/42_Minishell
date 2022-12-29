@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:31:44 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 17:48:07 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 18:27:35 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ char	*ft_itoa(int n);
 void	*ft_malloc(size_t size);
 void	*ft_calloc(size_t count, size_t data_type_size);
 void	ft_exit(const char *signal, int fd, int status);
-void	ft_free(void *ptr);
+void	ft_free(void **ptr);
 
 #endif
