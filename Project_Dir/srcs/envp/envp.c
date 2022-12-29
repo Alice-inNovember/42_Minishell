@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 13:25:24 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 19:27:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	envp_init(t_list *envp_list, char **envp)
 		key = ft_substr(envp[i], 0, keyend);
 		value = ft_strdup(ft_strchr(envp[i], '=') + 1);
 		envp_add(envp_list, key, value);
-		ft_free(key);
+		ft_free(&key);
 		ft_free(value);
 		i++;
 	}
