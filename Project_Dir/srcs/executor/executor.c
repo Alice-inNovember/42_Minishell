@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.h                                             :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 13:36:42 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 16:22:26 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
+/*   Updated: 2022/12/29 16:21:38 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#include "../../includes/minishell.h"
 
-# include "data.h"
-
-void	envp_delete(t_list *envp_list, char *key);
-void	envp_init(t_list *envp_list, char **envp);
-void	envp_add(t_list *envp_list, char *key, char *value);
-char	*envp_find(t_list *envp_list, char *key);
-char	**envp2arr(t_list *envp_list);
-char	*str3join(char *str1, char *str2, char *str3);
-char	*ft_strcat(char *dest, char *src);
-
-#endif
+void	executor(t_data *data)
+{
+	
+}

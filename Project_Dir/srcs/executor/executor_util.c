@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.h                                             :+:      :+:    :+:   */
+/*   executor_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 13:36:42 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 16:22:26 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
+/*   Updated: 2022/12/29 16:21:41 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#include "../../includes/minishell.h"
+#include <stddef.h>
 
-# include "data.h"
+char	**cmd_list2arr(t_list *cmd_lst)
+{
+	t_node	*node;
+	size_t	i;
+	size_t	cmdlen;
+	char	**cmdarr;
 
-void	envp_delete(t_list *envp_list, char *key);
-void	envp_init(t_list *envp_list, char **envp);
-void	envp_add(t_list *envp_list, char *key, char *value);
-char	*envp_find(t_list *envp_list, char *key);
-char	**envp2arr(t_list *envp_list);
-char	*str3join(char *str1, char *str2, char *str3);
-char	*ft_strcat(char *dest, char *src);
-
-#endif
+	node = lst_peek_first(cmd_lst);
+	cmdlen = lst_size(cmd_lst);
+	cmdarr = (char **)ft_malloc(cmdlen + 1);
+	i = 0;
+	while (i < cmdlen)
+	{
+		cmdarr[i] = node->content;
+		node = node->next;
+		i++;
+	}
+	cmdarr[i] = NULL;
+	return (cmdarr);
+}

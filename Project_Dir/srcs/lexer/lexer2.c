@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 15:17:47 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/28 15:56:09 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 15:36:29 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,22 +159,5 @@ void	make_token_list2(t_data *data, char *line)
 		else
 			lex_word2(&line, &buffer, data);
 		lst_clear(&buffer, NULL);
-	}
-}
-
-void	lex_token_env_converter(t_data *data)
-{
-	t_node	*node;
-
-	node = lst_peek_first(&data->token_lst);
-	while (1)
-	{
-		if (((t_token *)node->content)->type != T_DLESS)
-		{
-			if (strchr (((t_token *)node->content)->value, '$'))
-			{
-				
-			}
-		}
 	}
 }
