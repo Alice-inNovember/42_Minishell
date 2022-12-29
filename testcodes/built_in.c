@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 19:06:49 by tyi               #+#    #+#             */
-/*   Updated: 2022/12/29 16:17:37 by tyi              ###   ########.fr       */
+/*   Updated: 2022/12/29 22:22:26 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,24 @@
 void	bt_echo(char **cmd_vector, t_list *envp_list)
 {
 	int	i;
+	char	*word;
 	int	new_line_flag;
 
-	if (bt_strcmp(cmd_vector[1], "-n"))
+	new_line_flag = 1;
+	i = 1;
+	while (cmd_vector[i][0] == '-' && cmd_vector[i][0] == 'n')
 	{
 		new_line_flag = 0;
-		i = 2;
-	}
-	else
-	{
-		new_line_flag = 1;
-		i = 1;
+		i++;
 	}
 	while (cmd_vector[i])
 	{
-		bt_printf("%s", cmd_vector[i]);
+		word = cmd_vector[i];
+		ft_printf("%s", cmd_vector[i]);
 		i++;
 	}
 	if (new_line_flag == 1)
-		bt_printf("\n");
+		ft_printf("\n");
 }
 
 void	bt_pwd(char **cmd_vector,t_list *envp_list)
@@ -45,7 +44,7 @@ void	bt_pwd(char **cmd_vector,t_list *envp_list)
 	char	*pwd;
 	
 	pwd = envp_find(envp_find, "PWD");
-	bt_printf("%s\n", pwd);
+	ft_printf("%s\n", pwd);
 }
 
 void	bt_env(char **cmd_vector,t_list *envp_list)
@@ -59,7 +58,7 @@ void	bt_env(char **cmd_vector,t_list *envp_list)
 	{
 		key = cur_node->content->key;
 		value = cur_node->content->value;
-		bt_printf("%s=%s\n", key, value);
+		ft_printf("%s=%s\n", key, value);
 	}
 }
 
@@ -71,18 +70,19 @@ void	bt_exit(char **cmd_vector,t_list *envp_list)
 void	bt_cd(char **cmd_vector, t_list *envp_list)
 {
 	char	*path;
-	char	*value;
+	char	*new_pwd;
+	char	*old_pwd;
 
-	path = cmd_vector[1];
-	if (!check_abs_path(path))
-	{
-		
-	}
-	node_p = find_node_type_p(envp_list, "PWD");
-	if (!opendir(path))
-		perror("cd: no such file or directory");
-	value = envp_find(envp_list, "PWD");
-	*value = path;
+	path = cmd_vector[1];	
+	old_pwd = getcwd(0, 0);
+	if (!chdir(path))
+		error();
+	new_pwd = getcwd(0, 0);
+	envp_delete(envp_list, "PWD");
+	envp_add(envp_list, "PWD", new_pwd);
+	if (envp_find(envp_list, "OLDPWD"))
+		envp_delete(envp_list, "OLDPWD");
+	envp_add(envp_list, "OLDPWD", old_pwd);
 }
 
 void	bt_export(char **cmd_vector,t_list *envp_list)
