@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/28 16:11:48 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:59:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,25 @@
 typedef enum e_status
 {
 	START,
-	MAKE_WORD,
-	MAKE_PIPE,
-	MAKE_LESS,
-	MAKE_DLESS,
-	MAKE_GREAT,
-	MAKE_DGREAT,
+	MAKING_WORD,
+	MAKING_PIPE,
+	MAKING_LESS,
+	MAKING_DLESS,
+	MAKING_GREAT,
+	MAKING_DGREAT,
 	QUOTE_OPEN,
+	QUOTE_MAKING_LITERAL,
 	QUOTE_CLOSE,
 	DQUOTE_OPEN,
+	DQUOTE_MAKING_LITERAL,
 	DQUOTE_CLOSE,
+	ERROR,
 	FINISH
 }	t_status;
 
-# define TOTAL_STATUS	12
+# define TOTAL_STATUS	14
 
-typedef void	(*t_status_fp)(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+typedef void	(*t_status_fp)(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 
 // define token type as enum
 typedef enum e_type
@@ -55,24 +58,28 @@ typedef struct s_token
 }	t_token;
 
 // tokenize.c
-void	tokenize(t_list *token_lst, t_list *envp_lst, char *line);
+void	tokenize(t_data *data, char *line);
 
 // tokenize_utils.c
 void	del_token(void *content);
+void	create_token(t_list *token_lst, t_list *buffer_lst, t_type type);
+void	expand(char **line);
 
 // print_token_lst.c
 void	print_token_lst(t_list *token_lst);
 
-void	start(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_word(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_pipe(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_less(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_dless(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_great(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	make_dgreat(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	quote_open(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	quote_close(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	dquote_open(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
-void	dquote_close(t_status *status, t_list *token_lst, char **line, t_list *buffer_lst);
+// status
+void	error(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	start(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	making_word(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	making_pipe(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	making_less(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	making_dless(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	making_great(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	making_dgreat(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	quote_open(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	quote_close(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	dquote_open(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	dquote_close(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 
 #endif
