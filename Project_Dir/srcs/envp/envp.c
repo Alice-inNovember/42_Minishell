@@ -6,20 +6,18 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/28 14:09:35 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/29 13:25:24 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdlib.h>
 #include "../../includes/data.h"
 #include "../../includes/minishell.h"
 
-char	*envp_find(t_data *data, char *key)
+char	*envp_find(t_list *envp_list, char *key)
 {
 	t_node	*node;
 
-	node = lst_peek_first(&data->envp_lst);
+	node = lst_peek_first(envp_list);
 	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	if (node->content)
@@ -27,37 +25,37 @@ char	*envp_find(t_data *data, char *key)
 	return (NULL);
 }
 
-void	envp_edit(t_data *data, char *key, char *value)
+void	envp_edit(t_list *envp_list, char *key, char *value)
 {
 	t_node	*node;
 
-	node = lst_peek_first(&data->envp_lst);
+	node = lst_peek_first(envp_list);
 	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	free(((t_envp *)node->content)->value);
 	((t_envp *)node->content)->value = ft_strdup(value);
 }
 
-void	envp_add(t_data *data, char *key, char *value)
+void	envp_add(t_list *envp_list, char *key, char *value)
 {
 	t_envp	*e_node;
 
-	if (envp_find(data, key))
-		return (envp_edit(data, key, value));
+	if (envp_find(envp_list, key))
+		return (envp_edit(envp_list, key, value));
 	e_node = (t_envp *)ft_calloc(1, sizeof(t_envp));
 	e_node->key = ft_strdup(key);
 	e_node->value = ft_strdup(value);
-	lst_append(&data->envp_lst, new_node(e_node));
+	lst_append(envp_list, new_node(e_node));
 }
 
-void	envp_init(t_data *data, char **envp)
+void	envp_init(t_list *envp_list, char **envp)
 {
 	int		i;
 	size_t	keyend;
 	char	*key;
 	char	*value;
 
-	lst_init(&data->envp_lst);
+	lst_init(envp_list);
 	i = 0;
 	while (envp[i])
 	{
@@ -66,18 +64,18 @@ void	envp_init(t_data *data, char **envp)
 			keyend++;
 		key = ft_substr(envp[i], 0, keyend);
 		value = ft_strdup(ft_strchr(envp[i], '=') + 1);
-		envp_add(data, key, value);
+		envp_add(envp_list, key, value);
 		ft_free(key);
 		ft_free(value);
 		i++;
 	}
 }
 
-void	envp_delete(t_data *data, char *key)
+void	envp_delete(t_list *envp_list, char *key)
 {
 	t_node	*node;
 
-	node = lst_peek_first(&data->envp_lst);
+	node = lst_peek_first(envp_list);
 	while (ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	if (!node->content)
