@@ -1,72 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 12:39:46 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/29 15:31:09 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
- * t_list
- * {
- * 		t_node *head;
- * 		t_node *tail;
- * 		int		size;
- * }
- *
- * t_node
- * {
- * 		void	*content;
- * 		t_node	*prev;
- * 		t_node	*next;
- * }
- *
- * t_token
- * {
- * 		t_type			type;
- * 		t_quote_type	quote_type;
- * 		char			*value;
- * }
- *
- * t_redir
- * {
- * 		t_type	type;
- * 		char	*fname;
- * }
- *
-typedef struct s_envp
-{
-	char		*key;
-	char		*value;
-}	t_envp;
-
-typedef struct s_proc_data
-{
-	t_list	cmd_lst;
-	t_list	redir_lst;
-}	t_proc_data;
-
-typedef struct s_data
-{
-	t_list	token_lst;
-	t_list	envp_lst;
-	t_list	proc_data_lst;
-}	t_data;
-
- */
+#include "../../includes/data.h"
 
 int	is_redir(t_data *data, t_node *node)
 {
-	if (node->type == T_LESS || node->type == T_GREAT
-		|| node->type == T_DESS || node->type == T_DGREAT)
+	t_type	cur_type;
+	t_type	next_type;
+
+	cur_type = ((t_token *)node->content)->type;
+	next_type = ((t_token *)node->next->content)->type;
+	if (cur_type == T_LESS || cur_type == T_GREAT
+		|| cur_type == T_DESS || cur_type == T_DGREAT)
 	{
-		if (node->next->type == T_WORD)
+		if (next->type == T_WORD)
 			return (1);
-		syntax_err(); // 현재 노드가 리다이렉션이지만 다음이 워드가 아닌 경우
+		syntax_err(data); // 현재 노드가 리다이렉션이지만 다음이 워드가 아닌 경우
+		return (-1);
 	}
 	return (0);
 }
@@ -99,26 +58,30 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_node *first, t_nod
 
 void	parse_io_here(t_data *data, t_proc_data *proc_data, t_node *redir_node, t_node *limiter_node)
 {
+
 }
 
 void	parse_io_file(t_data *data, t_proc_data *proc_data, t_node *redir_node, t_node *fname_node)
 {
 	t_redir	*redir;
+	t_type	redir_type;
 
 	redir = ft_calloc(1, sizeof(t_redir));
-
-	if (redir_node->type == T_LESS)
-		//...
-	else if (redir_node->type == T_GREAT)
-		//...
-	else if (redir_node->type == T_DGREAT)
-		//...
+	lst_append(&proc_data->redir_lst, new_node((void *)redir));
+	redir_type = ((t_token *)redir_node->content)->type;
+	if (redir_type == T_LESS)
+		redir->type = T_LESS;
+	else if (redir_type == T_GREAT)
+		redir->type = T_GREAT;
+	else if (redir_type == T_DGREAT)
+		redir->type = T_DGREAT;
+	redir->fname = (char *)(((t_token *)fname_node->content)->value);
 }
 
 void	parse_io_redirect(t_data *data, t_proc_data *proc_data,
 		t_node *redir_node, t_node *fname_node)
 {
-	if (redir_node->type == DLESS)
+	if (((t_token *)redir_node->content)->type == DLESS)
 		parse_io_here(data, proc_data, redir_node, fname_node);
 	else
 		parse_io_file(data, proc_data, redir_node, fname_node);
@@ -126,10 +89,17 @@ void	parse_io_redirect(t_data *data, t_proc_data *proc_data,
 
 void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_node *node)
 {
-	if (node->type == T_WORD)
-		lst_append(&proc_data->cmd_lst, new_node((void *)node->content->value));
+	t_token	*token;
+
+	token = (t_token *)node->content;
+	if (token->type == T_WORD)
+		lst_append(&proc_data->cmd_lst, new_node((void *)token->value)); 
+	// ㄴ cmd_lst 의 경우 node의 content에 문자열 포인터를 바로 삽입
 	else
-		syntax_error();
+	{
+		syntax_error(data);
+		return ;
+	}
 }
 
 void	parse_simple_cmd(t_data *data, t_node *first, t_node *last)
@@ -138,14 +108,19 @@ void	parse_simple_cmd(t_data *data, t_node *first, t_node *last)
 	t_node		*cur_node;
 
 	if (first->prev == last) // 재귀로 들어올 때 last == cur_node 인 경우. ex) ls |
-		syntax_err();
+	{
+		syntax_err(data);
+		return ;
+	}
 	proc_data = ft_calloc(1, sizeof(t_proc_data));
 	lst_init(&proc_data->cmd_lst);
 	lst_init(&proc_data->redir_lst);
 	lst_append(&data->proc_data_lst, new_node((void *)proc_data));
 	cur_node = first;
-	while (is_redir(data, cur_node))
+	while (is_redir(data, cur_node) == 1)
 		cur_node = cur_node->next->next;
+	if (is_redir(data, cur_node) == -1)
+		return ;
 	parse_cmd_prefix(data, proc_data, first, cur_node->prev);
 	parse_cmd_word(data, proc_data, cur_node);
 	parse_cmd_suffix(data, proc_data, cur_node->next, last);
@@ -157,7 +132,10 @@ void	parse_expression(t_data *data, t_node *first, t_node *last)
 	t_token	*token;
 
 	if (last->next == first) // 재귀로 들어올 때 first == cur_node 인 경우. ex) | ls
-		syntax_err();
+	{
+		syntax_err(data);
+		return ;
+	}
 	cur_node = last;
 	while (cur_node->prev != NULL)
 	{

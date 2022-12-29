@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:52:39 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 15:27:31 by jincpark         ###   ########.fr       */
+/*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
+/*   Updated: 2022/12/29 17:13:17 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/data.h"
 
-void	ft_free(void **ptr)
+void	syntax_err(t_data *data)
 {
-	if (ptr != NULL && *ptr != NULL)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
+	data->syntax_err_flag = 1;
+	lst_clear(&data->token_lst, del_s_token);
+	lst_clear(&data->proc_data_lst, del_proc_data);
+	printf("error : syntax error\n");
 }
