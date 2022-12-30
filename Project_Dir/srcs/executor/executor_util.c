@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 16:21:41 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 10:02:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**cmd_list2arr(t_list *cmd_lst)
 	size_t	cmdlen;
 	char	**cmdarr;
 
-	node = lst_peek_first(cmd_lst);
+	node = lst_peek_first_node(cmd_lst);
 	cmdlen = lst_size(cmd_lst);
 	cmdarr = (char **)ft_malloc(cmdlen + 1);
 	i = 0;

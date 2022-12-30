@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 19:20:22 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 09:11:50 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_envp
 // define lexer status
 typedef enum e_status
 {
-	START,
+	BRANCH,
 	MAKING_WORD,
 	MAKING_PIPE,
 	MAKING_LESS,
@@ -32,16 +32,16 @@ typedef enum e_status
 	MAKING_GREAT,
 	MAKING_DGREAT,
 	QUOTE_OPEN,
-	QUOTE_MAKING_LITERAL,
 	QUOTE_CLOSE,
 	DQUOTE_OPEN,
-	DQUOTE_MAKING_LITERAL,
 	DQUOTE_CLOSE,
+	EXPAND,
+	DQUOTE_EXPAND,
 	ERROR,
 	FINISH
 }	t_status;
 
-# define TOTAL_STATUS	14
+# define TOTAL_STATUS	15
 
 // define token type as enum
 typedef enum e_type

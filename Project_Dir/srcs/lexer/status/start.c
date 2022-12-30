@@ -6,27 +6,24 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:15:22 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 22:15:53 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:31:14 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 #include "../../../includes/lexer1.h"
 
-void	start(t_status *status, t_data *data, char **line, t_list *buffer_lst)
+void	branch(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 {
-	if (**line == '\0')
+	if (**line == ' ')
 	{
+		*status = BRANCH;
+		(*line)++;
+	}
+	else if (**line == '\0')
 		*status = FINISH;
-		return ;
-	}
-	else if (**line == '$')
-	{
-		expand(status, data, line, buffer_lst);
-		return ;
-	}
-	else if (**line == ' ')
-		*status = START;
+	else if (**line == '$' && is_proper_env(*line + 1))
+		*status = EXPAND;
 	else if (**line == '|')
 		*status = MAKING_PIPE;
 	else if (**line == '<')
@@ -39,5 +36,4 @@ void	start(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 		*status = DQUOTE_OPEN;
 	else
 		*status = MAKING_WORD;
-	(*line)++;
 }

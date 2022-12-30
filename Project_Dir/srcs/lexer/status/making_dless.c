@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:18:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 16:18:11 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 09:40:01 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 void	making_dless(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 {
 	create_token(&data->token_lst, buffer_lst, T_DLESS);
-	*status = START;
+	*status = BRANCH;
+	(*line)++;
 }

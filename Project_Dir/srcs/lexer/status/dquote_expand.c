@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   making_great.c                                     :+:      :+:    :+:   */
+/*   dquote_expand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:19:03 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 09:40:20 by minseok2         ###   ########.fr       */
+/*   Created: 2022/12/30 09:07:12 by minseok2          #+#    #+#             */
+/*   Updated: 2022/12/30 11:12:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 #include "../../../includes/lexer1.h"
 
-void	making_great(t_status *status, t_data *data, char **line, t_list *buffer_lst)
+void	dquote_expand(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 {
-	(*line)++;
-	if (**line == '<')
-		*status = MAKING_DGREAT;
-	else
-		create_token(&data->token_lst, buffer_lst, T_GREAT);
-	*status = BRANCH;
+	const t_token	*last_token = lst_peek_last_content(&data->token_lst);
+
+	if (last_token->type == T_DLESS)
+	{
+		*status = DQUOTE_OPEN;
+		return ;
+	}
 }
