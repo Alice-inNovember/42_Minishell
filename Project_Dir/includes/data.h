@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/30 09:11:50 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:22:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ typedef enum e_status
 	DQUOTE_CLOSE,
 	EXPAND,
 	DQUOTE_EXPAND,
-	ERROR,
+	QUOTE_ERROR,
+	DQUOTE_ERROR,
 	FINISH
 }	t_status;
 
-# define TOTAL_STATUS	15
+# define TOTAL_STATUS	17
 
 // define token type as enum
 typedef enum e_type
@@ -81,6 +82,7 @@ typedef struct s_proc_data
 
 typedef struct s_data
 {
+	char	*line;
 	t_list	token_lst;
 	t_list	envp_lst;
 	t_list	builtin_lst;
