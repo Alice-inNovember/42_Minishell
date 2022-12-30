@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:15:22 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 13:55:03 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:54:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	branch(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 	else if (**line == '|')
 		*status = MAKING_PIPE;
 	else if (**line == '<')
-		*status = MAKING_DLESS;
+		*status = MAKING_LESS;
 	else if (**line == '>')
 		*status = MAKING_GREAT;
 	else if (**line == '\'')

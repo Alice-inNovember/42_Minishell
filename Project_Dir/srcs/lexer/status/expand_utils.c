@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:20:08 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 14:29:18 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:48:51 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_heredoc_limit_string(t_list *token_lst)
 {
 	const t_token	*last_token = lst_peek_last_content(token_lst);
 
-	if (last_token->type == T_DLESS)
+	if (last_token != NULL && last_token->type == T_DLESS)
 		return (1);
 	else
 		return (0);

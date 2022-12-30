@@ -6,18 +6,18 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:43:28 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 14:36:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:47:27 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/lexer1.h"
 
-void	del_token(void *content)
+void	del_token(void **content)
 {
 	t_token	*token;
 
-	token = content;
+	token = *content;
 	ft_free((void **)&token->value);
 }
 
@@ -43,9 +43,14 @@ void	create_token(t_list *token_lst, t_list *buffer_lst, t_type type)
 	char	*value;
 
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
-	value = (char *)ft_calloc(lst_size(buffer_lst), sizeof(char));
-	copy_buffer(value, buffer_lst);
+	if (type == T_WORD)
+	{
+		value = (char *)ft_calloc(lst_size(buffer_lst) + 1, sizeof(char));
+		copy_buffer(value, buffer_lst);
+	}
+	else
+		value = NULL;
 	token->value = value;
 	token->type = type;
-	lst_append(token_lst, new_node(&token));
+	lst_append(token_lst, new_node(token));
 }
