@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 15:34:23 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2022/12/30 09:59:57 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_builtin_fp	builtin_find(t_list *builtin_lst, char *key)
 {
 	t_node	*node;
 
-	node = lst_peek_first(builtin_lst);
+	node = lst_peek_first_node(builtin_lst);
 	while (node->content && ft_strcmp(((t_builtin *)node->content)->key, key))
 		node = node->next;
 	if (node->content)

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:45:32 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/28 15:43:04 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:02:41 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_token_lst(t_list *token_lst)
 	t_node	*cur_node;
 	t_token	*token;
 
-	cur_node = lst_peek_first(token_lst);
+	cur_node = lst_peek_first_node(token_lst);
 	while (cur_node->next != NULL)
 	{
 		token = cur_node->content;

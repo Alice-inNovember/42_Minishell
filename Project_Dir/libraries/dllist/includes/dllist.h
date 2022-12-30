@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:38:14 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 18:31:30 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:04:18 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	lst_prepend(t_list *list, t_node *new_node);
 void	lst_append(t_list *list, t_node *new_node);
 
 // list_peek.c
-t_node	*lst_peek_first(t_list *list);
-t_node	*lst_peek_last(t_list *list);
+t_node	*lst_peek_first_node(t_list *list);
+t_node	*lst_peek_last_node(t_list *list);
+void	*lst_peek_first_content(t_list *list);
+void	*lst_peek_last_content(t_list *list);
 
 // list_delete.c
 void	lst_delete(t_node **node, void (*del)(void **));
