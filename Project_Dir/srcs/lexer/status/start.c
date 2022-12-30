@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:15:22 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 11:31:14 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:55:03 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	branch(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 	}
 	else if (**line == '\0')
 		*status = FINISH;
-	else if (**line == '$' && is_proper_env(*line + 1))
+	else if (**line == '$')
 		*status = EXPAND;
 	else if (**line == '|')
 		*status = MAKING_PIPE;

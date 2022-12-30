@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/30 11:39:44 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:29:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	create_token(t_list *token_lst, t_list *buffer_lst, t_type type);
 void	print_token_lst(t_list *token_lst);
 
 // status
-void	error(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	quote_error(t_status *status, t_data *data, char **line, t_list *buffer_lst);
+void	dquote_error(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 void	branch(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 void	making_word(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 void	making_pipe(t_status *status, t_data *data, char **line, t_list *buffer_lst);
@@ -42,6 +43,7 @@ void	expand(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 void	dquote_expand(t_status *status, t_data *data, char **line, t_list *buffer_lst);
 
 // expand_utils
+char	*make_expanded_line(char *line, t_list *envp_lst);
 int		is_heredoc_limit_string(t_list *token_lst);
 int		get_env_length(char *line);
 int		is_proper_env(char *line);

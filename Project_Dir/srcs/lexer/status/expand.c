@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 09:06:43 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 11:40:08 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:30:59 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 
 void	expand(t_status *status, t_data *data, char **line, t_list *buffer_lst)
 {
-	if (is_h)
+	char	*expanded_line;
+
+	if (!is_proper_env(*line + 1) || is_heredoc_limit_string(&data->token_lst))
 	{
 		*status = MAKING_WORD;
 		return ;
 	}
+	(*line)++;
+	expanded_line = make_expanded_line(*line, &data->envp_lst);
+	*line = expanded_line;
+	ft_free((void **)&data->line);
+	data->line = expanded_line;
+	*status = MAKING_WORD;
 }

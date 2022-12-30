@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 21:07:36 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:22:47 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
-	char	*line;
 
 	envp_init(&data.envp_lst, envp);
 	while (1)
 	{
-		line = readline("minishell>");
-		tokenize(&data, line);
+		data.line = readline("minishell>");
+		tokenize(&data, data.line);
 		print_token_lst(&data.token_lst);
 		lst_init(&data.proc_data_lst);
 		data.syntax_err_flag = 0;
