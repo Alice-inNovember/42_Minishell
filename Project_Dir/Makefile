@@ -30,6 +30,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
 
+
 all : $(NAME)
 
 $(NAME) : $(OBJS)
