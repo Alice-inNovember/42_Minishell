@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:09:11 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/30 14:29:54 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:31:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	tokenize(t_data *data, char *line);
 
 // tokenize_utils.c
-void	del_token(void *content);
+void	del_token(void **content);
 void	create_token(t_list *token_lst, t_list *buffer_lst, t_type type);
 
 // print_token_lst.c
