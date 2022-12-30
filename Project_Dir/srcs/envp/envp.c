@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 19:27:08 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:47:28 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*envp_find(t_list *envp_list, char *key)
 {
 	t_node	*node;
 
-	node = lst_peek_first(envp_list);
+	node = lst_peek_first_node(envp_list);
 	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	if (node->content)
@@ -29,7 +29,7 @@ void	envp_edit(t_list *envp_list, char *key, char *value)
 {
 	t_node	*node;
 
-	node = lst_peek_first(envp_list);
+	node = lst_peek_first_node(envp_list);
 	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	free(((t_envp *)node->content)->value);
@@ -65,8 +65,8 @@ void	envp_init(t_list *envp_list, char **envp)
 		key = ft_substr(envp[i], 0, keyend);
 		value = ft_strdup(ft_strchr(envp[i], '=') + 1);
 		envp_add(envp_list, key, value);
-		ft_free(&key);
-		ft_free(value);
+		ft_free((void **)&key);
+		ft_free((void **)&value);
 		i++;
 	}
 }
@@ -75,14 +75,14 @@ void	envp_delete(t_list *envp_list, char *key)
 {
 	t_node	*node;
 
-	node = lst_peek_first(envp_list);
+	node = lst_peek_first_node(envp_list);
 	while (ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	if (!node->content)
 		return ;
-	ft_free(((t_envp *)node->content)->value);
-	ft_free(node->content);
+	ft_free((void **)&((t_envp *)node->content)->value);
+	ft_free((void **)&node->content);
 	node->prev->next = node->next;
 	node->next->prev = node->prev;
-	ft_free(node);
+	ft_free((void **)&node);
 }
