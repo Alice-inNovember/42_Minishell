@@ -23,10 +23,13 @@ INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(LEXERDIR)/lexer2.c \
+				$(LEXERDIR)/print_token_lst.c \
+				$(LEXERDIR)/tokenize.c \
 				$(PARSEDIR)/parser.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
+
 
 all : $(NAME)
 
