@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sub_token_lst.c                                    :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/02 21:02:49 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 22:40:40 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	is_head_or_tail(t_node *first, t_node *last)
 
 t_list	*sub_token_lst(t_data *data, t_node *first, t_node *last)
 {
-	t_list	*new_lst;
-	t_node	*cur_node;
+	t_list	*new_list;
+	t_node	*curr;
 	t_token	*token_cp;
 
 	if (is_head_or_tail(first, last))
@@ -28,15 +28,16 @@ t_list	*sub_token_lst(t_data *data, t_node *first, t_node *last)
 		syntax_err(data);
 		return (NULL);
 	}
-	lst_init(&new_lst);
-	cur_node = first;
-	while (cur_node->next != NULL)
+	new_list = ft_calloc(1, sizeof(t_list));
+	lst_init(new_list);
+	curr = first;
+	while (curr != last->next)
 	{
 		token_cp = ft_calloc(1, sizeof(t_token));
-		token_cp->type = ((t_token *)cur_node->content)->type;
-		token_cp->value = ft_strdup(((t_token *)cur_node->content)->value);
+		token_cp->type = ((t_token *)curr->content)->type;
+		token_cp->value = ft_strdup(((t_token *)curr->content)->value);
 		lst_append(new_list, new_node((void *)token_cp));
-		cur_node = cur_node->next;
+		curr = curr->next;
 	}
 	return (new_list);
 }
