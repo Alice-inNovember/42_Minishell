@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 18:57:33 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 17:13:35 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 int	is_redir(t_data *data, t_node *node)
 {
 	t_type	cur_type;
-	t_type	next_type;
+	t_token	*next_token;
 
+	if (node == NULL || node->next == NULL)
+		return (0);
 	cur_type = ((t_token *)node->content)->type;
-	next_type = ((t_token *)node->next->content)->type;
 	if (cur_type == T_LESS || cur_type == T_GREAT
 		|| cur_type == T_DLESS || cur_type == T_DGREAT)
 	{
-		if (next_type == T_WORD)
+		next_token = (t_token *)node->next->content;
+		if (next_token && next_token->type == T_WORD)
 			return (1);
 		syntax_err(data); // 현재 노드가 리다이렉션이지만 다음이 워드가 아닌 경우
 		return (-1);
@@ -34,16 +36,17 @@ int	is_redir(t_data *data, t_node *node)
 void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_node *node)
 {
 	t_token	*token;
+	char	*cmd_word;
 
+	if (node == NULL || node->next == NULL)
+		return ;
 	token = (t_token *)node->content;
 	if (token->type == T_WORD)
-		lst_append(&proc_data->cmd_lst, new_node((void *)token->value)); 
-	// ㄴ cmd_lst 의 경우 node의 content에 문자열 포인터를 바로 삽입
-	else
 	{
-		syntax_err(data);
-		return ;
+		cmd_word = ft_strdup((char *)token->value);
+		lst_append(&proc_data->cmd_lst, new_node((void *)cmd_word)); 
 	}
+	return ;
 }
 
 
@@ -51,6 +54,7 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_node *redir_node, t_n
 {
 	t_redir	*redir;
 	t_type	redir_type;
+	char	*fname;
 
 	redir = ft_calloc(1, sizeof(t_redir));
 	lst_append(&proc_data->redir_lst, new_node((void *)redir));
@@ -61,7 +65,7 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_node *redir_node, t_n
 		redir->type = T_GREAT;
 	else if (redir_type == T_DGREAT)
 		redir->type = T_DGREAT;
-	redir->fname = (char *)(((t_token *)fname_node->content)->value);
+	fname = ft_strdup((char *)(((t_token *)fname_node->content)->value));
 }
 
 void	parse_io_here(t_data *data, t_proc_data *proc_data, t_node *redir_node, t_node *limiter_node)
@@ -89,7 +93,7 @@ void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_node *first, t_nod
 
 void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_node *first, t_node *last)
 {
-	if (first == last->next) // suffix가 없는 경우
+	if (first == NULL || first == last->next) // suffix가 없는 경우
 		return ;
 	if (is_redir(data, last->prev))
 	{
@@ -109,6 +113,7 @@ void	parse_simple_cmd(t_data *data, t_node *first, t_node *last)
 {
 	t_proc_data	*proc_data;
 	t_node		*cur_node;
+	int			redir_value;
 
 	if (first->prev == last) // 재귀로 들어올 때 last == cur_node 인 경우. ex) ls |
 	{
@@ -120,13 +125,18 @@ void	parse_simple_cmd(t_data *data, t_node *first, t_node *last)
 	lst_init(&proc_data->redir_lst);
 	lst_append(&data->proc_data_lst, new_node((void *)proc_data));
 	cur_node = first;
-	while (is_redir(data, cur_node) == 1)
+	redir_value = is_redir(data, cur_node);
+	while (redir_value == 1)
+	{
 		cur_node = cur_node->next->next;
-	if (is_redir(data, cur_node) == -1)
+		redir_value = is_redir(data, cur_node);
+	}
+	if (redir_value == -1)
 		return ;
 	parse_cmd_prefix(data, proc_data, first, cur_node->prev);
 	parse_cmd_word(data, proc_data, cur_node);
-	parse_cmd_suffix(data, proc_data, cur_node->next, last);
+	if (data->syntax_err_flag != 1)
+		parse_cmd_suffix(data, proc_data, cur_node->next, last);
 }
 
 void	parse_expression(t_data *data, t_node *first, t_node *last)
@@ -146,7 +156,8 @@ void	parse_expression(t_data *data, t_node *first, t_node *last)
 		if (token->type == T_PIPE)
 		{
 			parse_expression(data, first, cur_node->prev);
-			parse_simple_cmd(data, cur_node->next, last);
+			if (data->syntax_err_flag != 1)
+				parse_simple_cmd(data, cur_node->next, last);
 			return ;
 		}
 		cur_node = cur_node->prev;
