@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
+/*   branch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:15:22 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 16:54:12 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:55:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 #include "../../../includes/lexer1.h"
 
-void	branch(t_status *status, t_data *data, char **line, t_list *buffer_lst)
+void	branch(t_status *status, t_pack *pack)
 {
-	if (**line == ' ')
-	{
-		*status = BRANCH;
-		(*line)++;
-	}
-	else if (**line == '\0')
+	const char	input = pack->line[pack->index];
+
+	if (input == ' ')
+		pack->index++;
+	else if (input == '\0')
 		*status = FINISH;
-	else if (**line == '$')
+	else if (input == '$' && is_proper_env(&pack->line[pack->index + 1]) && \
+			!is_heredoc_limit_string(pack->token_lst))
 		*status = EXPAND;
-	else if (**line == '|')
+	else if (input == '|')
 		*status = MAKING_PIPE;
-	else if (**line == '<')
+	else if (input == '<')
 		*status = MAKING_LESS;
-	else if (**line == '>')
+	else if (input == '>')
 		*status = MAKING_GREAT;
-	else if (**line == '\'')
+	else if (input == '\'')
 		*status = QUOTE_OPEN;
-	else if (**line == '\"')
+	else if (input == '\"')
 		*status = DQUOTE_OPEN;
 	else
 		*status = MAKING_WORD;

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:17:33 by junlee2           #+#    #+#             */
-/*   Updated: 2022/12/29 16:26:20 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/02 13:57:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**envp_list2arr(t_list *envp_list)
 
 	envplen = lst_size(envp_list);
 	envparr = (char **)ft_malloc(envplen + 1);
-	node = lst_peek_first(envp_list);
+	node = lst_peek_first_node(envp_list);
 	i = 0;
 	while (i < envplen)
 	{

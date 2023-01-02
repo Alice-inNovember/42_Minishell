@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_error.c                                      :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:18:51 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 14:34:54 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
+/*   Updated: 2023/01/02 14:35:35 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
-#include "../../../includes/lexer1.h"
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-void	quote_error(t_status *status, t_data *data, char **line, t_list *buffer_lst)
-{
-	printf("Syntax error: open dquote\n");
-	*status = FINISH;
-}
+# include "data.h"
+
+void	execute_child(t_data *data, t_proc_data *proc, int *pip, int read_end);
+char	**cmd_list2arr(t_list *cmd_lst);
+
+#endif

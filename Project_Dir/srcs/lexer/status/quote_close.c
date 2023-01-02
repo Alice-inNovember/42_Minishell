@@ -6,17 +6,18 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:19:23 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 16:52:11 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:26:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 #include "../../../includes/lexer1.h"
 
-void	quote_close(t_status *status, t_data *data, char **line, t_list *buffer_lst)
+void	quote_close(t_status *status, t_pack *pack)
 {
-	(*line)++;
-	if (**line != '\'' && **line != '\"')
-		create_token(&data->token_lst, buffer_lst, T_WORD);
+	if (pack->line[pack->index + 1] == '\0' || \
+			pack->line[pack->index + 1] == ' ')
+		create_token(pack->token_lst, &pack->buffer_lst, T_WORD);
 	*status = BRANCH;
+	pack->index++;
 }
