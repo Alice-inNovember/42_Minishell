@@ -23,24 +23,24 @@ INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(LEXERDIR)/print_token_lst.c \
-				$(LEXERDIR)/tokenize.c \
-				$(LEXERDIR)/tokenize_utils.c \
-				$(LEXERDIR)/status/dquote_close.c \
-				$(LEXERDIR)/status/dquote_error.c \
-				$(LEXERDIR)/status/dquote_expand.c \
-				$(LEXERDIR)/status/dquote_open.c \
-				$(LEXERDIR)/status/expand.c \
-				$(LEXERDIR)/status/expand_utils.c \
-				$(LEXERDIR)/status/making_dgreat.c \
-				$(LEXERDIR)/status/making_dless.c \
-				$(LEXERDIR)/status/making_great.c \
-				$(LEXERDIR)/status/making_less.c \
+				$(LEXERDIR)/make_token_list.c \
+				$(LEXERDIR)/make_token_list_utils.c \
+				$(LEXERDIR)/status/branch.c \
 				$(LEXERDIR)/status/making_pipe.c \
 				$(LEXERDIR)/status/making_word.c \
-				$(LEXERDIR)/status/quote_close.c \
-				$(LEXERDIR)/status/quote_error.c \
+				$(LEXERDIR)/status/making_less.c \
+				$(LEXERDIR)/status/making_dless.c \
+				$(LEXERDIR)/status/making_great.c \
+				$(LEXERDIR)/status/making_dgreat.c \
 				$(LEXERDIR)/status/quote_open.c \
-				$(LEXERDIR)/status/start.c \
+				$(LEXERDIR)/status/quote_close.c \
+				$(LEXERDIR)/status/dquote_open.c \
+				$(LEXERDIR)/status/dquote_close.c \
+				$(LEXERDIR)/status/expand.c \
+				$(LEXERDIR)/status/dquote_expand.c \
+				$(LEXERDIR)/status/dquote_error.c \
+				$(LEXERDIR)/status/quote_error.c \
+				$(LEXERDIR)/status/expand_utils.c \
 				$(PARSEDIR)/parser.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c
