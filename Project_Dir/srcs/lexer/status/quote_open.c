@@ -6,20 +6,20 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:19:27 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/30 14:04:57 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:59:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 #include "../../../includes/lexer1.h"
 
-void	quote_open(t_status *status, t_data *data, char **line, t_list *buffer_lst)
+void	quote_open(t_status *status, t_pack *pack)
 {
-	(*line)++;
-	if (**line == '\0')
-		*status = QUOTE_ERROR; //quote 에러 dquote 에러 나눌 것인지
-	else if (**line == '\'')
+	if (pack->line[pack->index + 1] == '\0')
+		*status = QUOTE_ERROR;
+	else if (pack->line[pack->index + 1] == '\'')
 		*status = QUOTE_CLOSE;
 	else
-		lst_append(buffer_lst, new_node(*line));
+		lst_append(&pack->buffer_lst, new_node(&pack->line[pack->index + 1]));
+	pack->index++;
 }
