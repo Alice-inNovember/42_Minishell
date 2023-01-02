@@ -37,11 +37,12 @@ typedef enum e_status
 	DQUOTE_CLOSE,
 	EXPAND,
 	DQUOTE_EXPAND,
-	ERROR,
+	QUOTE_ERROR,
+	DQUOTE_ERROR,
 	FINISH
 }	t_status;
 
-# define TOTAL_STATUS	15
+# define TOTAL_STATUS	17
 
 // define token type as enum
 typedef enum e_type
@@ -81,6 +82,7 @@ typedef struct s_proc_data
 
 typedef struct s_data
 {
+	char	*line;
 	t_list	token_lst;
 	t_list	envp_lst;
 	t_list	builtin_lst;
