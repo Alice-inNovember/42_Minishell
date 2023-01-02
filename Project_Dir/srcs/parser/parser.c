@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/02 23:44:28 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:19:25 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_lst)
 	if (is_err_occured(data, token_lst))
 		return ;
 	token = lst_peek_first_content(token_lst);
-	cmd_word = ft_strdup((char *)token->value);
-	lst_append(&proc_data->cmd_lst, new_node((void *)cmd_word)); 
-	lst_clear(token_lst, del_s_token);
+	if (token->type == T_WORD)
+	{
+		cmd_word = ft_strdup((char *)token->value);
+		lst_append(&proc_data->cmd_lst, new_node((void *)cmd_word)); 
+		lst_clear(token_lst, del_s_token);
+	}
+	else
+		syntax_err(data);
 }
 
 
@@ -58,6 +63,8 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_lst)
 	t_type	redir_type;
 	char	*fname;
 
+	if (is_err_occured(data, token_lst))
+		return ;
 	redir = ft_calloc(1, sizeof(t_redir));
 	lst_append(&proc_data->redir_lst, new_node((void *)redir));
 	redir_type = ((t_token *)lst_peek_first_content(token_lst))->type;
@@ -182,6 +189,11 @@ void	parse_expression(t_data *data, t_list *token_lst)
 	t_node	*last;
 	t_node	*curr;
 
+	if (token_lst == NULL)
+	{
+		syntax_err(data);
+		return ;
+	}
 	if (is_err_occured(data, token_lst))
 		return ;
 	first = lst_peek_first_node(token_lst);
@@ -192,6 +204,8 @@ void	parse_expression(t_data *data, t_list *token_lst)
 		if (((t_token *)curr->content)->type == T_PIPE)
 		{
 			parse_expression(data, sub_token_lst(data, first, curr->prev));
+			if (is_err_occured(data, token_lst))
+				return ;
 			parse_simple_cmd(data, sub_token_lst(data, curr->next, last));
 			//lst_clear(token_lst, del_s_token);
 			return ;
