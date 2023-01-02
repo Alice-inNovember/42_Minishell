@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:15:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 16:01:24 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:55:48 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	branch(t_status *status, t_pack *pack)
 		pack->index++;
 	else if (input == '\0')
 		*status = FINISH;
-	else if (input == '$' && is_proper_env(&pack->line[pack->index]) && \
+	else if (input == '$' && is_proper_env(&pack->line[pack->index + 1]) && \
 			!is_heredoc_limit_string(pack->token_lst))
 		*status = EXPAND;
 	else if (input == '|')

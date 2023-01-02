@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:20:08 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 16:04:11 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:56:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_env_value(char *line, int index, t_list *envp_lst)
 	char	*env_value;
 	int		env_length;
 
-	env_length = get_env_length(&line[index]);
+	env_length = get_env_length(&line[index + 1]);
 	env_name = ft_substr(line, index + 1, env_length);
 	env_value = envp_find(envp_lst, env_name);
 	ft_free((void **)&env_name);
@@ -33,7 +33,7 @@ char	*cut_back(char *line, int index)
 	int		line_length;
 	int		back_length;
 
-	env_length = get_env_length(&line[index]);
+	env_length = get_env_length(&line[index + 1]);
 	line_length = ft_strlen(line);
 	back_length = line_length - (index + env_length + 1);
 	back = ft_substr(line, index + env_length, back_length);
@@ -77,7 +77,6 @@ int	get_env_length(char *line)
 {
 	int	length;
 
-	line++;
 	length = 0;
 	while (line[length] == '_' || ft_isalpha(line[length]))
 		length++;
