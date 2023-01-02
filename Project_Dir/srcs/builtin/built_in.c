@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 19:06:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/02 15:40:15 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/02 16:44:55g by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,27 @@ int	check_word_cnt(char **cmd_vector)
 	return (i);	
 }
 
-void	bt_echo(char **cmd_vector, t_list *envp_list) 
+void	print_word(char *word)
+{
+	int	i;
+	
+	i = 0;
+	while (word[i])
+	{	
+		if (!ft_strncmp(word + i, "$?", 2))
+		{
+			printf("%d", g_last_exit_status);
+			i = i + 2;
+		}
+		else
+		{
+			ft_putchar_fd(word[i], 1);
+			i++;
+		}
+	}
+}
+
+int	bt_echo(char **cmd_vector, t_list *envp_list) 
 {
 	char	*word;
 	int		i;
@@ -42,8 +62,7 @@ void	bt_echo(char **cmd_vector, t_list *envp_list)
 	}
 	while (1) // while 조건 // $?
 	{
-		word = cmd_vector[i];
-		printf("%s", cmd_vector[i]);
+		print_word(cmd_vector[i]);
 		if (!cmd_vector[i + 1])
 			break ;
 		printf(" ");
@@ -51,6 +70,7 @@ void	bt_echo(char **cmd_vector, t_list *envp_list)
 	}
 	if (new_line_flag == 1)
 		printf("\n");
+	return (0);
 }
 
 
@@ -95,11 +115,7 @@ int	bt_pwd(char **cmd_vector, t_list *envp_list)
 	return (0);
 }
 
-// handel case
-// all
-// not handle case
-// error case
-// env word ...
+
 
 int	bt_env(char **cmd_vector,t_list *envp_list)
 {
@@ -117,7 +133,6 @@ int	bt_env(char **cmd_vector,t_list *envp_list)
 		value = ((t_envp *)cur_node->content)->value;
 		printf("%s=%s\n", key, value);
 	}
-	printf("_=/usr/bin/env\n");
 	return (0);
 }
 
@@ -147,15 +162,12 @@ int	ft_findchr_i(char *str, char c)
 	return (-1);
 }
 
-void	print_export(char **cmd_vector, t_list *envp_list)
+void	print_export(t_list *envp_list)
 {
 	t_node	*cur_node;
 	char	*key;
 	char	*value;
 
-	
-	if (check_word_cnt(cmd_vector) != 1)
-		error_handle();
 	cur_node = lst_peek_first_node(envp_list);
 	while (cur_node != lst_peek_last_node(envp_list))
 	{
@@ -164,11 +176,95 @@ void	print_export(char **cmd_vector, t_list *envp_list)
 		printf("declare -x %s=\"%s\"\n", key, value);
 		cur_node = cur_node->next;
 	}
+} 
+
+char	**make_key_arr(t_list *envp_list)
+{
+	int		i;
+	t_node	*cur_node;
+	char	*key;
+	char	*value;
+	char	**key_arr;
+
+	i = 0;
+	key_arr = malloc(sizeof(char *) * lst_size(envp_list) + 1);
+	cur_node = lst_peek_first_node(envp_list);
+	while (cur_node != lst_peek_last_node(envp_list))
+	{
+		key_arr[i] = ((t_envp *)cur_node->content)->key;
+		cur_node = cur_node->next;
+	}
+	key_arr[i] = 0;
+	return (key_arr);
+}
+
+void	make_order_key_arr(char **key_arr)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	while (key_arr[i])
+	{
+		j = i + 1;
+		while (key_arr[j])
+		{	
+			if (ft_strcmp(key_arr[i], key_arr[j]) < 0)
+			{
+				temp = key_arr[i];
+				key_arr[i] = key_arr[i + 1];			
+				key_arr[i + 1] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	print_export(t_list *envp_list)
+{
+	int		i;
+	char	**key_arr;
+	char	*key;
+	char	*value;
+
+	i = 0;
+	key_arr = make_key_arr(envp_list);
+	make_order_key_arr(key_arr);
+	while (key_arr[i])
+	{
+		value = envp_find(envp_list, key_arr[i]);
+		printf("declare -x %s=\"%s\"\n", key[i], value);
+		i++;
+	}
+	
+} 
+
+int	check_word_sep_key_val(char *word, char **key, char **value, int *error_flag)
+{
+	int		equal_i;
+		
+	equal_i = ft_findchr_i(word, '=');
+	if (equal_i <= 0)
+	{
+		*error_flag = 1; // if with pipe execution must exit(1);
+		return (1);
+	}
+	*key = ft_substr(word, 0, equal_i + 1);
+	if (!is_proper_env(key)) // fdsfad
+	{
+		*error_flag = 1;
+		free(*key);
+		return (1);
+	}
+	*value = ft_substr(word, 0, ft_strlen(word) - equal_i);
+	
+	return (0);
 }
 
 int	bt_export(char **cmd_vector,t_list *envp_list)
 {
-	int		equal_i;
 	int		word_i;
 	int		error_flag;
 	char	*word;
@@ -179,26 +275,14 @@ int	bt_export(char **cmd_vector,t_list *envp_list)
 	word_i = 1;
 	while (cmd_vector[word_i]) // mid error continue
 	{
-		word = cmd_vector[word_i];
-		equal_i = ft_findchr_i(word, '=');
-		if (equal_i <= 0)
-		{
-			error_flag = 1; // if with pipe execution must exit(1);
-			continue ;
-		}
-		key = ft_substr(word, 0, equal_i + 1);
-		if (!is_proper_env(key)) // fdsfad
-		{
-			error_flag = 1;
-			continue ;	
-		}
-		value = ft_substr(word, 0, ft_strlen(word) - equal_i);
-		envp_delete(envp_list);
+		if (check_word_sep_key_val(word, &key, &value, &error_flag))
+			continue;
+		envp_delete(envp_list, key);
 		envp_add(envp_list, key, value);
 		word_i++;
 	}
 	if (word_i == 1)
-		print_export(cmd_vector, envp_list);
+		print_export(envp_list);
 	return (error_flag);
 }
 
