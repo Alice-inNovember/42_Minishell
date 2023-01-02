@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/02 20:48:26 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:02:49 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ static int	is_head_or_tail(t_node *first, t_node *last)
 	return (first->next == NULL || last->prev == NULL);
 }
 
-t_list	*sub_token_lst(t_node *first, t_node *last)
+t_list	*sub_token_lst(t_data *data, t_node *first, t_node *last)
 {
 	t_list	*new_lst;
 	t_node	*cur_node;
 	t_token	*token_cp;
 
-	if (is_head_or_tail(old_lst, first, last))
+	if (is_head_or_tail(first, last))
+	{
+		syntax_err(data);
 		return (NULL);
+	}
 	lst_init(&new_lst);
 	cur_node = first;
 	while (cur_node->next != NULL)
