@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:18:47 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 16:55:24 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:02:53 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void	dquote_open(t_status *status, t_pack *pack)
 {
+	char	*buffer;
+
 	if (pack->line[pack->index + 1] == '\0')
 		*status = DQUOTE_ERROR;
 	else if (pack->line[pack->index + 1] == '$' && \
@@ -24,6 +26,9 @@ void	dquote_open(t_status *status, t_pack *pack)
 	else if (pack->line[pack->index + 1] == '\"')
 		*status = DQUOTE_CLOSE;
 	else
-		lst_append(&pack->buffer_lst, new_node(&pack->line[pack->index + 1]));
+	{
+		buffer = make_buffer(pack->line[pack->index + 1]);
+		lst_append(&pack->buffer_lst, new_node(buffer));
+	}
 	pack->index++;
 }

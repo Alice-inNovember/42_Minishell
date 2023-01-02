@@ -38,8 +38,6 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/status/dquote_close.c \
 				$(LEXERDIR)/status/expand.c \
 				$(LEXERDIR)/status/dquote_expand.c \
-				$(LEXERDIR)/status/dquote_error.c \
-				$(LEXERDIR)/status/quote_error.c \
 				$(LEXERDIR)/status/expand_utils.c \
 				$(PARSEDIR)/parser.c \
 				$(UTILDIR)/syntax_err.c \

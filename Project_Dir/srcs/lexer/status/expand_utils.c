@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:20:08 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 16:56:08 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:24:00 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*cut_back(char *line, int index)
 	env_length = get_env_length(&line[index + 1]);
 	line_length = ft_strlen(line);
 	back_length = line_length - (index + env_length + 1);
-	back = ft_substr(line, index + env_length, back_length);
+	back = ft_substr(line, index + env_length + 1, back_length);
 	return (back);
 }
 

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:19:03 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 14:54:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:04:23 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 void	making_great(t_status *status, t_pack *pack)
 {
-	lst_append(&pack->buffer_lst, new_node(&pack->line[pack->index]));
+	char	*buffer;
+
+	buffer = make_buffer(pack->line[pack->index]);
+	lst_append(&pack->buffer_lst, new_node(buffer));
 	if (pack->line[pack->index + 1] == '>')
 		*status = MAKING_DGREAT;
 	else
