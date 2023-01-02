@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/30 14:22:54 by minseok2         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:28:19 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_data
 	t_list	envp_lst;
 	t_list	builtin_lst;
 	t_list	proc_data_lst;
+	t_list	pid_lst;
 	int		syntax_err_flag;
 }	t_data;
 
