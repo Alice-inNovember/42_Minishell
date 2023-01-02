@@ -42,6 +42,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/status/quote_open.c \
 				$(LEXERDIR)/status/start.c \
 				$(PARSEDIR)/parser.c \
+				$(PARSEDIR)/parser_utils.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
