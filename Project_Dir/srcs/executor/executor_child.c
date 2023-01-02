@@ -23,18 +23,18 @@ int	open_redirect(t_redir *redir_data)
 	if (redir_data->type == T_GREAT || redir_data->type == T_DGREAT)
 	{
 		if (redir_data->type == T_GREAT)
-			fd = open(redir_data->fname, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+			fd = open(redir_data->fname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (redir_data->type == T_DGREAT)
-			fd = open(redir_data->fname, O_WRONLY | O_CREAT | O_APPEND, 0600);
+			fd = open(redir_data->fname, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
-			(perror("Could not open file :"), exit(EXIT_FAILURE));
+			(perror("Could not open file"), exit(EXIT_FAILURE));
 		(dup2(fd, STDOUT_FILENO), close(fd));
 	}
 	else
 	{
-		fd = open(redir_data->fname, O_RDONLY, 0600);
+		fd = open(redir_data->fname, O_RDONLY, 0644);
 		if (fd == -1)
-			(perror("Could not open file :"), exit(EXIT_FAILURE));
+			(perror("Could not open file"), exit(EXIT_FAILURE));
 		(dup2(fd, STDIN_FILENO), close(fd));
 	}
 	return (fd);
@@ -54,7 +54,7 @@ void	child_redirect(t_proc_data *proc_data, int *pip, int read_end)
 	if (lst_size(&proc_data->redir_lst))
 		return ;
 	node = lst_peek_first_node(&proc_data->redir_lst);
-	while (node->content)
+	while (node->next != NULL)
 	{
 		open_redirect(((t_redir *)node->content));
 		node = node->next;
