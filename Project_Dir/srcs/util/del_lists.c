@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:10:20 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/29 18:53:16 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:08:10 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	del_s_redir(void **content)
 	ft_free((void **)redir);
 }
 
-void	del_proc_data(void **content)
+void	del_s_proc_data(void **content)
 {
 	t_proc_data	**proc_data;
 
