@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/02 22:40:40 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 22:52:15 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ t_list	*sub_token_lst(t_data *data, t_node *first, t_node *last)
 	t_token	*token_cp;
 
 	if (is_head_or_tail(first, last))
-	{
-		syntax_err(data);
 		return (NULL);
-	}
 	new_list = ft_calloc(1, sizeof(t_list));
 	lst_init(new_list);
 	curr = first;
