@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 21:09:31 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 22:24:31 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
 		print_token_lst(&data.token_lst);
 		lst_init(&data.proc_data_lst);
 		data.syntax_err_flag = 0;
-		parse_expression(&data, data.token_lst.head->next, data.token_lst.tail->prev);
+		parse_expression(&data, &data.token_lst);
 		if (data.syntax_err_flag == 1)
 			continue ;
 		// executor();
