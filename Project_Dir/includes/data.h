@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/30 15:28:19 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/02 13:45:07 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,6 @@ typedef struct s_envp
 	char		*key;
 	char		*value;
 }	t_envp;
-
-// define lexer status
-typedef enum e_status
-{
-	BRANCH,
-	MAKING_WORD,
-	MAKING_PIPE,
-	MAKING_LESS,
-	MAKING_DLESS,
-	MAKING_GREAT,
-	MAKING_DGREAT,
-	QUOTE_OPEN,
-	QUOTE_CLOSE,
-	DQUOTE_OPEN,
-	DQUOTE_CLOSE,
-	EXPAND,
-	DQUOTE_EXPAND,
-	QUOTE_ERROR,
-	DQUOTE_ERROR,
-	FINISH
-}	t_status;
-
-# define TOTAL_STATUS	17
 
 // define token type as enum
 typedef enum e_type
@@ -83,15 +60,12 @@ typedef struct s_proc_data
 typedef struct s_data
 {
 	char	*line;
-	t_list	token_lst;
 	t_list	envp_lst;
+	t_list	token_lst;
 	t_list	builtin_lst;
 	t_list	proc_data_lst;
 	t_list	pid_lst;
 	int		syntax_err_flag;
 }	t_data;
-
-typedef void	(*t_status_fp)(t_status *status, \
-		t_data *data, char **line, t_list *buffer_lst);
 
 #endif
