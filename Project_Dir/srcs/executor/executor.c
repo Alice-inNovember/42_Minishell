@@ -23,10 +23,10 @@ int	check_and_exec_single_builtin(t_data *data)
 	char			*key;
 	t_builtin_fp	bt_fp;
 
-	proc_data = (t_proc_data *)data->proc_data_lst.head->next;
-	key = (char *)proc_data->cmd_lst.head->next->content;
+	proc_data = lst_peek_first_content(&data->proc_data_lst);
+	key = lst_peek_first_content(&proc_data->cmd_lst);
 	bt_fp = builtin_find(&data->builtin_lst, key);
-	if (data->proc_data_lst.size == 1 && bt_fp != NULL)
+	if (lst_size(&data->proc_data_lst) == 1 && bt_fp != NULL)
 	{
 		return (1);
 	}
@@ -75,7 +75,7 @@ void	make_child(t_data *data)
 	pid_t	*pid;
 
 	proc_node = lst_peek_first_node(&data->proc_data_lst);
-	while (proc_node != NULL)
+	while (proc_node->next != NULL)
 	{
 		pid = ft_calloc(1, sizeof(pid_t));
 		*pid = do_fork(data, proc_node->content);
