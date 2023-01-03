@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 13:35:28 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 19:21:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ typedef struct s_envp
 	char		*key;
 	char		*value;
 }	t_envp;
+
+//define syntax error type
+typedef enum e_error
+{
+	NONE,
+	SINGLE_QUOTE,
+	SINGLE_DQUOTE
+}	t_error;
 
 // define token type as enum
 typedef enum e_type
@@ -41,8 +49,8 @@ typedef struct s_token
 
 typedef struct s_builtin
 {
-	char		*key;
-	void		(*function)(char **, t_list *);
+	char	*key;
+	int		(*function)(char **, t_list *);
 }	t_builtin;
 
 typedef struct s_redir
@@ -65,7 +73,7 @@ typedef struct s_data
 	t_list	builtin_list;
 	t_list	proc_data_list;
 	t_list	pid_list;
-	int		syntax_err_flag;
+	t_error	syntax_err_flag;
 }	t_data;
 
 #endif

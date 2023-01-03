@@ -22,6 +22,28 @@ LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
 INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
+				$(LEXERDIR)/make_token_list.c \
+				$(LEXERDIR)/make_token_list_utils.c \
+				$(LEXERDIR)/print_token_list.c \
+				$(LEXERDIR)/state/branch.c \
+				$(LEXERDIR)/state/clear.c \
+				$(LEXERDIR)/state/dquote_branch.c \
+				$(LEXERDIR)/state/dquote_close.c \
+				$(LEXERDIR)/state/dquote_expand.c \
+				$(LEXERDIR)/state/dquote_making_word.c \
+				$(LEXERDIR)/state/expand.c \
+				$(LEXERDIR)/state/init.c \
+				$(LEXERDIR)/state/making_dgreat.c \
+				$(LEXERDIR)/state/making_dless.c \
+				$(LEXERDIR)/state/making_great.c \
+				$(LEXERDIR)/state/making_less.c \
+				$(LEXERDIR)/state/making_pipe.c \
+				$(LEXERDIR)/state/making_word.c \
+				$(LEXERDIR)/state/quote_branch.c \
+				$(LEXERDIR)/state/quote_close.c \
+				$(LEXERDIR)/state/quote_making_word.c \
+				$(LEXERDIR)/expand/expand_logic.c \
+				$(LEXERDIR)/expand/expand_utils.c \
 				$(PARSEDIR)/parser.c \
 				$(PARSEDIR)/parser_utils.c \
 				$(UTILDIR)/syntax_err.c \

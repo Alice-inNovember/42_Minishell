@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   making_less.c                                      :+:      :+:    :+:   */
+/*   quote_making_word.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 16:51:13 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 16:53:26 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/03 19:27:23 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/03 19:53:50 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/lexer.h"
 
-void	making_less(t_state *state, t_data *data, t_list *buf_list, int *idx)
+void	quote_making_word(t_state *state, \
+									t_data *data, t_list *buf_list, int *idx)
 {
 	const char	input = data->line[*idx];
-	const char	next_input = data->line[*idx + 1];
 	char		*buf;
 
 	buf = make_buf(input);
 	list_append(buf_list, new_node(buf));
-	if (next_input == '<')
-		*state = MAKING_DLESS;
-	else
-	{
-		make_token(&data->token_list, buf_list, T_LESS);
-		*state = BRANCH;
-	}
+	*state = QUOTE_BRANCH;
 	(*idx)++;
 }

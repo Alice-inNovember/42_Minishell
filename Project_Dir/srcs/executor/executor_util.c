@@ -6,12 +6,15 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 13:36:01 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 15:16:04 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stddef.h>
+#include <stdlib.h>
+#include <sys/unistd.h>
+#include <unistd.h>
 
 char	**cmd_list2arr(t_list *cmd_list)
 {
@@ -36,5 +39,32 @@ char	**cmd_list2arr(t_list *cmd_list)
 
 char	**get_path(t_data *data)
 {
-	
+	char	*path;
+	char	**returnpath;
+
+	path = envp_find(&data->envp_list, "PATH");
+	returnpath = ft_split(path, ':');
+	return (returnpath);
+}
+
+char	*get_cmd_path(t_data *data, char **cmd_argv)
+{
+	char	**path;
+	char	*cmdpath;
+	size_t	i;
+
+	path = get_path(data);
+	if (ft_strchr(cmd_argv[0], '/'))
+		if (access(cmd_argv[0], F_OK | X_OK) == 0)
+			return (cmd_argv[0]);
+	i = 0;
+	while (path[i])
+	{
+		cmdpath = str3join(path[i], "/", cmd_argv[0]);
+		if (access(cmdpath, F_OK | X_OK) == 0)
+			return (cmdpath);
+		free(cmdpath);
+		i++;
+	}
+	return (cmd_argv[0]);
 }
