@@ -16,8 +16,6 @@
 # include <dirent.h>
 # include "./../../libraries/dllist/includes/dllist.h"
 
-
-
 int	check_word_cnt(char **cmd_vector)
 {
 	int	i;
@@ -30,7 +28,7 @@ int	check_word_cnt(char **cmd_vector)
 void	print_word(char *word)
 {
 	int	i;
-	
+
 	i = 0;
 	while (word[i])
 	{	
@@ -102,7 +100,7 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 int	bt_pwd(char **cmd_vector, t_list *envp_list)
 {
 	char	*pwd;
-	
+
 	if (check_word_cnt(cmd_vector) != 1);
 		return (1);
 	pwd = envp_find(envp_list, "PWD");
@@ -116,7 +114,6 @@ int	bt_env(char **cmd_vector,t_list *envp_list)
 	char	*key;
 	char	*value;
 
-	
 	if (check_word_cnt(cmd_vector) != 1)
 		return (1);
 	cur_node = list_peek_first(envp_list);
@@ -264,7 +261,7 @@ int bt_unset(char **cmd_vector, t_list *envp_list)
 	int		error_flag;
 	int		word_i;
 	char	*key;
-	
+
 	error_flag = 0;
 	word_i = 1;
 	while (cmd_vector[word_i])

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 13:35:28 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 14:53:28 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_token
 
 typedef struct s_builtin
 {
-	char		*key;
-	void		(*function)(char **, t_list *);
+	char	*key;
+	int		(*function)(char **, t_list *);
 }	t_builtin;
 
 typedef struct s_redir
