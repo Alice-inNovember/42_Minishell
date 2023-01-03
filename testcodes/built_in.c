@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 19:06:49 by tyi               #+#    #+#             */
-/*   Updated: 2022/12/29 22:22:26 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/03 13:36:14 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	bt_env(char **cmd_vector,t_list *envp_list)
 	char	*key;
 	char	*value;
 
-	cur_node = lst_peek_first(envp_list);
-	while (cur_node != lst_peek_last(envp_list))
+	cur_node = list_peek_first(envp_list);
+	while (cur_node != list_peek_last(envp_list))
 	{
 		key = cur_node->content->key;
 		value = cur_node->content->value;

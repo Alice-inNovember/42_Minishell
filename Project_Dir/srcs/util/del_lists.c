@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   del_lists.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:10:20 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/02 21:08:10 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:36:10 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	del_s_proc_data(void **content)
 	t_proc_data	**proc_data;
 
 	proc_data = (t_proc_data **)content;
-	lst_clear(&(*proc_data)->cmd_lst, del_s_cmd);
-	lst_clear(&(*proc_data)->redir_lst, del_s_redir);
+	list_clear(&(*proc_data)->cmd_list, del_s_cmd);
+	list_clear(&(*proc_data)->redir_list, del_s_redir);
 	ft_free((void **)proc_data);
 }

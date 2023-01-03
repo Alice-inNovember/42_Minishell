@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_make_struct.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:31:55 by tyi               #+#    #+#             */
-/*   Updated: 2022/12/27 15:59:14 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/03 13:36:23 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_token
 typedef struct s_command
 {
 	char	**cmd_vector;
-	t_list	*infile_lst;
-	t_list	*outfile_lst;
+	t_list	*infile_list;
+	t_list	*outfile_list;
 }	t_command;
 
 typedef struct s_list

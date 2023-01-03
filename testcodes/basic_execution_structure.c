@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_execution_structure.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 21:50:01 by jincpark          #+#    #+#             */
-/*   Updated: 2022/12/25 22:50:29 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:36:13 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 #include "readline/history.h"
 #include "minishell.h"
 
-typedef struct	s_redir_lst
+typedef struct	s_redir_list
 {
 	int	type;
 	int	in;
 	int	out;
 	...
-}	t_redir_lst;
+}	t_redir_list;
 
 typedef struct s_proc
 {
 	pid_t		pid;
 	int			stat;
 	char		*cmd;
-	t_redir_lst	*redir_out;
-	t_redir_lst	*redir_in;
+	t_redir_list	*redir_out;
+	t_redir_list	*redir_in;
 	...
 }	t_proc;
 

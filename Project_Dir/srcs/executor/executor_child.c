@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/02 15:45:16 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:36:00 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	child_redirect(t_proc_data *proc_data, int *pip, int read_end)
 	}
 	dup2(pip[1], STDOUT_FILENO);
 	close(pip[1]);
-	if (lst_size(&proc_data->redir_lst))
+	if (list_size(&proc_data->redir_list))
 		return ;
-	node = lst_peek_first_node(&proc_data->redir_lst);
+	node = list_peek_first_node(&proc_data->redir_list);
 	while (node->next != NULL)
 	{
 		open_redirect(((t_redir *)node->content));
@@ -68,9 +68,9 @@ void	execute_child(t_data *data, t_proc_data *proc, int *pip, int read_end)
 	char			**cmd_envp;
 
 	child_redirect(proc, pip, read_end);
-	cmd_argv = cmd_list2arr(&proc->cmd_lst);
-	cmd_envp = envp2arr(&data->envp_lst);
-	builtin_fp = builtin_find(&data->builtin_lst, cmd_argv[0]);
+	cmd_argv = cmd_list2arr(&proc->cmd_list);
+	cmd_envp = envp2arr(&data->envp_list);
+	builtin_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
 	if (builtin_fp)
 		execute_builtin();
 	else

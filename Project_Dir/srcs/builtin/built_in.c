@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "/Users/tyi/Documents/minishell/Project_Dir/libraries/libft/includes/libft.h"
+# include "../../libraries/libft/includes/libft.h"
 # include "../../includes/minishell.h"
 # include <sys/types.h>
 # include <dirent.h>
@@ -73,7 +73,6 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 	return (0);
 }
 
-
 int	bt_cd(char **cmd_vector, t_list *envp_list)
 {
 	char	*path;
@@ -100,10 +99,6 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 	return (0);
 }
 
-
-
-
-
 int	bt_pwd(char **cmd_vector, t_list *envp_list)
 {
 	char	*pwd;
@@ -115,8 +110,6 @@ int	bt_pwd(char **cmd_vector, t_list *envp_list)
 	return (0);
 }
 
-
-
 int	bt_env(char **cmd_vector,t_list *envp_list)
 {
 	t_node	*cur_node;
@@ -126,8 +119,8 @@ int	bt_env(char **cmd_vector,t_list *envp_list)
 	
 	if (check_word_cnt(cmd_vector) != 1)
 		return (1);
-	cur_node = lst_peek_first(envp_list);
-	while (cur_node != lst_peek_last(envp_list))
+	cur_node = list_peek_first(envp_list);
+	while (cur_node != list_peek_last(envp_list))
 	{
 		key = ((t_envp *)cur_node->content)->key;
 		value = ((t_envp *)cur_node->content)->value;
@@ -141,7 +134,6 @@ void	bt_exit(char **cmd_vector,t_list *envp_list)
 	if (check_word_cnt(cmd_vector) != 1);
 		error_handle();
 }
-
 
 // handle case
 // export a=b c=d
@@ -168,15 +160,15 @@ void	print_export(t_list *envp_list)
 	char	*key;
 	char	*value;
 
-	cur_node = lst_peek_first_node(envp_list);
-	while (cur_node != lst_peek_last_node(envp_list))
+	cur_node = list_peek_first_node(envp_list);
+	while (cur_node != list_peek_last_node(envp_list))
 	{
 		key = ((t_envp *)cur_node->content)->key;
 		value = ((t_envp *)cur_node->content)->value;
 		printf("declare -x %s=\"%s\"\n", key, value);
 		cur_node = cur_node->next;
 	}
-} 
+}
 
 char	**make_key_arr(t_list *envp_list)
 {
@@ -187,9 +179,9 @@ char	**make_key_arr(t_list *envp_list)
 	char	**key_arr;
 
 	i = 0;
-	key_arr = malloc(sizeof(char *) * lst_size(envp_list) + 1);
-	cur_node = lst_peek_first_node(envp_list);
-	while (cur_node != lst_peek_last_node(envp_list))
+	key_arr = malloc(sizeof(char *) * list_size(envp_list) + 1);
+	cur_node = list_peek_first_node(envp_list);
+	while (cur_node != list_peek_last_node(envp_list))
 	{
 		key_arr[i] = ((t_envp *)cur_node->content)->key;
 		cur_node = cur_node->next;
@@ -213,7 +205,7 @@ void	make_order_key_arr(char **key_arr)
 			if (ft_strcmp(key_arr[i], key_arr[j]) < 0)
 			{
 				temp = key_arr[i];
-				key_arr[i] = key_arr[i + 1];			
+				key_arr[i] = key_arr[i + 1];
 				key_arr[i + 1] = temp;
 			}
 			j++;
@@ -222,29 +214,10 @@ void	make_order_key_arr(char **key_arr)
 	}
 }
 
-void	print_export(t_list *envp_list)
-{
-	int		i;
-	char	**key_arr;
-	char	*key;
-	char	*value;
-
-	i = 0;
-	key_arr = make_key_arr(envp_list);
-	make_order_key_arr(key_arr);
-	while (key_arr[i])
-	{
-		value = envp_find(envp_list, key_arr[i]);
-		printf("declare -x %s=\"%s\"\n", key[i], value);
-		i++;
-	}
-	
-} 
-
 int	check_word_sep_key_val(char *word, char **key, char **value, int *error_flag)
 {
 	int		equal_i;
-		
+
 	equal_i = ft_findchr_i(word, '=');
 	if (equal_i <= 0)
 	{
@@ -259,7 +232,7 @@ int	check_word_sep_key_val(char *word, char **key, char **value, int *error_flag
 		return (1);
 	}
 	*value = ft_substr(word, 0, ft_strlen(word) - equal_i);
-	
+
 	return (0);
 }
 
@@ -276,7 +249,7 @@ int	bt_export(char **cmd_vector,t_list *envp_list)
 	while (cmd_vector[word_i]) // mid error continue
 	{
 		if (check_word_sep_key_val(word, &key, &value, &error_flag))
-			continue;
+			continue ;
 		envp_delete(envp_list, key);
 		envp_add(envp_list, key, value);
 		word_i++;
@@ -291,7 +264,6 @@ int bt_unset(char **cmd_vector, t_list *envp_list)
 	int		error_flag;
 	int		word_i;
 	char	*key;
-
 	
 	error_flag = 0;
 	word_i = 1;
@@ -312,6 +284,6 @@ int	main(int ac, char **av)
 {
 	char	**cmd_vec = av + 1;
 
-	bt_echo(cmd_vec, 0);	
+	bt_echo(cmd_vec, 0);
 	return (0);
 }

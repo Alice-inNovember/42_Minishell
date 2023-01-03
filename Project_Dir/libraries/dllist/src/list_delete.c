@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list_delete.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:06:46 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 18:30:39 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:35:42 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/dllist.h"
 
-void	lst_delete(t_node **node, void (*del)(void **))
+void	list_delete(t_node **node, void (*del)(void **))
 {
 	t_node	*prev_node;
 	t_node	*next_node;
@@ -25,7 +25,7 @@ void	lst_delete(t_node **node, void (*del)(void **))
 	next_node->prev = prev_node;
 }
 
-void	lst_delete_first(t_list *list, void (*del)(void **))
+void	list_delete_first(t_list *list, void (*del)(void **))
 {
 	t_node	**first_node;
 	t_node	*prev_node;
@@ -40,7 +40,7 @@ void	lst_delete_first(t_list *list, void (*del)(void **))
 	next_node->prev = prev_node;
 }
 
-void	lst_delete_last(t_list *list, void (*del)(void **))
+void	list_delete_last(t_list *list, void (*del)(void **))
 {
 	t_node	**last_node;
 	t_node	*prev_node;
@@ -55,7 +55,7 @@ void	lst_delete_last(t_list *list, void (*del)(void **))
 	next_node->prev = prev_node;
 }
 
-void	lst_clear(t_list *list, void (*del)(void **))
+void	list_clear(t_list *list, void (*del)(void **))
 {
 	t_node	**current_node;
 	t_node	**next_node;

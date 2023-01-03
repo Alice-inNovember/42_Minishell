@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 15:01:14 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/27 17:35:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:35:40 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/dllist.h"
 
-void	lst_prepend(t_list *list, t_node *new_node)
+void	list_prepend(t_list *list, t_node *new_node)
 {
 	t_node	*first_node;
 
@@ -24,7 +24,7 @@ void	lst_prepend(t_list *list, t_node *new_node)
 	(list->size)++;
 }
 
-void	lst_append(t_list *list, t_node *new_node)
+void	list_append(t_list *list, t_node *new_node)
 {
 	t_node	*last_node;
 

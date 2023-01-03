@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/02 14:36:07 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:36:02 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	check_and_exec_single_builtin(t_data *data)
 	char			*key;
 	t_builtin_fp	bt_fp;
 
-	proc_data = lst_peek_first_content(&data->proc_data_lst);
-	key = lst_peek_first_content(&proc_data->cmd_lst);
-	bt_fp = builtin_find(&data->builtin_lst, key);
-	if (lst_size(&data->proc_data_lst) == 1 && bt_fp != NULL)
+	proc_data = list_peek_first_content(&data->proc_data_list);
+	key = list_peek_first_content(&proc_data->cmd_list);
+	bt_fp = builtin_find(&data->builtin_list, key);
+	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
 		return (1);
 	}
@@ -37,7 +37,7 @@ void	wait_child(t_data *data)
 {
 	t_node	*pid_node;
 
-	pid_node = lst_peek_first_node(&data->pid_lst);
+	pid_node = list_peek_first_node(&data->pid_list);
 	while (pid_node != NULL)
 	{
 		waitpid(*(pid_t *)pid_node->content, &g_last_exit_status, 0);
@@ -74,12 +74,12 @@ void	make_child(t_data *data)
 	t_node	*proc_node;
 	pid_t	*pid;
 
-	proc_node = lst_peek_first_node(&data->proc_data_lst);
+	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
 		pid = ft_calloc(1, sizeof(pid_t));
 		*pid = do_fork(data, proc_node->content);
-		lst_append(&data->pid_lst, (void *)pid);
+		list_append(&data->pid_list, (void *)pid);
 		proc_node = proc_node->next;
 	}
 }

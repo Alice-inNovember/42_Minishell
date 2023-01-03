@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/02 13:41:42 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:35:54 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,32 @@ void	*builtin_add(char *key, t_builtin_fp function)
 	return (builtin);
 }
 
-void	builtin_init(t_list *builtin_lst)
+void	builtin_init(t_list *builtin_list)
 {
 	void	*builtin;
 
-	lst_init(builtin_lst);
+	list_init(builtin_list);
 	builtin = builtin_add("cd", bt_cd);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 	builtin = builtin_add("echo", bt_echo);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 	builtin = builtin_add("env", bt_env);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 	builtin = builtin_add("exit", bt_exit);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 	builtin = builtin_add("export", bt_export);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 	builtin = builtin_add("pwd", bt_pwd);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 	builtin = builtin_add("unset", bt_unset);
-	lst_append(builtin_lst, new_node(builtin));
+	list_append(builtin_list, new_node(builtin));
 }
 
-t_builtin_fp	builtin_find(t_list *builtin_lst, char *key)
+t_builtin_fp	builtin_find(t_list *builtin_list, char *key)
 {
 	t_node	*node;
 
-	node = lst_peek_first_node(builtin_lst);
+	node = list_peek_first_node(builtin_list);
 	while (node->content && ft_strcmp(((t_builtin *)node->content)->key, key))
 		node = node->next;
 	if (node->content)
