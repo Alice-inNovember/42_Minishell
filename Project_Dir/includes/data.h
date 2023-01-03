@@ -49,8 +49,8 @@ typedef struct s_token
 
 typedef struct s_builtin
 {
-	char		*key;
-	void		(*function)(char **, t_list *);
+	char	*key;
+	int		(*function)(char **, t_list *);
 }	t_builtin;
 
 typedef struct s_redir
