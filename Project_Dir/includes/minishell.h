@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:32:30 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/02 15:02:26 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/03 13:33:39 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include "data.h"
 # include "envp.h"
+# include "lexer.h"
 # include "builtin.h"
 # include "parser.h"
 # include "util.h"
@@ -29,6 +30,6 @@
 # include "../libraries/libft/includes/libft.h"
 # include "../libraries/get_next_line/includes/get_next_line.h"
 
-static int	g_last_exit_status;
+static int		g_last_exit_status;
 
 #endif

@@ -5,35 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:15:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 16:55:48 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/03 13:13:49 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/03 13:22:01 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
-#include "../../../includes/lexer1.h"
+#include "../../../includes/lexer.h"
 
-void	branch(t_status *status, t_pack *pack)
+void	branch(t_state *state, t_data *data, t_list *buf_list, int *idx)
 {
-	const char	input = pack->line[pack->index];
+	const char	input = data->line[*idx];
 
 	if (input == ' ')
-		pack->index++;
+		(*idx)++;
 	else if (input == '\0')
-		*status = FINISH;
-	else if (input == '$' && is_proper_env(&pack->line[pack->index + 1]) && \
-			!is_heredoc_limit_string(pack->token_lst))
-		*status = EXPAND;
+		*state = FINISH;
 	else if (input == '|')
-		*status = MAKING_PIPE;
+		*state = MAKING_PIPE;
 	else if (input == '<')
-		*status = MAKING_LESS;
+		*state = MAKING_LESS;
 	else if (input == '>')
-		*status = MAKING_GREAT;
+		*state = MAKING_GREAT;
 	else if (input == '\'')
-		*status = QUOTE_OPEN;
+		*state = QUOTE_OPEN;
 	else if (input == '\"')
-		*status = DQUOTE_OPEN;
+		*state = DQUOOTE_OPEN;
 	else
-		*status = MAKING_WORD;
+		*state = MAKING_WORD;
+	(t_unused)buf_list;
 }

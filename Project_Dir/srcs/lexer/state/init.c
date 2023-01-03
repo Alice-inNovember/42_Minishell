@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   making_pipe.c                                      :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:19:12 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 21:05:00 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/03 13:02:13 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/03 13:22:07 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
-#include "../../../includes/lexer1.h"
+#include "../../../includes/lexer.h"
 
-void	making_pipe(t_status *status, t_pack *pack)
+void	init(t_state *state, t_data *data, t_list *buf_list, int *idx)
 {
-	char	*buffer;
-
-	buffer = make_buffer(pack->line[pack->index]);
-	lst_append(&pack->buffer_lst, new_node(buffer));
-	create_token(pack->token_lst, &pack->buffer_lst, T_PIPE);
-	*status = BRANCH;
-	pack->index++;
+	lst_init(buf_list);
+	(*idx) = 0;
+	*state = BRANCH;
+	(t_unused)data;
 }

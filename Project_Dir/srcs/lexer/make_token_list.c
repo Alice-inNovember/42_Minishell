@@ -5,52 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 10:37:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/02 19:05:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/03 09:37:12 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/03 13:02:55 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/lexer1.h"
+#include "../../includes/lexer.h"
 
-void	init_pack(t_pack *pack, t_list *token_lst, t_list *envp_lst, char *line)
+void	make_token_list(t_data *data)
 {
-	lst_init(token_lst);
-	pack->token_lst = token_lst;
-	pack->envp_lst = envp_lst;
-	lst_init(&pack->buffer_lst);
-	pack->line = line;
-	pack->index = 0;
-}
-
-void	error_handle(t_status *status, t_pack *pack)
-{
-	if (*status == QUOTE_ERROR)
-		printf("Syntax error: open quote\n");
-	else if (*status == DQUOTE_ERROR)
-		printf("Syntax error: open dquote\n");
-	free_pack(pack);
-}
-
-int	make_token_list(t_data *data, char *line)
-{
-	const t_status_fp	status_fp[TOTAL_STATUS - 3] = {
-		branch, making_word, making_pipe, \
-		making_less, making_dless, making_great, making_dgreat, \
-		quote_open, quote_close, dquote_open, dquote_close, \
-		expand, dquote_expand
+	const t_state_fp	state_fp[TOTAL_STATE - 1] = {
+		init, branch, making_word, making_pipe,
+		making_less, making_dless, making_great, making_dgreat,
+		quote_open, quote_close, dquote_open, dquote_close
 	};
-	t_status			status;
-	t_pack				pack;
+	t_state				state;
+	t_list				buf_list;
+	int					index;
 
-	init_pack(&pack, &data->token_lst, &data->envp_lst, line);
-	status = BRANCH;
-	while (status != FINISH && status != QUOTE_ERROR && status != DQUOTE_ERROR)
-		status_fp[status](&status, &pack);
-	if (status != FINISH)
-	{
-		error_handle(&status, &pack);
-		return (1);
-	}
-	return (0);
+	state = INIT;
+	while (state != FINISH)
+		state_fp[state](&state, data, &buf_list, &index);
 }
