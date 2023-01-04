@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:46:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 20:13:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:39:04 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	dquote_branch(t_state *state, t_data *data, t_list *buf_list, int *idx)
 		return ;
 	}
 	else if (next_input == '$' && \
-				is_expansion(data->line, *idx, &data->token_list))
+				is_expansion(data->line, *idx + 1, &data->token_list))
+	{
 		*state = DQUOTE_EXPAND;
+		return ;
+	}
 	else if (next_input == '\"')
 		*state = DQUOTE_CLOSE;
 	else

@@ -6,12 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 13:36:08 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 08:51:52 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/lexer2.h"
+#include "../../includes/lexer.h"
 
 int	is_err_occured(t_data *data, t_list *token_list)
 {

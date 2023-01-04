@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:01:31 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 16:47:54 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:16:32 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*make_value(t_list *buf_list)
 	char	*buf;
 	int		i;
 
-	value = (char *)ft_calloc(list_size(buf_list), sizeof(char));
+	value = (char *)ft_calloc(list_size(buf_list) + 1, sizeof(char));
 	cur_node = list_peek_first_node(buf_list);
 	i = 0;
 	while (cur_node->next != NULL)
