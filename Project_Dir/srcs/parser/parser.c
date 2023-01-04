@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/04 13:10:50 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:04:51 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,14 @@ int	is_return_case(t_data *data, t_list *token_list, t_error flag)
 	return (0);
 }
 
-int	is_redir(t_data *data, t_node *node)
+int	is_redir(t_type type)
+{
+	if (type == T_LESS || type == T_GREAT || type == T_DLESS || type == T_DGREAT)
+		return (1);
+	return (0);
+}
+
+int	is_redir_correct(t_data *data, t_node *node)
 {
 	t_type	cur_type;
 	t_token	*next_token;
@@ -54,8 +61,7 @@ int	is_redir(t_data *data, t_node *node)
 	if (node->content == NULL)
 		return (0);
 	cur_type = ((t_token *)node->content)->type;
-	if (cur_type == T_LESS || cur_type == T_GREAT
-		|| cur_type == T_DLESS || cur_type == T_DGREAT)
+	if (is_redir(cur_type))
 	{
 		next_token = (t_token *)node->next->content;
 		if (next_token && next_token->type == T_WORD)
@@ -90,10 +96,10 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	{
 		cmd_word = ft_strdup((char *)token->value);
 		list_append(&proc_data->cmd_list, new_node((void *)cmd_word)); 
-		list_clear(token_list, del_s_token);
-		return ;
 	}
-	set_redir_err_flag(data, token);
+	else
+		set_redir_err_flag(data, token);
+	list_clear(token_list, del_s_token);
 }
 
 
@@ -155,7 +161,7 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		return ;
 	first = list_peek_first_node(token_list);
 	last = list_peek_last_node(token_list);
-	if (is_redir(data, last->prev))
+	if (is_redir_correct(data, last->prev))
 	{
 		parse_cmd_suffix(data, proc_data, sub_token_list(data, first, last->prev->prev));
 		parse_io_redirect(data, proc_data, sub_token_list(data, last->prev, last));
@@ -164,6 +170,8 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	else
 	{
 		parse_cmd_suffix(data, proc_data, sub_token_list(data, first, last->prev));
+		if (is_redir(((t_token *)last->content)->type))
+			data->syntax_err_flag = E_NEAR_NEWLINE;
 		parse_cmd_word(data, proc_data, sub_token_list(data, last, last));
 		list_clear(token_list, del_s_token);
 	}
@@ -182,20 +190,10 @@ t_proc_data	*new_proc_data(void)
 t_node	*get_cmd_node(t_data *data, t_list *token_list)
 {
 	t_node	*curr;
-	int		redir_value;
 
 	curr = list_peek_first_node(token_list);
-	redir_value = is_redir(data, curr);
-	while (redir_value == 1)
-	{
+	while (is_redir_correct(data, curr))
 		curr = curr->next->next;
-		redir_value = is_redir(data, curr);
-	}
-	if (redir_value == -1)
-	{
-		list_clear(token_list, del_s_token);
-		return (NULL);
-	}
 	return (curr);
 }
 
