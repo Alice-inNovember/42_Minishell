@@ -6,28 +6,36 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 13:36:02 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 12:19:37 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <unistd.h>
 
-/*
- * 파이프 없음 && 빌트인 : no fork()
- */
-
-int	check_and_exec_single_builtin(t_data *data)
+int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 {
 	t_proc_data		*proc_data;
-	char			*key;
 	t_builtin_fp	bt_fp;
+	int				stdpip[2];
+	int				prev_stdio[2];
+	char			**cmd_argv;
 
 	proc_data = list_peek_first_content(&data->proc_data_list);
-	key = list_peek_first_content(&proc_data->cmd_list);
-	bt_fp = builtin_find(&data->builtin_list, key);
+	cmd_argv = cmd_list2arr(&proc_data->cmd_list);
+	bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
+	stdpip[1] = STDOUT_FILENO;
 	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
+		prev_stdio[0] = dup(STDIN_FILENO);
+		prev_stdio[1] = dup(STDOUT_FILENO);
+		child_redirect(proc_data, stdpip, 0);
+		bt_fp(cmd_argv, envp_list);
+		dup2(prev_stdio[0], STDIN_FILENO);
+		dup2(prev_stdio[1], STDOUT_FILENO);
+		close(prev_stdio[0]);
+		close(prev_stdio[1]);
+		cmd_argv_free(cmd_argv);
 		return (1);
 	}
 	return (0);
@@ -86,7 +94,9 @@ void	make_child(t_data *data)
 
 void	executor(t_data *data)
 {
-	if (check_and_exec_single_builtin(data))
+	if (data->syntax_err_flag != 0)
+		return ;
+	if (check_and_exec_single_builtin(data, &data->envp_list))
 		return ;
 	make_child(data);
 	wait_child(data);
