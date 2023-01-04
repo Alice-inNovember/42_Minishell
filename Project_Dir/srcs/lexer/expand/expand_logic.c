@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 20:20:34 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 21:48:55 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:47:07 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_env_value(t_data *data, int idx)
 	env_length = get_env_length(&data->line[idx]);
 	env_name = ft_substr(data->line, idx, env_length);
 	env_value = envp_find(&data->envp_list, env_name);
-	ft_free((void **)env_name);
+	ft_free((void **)&env_name);
 	return (env_value);
 }
 
@@ -45,7 +45,7 @@ char	*join_three_strings(char *front, char *env_value, char *back)
 
 	temp = ft_strjoin(front, env_value);
 	expanded_line = ft_strjoin(temp, back);
-	ft_free((void **)&env_value);
+	ft_free((void **)&temp);
 	return (expanded_line);
 }
 
@@ -63,7 +63,7 @@ char	*make_expanded_line(t_data *data, int idx)
 		expanded_line = ft_strjoin(front, back);
 	else
 		expanded_line = join_three_strings(front, env_value, back);
-	ft_free((void **)front);
-	ft_free((void **)back);
+	ft_free((void **)&front);
+	ft_free((void **)&back);
 	return (expanded_line);
 }
