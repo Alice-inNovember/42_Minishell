@@ -54,7 +54,8 @@ typedef enum e_excode
 	EX_BT_FAIL = 2,
 	EX_CNOT_EXEC = 126,
 	EX_CNOT_FIND = 127,
-	EX_BY_SIGNAL = 128
+	EX_BY_SIGNAL = 128,
+	EX_OUTOF_RANGE = 255
 }	t_excode;
 // 0		성공
 // 1		일반적인 에러
