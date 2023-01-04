@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:17:33 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 13:35:58 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 13:39:43 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*str3join(char *str1, char *str2, char *str3)
 	return (returnstr);
 }
 
-char	**envp_list2arr(t_list *envp_list)
+char	**envp2arr(t_list *envp_list)
 {
 	size_t	i;
 	size_t	envplen;

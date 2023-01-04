@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 13:35:10 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/04 13:36:13 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define EXECUTOR_H
 
 # include "data.h"
-#include <cstdlib>
 
 void	executor(t_data *data);
 void	execute_child(t_data *data, t_proc_data *proc, int *pip, int read_end);
