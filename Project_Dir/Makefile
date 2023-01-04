@@ -1,7 +1,7 @@
 #NAME
 NAME		=	minishell
 #CMDS
-CC			=	cc -fsanitize=address -g3
+CC			=	cc -g3 -fsanitize=address
 RM			=	rm -rf
 LIBC		=	ar rcs
 #FLAGS
