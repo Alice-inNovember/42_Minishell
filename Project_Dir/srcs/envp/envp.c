@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 13:35:59 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 13:11:44 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	envp_delete(t_list *envp_list, char *key)
 	t_node	*node;
 
 	node = list_peek_first_node(envp_list);
-	while (ft_strcmp(((t_envp *)node->content)->key, key))
+	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	if (!node->content)
 		return ;

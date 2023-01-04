@@ -51,10 +51,10 @@ void	print_word(char *word)
 
 int	bt_echo(char **cmd_vector, t_list *envp_list) 
 {
-	char	*word;
 	int		i;
 	int		new_line_flag;
 
+	(void)envp_list;
 	new_line_flag = 1;
 	i = 1;
 	while (!ft_strcmp(cmd_vector[i], "-n"))
@@ -171,7 +171,8 @@ int	bt_exit(char **cmd_vector, t_list *envp_list)
 {
 	
 	int	status;	
-	
+
+	(void)envp_list;
 	if (check_word_cnt(cmd_vector) == 1)
 		status = 0;
 	else if (check_word_cnt(cmd_vector) == 2)
@@ -193,7 +194,6 @@ int	ft_findchr_i(char *str, char c)
 {
 	int	i;
 
-
 	i = 0;
 	while (str[i])
 	{
@@ -210,8 +210,6 @@ char	**make_key_arr(t_list *envp_list)
 {
 	int		i;
 	t_node	*cur_node;
-	char	*key;
-	char	*value;
 	char	**key_arr;
 
 	i = 0;
@@ -271,21 +269,6 @@ void	print_export(t_list *envp_list)
 	free (key_arr);
 }
 
-int	get_env_length(char *env_name)
-{
-	int	length;
-
-	length = 0;
-	while (env_name[length] == '_' || ft_isalpha(env_name[length]))
-		length++;
-	if (length == 0)
-		return (0);
-	while (env_name[length] == '_' || \
-			ft_isalpha(env_name[length]) || ft_isdigit(env_name[length]))
-		length++;
-	return (length);
-}
-
 int	is_proper_env(char *env_name)
 {
 	int	full_length;
@@ -332,10 +315,11 @@ int	bt_export(char **cmd_vector,t_list *envp_list)
 	word_i = 1;
 	while (cmd_vector[word_i]) // mid error continue
 	{
+		word = cmd_vector[word_i];
 		if (check_word_sep_key_val(word, &key, &value, &error_flag))
 			continue ;
-		envp_delete(envp_list, key);
-		envp_add(envp_list, key, value);
+		(envp_delete(envp_list, key), envp_add(envp_list, key, value));
+		(free(key), free(value));
 		word_i++;
 	}
 	if (word_i == 1)
@@ -360,38 +344,41 @@ int bt_unset(char **cmd_vector, t_list *envp_list)
 		}
 		key = cmd_vector[word_i];
 		envp_delete(envp_list, key);
+		word_i++;
 	}
 	return (error_flag);
 }
 
-int	main(int ac, char **av, char **envp)
-{
-	char	*line;
-	char	**vec;
-	t_list	envp_list;
+// int	main(int ac, char **av, char **envp)
+// {
+// 	char	*line;
+// 	char	**vec;
+// 	t_list	envp_list;
 	
-	envp_init(&envp_list, envp);
-	while (1)
-	{
-		line = readline("minishell > ");
-		add_history(line);
-		vec = ft_split(line, ' ');
-		if (!ft_strcmp(vec[0], "echo"))
-			bt_echo(vec, &envp_list);
-		else if (!ft_strcmp(vec[0], "pwd"))
-			bt_pwd(vec, &envp_list);
-		else if (!ft_strcmp(vec[0], "unset"))
-			bt_unset(vec, &envp_list);
-		else if (!ft_strcmp(vec[0], "cd"))
-			bt_cd(vec, &envp_list);
-		else if (!ft_strcmp(vec[0], "env"))
-			bt_env(vec, &envp_list);
-		else if (!ft_strcmp(vec[0], "export"))
-			bt_export(vec, &envp_list);
-		else if (!ft_strcmp(vec[0], "exit"))
-			bt_exit(vec, &envp_list);
-		else 		
-			printf("no_command\n");
-	}
-	return (0);
-}
+// 	(void) ac;
+// 	(void) av;
+// 	envp_init(&envp_list, envp);
+// 	while (1)
+// 	{
+// 		line = readline("minishell > ");
+// 		add_history(line);
+// 		vec = ft_split(line, ' ');
+// 		if (!ft_strcmp(vec[0], "echo"))
+// 			bt_echo(vec, &envp_list);
+// 		else if (!ft_strcmp(vec[0], "pwd"))
+// 			bt_pwd(vec, &envp_list);
+// 		else if (!ft_strcmp(vec[0], "unset"))
+// 			bt_unset(vec, &envp_list);
+// 		else if (!ft_strcmp(vec[0], "cd"))
+// 			bt_cd(vec, &envp_list);
+// 		else if (!ft_strcmp(vec[0], "env"))
+// 			bt_env(vec, &envp_list);
+// 		else if (!ft_strcmp(vec[0], "export"))
+// 			bt_export(vec, &envp_list);
+// 		else if (!ft_strcmp(vec[0], "exit"))
+// 			bt_exit(vec, &envp_list);
+// 		else 		
+// 			printf("no_command\n");
+// 	}
+// 	return (0);
+// }
