@@ -49,6 +49,23 @@ void	print_word(char *word)
 	}
 }
 
+int	is_proper_opt(char *word, char opt_chr)
+{
+	int	i;
+
+	i = 1;
+	if (word[0] != '-' || ft_strlen(word) < 2)
+		return (0);
+	while (word[i])
+	{
+		if (word[i] != opt_chr)
+			return (0);
+		i++;
+	}  
+	return (1);
+
+}
+
 int	bt_echo(char **cmd_vector, t_list *envp_list) 
 {
 	int		i;
@@ -57,14 +74,12 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 	(void)envp_list;
 	new_line_flag = 1;
 	i = 1;
-	if (check_word_cnt(cmd_vector) == 1)
-		return (1);
-	while (!ft_strcmp(cmd_vector[i], "-n"))
+	while (cmd_vector[i] && is_proper_opt(cmd_vector[i], 'n'))
 	{
 		new_line_flag = 0;
 		i++;
 	}
-	while (1) // while 조건 // $?
+	while (cmd_vector[i]) // while 조건 // $?
 	{
 		print_word(cmd_vector[i]);
 		if (!cmd_vector[i + 1])
@@ -74,7 +89,7 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 	}
 	if (new_line_flag == 1)
 		printf("\n");
-	return (0);
+	return (EX_SUCCESS);
 }
 
 int	bt_cd(char **cmd_vector, t_list *envp_list)
@@ -282,20 +297,20 @@ void	print_export(t_list *envp_list)
 
 // commit할 떄 out
 
-// int	get_env_length(char *line)
-// {
-// 	int	length;
+int	get_env_length(char *line)
+{
+	int	length;
 
-// 	length = 0;
-// 	while (line[length] == '_' || ft_isalpha(line[length]))
-// 		length++;
-// 	if (length == 0)
-// 		return (0);
-// 	while (line[length] == '_' || \
-// 			ft_isalpha(line[length]) || ft_isdigit(line[length]))
-// 		length++;
-// 	return (length);
-// }
+	length = 0;
+	while (line[length] == '_' || ft_isalpha(line[length]))
+		length++;
+	if (length == 0)
+		return (0);
+	while (line[length] == '_' || \
+			ft_isalpha(line[length]) || ft_isdigit(line[length]))
+		length++;
+	return (length);
+}
 
 int	is_proper_env(char *env_name)
 {
@@ -365,6 +380,8 @@ int bt_unset(char **cmd_vector, t_list *envp_list)
 
 	error_flag = 0;
 	word_i = 1;
+	if (check_word_cnt(cmd_vector) == 1)
+		return (1);
 	while (cmd_vector[word_i])
 	{
 		if (!is_proper_env(cmd_vector[word_i]))
@@ -379,35 +396,35 @@ int bt_unset(char **cmd_vector, t_list *envp_list)
 	return (error_flag);
 }
 
-// int	main(int ac, char **av, char **envp)
-// {
-// 	char	*line;
-// 	char	**vec;
-// 	t_list	envp_list;
+int	main(int ac, char **av, char **envp)
+{
+	char	*line;
+	char	**vec;
+	t_list	envp_list;
 	
-// 	((void) ac, (void) av);
-// 	envp_init(&envp_list, envp);
-// 	while (1)
-// 	{
-// 		line = readline("minishell > ");
-// 		add_history(line);
-// 		vec = ft_split(line, ' ');
-// 		if (!ft_strcmp(vec[0], "echo"))
-// 			bt_echo(vec, &envp_list);
-// 		else if (!ft_strcmp(vec[0], "pwd"))
-// 			bt_pwd(vec, &envp_list);
-// 		else if (!ft_strcmp(vec[0], "unset"))
-// 			bt_unset(vec, &envp_list);
-// 		else if (!ft_strcmp(vec[0], "cd"))
-// 			bt_cd(vec, &envp_list);
-// 		else if (!ft_strcmp(vec[0], "env"))
-// 			bt_env(vec, &envp_list);
-// 		else if (!ft_strcmp(vec[0], "export"))
-// 			bt_export(vec, &envp_list);
-// 		else if (!ft_strcmp(vec[0], "exit"))
-// 			bt_exit(vec, &envp_list);
-// 		else 		
-// 			printf("no_command\n");
-// 	}
-// 	return (0);
-// }
+	((void) ac, (void) av);
+	envp_init(&envp_list, envp);
+	while (1)
+	{
+		line = readline("minishell > ");
+		add_history(line);
+		vec = ft_split(line, ' ');
+		if (!ft_strcmp(vec[0], "echo"))
+			bt_echo(vec, &envp_list);
+		else if (!ft_strcmp(vec[0], "pwd"))
+			bt_pwd(vec, &envp_list);
+		else if (!ft_strcmp(vec[0], "unset"))
+			bt_unset(vec, &envp_list);
+		else if (!ft_strcmp(vec[0], "cd"))
+			bt_cd(vec, &envp_list);
+		else if (!ft_strcmp(vec[0], "env"))
+			bt_env(vec, &envp_list);
+		else if (!ft_strcmp(vec[0], "export"))
+			bt_export(vec, &envp_list);
+		else if (!ft_strcmp(vec[0], "exit"))
+			bt_exit(vec, &envp_list);
+		else 		
+			printf("no_command\n");
+	}
+	return (0);
+}
