@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:37:12 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 21:54:05 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:57:22 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	error_handle(t_data *data)
 {
-	if (data->syntax_err_flag == SINGLE_QUOTE)
+	if (data->syntax_err_flag == E_SINGLE_QUOTE)
 		printf("Syntax Error: single quote");
-	else if (data->syntax_err_flag == SINGLE_DQUOTE)
+	else if (data->syntax_err_flag == E_SINGLE_DQUOTE)
 		printf("Syntax Error: single dquote");
 	list_clear(&data->token_list, del_s_token);
 }
@@ -37,6 +37,6 @@ void	make_token_list(t_data *data)
 	state = INIT;
 	while (state != FINISH)
 		state_fp[state](&state, data, &buf_list, &index);
-	if (data->syntax_err_flag != NONE)
+	if (data->syntax_err_flag != E_NONE)
 		error_handle(data);
 }
