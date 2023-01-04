@@ -6,21 +6,22 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 14:52:37 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 14:46:11 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-void	*builtin_add(char *key, t_builtin_fp function)
+void	builtin_add(t_list *builtin_list, char *key, t_builtin_fp function)
 {
-	t_builtin	*builtin;
+	t_builtin	*bt_node;
 
-	builtin = (t_builtin *)ft_malloc(sizeof(t_builtin));
-	builtin->key = ft_strdup("key");
-	builtin->function = function;
-	return (builtin);
+	bt_node = (t_builtin *)ft_calloc(1, sizeof(t_envp));
+	bt_node->key = ft_strdup(key);
+	bt_node->function = function;
+	list_append(builtin_list, new_node(bt_node));
 }
 
 void	builtin_init(t_list *builtin_list)
@@ -28,20 +29,13 @@ void	builtin_init(t_list *builtin_list)
 	void	*builtin;
 
 	list_init(builtin_list);
-	builtin = builtin_add("cd", bt_cd);
-	list_append(builtin_list, new_node(builtin));
-	builtin = builtin_add("echo", bt_echo);
-	list_append(builtin_list, new_node(builtin));
-	builtin = builtin_add("env", bt_env);
-	list_append(builtin_list, new_node(builtin));
-	builtin = builtin_add("exit", bt_exit);
-	list_append(builtin_list, new_node(builtin));
-	builtin = builtin_add("export", bt_export);
-	list_append(builtin_list, new_node(builtin));
-	builtin = builtin_add("pwd", bt_pwd);
-	list_append(builtin_list, new_node(builtin));
-	builtin = builtin_add("unset", bt_unset);
-	list_append(builtin_list, new_node(builtin));
+	builtin_add(builtin_list, "cd", bt_cd);
+	builtin_add(builtin_list, "echo", bt_echo);
+	builtin_add(builtin_list, "env", bt_env);
+	builtin_add(builtin_list, "exit", bt_exit);
+	builtin_add(builtin_list, "export", bt_export);
+	builtin_add(builtin_list, "pwd", bt_pwd);
+	builtin_add(builtin_list, "unset", bt_unset);
 }
 
 t_builtin_fp	builtin_find(t_list *builtin_list, char *key)

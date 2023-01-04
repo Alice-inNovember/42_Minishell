@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 19:06:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/02 16:44:55g by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/04 14:25:50 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,10 +166,8 @@ int	ft_atoi_in_bt(const char *str)
 	return (sign * res);
 }
 
-
 int	bt_exit(char **cmd_vector, t_list *envp_list)
 {
-	
 	int	status;	
 
 	(void)envp_list;
@@ -203,8 +201,6 @@ int	ft_findchr_i(char *str, char c)
 	}
 	return (-1);
 }
-
-
 
 char	**make_key_arr(t_list *envp_list)
 {

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 13:34:48 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:27:52 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	init_data(t_data *data)
 {
 	list_init(&data->token_list);
 	list_init(&data->proc_data_list);
-	list_init(&data->builtin_list);
 	list_init(&data->pid_list);
 	data->syntax_err_flag = 0;
 }
@@ -34,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 
 	envp_init(&data.envp_list, envp);
+	builtin_init(&data.builtin_list);
 	while (1)
 	{
 		init_data(&data);

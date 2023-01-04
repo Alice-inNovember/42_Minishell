@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 12:18:34 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 14:52:01 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**cmd_list2arr(t_list *cmd_list)
 
 	node = list_peek_first_node(cmd_list);
 	cmdlen = list_size(cmd_list);
-	cmdarr = (char **)ft_malloc(cmdlen + 1);
+	cmdarr = (char **)ft_malloc(sizeof(char *) * (cmdlen + 1));
 	i = 0;
 	while (i < cmdlen)
 	{
@@ -71,13 +71,5 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 
 void	cmd_argv_free(char **cmd_argv)
 {
-	int	i;
-
-	i = 0;
-	while (cmd_argv[i])
-	{
-		free(cmd_argv[i]);
-		i++;
-	}
 	free(cmd_argv);
 }
