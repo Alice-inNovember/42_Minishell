@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:37:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 22:03:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 10:05:29 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*make_buf(char input);
 void	make_token(t_list *token_list, t_list *buf_list, t_type type);
 
 // print_token_list
-void	print_token_lst(t_list *token_lst);
+void	print_token_list(t_data *data);
 
 // state functions
 void	init(t_state *state, t_data *data, t_list *buf_list, int *idx);
