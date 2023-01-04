@@ -15,6 +15,8 @@ INCDIR		=	./includes
 ENVPDIR		=	$(SRCDIR)/envp
 LEXERDIR	=	$(SRCDIR)/lexer
 PARSEDIR	=	$(SRCDIR)/parser
+EXECDIR		= 	$(SRCDIR)/executor
+BUIDIR		=	$(SRCDIR)/builtin
 UTILDIR		=	$(SRCDIR)/util
 BONUSDIR	=	
 #FILES
@@ -22,6 +24,7 @@ LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
 INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
+				$(ENVPDIR)/envp_util.c \
 				$(LEXERDIR)/make_token_list.c \
 				$(LEXERDIR)/make_token_list_utils.c \
 				$(LEXERDIR)/print_token_list.c \
@@ -46,6 +49,11 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/expand/expand_utils.c \
 				$(PARSEDIR)/parser.c \
 				$(PARSEDIR)/parser_utils.c \
+				$(EXECDIR)/executor.c \
+				$(EXECDIR)/executor_child.c \
+				$(EXECDIR)/executor_util.c \
+				$(BUIDIR)/built_in.c \
+				$(BUIDIR)/built_in_util.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
