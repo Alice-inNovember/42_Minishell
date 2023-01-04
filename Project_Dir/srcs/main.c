@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 11:09:30 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:59:06 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_data(t_data *data)
 
 void	clear_data(t_data *data)
 {
-	list_clear(&data->token_list, del_s_token);
+	//list_clear(&data->token_list, del_s_token);
 	list_clear(&data->proc_data_list, del_s_proc_data);
 	list_clear(&data->pid_list, NULL);
 	//list_clear(&data->builtin_list, NULL);
@@ -40,11 +40,12 @@ int	main(int argc, char **argv, char **envp)
 		data.line = readline("minishell>");
 		make_token_list(&data);
 		print_token_list(&data);
-		//parse_expression(&data, &data.token_list);
+		parse_expression(&data, &data.token_list);
 		//if (data.syntax_err_flag == 1)
 		//	continue ;
 		//executor();
 		clear_data(&data);
+		print_syntax_err(&data);
 	}
 	return (0);
 }

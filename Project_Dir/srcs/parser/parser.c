@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/04 12:39:34 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/04 13:10:50 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@ int	is_syntax_err(t_list *token_list, t_error flag)
 	return (token_list == NULL && flag != E_NONE);
 }
 
-int	detect_parse_err(t_data *data, t_list *token_list, t_error flag)
+int	is_token_list_empty(t_list *token_list)
+{
+	return (token_list == NULL);
+}
+
+int	is_return_case(t_data *data, t_list *token_list, t_error flag)
 {
 	if (is_err_occured(data))
 	{
 		if (token_list != NULL)
-			lst_clear(token_list, del_s_token);
+			list_clear(token_list, del_s_token);
 		return (1);
 	}
 	if (is_syntax_err(token_list, flag))
@@ -36,6 +41,8 @@ int	detect_parse_err(t_data *data, t_list *token_list, t_error flag)
 		data->syntax_err_flag = flag;
 		return (1);
 	}
+	if (is_token_list_empty(token_list))
+		return (1);
 	return (0);
 }
 
@@ -53,12 +60,13 @@ int	is_redir(t_data *data, t_node *node)
 		next_token = (t_token *)node->next->content;
 		if (next_token && next_token->type == T_WORD)
 			return (1);
-		data->syntax_err_flag = E_NEAR_NEWLINE;
+		if (next_token == NULL)
+			data->syntax_err_flag = E_NEAR_NEWLINE;
 	}
 	return (0);
 }
 
-void	set_redir_err_flag(t_token *token)
+void	set_redir_err_flag(t_data *data, t_token *token)
 {
 	if (token->type == T_GREAT)
 		data->syntax_err_flag = E_NEAR_GREAT;
@@ -75,7 +83,7 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	t_token	*token;
 	char	*cmd_word;
 
-	if (detect_syntax_err(data, token_list, E_NONE))
+	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	token = list_peek_first_content(token_list);
 	if (token->type == T_WORD)
@@ -85,7 +93,7 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		list_clear(token_list, del_s_token);
 		return ;
 	}
-	set_redir_err_flag(token);
+	set_redir_err_flag(data, token);
 }
 
 
@@ -95,7 +103,7 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	t_type	redir_type;
 	char	*fname;
 
-	if (detect_syntax_err(data, token_list, E_NONE))
+	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	redir = ft_calloc(1, sizeof(t_redir));
 	list_append(&proc_data->redir_list, new_node((void *)redir));
@@ -129,7 +137,7 @@ void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	t_node	*first;
 	t_node	*last;
 
-	if (detect_syntax_err(data, token_list, E_NONE))
+	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	first = list_peek_first_node(token_list);
 	last = list_peek_last_node(token_list);
@@ -143,7 +151,7 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	t_node	*first;
 	t_node	*last;
 
-	if (detect_syntax_err(data, token_list, E_NONE))
+	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	first = list_peek_first_node(token_list);
 	last = list_peek_last_node(token_list);
@@ -185,7 +193,7 @@ t_node	*get_cmd_node(t_data *data, t_list *token_list)
 	}
 	if (redir_value == -1)
 	{
-		lst_clear(token_list, del_s_token);
+		list_clear(token_list, del_s_token);
 		return (NULL);
 	}
 	return (curr);
@@ -198,7 +206,7 @@ void	parse_simple_cmd(t_data *data, t_list *token_list)
 	t_node		*last;
 	t_proc_data	*proc_data;
 
-	if (detect_syntax_err(data, token_list, E_NEAR_PIPE))
+	if (is_return_case(data, token_list, E_NEAR_PIPE))
 		return ;
 	proc_data = new_proc_data();
 	list_append(&data->proc_data_list, new_node((void *)proc_data));
@@ -206,11 +214,11 @@ void	parse_simple_cmd(t_data *data, t_list *token_list)
 	cmd_node = get_cmd_node(data, token_list);
 	if (cmd_node == NULL)
 		return ;
-	last = lst_peek_last_node(token_list);
+	last = list_peek_last_node(token_list);
 	parse_cmd_prefix(data, proc_data, sub_token_list(data, first, cmd_node->prev));
 	parse_cmd_word(data, proc_data, sub_token_list(data, cmd_node, cmd_node));
 	parse_cmd_suffix(data, proc_data, sub_token_list(data, cmd_node->next, last));
-	lst_clear(token_list, del_s_token);
+	list_clear(token_list, del_s_token);
 }
 
 void	parse_expression(t_data *data, t_list *token_list)
@@ -219,24 +227,22 @@ void	parse_expression(t_data *data, t_list *token_list)
 	t_node	*last;
 	t_node	*curr;
 
-	if (detect_syntax_err(data, token_list, E_NEAR_PIPE))
+	if (is_return_case(data, token_list, E_NEAR_PIPE))
 		return ;
-	first = lst_peek_first_node(token_list);
-	last = lst_peek_last_node(token_list);
+	first = list_peek_first_node(token_list);
+	last = list_peek_last_node(token_list);
 	curr = last;
 	while (curr->prev != NULL)
 	{
 		if (((t_token *)curr->content)->type == T_PIPE)
 		{
 			parse_expression(data, sub_token_list(data, first, curr->prev));
-			if (is_err_occured(data, token_list))
-				return ;
 			parse_simple_cmd(data, sub_token_list(data, curr->next, last));
-			lst_clear(token_list, del_s_token);
+			list_clear(token_list, del_s_token);
 			return ;
 		}
 		curr = curr->prev;
 	}
 	parse_simple_cmd(data, sub_token_list(data, first, last));
-	lst_clear(token_list, del_s_token);
+	list_clear(token_list, del_s_token);
 }
