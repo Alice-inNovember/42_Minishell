@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 19:21:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:56:46 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,25 @@ typedef enum e_type
 	T_DLESS,
 	T_DGREAT
 }	t_type;
+
+// define exit code type as enum
+typedef enum e_excode
+{
+	EX_SUCCESS = 0,
+	EX_FAILURE = 1,
+	EX_BT_FAIL = 2,
+	EX_CNOT_EXEC = 126,
+	EX_CNOT_FIND = 127,
+	EX_BY_SIGNAL = 128
+}	t_excode;
+// 0		성공
+// 1		일반적인 에러
+// 2		builtin shell command 에러
+// 126		command가 존재하지만 실행 불가
+// 127		command 존재 x
+// 128		not used on shell
+// 128+N	signal N 으로 종료된 경우
+// 255		범위 밖인 경우
 
 // define token as node
 typedef struct s_token
