@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:54:52 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 20:14:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 09:57:39 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	quote_branch(t_state *state, t_data *data, t_list *buf_list, int *idx)
 
 	if (next_input == '\0')
 	{
-		data->syntax_err_flag = SINGLE_QUOTE;
+		data->syntax_err_flag = E_SINGLE_QUOTE;
 		*state = CLEAR;
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/04 12:56:46 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/04 13:01:01 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ typedef struct s_envp
 //define syntax error type
 typedef enum e_error
 {
-	NONE,
-	SINGLE_QUOTE,
-	SINGLE_DQUOTE
+	E_NONE,
+	E_SINGLE_QUOTE,
+	E_SINGLE_DQUOTE,
+	E_NEAR_PIPE,
+	E_NEAR_GREAT,
+	E_NEAR_DGREAT,
+	E_NEAR_LESS,
+	E_NEAR_DLESS,
+	E_NEAR_NEWLINE
 }	t_error;
 
 // define token type as enum
