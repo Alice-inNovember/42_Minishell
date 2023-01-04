@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 19:21:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/04 10:23:10 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ typedef enum e_error
 {
 	NONE,
 	SINGLE_QUOTE,
-	SINGLE_DQUOTE
+	SINGLE_DQUOTE,
+	NEAR_PIPE,
+	NEAR_REDIR,
+	NEAR_NEWLINE
 }	t_error;
 
 // define token type as enum
