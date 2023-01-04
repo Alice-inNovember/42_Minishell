@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/04 10:53:28 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/04 13:32:07 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void	print_syntax_err(t_data *data)
 		printf("minishell: syntax error near unexpected token '<'\n");
 	else if (flag == E_NEAR_GREAT)
 		printf("minishell: syntax error near unexpected token '>'\n");
+	else if (flag == E_NEAR_DGREAT)
+		printf("minishell: syntax error near unexpected token '>>'\n");
+	else if (flag == E_NEAR_DLESS)
+		printf("minishell: syntax error near unexpected token '<<'\n");
 	else if (flag == E_NEAR_NEWLINE)
 		printf("minishell: syntax error near unexpected token 'newline'\n");
 }
