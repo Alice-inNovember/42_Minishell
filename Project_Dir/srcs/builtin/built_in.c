@@ -57,6 +57,8 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 	(void)envp_list;
 	new_line_flag = 1;
 	i = 1;
+	if (check_word_cnt(cmd_vector) == 1)
+		return (1);
 	while (!ft_strcmp(cmd_vector[i], "-n"))
 	{
 		new_line_flag = 0;
@@ -121,13 +123,22 @@ int	bt_env(char **cmd_vector,t_list *envp_list)
 	if (check_word_cnt(cmd_vector) != 1)
 		return (1);
 	cur_node = list_peek_first_node(envp_list);
-	while (cur_node != list_peek_last_node(envp_list))
+	while (cur_node->next)
 	{
 		key = ((t_envp *)cur_node->content)->key;
 		value = ((t_envp *)cur_node->content)->value;
 		printf("%s=%s\n", key, value);
 		cur_node = cur_node->next;
 	}
+	
+	// char **arr;
+	
+	// arr = envp2arr(envp_list);
+	// while (*arr)
+	// {
+	// 	printf("new : %s\n", *arr);
+	// 	arr++;
+	// }
 	return (0);
 }
 
@@ -211,7 +222,7 @@ char	**make_key_arr(t_list *envp_list)
 	i = 0;
 	key_arr = malloc(sizeof(char *) * list_size(envp_list) + 1);
 	cur_node = list_peek_first_node(envp_list);
-	while (cur_node != list_peek_last_node(envp_list))
+	while (cur_node->next)
 	{
 		key_arr[i] = ((t_envp *)cur_node->content)->key;
 		cur_node = cur_node->next;
@@ -265,6 +276,23 @@ void	print_export(t_list *envp_list)
 	free (key_arr);
 }
 
+// commit할 떄 out
+
+// int	get_env_length(char *line)
+// {
+// 	int	length;
+
+// 	length = 0;
+// 	while (line[length] == '_' || ft_isalpha(line[length]))
+// 		length++;
+// 	if (length == 0)
+// 		return (0);
+// 	while (line[length] == '_' || \
+// 			ft_isalpha(line[length]) || ft_isdigit(line[length]))
+// 		length++;
+// 	return (length);
+// }
+
 int	is_proper_env(char *env_name)
 {
 	int	full_length;
@@ -309,17 +337,19 @@ int	bt_export(char **cmd_vector,t_list *envp_list)
 
 	error_flag = 0;
 	word_i = 1;
+	if (check_word_cnt(cmd_vector) == 1)
+		print_export(envp_list);
 	while (cmd_vector[word_i]) // mid error continue
 	{
 		word = cmd_vector[word_i];
+		word_i++;
 		if (check_word_sep_key_val(word, &key, &value, &error_flag))
 			continue ;
-		(envp_delete(envp_list, key), envp_add(envp_list, key, value));
+		printf("key : \"%s\" \n value \"%s\" \n",key, value);
+		// envp_delete(envp_list, key); 
+		envp_add(envp_list, key, value);
 		(free(key), free(value));
-		word_i++;
 	}
-	if (word_i == 1)
-		print_export(envp_list);
 	return (error_flag);
 }
 
@@ -351,8 +381,7 @@ int bt_unset(char **cmd_vector, t_list *envp_list)
 // 	char	**vec;
 // 	t_list	envp_list;
 	
-// 	(void) ac;
-// 	(void) av;
+// 	((void) ac, (void) av);
 // 	envp_init(&envp_list, envp);
 // 	while (1)
 // 	{
