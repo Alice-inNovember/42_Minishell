@@ -6,9 +6,11 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:25:02 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 16:38:49 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:05:05 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/parser.h"
 
 void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
@@ -21,7 +23,7 @@ void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	last = list_peek_last_node(token_list);
 	parse_cmd_prefix(data, proc_data, sub_token_list(first, last->prev->prev));
 	parse_io_redirect(data, proc_data, sub_token_list(last->prev, last));
-	list_clear_and_free(token_list, del_s_token);
+	clear_and_free_token_list(token_list);
 }
 
 void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
@@ -37,7 +39,7 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	{
 		parse_cmd_suffix(data, proc_data, sub_token_list(first, last->prev->prev));
 		parse_io_redirect(data, proc_data, sub_token_list(last->prev, last));
-		list_clear_and_free(token_list, del_s_token);
+		clear_and_free_token_list(token_list);
 		
 	}
 	else
@@ -46,6 +48,6 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		if (is_redir(((t_token *)last->content)->type))
 			data->syntax_err_flag = E_NEAR_NEWLINE;
 		parse_cmd_word(data, proc_data, sub_token_list(last, last));
-		list_clear_and_free_and_free(token_list, del_s_token);
+		clear_and_free_token_list(token_list);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 16:22:39 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:04:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_list	*sub_token_list(t_node *first, t_node *last)
 	return (new_list);
 }
 
-void	list_clear_and_free(t_list *list, void del(void *))
+void	clear_and_free_token_list(t_list *list)
 {
-	list_clear(list, del);
+	list_clear(list, del_s_token);
 	free(list);
 }
 

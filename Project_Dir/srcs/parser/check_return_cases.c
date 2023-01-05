@@ -6,11 +6,12 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:11:19 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 16:38:37 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:07:17 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
+#include "../../includes/parser.h"
 
 int	is_err_occured(t_data *data)
 {
@@ -32,7 +33,7 @@ int	is_return_case(t_data *data, t_list *token_list, t_error flag)
 	if (is_err_occured(data))
 	{
 		if (token_list != NULL)
-			list_clear(token_list, del_s_token);
+			clear_and_free_token_list(token_list);
 		return (1);
 	}
 	if (is_syntax_err(token_list, flag))

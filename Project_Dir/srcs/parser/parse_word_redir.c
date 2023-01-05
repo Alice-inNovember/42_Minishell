@@ -6,9 +6,12 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:34:51 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 16:35:39 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:05:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/parser.h"
+#include "../../includes/util.h"
 
 void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
@@ -25,7 +28,7 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	}
 	else
 		set_redir_err_flag(data, token);
-	list_clear_and_free(token_list, del_s_token);
+	clear_and_free_token_list(token_list);
 }
 
 void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
@@ -46,7 +49,7 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		set_redir_err_flag(data, fname_token);
 	else
 		fname = ft_strdup((char *)fname_token->value);
-	list_clear_and_free(token_list, del_s_token);
+	clear_and_free_token_list(token_list);
 }
 
 void	parse_io_redirect(t_data *data, t_proc_data *proc_data, t_list *token_list)
