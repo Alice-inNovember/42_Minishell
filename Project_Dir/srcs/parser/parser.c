@@ -102,24 +102,28 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	list_clear(token_list, del_s_token);
 }
 
+void	set_redir_type(t_redir *redir, t_type type)
+{
+	if (type == T_LESS)
+		redir->type = T_LESS;
+	else if (type == T_GREAT)
+		redir->type = T_GREAT;
+	else
+		redir->type = T_DGREAT;
+}
 
 void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
 	t_redir	*redir;
-	t_type	redir_type;
+	t_type	type;
 	char	*fname;
 
 	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	redir = ft_calloc(1, sizeof(t_redir));
 	list_append(&proc_data->redir_list, new_node((void *)redir));
-	redir_type = ((t_token *)list_peek_first_content(token_list))->type;
-	if (redir_type == T_LESS)
-		redir->type = T_LESS;
-	else if (redir_type == T_GREAT)
-		redir->type = T_GREAT;
-	else
-		redir->type = T_DGREAT;
+	type = ((t_token *)list_peek_first_content(token_list))->type;
+	set_redir_type(redir, type);
 	fname = ft_strdup((char *)(((t_token *)list_peek_last_content(token_list))->value));
 	list_clear(token_list, del_s_token);
 }
