@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 15:16:31 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:01:59 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_data(t_data *data, char **envp)
 
 void	clear_data(t_data *data)
 {
-	//list_clear(&data->token_list, del_s_token);
+	list_clear(&data->token_list, del_s_token);
 	list_clear(&data->proc_data_list, del_s_proc_data);
 	list_clear(&data->pid_list, NULL);
 	//list_clear(&data->builtin_list, NULL);
