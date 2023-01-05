@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:13:49 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 13:31:57 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:24:32 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	branch(t_state *state, t_data *data, t_list *buf_list, int *idx)
 	const char	input = data->line[*idx];
 
 	if (input == ' ')
-		(*idx)++;
+		*state = SKIP_SPACE;
 	else if (input == '\0')
 		*state = CLEAR;
 	else if (input == '$' && \
