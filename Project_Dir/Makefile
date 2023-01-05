@@ -26,8 +26,6 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
 				$(LEXERDIR)/make_token_list.c \
-				$(LEXERDIR)/make_token_list_utils.c \
-				$(LEXERDIR)/print_token_list.c \
 				$(LEXERDIR)/state/branch.c \
 				$(LEXERDIR)/state/clear.c \
 				$(LEXERDIR)/state/dquote_branch.c \
@@ -46,7 +44,9 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/state/quote_close.c \
 				$(LEXERDIR)/state/quote_making_word.c \
 				$(LEXERDIR)/expand/expand_logic.c \
-				$(LEXERDIR)/expand/expand_utils.c \
+				$(LEXERDIR)/utils/make_buf.c \
+				$(LEXERDIR)/utils/make_token.c \
+				$(LEXERDIR)/utils/print_token_list.c \
 				$(PARSEDIR)/parser.c \
 				$(PARSEDIR)/parser_utils.c \
 				$(EXECDIR)/executor.c \
