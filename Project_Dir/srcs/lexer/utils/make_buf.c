@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   make_buf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:52:39 by minseok2          #+#    #+#             */
-/*   Updated: 2022/12/29 15:27:31 by jincpark         ###   ########.fr       */
+/*   Created: 2023/01/05 10:42:39 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/05 10:42:43 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../../includes/lexer.h"
 
-void	ft_free(void **ptr)
+void	del_buffer(void *content)
 {
-	if (ptr != NULL && *ptr != NULL)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
+	free(content);
+}
+
+char	*make_buf(char input)
+{
+	char	*buf;
+
+	buf = (char *)ft_calloc(1, sizeof(char));
+	*buf = input;
+	return (buf);
 }

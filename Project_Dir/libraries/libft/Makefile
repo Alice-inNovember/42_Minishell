@@ -6,7 +6,7 @@
 #    By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 11:00:34 by minseok2          #+#    #+#              #
-#    Updated: 2022/12/27 17:48:47 by junlee2          ###   ########seoul.kr   #
+#    Updated: 2023/01/05 09:31:55 by minseok2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,7 @@ SRCS = ft_isalpha.c \
 		ft_itoa.c \
 		ft_malloc.c \
 		ft_calloc.c \
-		ft_exit.c \
-		ft_free.c
+		ft_exit.c
 
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)

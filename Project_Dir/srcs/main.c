@@ -6,14 +6,21 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 13:34:48 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:47:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	init_data(t_data *data)
+void	init_data(t_data *data, char **envp)
 {
+	static int	first_call_flag = ON;
+
+	if (first_call_flag == ON)
+	{
+		envp_init(&data->envp_list, envp);
+		first_call_flag = OFF;
+	}
 	list_init(&data->token_list);
 	list_init(&data->proc_data_list);
 	list_init(&data->builtin_list);
@@ -33,19 +40,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	envp_init(&data.envp_list, envp);
 	while (1)
 	{
-		init_data(&data);
+		init_data(&data, envp);
 		data.line = readline("minishell>");
 		make_token_list(&data);
 		print_token_list(&data);
-		parse_expression(&data, &data.token_list);
-		//if (data.syntax_err_flag == 1)
-		//	continue ;
-		executor(&data);
+		//parse_expression(&data, &data.token_list);
+		//executor(&data);
+		//print_syntax_err(&data);
 		clear_data(&data);
-		print_syntax_err(&data);
 	}
 	return (0);
 }
