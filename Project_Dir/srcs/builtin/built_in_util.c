@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 14:52:37 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 22:49:18 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ t_builtin_fp	builtin_find(t_list *builtin_list, char *key)
 	if (node->content)
 		return (((t_builtin *)node->content)->function);
 	return (NULL);
+}
+
+int	check_word_cnt(char **cmd_vector)
+{
+	int	i;
+
+	i = 0;
+	while (cmd_vector[i])
+		i++;
+	return (i);
 }

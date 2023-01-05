@@ -1,0 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bt_exit.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 17:35:08 by tyi               #+#    #+#             */
+/*   Updated: 2023/01/05 22:53:42 by tyi              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/builtin.h"
+
+void	ft_error_manage(int	*flag)
+{
+	*flag = 1;
+}
+
+int	bt_atoi(const char *str, int *flag)
+{
+	unsigned long	res;
+	int				sign;
+	int				i;
+
+	(sign = 1, res = 0, i = 0);
+	while ((str[i] > 8 && str[i] < 14) || str[i] == 32)
+		i ++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i++] == '-')
+			sign *= -1;
+	}
+	if (!(str[i] >= '0' && str[i] <= '9'))
+		ft_error_manage(flag);
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = 10 * (res) + str[i++] - '0';
+		if ((res > 2147483647 && sign == 1) || (res > 2147483648 && sign == -1))
+			ft_error_manage(flag);
+	}
+	while ((str[i] > 8 && str[i] < 14) || str[i] == 32)
+		i ++;
+	if (str[i])
+		ft_error_manage(flag);
+	return (sign * res);
+}
+
+int	bt_exit(char **cmd_vector, t_list *envp_list)
+{	
+	int	num;
+	int	flag;
+
+	printf("exit\n");
+	(void)envp_list;
+	flag = 0;
+	if (check_word_cnt(cmd_vector) == 1)
+		num = 0;
+	else if (check_word_cnt(cmd_vector) == 2)
+	{
+		num = bt_atoi(cmd_vector[1], &flag);
+		if (flag)
+		{
+			perror("bash: exit: numeric argumnet required");
+			exit (255);
+		}
+	}
+	else
+	{
+		perror("exit : too many arguments");
+		return (EX_BT_FAIL);
+	}
+	exit ((unsigned char)num);
+}
