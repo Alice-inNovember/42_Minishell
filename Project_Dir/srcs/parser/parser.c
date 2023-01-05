@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 13:08:50 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:16:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	if (token->type == T_WORD)
 	{
 		cmd_word = ft_strdup((char *)token->value);
-		list_append(&proc_data->cmd_list, new_node((void *)cmd_word)); 
+		list_append(&proc_data->cmd_list, new_node((void *)cmd_word));
 	}
 	else
 		set_redir_err_flag(data, token);
@@ -130,9 +130,12 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 
 void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
-	(void)data;
-	(void)proc_data;
-	(void)token_list;
+	t_redir	*redir;
+
+	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
+	redir->type = T_DLESS;
+	redir->fname = make_temp_file(data);
+	list_append(&proc_data->redir_list, new_node(redir));
 }
 
 void	parse_io_redirect(t_data *data, t_proc_data *proc_data, t_list *token_list)
@@ -142,7 +145,6 @@ void	parse_io_redirect(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	else
 		parse_io_file(data, proc_data, token_list);
 }
-
 
 void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {

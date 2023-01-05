@@ -50,6 +50,9 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/utils/print_token_list.c \
 				$(PARSEDIR)/parser.c \
 				$(PARSEDIR)/parser_utils.c \
+				$(PARSEDIR)/heredoc/make_temp_file.c \
+				$(PARSEDIR)/heredoc/make_file_using_mktemp.c \
+				$(PARSEDIR)/heredoc/make_random_name_file.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
 				$(EXECDIR)/executor_util.c \
