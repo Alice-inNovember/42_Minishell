@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:34:51 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 17:05:01 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:37:20 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	t_redir	*redir;
 	t_type	type;
 	t_token	*fname_token;
-	char	*fname;
 
 	if (is_return_case(data, token_list, E_NONE))
 		return ;
@@ -45,16 +44,20 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	type = ((t_token *)list_peek_first_content(token_list))->type;
 	set_redir_type(redir, type);
 	fname_token = (t_token *)list_peek_last_content(token_list);
-	if (is_redir(fname_token->type))
-		set_redir_err_flag(data, fname_token);
-	else
-		fname = ft_strdup((char *)fname_token->value);
+	redir->fname = ft_strdup((char *)fname_token->value);
 	clear_and_free_token_list(token_list);
 }
 
 void	parse_io_redirect(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
-	if (((t_token *)list_peek_first_content(token_list))->type == T_DLESS)
+	t_token	*first_token;
+	t_token	*second_token;
+	
+	first_token = (t_token *)list_peek_first_content(token_list);
+	second_token = (t_token *)list_peek_last_content(token_list);
+	if (is_redir(second_token->type))
+		set_redir_err_flag(data, second_token);
+	if (first_token->type == T_DLESS)
 		parse_io_here(data, proc_data, token_list);
 	else
 		parse_io_file(data, proc_data, token_list);
