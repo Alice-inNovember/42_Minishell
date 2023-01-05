@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 21:59:44 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 10:45:02 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:26:53 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static void	print_token_type(t_type type)
 
 static void	print_token_value(char *value)
 {
-	if (value != NULL)
-		printf("value = %s\n", value);
-	else
-		printf("value is unset\n");
+	printf("value = %s\n\n", value);
 }
 
 void	print_token_list(t_data *data)

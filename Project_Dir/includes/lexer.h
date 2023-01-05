@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:37:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 10:50:44 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:25:35 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef enum e_state
 {
 	INIT,
 	BRANCH,
+	SKIP_SPACE,
 	MAKING_WORD,
 	MAKING_PIPE,
 	MAKING_LESS,
@@ -39,7 +40,7 @@ typedef enum e_state
 }	t_state;
 
 // define total state
-# define TOTAL_STATE	18
+# define TOTAL_STATE	19
 
 // define state function pointer
 typedef void	(*t_state_fp)(t_state *state, \
@@ -56,6 +57,7 @@ void	print_token_list(t_data *data);
 // state
 void	init(t_state *state, t_data *data, t_list *buf_list, int *idx);
 void	branch(t_state *state, t_data *data, t_list *buf_list, int *idx);
+void	skip_space(t_state *state, t_data *data, t_list *buf_list, int *idx);
 void	making_word(t_state *state, t_data *data, t_list *buf_list, int *idx);
 void	making_pipe(t_state *state, t_data *data, t_list *buf_list, int *idx);
 void	making_less(t_state *state, t_data *data, t_list *buf_list, int *idx);
