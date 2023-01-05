@@ -52,6 +52,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(PARSEDIR)/parser.c \
 				$(PARSEDIR)/parse_suffix_prefix.c \
 				$(PARSEDIR)/parse_word_redir.c \
+				$(PARSEDIR)/parse_heredoc.c \
 				$(PARSEDIR)/check_return_cases.c \
 				$(PARSEDIR)/redir_check_set_err.c \
 				$(PARSEDIR)/parser_utils.c \
