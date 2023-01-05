@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/04 13:01:01 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 10:44:10 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include "../libraries/dllist/includes/dllist.h"
 
-typedef struct s_envp
-{
-	char		*key;
-	char		*value;
-}	t_envp;
+// define on, off
+# define OFF	0
+# define ON		1
+
+// define unused type
+typedef void	t_unused;
 
 //define syntax error type
 typedef enum e_error
@@ -35,18 +36,7 @@ typedef enum e_error
 	E_NEAR_NEWLINE
 }	t_error;
 
-// define token type as enum
-typedef enum e_type
-{
-	T_WORD,
-	T_PIPE,
-	T_LESS,
-	T_GREAT,
-	T_DLESS,
-	T_DGREAT
-}	t_type;
-
-// define exit code type as enum
+// define exit code type
 typedef enum e_excode
 {
 	EX_SUCCESS = 0,
@@ -65,7 +55,25 @@ typedef enum e_excode
 // 128+N	signal N 으로 종료된 경우
 // 255		범위 밖인 경우
 
-// define token as node
+// define envp node
+typedef struct s_envp
+{
+	char		*key;
+	char		*value;
+}	t_envp;
+
+// define token type
+typedef enum e_type
+{
+	T_WORD,
+	T_PIPE,
+	T_LESS,
+	T_GREAT,
+	T_DLESS,
+	T_DGREAT
+}	t_type;
+
+// define token node
 typedef struct s_token
 {
 	t_type			type;
