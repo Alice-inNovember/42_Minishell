@@ -1,0 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_heredoc.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/05 17:35:34 by jincpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/data.h"
+#include "../../includes/parser.h"
+
+void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
+{
+	if (is_return_case(data, token_list, E_NONE))
+		return ;
+}
