@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 10:16:38 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 13:08:50 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,9 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 
 void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
-
+	(void)data;
+	(void)proc_data;
+	(void)token_list;
 }
 
 void	parse_io_redirect(t_data *data, t_proc_data *proc_data, t_list *token_list)
@@ -151,8 +153,8 @@ void	parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		return ;
 	first = list_peek_first_node(token_list);
 	last = list_peek_last_node(token_list);
-	parse_cmd_prefix(data, proc_data, sub_token_list(data, first, last->prev->prev));
-	parse_io_redirect(data, proc_data, sub_token_list(data, last->prev, last));
+	parse_cmd_prefix(data, proc_data, sub_token_list(first, last->prev->prev));
+	parse_io_redirect(data, proc_data, sub_token_list(last->prev, last));
 	list_clear(token_list, del_s_token);
 }
 
@@ -167,16 +169,16 @@ void	parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	last = list_peek_last_node(token_list);
 	if (is_redir_correct(data, last->prev))
 	{
-		parse_cmd_suffix(data, proc_data, sub_token_list(data, first, last->prev->prev));
-		parse_io_redirect(data, proc_data, sub_token_list(data, last->prev, last));
+		parse_cmd_suffix(data, proc_data, sub_token_list(first, last->prev->prev));
+		parse_io_redirect(data, proc_data, sub_token_list(last->prev, last));
 		list_clear(token_list, del_s_token);
 	}
 	else
 	{
-		parse_cmd_suffix(data, proc_data, sub_token_list(data, first, last->prev));
+		parse_cmd_suffix(data, proc_data, sub_token_list(first, last->prev));
 		if (is_redir(((t_token *)last->content)->type))
 			data->syntax_err_flag = E_NEAR_NEWLINE;
-		parse_cmd_word(data, proc_data, sub_token_list(data, last, last));
+		parse_cmd_word(data, proc_data, sub_token_list(last, last));
 		list_clear(token_list, del_s_token);
 	}
 }
@@ -217,9 +219,9 @@ void	parse_simple_cmd(t_data *data, t_list *token_list)
 	if (cmd_node == NULL)
 		return ;
 	last = list_peek_last_node(token_list);
-	parse_cmd_prefix(data, proc_data, sub_token_list(data, first, cmd_node->prev));
-	parse_cmd_word(data, proc_data, sub_token_list(data, cmd_node, cmd_node));
-	parse_cmd_suffix(data, proc_data, sub_token_list(data, cmd_node->next, last));
+	parse_cmd_prefix(data, proc_data, sub_token_list(first, cmd_node->prev));
+	parse_cmd_word(data, proc_data, sub_token_list(cmd_node, cmd_node));
+	parse_cmd_suffix(data, proc_data, sub_token_list(cmd_node->next, last));
 	list_clear(token_list, del_s_token);
 }
 
@@ -238,13 +240,13 @@ void	parse_expression(t_data *data, t_list *token_list)
 	{
 		if (((t_token *)curr->content)->type == T_PIPE)
 		{
-			parse_expression(data, sub_token_list(data, first, curr->prev));
-			parse_simple_cmd(data, sub_token_list(data, curr->next, last));
+			parse_expression(data, sub_token_list(first, curr->prev));
+			parse_simple_cmd(data, sub_token_list(curr->next, last));
 			list_clear(token_list, del_s_token);
 			return ;
 		}
 		curr = curr->prev;
 	}
-	parse_simple_cmd(data, sub_token_list(data, first, last));
+	parse_simple_cmd(data, sub_token_list(first, last));
 	list_clear(token_list, del_s_token);
 }

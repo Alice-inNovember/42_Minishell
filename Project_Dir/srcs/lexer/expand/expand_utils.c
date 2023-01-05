@@ -6,11 +6,13 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:39:27 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 16:08:44 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 13:14:02 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../libraries/libft/includes/libft.h"
+#include "../../../libraries/dllist/includes/dllist.h"
+#include "../../../includes/data.h"
 
 int	get_env_length(char *line)
 {
