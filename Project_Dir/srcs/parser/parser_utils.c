@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 13:36:07 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 13:07:47 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_head_or_tail(t_node *first, t_node *last)
 	return (first->next == NULL || last->prev == NULL);
 }
 
-t_list	*sub_token_list(t_data *data, t_node *first, t_node *last)
+t_list	*sub_token_list(t_node *first, t_node *last)
 {
 	t_list	*new_list;
 	t_node	*curr;
