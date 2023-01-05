@@ -6,15 +6,15 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:01:31 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 09:16:32 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:32:33 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer.h"
 
-void	del_buffer(void **content)
+void	del_buffer(void *content)
 {
-	ft_free(content);
+	free(content);
 }
 
 char	*make_buf(char input)

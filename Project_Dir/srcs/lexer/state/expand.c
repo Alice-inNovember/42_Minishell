@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:50:27 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 11:24:07 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:23:56 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	expand(t_state *state, t_data *data, t_list *buf_list, int *idx)
 	char	*expanded_line;
 
 	expanded_line = make_expanded_line(data, *idx);
-	ft_free((void **)&data->line);
+	free(data->line);
 	data->line = expanded_line;
 	if (data->line[*idx] == '\0')
 		make_token(&data->token_list, buf_list, T_WORD);
