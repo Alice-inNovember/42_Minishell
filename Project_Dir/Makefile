@@ -50,6 +50,10 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/utils/make_token.c \
 				$(LEXERDIR)/utils/print_token_list.c \
 				$(PARSEDIR)/parser.c \
+				$(PARSEDIR)/parse_suffix_prefix.c \
+				$(PARSEDIR)/parse_word_redir.c \
+				$(PARSEDIR)/check_return_cases.c \
+				$(PARSEDIR)/redir_check_set_err.c \
 				$(PARSEDIR)/parser_utils.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
