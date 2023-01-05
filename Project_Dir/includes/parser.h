@@ -6,15 +6,33 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:23:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 13:29:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:03:28 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-void	parse_expression(t_data *data, t_list *token_list);
-void	syntax_err(t_data *data);
-t_list	*sub_token_list(t_node *first, t_node *last);
+# include "data.h"
+
+void		parser(t_data *data);
+void		parse_cmd_prefix(t_data *data, t_proc_data *proc_data, t_list *token_list);
+void		parse_cmd_suffix(t_data *data, t_proc_data *proc_data, t_list *token_list);
+void		parse_io_redirect(t_data *data, t_proc_data *proc_data, t_list *token_list);
+void		parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list);
+void		parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list);
+
+int			is_return_case(t_data *data, t_list *token_list, t_error flag);
+int			is_redir(t_type type);
+int			is_redir_form(t_data *data, t_node *node);
+
+void		set_redir_err_flag(t_data *data, t_token *token);
+void		set_redir_type(t_redir *redir, t_type type);
+
+t_list		*sub_token_list(t_node *first, t_node *last);
+t_proc_data	*new_proc_data(void);
+t_node		*get_cmd_node(t_data *data, t_list *token_list);
+t_token		*get_token(t_node *node);
+void		clear_and_free_token_list(t_list *list);
 
 #endif

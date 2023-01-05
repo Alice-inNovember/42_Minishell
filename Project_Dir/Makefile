@@ -1,11 +1,12 @@
 #NAME
 NAME		=	minishell
 #CMDS
-CC			=	cc -g3 -fsanitize=address
+CC			=	cc
 RM			=	rm -rf
 LIBC		=	ar rcs
 #FLAGS
 CFLAGS		=
+DFLAGS		=	-g3 -fsanitize=address
 #DIRS
 LFTDIR		=	libraries/libft
 DLLDIR		=	libraries/dllist
@@ -49,6 +50,10 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/utils/make_token.c \
 				$(LEXERDIR)/utils/print_token_list.c \
 				$(PARSEDIR)/parser.c \
+				$(PARSEDIR)/parse_suffix_prefix.c \
+				$(PARSEDIR)/parse_word_redir.c \
+				$(PARSEDIR)/check_return_cases.c \
+				$(PARSEDIR)/redir_check_set_err.c \
 				$(PARSEDIR)/parser_utils.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
@@ -59,6 +64,9 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
 
+ifdef IF_DEBUG
+	CFLAGS += $(DFLAGS)
+endif
 
 all : $(NAME)
 
@@ -86,5 +94,8 @@ fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
+
+debug	:
+	$(MAKE) IF_DEBUG=1 all
 
 .PHONY : all clean fclean re
