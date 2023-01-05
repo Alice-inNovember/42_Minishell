@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:37:32 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 10:05:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:17:08 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef void	(*t_state_fp)(t_state *state, \
 void	make_token_list(t_data *data);
 
 // make_token_list_utils
-void	del_buffer(void **content);
+void	del_buffer(void *content);
 char	*make_buf(char input);
 void	make_token(t_list *token_list, t_list *buf_list, t_type type);
 
