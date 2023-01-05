@@ -5,7 +5,7 @@ CC			=	cc -g3 -fsanitize=address
 RM			=	rm -rf
 LIBC		=	ar rcs
 #FLAGS
-CFLAGS		=	
+CFLAGS		=
 #DIRS
 LFTDIR		=	libraries/libft
 DLLDIR		=	libraries/dllist
@@ -44,6 +44,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/state/quote_close.c \
 				$(LEXERDIR)/state/quote_making_word.c \
 				$(LEXERDIR)/expand/expand_logic.c \
+				$(LEXERDIR)/expand/expand_utils.c \
 				$(LEXERDIR)/utils/make_buf.c \
 				$(LEXERDIR)/utils/make_token.c \
 				$(LEXERDIR)/utils/print_token_list.c \
