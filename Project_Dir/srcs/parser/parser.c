@@ -6,19 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 17:05:20 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:20:49 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/lexer.h"
-
-void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
-{
-	(void)data;
-	(void)proc_data;
-	(void)token_list;
-}
 
 void	parse_simple_cmd(t_data *data, t_list *token_list)
 {
