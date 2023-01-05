@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 12:19:37 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 10:33:36 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	make_child(t_data *data)
 
 void	executor(t_data *data)
 {
-	if (data->syntax_err_flag != 0)
+	if (data->syntax_err_flag != E_NONE)
 		return ;
 	if (check_and_exec_single_builtin(data, &data->envp_list))
 		return ;

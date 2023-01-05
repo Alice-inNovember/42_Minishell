@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:38:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/03 13:35:37 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 09:00:20 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	*list_peek_first_content(t_list *list);
 void	*list_peek_last_content(t_list *list);
 
 // list_delete.c
-void	list_delete(t_node **node, void (*del)(void **));
-void	list_delete_first(t_list *list, void (*del)(void **));
-void	list_delete_last(t_list *list, void (*del)(void **));
-void	list_clear(t_list *list, void (*del)(void **));
+void	list_delete(t_node *node, void (*del)(void *));
+void	list_delete_first(t_list *list, void (*del)(void *));
+void	list_delete_last(t_list *list, void (*del)(void *));
+void	list_clear(t_list *list, void (*del)(void *));
 
 #endif
