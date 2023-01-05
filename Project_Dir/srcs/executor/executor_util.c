@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 12:18:34 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 16:49:59 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**get_path(t_data *data)
 	return (returnpath);
 }
 
+
+// comment by minseok2 혹시 경로를 못찾으면 NULL을 반환 시키는 게 좋을지 + **path 문자열 free
 char	*get_cmd_path(t_data *data, char **cmd_argv)
 {
 	char	**path;
@@ -80,4 +82,12 @@ void	cmd_argv_free(char **cmd_argv)
 		i++;
 	}
 	free(cmd_argv);
+}
+
+int	wexitstatus(int status)
+{
+	int	exit_status;
+
+	exit_status = ((unsigned)status >> 8) & 0xff;
+	return (exit_status);
 }
