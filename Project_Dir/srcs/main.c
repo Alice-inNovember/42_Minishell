@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 10:47:35 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:16:31 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	main(int argc, char **argv, char **envp)
 		data.line = readline("minishell>");
 		make_token_list(&data);
 		print_token_list(&data);
-		//parse_expression(&data, &data.token_list);
+		parser(&data);
 		//executor(&data);
-		//print_syntax_err(&data);
+		print_syntax_err(&data);
 		clear_data(&data);
 	}
 	return (0);
