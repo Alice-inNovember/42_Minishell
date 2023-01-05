@@ -6,13 +6,13 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 21:59:44 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 10:04:56 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:45:02 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	print_token_type(t_type type)
+static void	print_token_type(t_type type)
 {
 	if (type == T_WORD)
 		printf("type = WORD\n");
@@ -28,7 +28,7 @@ void	print_token_type(t_type type)
 		printf("type = DGREAT\n");
 }
 
-void	print_token_value(char *value)
+static void	print_token_value(char *value)
 {
 	if (value != NULL)
 		printf("value = %s\n", value);

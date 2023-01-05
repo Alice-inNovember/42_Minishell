@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_token_list_utils.c                            :+:      :+:    :+:   */
+/*   make_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:01:31 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 09:32:33 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:42:51 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "../../../includes/lexer.h"
 
-void	del_buffer(void *content)
-{
-	free(content);
-}
-
-char	*make_buf(char input)
-{
-	char	*buf;
-
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
-}
-
-char	*make_value(t_list *buf_list)
+static char	*make_value(t_list *buf_list)
 {
 	t_node	*cur_node;
 	char	*value;
