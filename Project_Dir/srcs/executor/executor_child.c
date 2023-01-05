@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/03 15:44:36 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 16:05:22 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ void	execute_child(t_data *data, t_proc_data *proc, int *pip, int read_end)
 	if (builtin_fp)
 		execute_builtin(builtin_fp, cmd_argv, &data->envp_list);
 	else
-		execute_execve(data, cmd_argv, cmd_argv);
+		execute_execve(data, cmd_argv, cmd_envp);
 }

@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:16:47 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/04 09:44:07 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:18:19 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	dquote_expand(t_state *state, t_data *data, t_list *buf_list, int *idx)
 	char	*expanded_line;
 
 	expanded_line = make_expanded_line(data, *idx + 1);
-	ft_free((void **)&data->line);
+	free(data->line);
 	data->line = expanded_line;
 	*state = DQUOTE_BRANCH;
 	(t_unused)buf_list;

@@ -1,11 +1,12 @@
 #NAME
 NAME		=	minishell
 #CMDS
-CC			=	cc -g3 -fsanitize=address
+CC			=	cc
 RM			=	rm -rf
 LIBC		=	ar rcs
 #FLAGS
-CFLAGS		=	
+CFLAGS		=
+DFLAGS		=	-g3 -fsanitize=address
 #DIRS
 LFTDIR		=	libraries/libft
 DLLDIR		=	libraries/dllist
@@ -26,10 +27,8 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
 				$(LEXERDIR)/make_token_list.c \
-				$(LEXERDIR)/make_token_list_utils.c \
-				$(LEXERDIR)/print_token_list.c \
 				$(LEXERDIR)/state/branch.c \
-				$(LEXERDIR)/state/clear.c \
+				$(LEXERDIR)/state/skip_space.c \
 				$(LEXERDIR)/state/dquote_branch.c \
 				$(LEXERDIR)/state/dquote_close.c \
 				$(LEXERDIR)/state/dquote_expand.c \
@@ -45,10 +44,22 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/state/quote_branch.c \
 				$(LEXERDIR)/state/quote_close.c \
 				$(LEXERDIR)/state/quote_making_word.c \
+				$(LEXERDIR)/state/clear.c \
 				$(LEXERDIR)/expand/expand_logic.c \
 				$(LEXERDIR)/expand/expand_utils.c \
+				$(LEXERDIR)/utils/make_buf.c \
+				$(LEXERDIR)/utils/make_token.c \
+				$(LEXERDIR)/utils/print_token_list.c \
 				$(PARSEDIR)/parser.c \
+				$(PARSEDIR)/parse_suffix_prefix.c \
+				$(PARSEDIR)/parse_word_redir.c \
+				$(PARSEDIR)/parse_heredoc.c \
+				$(PARSEDIR)/check_return_cases.c \
+				$(PARSEDIR)/redir_check_set_err.c \
 				$(PARSEDIR)/parser_utils.c \
+				$(PARSEDIR)/heredoc/make_temp_file.c \
+				$(PARSEDIR)/heredoc/make_file_using_mktemp.c \
+				$(PARSEDIR)/heredoc/make_random_name_file.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
 				$(EXECDIR)/executor_util.c \
@@ -58,6 +69,9 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
 
+ifdef IF_DEBUG
+	CFLAGS += $(DFLAGS)
+endif
 
 all : $(NAME)
 
@@ -85,5 +99,8 @@ fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
+
+debug	:
+	$(MAKE) IF_DEBUG=1 all
 
 .PHONY : all clean fclean re

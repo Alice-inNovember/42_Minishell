@@ -71,7 +71,7 @@ void	make_child(t_data *data)
 
 void	executor(t_data *data)
 {
-	if (data->syntax_err_flag != 0)
+	if (data->syntax_err_flag != E_NONE)
 		return ;
 	if (check_and_exec_single_builtin(data, &data->envp_list))
 		return ;

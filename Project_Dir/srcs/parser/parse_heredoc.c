@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   parse_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 18:44:41 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 09:26:09 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/05 19:25:30 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_H
-# define UTIL_H
+#include "../../includes/data.h"
+#include "../../includes/parser.h"
 
-void	del_s_token(void *content);
-void	del_s_cmd(void *content);
-void	del_s_redir(void *content);
-void	del_s_proc_data(void *content);
+void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
+{
+	t_redir	*redir;
 
-void	print_syntax_err(t_data *data);
-
-#endif
+	if (is_return_case(data, token_list, E_NONE))
+		return ;
+	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
+	redir->type = T_DLESS;
+	redir->fname = make_temp_file(data);
+	list_append(&proc_data->redir_list, new_node(redir));
+}

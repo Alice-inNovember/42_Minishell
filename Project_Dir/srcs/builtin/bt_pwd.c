@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   bt_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 18:44:41 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 09:26:09 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/05 17:35:50 by tyi               #+#    #+#             */
+/*   Updated: 2023/01/05 19:25:09 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_H
-# define UTIL_H
+#include "../../includes/builtin.h"
 
-void	del_s_token(void *content);
-void	del_s_cmd(void *content);
-void	del_s_redir(void *content);
-void	del_s_proc_data(void *content);
+int	bt_pwd(char **cmd_vector, t_list *envp_list)
+{
+	char	*pwd;
 
-void	print_syntax_err(t_data *data);
-
-#endif
+	((void) cmd_vector, (void) envp_list);
+	pwd = getcwd(0, 0);
+	printf("%s\n", pwd);
+	return (EX_SUCCESS);
+}

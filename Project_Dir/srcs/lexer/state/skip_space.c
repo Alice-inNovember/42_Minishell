@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   skip_space.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 19:50:27 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 09:23:56 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/05 20:23:10 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/05 20:24:20 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/lexer.h"
 
-void	expand(t_state *state, t_data *data, t_list *buf_list, int *idx)
+void	skip_space(t_state *state, t_data *data, t_list *buf_list, int *idx)
 {
-	char	*expanded_line;
-
-	expanded_line = make_expanded_line(data, *idx);
-	free(data->line);
-	data->line = expanded_line;
-	if (data->line[*idx] == '\0')
-		make_token(&data->token_list, buf_list, T_WORD);
+	(*idx)++;
 	*state = BRANCH;
+	(t_unused)data;
 	(t_unused)buf_list;
 }

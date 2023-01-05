@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 14:38:42 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/05 20:30:30 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	envp_add(t_list *envp_list, char *key, char *value)
 		return (envp_edit(envp_list, key, value));
 	e_node = (t_envp *)ft_calloc(1, sizeof(t_envp));
 	e_node->key = ft_strdup(key);
-	e_node->value = ft_strdup(value);
+	if (!value)
+		e_node->value = ft_strdup(value);
+	else
+		e_node->value = 0;
 	list_append(envp_list, new_node(e_node));
 }
 
@@ -65,8 +68,8 @@ void	envp_init(t_list *envp_list, char **envp)
 		key = ft_substr(envp[i], 0, keyend);
 		value = ft_strdup(ft_strchr(envp[i], '=') + 1);
 		envp_add(envp_list, key, value);
-		ft_free((void **)&key);
-		ft_free((void **)&value);
+		free(key);
+		free(value);
 		i++;
 	}
 }
@@ -80,9 +83,9 @@ void	envp_delete(t_list *envp_list, char *key)
 		node = node->next;
 	if (!node->content)
 		return ;
-	ft_free((void **)&((t_envp *)node->content)->value);
-	ft_free(node->content);
+	free(((t_envp *)node->content)->value);  //혹시 key 값도 지우는게 맞는지 + list_delete - minseok2 
+	free(node->content);
 	node->prev->next = node->next;
 	node->next->prev = node->prev;
-	ft_free((void **)&node);
+	free(node);
 }
