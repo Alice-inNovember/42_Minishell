@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/07 08:33:26 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/07 08:36:29 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 
 	proc_data = list_peek_first_content(&data->proc_data_list);
 	cmd_argv = cmd_list2arr(&proc_data->cmd_list);
-	if (cmd_argv[0] != '\0')
+	if (cmd_argv[0] != NULL)
 		bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
 	if (list_size(&data->proc_data_list) == 1)
 	{
