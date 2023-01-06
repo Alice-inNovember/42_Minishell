@@ -23,9 +23,9 @@ static void	execve_cmd(t_data *data, int pip[2], char *cmd_path, char **cmd_argv
 	execve(cmd_path, cmd_argv, envp);
 }
 
-static char	*read_fname_from_pipe(pid_t pid, int pip[2])
+static char	*read_filename_from_pipe(pid_t pid, int pip[2])
 {
-	char	*fname;
+	char	*filename;
 	int		last_index;
 	int		wstatus;
 
@@ -35,17 +35,17 @@ static char	*read_fname_from_pipe(pid_t pid, int pip[2])
 		ft_putendl_fd("mktemp failure", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	fname = get_next_line(pip[READ_END]);
-	last_index = ft_strlen(fname) - 1;
-	if (fname[last_index] == '\n')
-		fname[last_index] = '\0';
-	return (fname);
+	filename = get_next_line(pip[READ_END]);
+	last_index = ft_strlen(filename) - 1;
+	if (filename[last_index] == '\n')
+		filename[last_index] = '\0';
+	return (filename);
 }
 
 char	*make_file_using_mktemp(t_data *data, \
 										char *mktemp_path, char **mktemp_argv)
 {
-	char	*fname;
+	char	*filename;
 	int		pip[2];
 	int		ret;
 	pid_t	pid;
@@ -55,6 +55,6 @@ char	*make_file_using_mktemp(t_data *data, \
 	if (pid == 0)
 		execve_cmd(data, pip, mktemp_path, mktemp_argv);
 	close(pip[WRITE_END]);
-	fname = read_fname_from_pipe(pid, pip);
-	return (fname);
+	filename = read_filename_from_pipe(pid, pip);
+	return (filename);
 }

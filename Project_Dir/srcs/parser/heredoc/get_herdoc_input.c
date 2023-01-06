@@ -16,13 +16,13 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-void	get_herdoc_input(char *fname, char *limiter)
+void	get_herdoc_input(char *filename, char *limiter)
 {
 	int		fd;
 	pid_t	pid;
 	char	*input_line;
 
-	fd = open(fname, O_WRONLY);
+	fd = open(filename, O_WRONLY);
 	pid = fork();
 	if (pid == 0)
 	{

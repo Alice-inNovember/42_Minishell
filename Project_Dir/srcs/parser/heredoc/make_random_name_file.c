@@ -15,7 +15,7 @@
 char	*make_random_name(int urandom_fd)
 {
 	const char		*charset = "abcdefghijklmnopqrstuvwxyz0123456789";
-	char			*fname;
+	char			*filename;
 	unsigned int	buf[4];
 	char			concat_str[5];
 	int				i;
@@ -30,26 +30,26 @@ char	*make_random_name(int urandom_fd)
 			concat_str[i] = charset[buf[i] % 36];
 			i++;
 		}
-		fname = ft_strjoin("tmp.", concat_str);
-		if (access(fname, F_OK) != 0)
+		filename = ft_strjoin("tmp.", concat_str);
+		if (access(filename, F_OK) != 0)
 		{
 			close(urandom_fd);
-			return (fname);
+			return (filename);
 		}
-		free(fname);
+		free(filename);
 	}
 }
 
 char	*make_random_name_file(void)
 {
-	char	*fname;
+	char	*filename;
 	int		urandom_fd;
 	int		temp_file_fd;
 
 	urandom_fd = open("/dev/urandom", O_RDONLY);
-	fname = make_random_name(urandom_fd);
+	filename = make_random_name(urandom_fd);
 	close(urandom_fd);
-	temp_file_fd = open(fname, O_WRONLY | O_CREAT, 0644);
+	temp_file_fd = open(filename, O_WRONLY | O_CREAT, 0644);
 	close(temp_file_fd);
-	return (fname);
+	return (filename);
 }
