@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:29:23 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/07 08:14:43 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	execute_builtin(t_builtin_fp bt_fp, char **cmd_argv, t_list *envp_list)
 void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 {
 	char	*cmd_path;
+	char	*msg;
 
 	cmd_path = get_cmd_path(data, cmd_argv);
 	execve(cmd_path, cmd_argv, cmd_envp);
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd("command not found: ", STDERR_FILENO);
-	ft_putstr_fd(cmd_argv[0], STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	msg = str3join("minishell: command not found: ", cmd_argv[0], "\n");
+	ft_putstr_fd(msg, STDERR_FILENO);
+	free(msg);
 	exit(EXIT_FAILURE);
 }
 
