@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 09:18:06 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:30:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 // define on, off
 # define OFF	0
 # define ON		1
+
+// define pipe end
+# define READ_END	0
+# define WRITE_END	1
 
 // define unused type
 typedef void	t_unused;

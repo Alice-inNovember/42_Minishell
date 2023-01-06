@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 09:55:20 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:30:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define EXECUTOR_H
 
 # include "data.h"
-
-// define pipe end
-# define READ_END	0
-# define WRITE_END	1
 
 void	executor(t_data *data);
 void	execute_child(t_data *data, t_proc_data *proc, int *pip, int read_end);
