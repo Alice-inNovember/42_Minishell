@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 18:11:41 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/07 08:02:52 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	get_heredoc_input(char *filename, char *limiter)
 			ft_putendl_fd(input_line, fd);
 			free(input_line);
 		}
+		exit(EXIT_SUCCESS);
 	}
 	close(fd);
 }
