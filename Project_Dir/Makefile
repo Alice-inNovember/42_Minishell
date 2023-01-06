@@ -62,7 +62,8 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(PARSEDIR)/heredoc/make_random_name_file.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
-				$(EXECDIR)/executor_util.c \
+				$(EXECDIR)/executor_util1.c \
+				$(EXECDIR)/executor_util2.c \
 				$(BUIDIR)/built_in.c \
 				$(BUIDIR)/built_in_util.c \
 				$(BUIDIR)/bt_cd.c \

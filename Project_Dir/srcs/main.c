@@ -6,11 +6,13 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 09:07:42 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 11:50:45 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int		g_last_exit_status;
 
 void	init_data(t_data *data, char **envp)
 {

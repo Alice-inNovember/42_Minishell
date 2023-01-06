@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 09:57:19 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:04:54 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+extern int	g_last_exit_status;
+
 int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 {
 	t_proc_data		*proc_data;
 	t_builtin_fp	bt_fp;
 	char			**cmd_argv;
+	int				origin_io[2];
 
 	proc_data = list_peek_first_content(&data->proc_data_list);
 	cmd_argv = cmd_list2arr(&proc_data->cmd_list);
@@ -28,6 +31,10 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 	{
 		bt_fp(cmd_argv, envp_list);
 		cmd_argv_free(cmd_argv);
+		dup2(origin_io[READ_END], STDIN_FILENO);
+		dup2(origin_io[WRITE_END], STDOUT_FILENO);
+		close(origin_io[READ_END]);
+		close(origin_io[WRITE_END]);
 		return (1);
 	}
 	return (0);
@@ -41,8 +48,8 @@ void	wait_child(t_data *data)
 	node = list_peek_first_node(&data->pid_list);
 	while (node->next != NULL)
 	{
-		waitpid(*((pid_t *)node->content), &status, 1);
-		g_last_exit_status = wexitstatus(int status);
+		waitpid(*((pid_t *)node->content), &status, 0);
+		g_last_exit_status = wexitstatus(status);
 	}
 }
 
