@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 19:29:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:07:42 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_data(t_data *data, char **envp)
 	if (first_call_flag == ON)
 	{
 		envp_init(&data->envp_list, envp);
+		builtin_init(&data->envp_list);
 		first_call_flag = OFF;
 	}
 	list_init(&data->token_list);
@@ -32,7 +33,6 @@ void	clear_data(t_data *data)
 	list_clear(&data->token_list, del_s_token);
 	list_clear(&data->proc_data_list, del_s_proc_data);
 	list_clear(&data->pid_list, NULL);
-	//list_clear(&data->builtin_list, NULL);
 }
 
 int	main(int argc, char **argv, char **envp)
