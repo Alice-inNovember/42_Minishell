@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:01 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 09:32:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:48:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUILTIN_H
 
 # include "data.h"
+# include "envp.h"
+# include "lexer.h"
 # include "../libraries/libft/includes/libft.h"
 # include <sys/types.h>
 # include <dirent.h>

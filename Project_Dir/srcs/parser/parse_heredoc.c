@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 09:56:13 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:35:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	fname = make_temp_file(data);
-	get_heredoc_input(fname);
+	//get_heredoc_input(fname);
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
 	redir->type = T_DLESS;
 	redir->fname = fname;
