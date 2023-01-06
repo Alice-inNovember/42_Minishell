@@ -111,7 +111,7 @@ fclean : clean
 
 re : fclean all
 
-debug	:
+rebug	: fclean
 	$(MAKE) IF_DEBUG=1 all
 
 .PHONY : all clean fclean re
