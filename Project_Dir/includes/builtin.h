@@ -49,5 +49,5 @@ void			builtin_init(t_list *builtin_list);
 t_builtin_fp	builtin_find(t_list *builtin_list, char *key);
 int				check_word_cnt(char **cmd_vector);
 void			error_handler(char *cmd, char *word, int status);
-
+void			print_export(t_list *envp_list);
 #endif

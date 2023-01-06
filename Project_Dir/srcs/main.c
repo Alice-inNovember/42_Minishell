@@ -6,10 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:39:50 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:36:32 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "../includes/minishell.h"
 
 int		g_last_exit_status;
@@ -21,7 +22,7 @@ void	init_data(t_data *data, char **envp)
 	if (first_call_flag == ON)
 	{
 		envp_init(&data->envp_list, envp);
-		builtin_init(&data->envp_list);
+		builtin_init(&data->builtin_list);
 		first_call_flag = OFF;
 	}
 	list_init(&data->token_list);
@@ -37,16 +38,28 @@ void	clear_data(t_data *data)
 	list_clear(&data->pid_list, NULL);
 }
 
+void	(*func)(int);
+
+void	signal_handler(int signo)
+{
+	printf("ctrl + c\n");
+	signal(SIGINT, func);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	//func = signal(SIGINT, signal_handler);
 	while (1)
 	{
 		init_data(&data, envp);
-		data.line = readline("minishell>");
+		data.line = readline("minishell> ");
+		if (data.line && data.line[0] == 0)
+			continue ;
+		add_history(data.line);
 		make_token_list(&data);
-		print_token_list(&data);
+		//print_token_list(&data);
 		parser(&data);
 		executor(&data);
 		print_syntax_err(&data);

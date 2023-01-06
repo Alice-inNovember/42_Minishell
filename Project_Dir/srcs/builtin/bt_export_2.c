@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   bt_export_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:06:54 by tyi               #+#    #+#             */
 /*   Updated: 2023/01/06 15:33:57 by tyi              ###   ########.fr       */

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 12:36:08 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:33:48 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 	bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
 	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
+		origin_io[READ_END] = dup(STDIN_FILENO);
+		origin_io[WRITE_END] = dup(STDOUT_FILENO);
+		do_redirect(proc_data);
 		bt_fp(cmd_argv, envp_list);
 		cmd_argv_free(cmd_argv);
 		dup2(origin_io[READ_END], STDIN_FILENO);
@@ -48,9 +51,9 @@ void	wait_child(t_data *data)
 	node = list_peek_first_node(&data->pid_list);
 	while (node->next != NULL)
 	{
-		waitpid(*((pid_t *)node->content), &status, 1);
 		waitpid(*((pid_t *)node->content), &status, 0);
 		g_last_exit_status = wexitstatus(status);
+		node = node->next;
 	}
 }
 
@@ -59,22 +62,28 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 	pid_t		pid;
 	int			pip[2];
 	int			pipe_stat;
+	int			cur_write_end;
 	static int	prev_read_end = -1;
 
-	if (prev_read_end != -1)
-		close(prev_read_end);
-	pipe_stat = pipe(pip);
-	if (pipe_stat != 0)
+	if (prev_read_end == -1)
+		prev_read_end = 0;
+	if (is_last_cmd(data, proc_data))
+		cur_write_end = STDOUT_FILENO;
+	else
 	{
-		wait_child(data);
-		perror("minishell");
-		exit(EXIT_FAILURE);
+		pipe_stat = pipe(pip);
+		if (pipe_stat != 0)
+			(wait_child(data), perror("minishell"), exit(EXIT_FAILURE));
+		cur_write_end = pip[WRITE_END];
 	}
 	pid = fork();
 	if (pid == 0)
-		execute_child(data, proc_data, pip, prev_read_end);
+		execute_child(data, proc_data, cur_write_end, prev_read_end);
+	if (prev_read_end != -1)
+		close(prev_read_end);
 	prev_read_end = pip[0];
-	close(pip[1]);
+	if (!is_last_cmd(data, proc_data))
+		close(pip[WRITE_END]);
 	return (pid);
 }
 
@@ -82,13 +91,20 @@ void	make_child(t_data *data)
 {
 	t_node	*proc_node;
 	pid_t	pid;
+	int		origin_io[2];
 
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
+		origin_io[READ_END] = dup(STDIN_FILENO);
+		origin_io[WRITE_END] = dup(STDOUT_FILENO);
 		pid = do_fork(data, proc_node->content);
 		pid_list_add(&data->pid_list, pid);
 		proc_node = proc_node->next;
+		dup2(origin_io[READ_END], STDIN_FILENO);
+		dup2(origin_io[WRITE_END], STDOUT_FILENO);
+		close(origin_io[READ_END]);
+		close(origin_io[WRITE_END]);
 	}
 }
 

@@ -6,12 +6,43 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 20:20:34 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 09:17:43 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:40:05 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/lexer.h"
 #include "../../../includes/envp.h"
+#include <stdio.h>
+
+extern int	g_last_exit_status;
+
+char	*join_three_strings(char *front, char *env_value, char *back)
+{
+	char	*expanded_line;
+	char	*temp;
+
+	temp = ft_strjoin(front, env_value);
+	expanded_line = ft_strjoin(temp, back);
+	free(temp);
+	return (expanded_line);
+}
+
+char	*expand_question_mark(char *line, int idx)
+{
+	char	*expanded_line;
+	char	*front;
+	char	*back;
+	int		start_index;
+	int		back_size;
+
+	front = ft_substr(line, 0, idx);
+	start_index = idx + 2;
+	back_size = ft_strlen(line) - start_index;
+	back = ft_substr(line, start_index, back_size);
+	expanded_line = join_three_strings(front, \
+			ft_itoa(g_last_exit_status), back);
+	return (expanded_line);
+}
 
 char	*get_env_value(t_data *data, int idx)
 {
@@ -38,17 +69,6 @@ char	*cut_back(char *line, int idx)
 	return (back);
 }
 
-char	*join_three_strings(char *front, char *env_value, char *back)
-{
-	char	*expanded_line;
-	char	*temp;
-
-	temp = ft_strjoin(front, env_value);
-	expanded_line = ft_strjoin(temp, back);
-	free(temp);
-	return (expanded_line);
-}
-
 char	*make_expanded_line(t_data *data, int idx)
 {
 	char	*expanded_line;
@@ -56,6 +76,11 @@ char	*make_expanded_line(t_data *data, int idx)
 	char	*front;
 	char	*back;
 
+	if (data->line[idx + 1] == '?')
+	{
+		expanded_line = expand_question_mark(data->line, idx);
+		return (expanded_line);
+	}
 	env_value = get_env_value(data, idx + 1);
 	front = ft_substr(data->line, 0, idx);
 	back = cut_back(data->line, idx);

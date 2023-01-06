@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:39:27 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 13:14:02 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:14:27 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int	is_heredoc_limiter(t_list *token_list)
 
 int	is_expansion(char *line, int idx, t_list *token_list)
 {
-	if (get_env_length(&line[idx + 1]) > 0 && !is_heredoc_limiter(token_list))
+	if (line[idx + 1] == '?')
+		return (1);
+	else if (get_env_length(&line[idx + 1]) > 0 && \
+					!is_heredoc_limiter(token_list))
 		return (1);
 	else
 		return (0);
