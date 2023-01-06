@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/05 22:58:30 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 15:59:00 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 		path = envp_find(envp_list, "HOME");
 		if (!path)
 		{
-			perror("minishell: cd: HOME not set");
+			error_handler("cd", 0, HOME_NOT);
 			return (EX_BT_FAIL);
 		}
 	}
@@ -32,13 +32,13 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 		path = cmd_vector[1];
 	else
 	{
-		perror("cd: too many arguments");
+		error_handler("cd", 0, HOME_NOT);
 		return (EX_BT_FAIL);
 	}
 	old_pwd = getcwd(0, 0);
 	if (chdir(path))
 	{
-		perror("minishell: cd: Can't change directory");
+		error_handler("cd", path, CANT_CD);
 		return (EX_BT_FAIL);
 	}
 	new_pwd = getcwd(0, 0);
@@ -46,4 +46,3 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 	envp_add(envp_list, "OLDPWD", old_pwd);
 	return (EX_SUCCESS);
 }
-

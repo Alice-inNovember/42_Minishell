@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:35 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/05 20:53:46 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 13:53:41 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	bt_env(char **cmd_vector, t_list *envp_list)
 
 	if (check_word_cnt(cmd_vector) != 1)
 	{
-		perror("env : Too many arguments");
+		error_handler("env", 0, MANY_ARG);
 		return (EX_CNOT_EXEC);
 	}
 	cur_node = list_peek_first_node(envp_list);

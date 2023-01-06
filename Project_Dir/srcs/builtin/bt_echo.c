@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:26 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 12:37:47 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:47:48 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,6 @@
 #include "../../includes/builtin.h"
 
 extern int	g_last_exit_status;
-
-void	print_word(char *word)
-{
-	int	i;
-
-	i = 0;
-	while (word[i])
-	{	
-		if (!ft_strncmp(word + i, "$?", 2))
-		{
-			printf("%d", g_last_exit_status);
-			i = i + 2;
-		}
-		else
-		{
-			ft_putchar_fd(word[i], 1);
-			i++;
-		}
-	}
-}
 
 int	is_proper_opt(char *word, char opt_chr)
 {
@@ -66,7 +46,7 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 	}
 	while (cmd_vector[i])
 	{
-		print_word(cmd_vector[i]);
+		printf("%s", cmd_vector[i]);
 		if (!cmd_vector[i + 1])
 			break ;
 		ft_putchar_fd(' ', 1);
