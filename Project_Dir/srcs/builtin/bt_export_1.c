@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 16:11:46 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 16:14:01 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_findchr_i(char *str, char c)
 // 		length++;
 // 	if (length == 0)
 // 		return (0);
-// 	while (line[length] == '_' || \
+// 	while (line[length] == '_' || 
 // 			ft_isalpha(line[length]) || ft_isdigit(line[length]))
 // 		length++;
 // 	return (length);
