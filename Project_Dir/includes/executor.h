@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:18:12 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 18:58:48 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		wexitstatus(int status);
 void	pid_list_add(t_list *pidlist, pid_t pid);
 void	do_redirect(t_proc_data *proc_data);
 int		is_last_cmd(t_data *data, t_proc_data *proc_data);
+int		is_first_cmd(t_data *data, t_proc_data *proc_data);
 
 #endif
