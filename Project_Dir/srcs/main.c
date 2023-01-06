@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 15:19:31 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:49:38 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,18 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	func = signal(SIGINT, signal_handler);
+	//func = signal(SIGINT, signal_handler);
 	while (1)
 	{
 		init_data(&data, envp);
 		data.line = readline("minishell> ");
-		if (data.line[0] != '\0')
-		{
-			add_history(data.line);
-			make_token_list(&data);
-			//print_token_list(&data);
-			parser(&data);
-			executor(&data);
-			print_syntax_err(&data);
-			clear_data(&data);
-		}
+		add_history(data.line);
+		make_token_list(&data);
+		print_token_list(&data);
+		parser(&data);
+		executor(&data);
+		print_syntax_err(&data);
+		clear_data(&data);
 	}
 	return (0);
 }
