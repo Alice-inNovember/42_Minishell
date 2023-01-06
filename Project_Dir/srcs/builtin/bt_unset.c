@@ -6,10 +6,11 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:33 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 15:29:25 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:35:56 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/envp.h"
 #include "../../includes/builtin.h"
 
 int	is_proper_env(char *env_name);

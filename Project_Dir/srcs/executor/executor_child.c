@@ -6,16 +6,19 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:12:29 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:29:23 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
+#include "../../includes/data.h"
+#include "../../includes/envp.h"
+#include "../../includes/builtin.h"
+#include "../../includes/executor.h"
 
 void	child_pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {

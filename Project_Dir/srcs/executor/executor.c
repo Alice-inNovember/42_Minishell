@@ -6,14 +6,15 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 18:59:17 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:18:29 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 #include <stdio.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "../../includes/executor.h"
+#include "../../includes/builtin.h"
 
 int	g_last_exit_status;
 

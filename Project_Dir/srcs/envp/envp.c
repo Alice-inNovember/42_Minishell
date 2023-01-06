@@ -6,12 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:17:34 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 19:24:07 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
-#include "../../includes/minishell.h"
 
 char	*envp_find(t_list *envp_list, char *key)
 {

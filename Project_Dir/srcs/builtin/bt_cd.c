@@ -6,11 +6,12 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 15:59:00 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:29:40 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtin.h"
+#include "../../includes/envp.h"
 
 int	bt_cd(char **cmd_vector, t_list *envp_list)
 {

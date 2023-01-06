@@ -6,12 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:17:33 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 15:07:48 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 19:25:26 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
-#include "../../includes/minishell.h"
 
 char	*ft_strcat(char *dest, char *src)
 {
