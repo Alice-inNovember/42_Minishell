@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:39:25 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:58:44 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,12 @@ void	single_bt_redirect(int *origin_io, t_proc_data *proc_data)
 		open_redirect(((t_redir *)node->content));
 		node = node->next;
 	}
+}
+
+int	is_last_cmd(t_data *data, t_proc_data *proc_data)
+{
+	t_node	*node;
+
+	node = list_peek_last_node(&data->proc_data_list);
+	return (node->content == proc_data);
 }

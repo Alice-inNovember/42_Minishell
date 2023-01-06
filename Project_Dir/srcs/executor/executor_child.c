@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:42:44 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:52:26 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	child_redirect(t_proc_data *proc_data, int write_end, int read_end)
 		dup2(read_end, STDIN_FILENO);
 		close(read_end);
 	}
-	dup2(pip[1], STDOUT_FILENO);
-	close(pip[1]);
+	dup2(write_end, STDOUT_FILENO);
+	close(write_end);
 	if (list_size(&proc_data->redir_list))
 		return ;
 	node = list_peek_first_node(&proc_data->redir_list);
@@ -53,13 +53,13 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	exit(EXIT_FAILURE);
 }
 
-void	execute_child(t_data *data, t_proc_data *proc, int write_end, int read_end)
+void	execute_child(t_data *data, t_proc_data *proc, int w_end, int r_end)
 {
 	t_builtin_fp	builtin_fp;
 	char			**cmd_argv;
 	char			**cmd_envp;
 
-	child_redirect(proc, write_end, read_end);
+	child_redirect(proc, w_end, r_end);
 	cmd_argv = cmd_list2arr(&proc->cmd_list);
 	cmd_envp = envp2arr(&data->envp_list);
 	builtin_fp = builtin_find(&data->builtin_list, cmd_argv[0]);

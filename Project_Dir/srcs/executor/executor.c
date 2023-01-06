@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:42:17 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:59:34 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,21 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 
 	if (prev_read_end != -1)
 		close(prev_read_end);
-	pipe_stat = pipe(pip);
-	if (pipe_stat != 0)
-		(wait_child(data), perror("minishell"), exit(EXIT_FAILURE));
+	if (is_last_cmd(data, proc_data))
+		cur_write_end = STDOUT_FILENO;
+	else
+	{
+		pipe_stat = pipe(pip);
+		cur_write_end = pip[WRITE_END];
+		if (pipe_stat != 0)
+			(wait_child(data), perror("minishell"), exit(EXIT_FAILURE));
+	}
 	pid = fork();
 	if (pid == 0)
 		execute_child(data, proc_data, cur_write_end, prev_read_end);
 	prev_read_end = pip[0];
-	close(pip[1]);
+	if (!is_last_cmd(data, proc_data))
+		close(pip[1]);
 	return (pid);
 }
 
