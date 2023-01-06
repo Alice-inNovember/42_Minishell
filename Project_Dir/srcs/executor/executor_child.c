@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 17:20:17 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:12:29 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	cmd_path = get_cmd_path(data, cmd_argv);
 	execve(cmd_path, cmd_argv, cmd_envp);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd("command not found:", STDERR_FILENO);
+	ft_putstr_fd("command not found: ", STDERR_FILENO);
 	ft_putstr_fd(cmd_argv[0], STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 	exit(EXIT_FAILURE);
