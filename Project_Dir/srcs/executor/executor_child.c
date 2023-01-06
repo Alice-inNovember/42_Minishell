@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:52:26 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 14:48:06 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ void	child_redirect(t_proc_data *proc_data, int write_end, int read_end)
 	t_node	*node;
 
 	if (read_end != -1)
-	{
-		dup2(read_end, STDIN_FILENO);
-		close(read_end);
-	}
-	dup2(write_end, STDOUT_FILENO);
-	close(write_end);
+		(dup2(read_end, STDIN_FILENO), close(read_end));
+	if (write_end != STDOUT_FILENO)
+		(dup2(write_end, STDOUT_FILENO), close(write_end));
 	if (list_size(&proc_data->redir_list))
 		return ;
 	node = list_peek_first_node(&proc_data->redir_list);

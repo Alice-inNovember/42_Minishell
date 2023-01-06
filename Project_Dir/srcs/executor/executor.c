@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:59:34 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 14:49:06 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	wait_child(t_data *data)
 	node = list_peek_first_node(&data->pid_list);
 	while (node->next != NULL)
 	{
-		waitpid(*((pid_t *)node->content), &status, 1);
 		waitpid(*((pid_t *)node->content), &status, 0);
 		g_last_exit_status = wexitstatus(status);
+		node = node->next;
 	}
 }
 
