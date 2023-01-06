@@ -6,10 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:06:54 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 15:33:57 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:34:54 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include "../../includes/envp.h"
 #include "../../includes/builtin.h"
 
 char	**make_key_arr(t_list *envp_list)

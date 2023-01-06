@@ -6,10 +6,11 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:50 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 15:29:20 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:35:04 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../../includes/builtin.h"
 
 int	bt_pwd(char **cmd_vector, t_list *envp_list)

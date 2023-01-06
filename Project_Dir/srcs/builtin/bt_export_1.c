@@ -6,11 +6,14 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 16:14:01 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:34:18 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../../includes/builtin.h"
+#include "../../includes/envp.h"
+#include "../../includes/lexer.h"
 
 void	print_export(t_list *envp_list);
 
@@ -27,23 +30,6 @@ int	ft_findchr_i(char *str, char c)
 	}
 	return (-1);
 }
-
-// // commit할 떄 out
-
-// int	get_env_length(char *line)
-// {
-// 	int	length;
-
-// 	length = 0;
-// 	while (line[length] == '_' || ft_isalpha(line[length]))
-// 		length++;
-// 	if (length == 0)
-// 		return (0);
-// 	while (line[length] == '_' || 
-// 			ft_isalpha(line[length]) || ft_isdigit(line[length]))
-// 		length++;
-// 	return (length);
-// }
 
 int	is_proper_env(char *env_name)
 {

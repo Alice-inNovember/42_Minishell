@@ -6,11 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 17:04:01 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:41:49 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/parser.h"
+#include "../../includes/util.h"
 
 t_list	*sub_token_list(t_node *first, t_node *last)
 {

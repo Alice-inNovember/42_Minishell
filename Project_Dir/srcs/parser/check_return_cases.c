@@ -6,11 +6,10 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:11:19 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 17:07:17 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:40:36 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/data.h"
 #include "../../includes/parser.h"
 
 int	is_err_occured(t_data *data)

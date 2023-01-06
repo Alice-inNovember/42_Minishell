@@ -6,12 +6,20 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 16:36:32 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 19:46:24 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "../includes/minishell.h"
+#include "readline/readline.h"
+#include "readline/history.h"
+#include "../includes/data.h"
+#include "../includes/lexer.h"
+#include "../includes/parser.h"
+#include "../includes/envp.h"
+#include "../includes/builtin.h"
+#include "../includes/executor.h"
+#include "../includes/util.h"
 
 int		g_last_exit_status;
 

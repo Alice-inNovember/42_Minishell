@@ -6,12 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 17:20:49 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:41:24 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/lexer.h"
+#include "../../includes/parser.h"
 
 void	parse_simple_cmd(t_data *data, t_list *token_list)
 {

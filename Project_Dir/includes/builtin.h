@@ -6,24 +6,14 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:01 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:27:39 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:27:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "data.h"
-# include "envp.h"
-# include "lexer.h"
-# include "minishell.h"
-# include "../libraries/libft/includes/libft.h"
-# include <sys/types.h>
-# include <dirent.h>
-# include "../libraries/dllist/includes/dllist.h"
-# include <stdio.h>  
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "data.h"
 
 typedef enum e_bt_error_stat
 {

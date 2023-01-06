@@ -6,13 +6,15 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 18:57:44 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:23:41 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
 #include <sys/_types/_pid_t.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include "../../includes/data.h"
 
 void	pid_list_add(t_list *pidlist, pid_t pid)
 {
