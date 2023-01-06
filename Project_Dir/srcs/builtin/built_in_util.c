@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/04 14:46:11 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:52:38 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	builtin_add(t_list *builtin_list, char *key, t_builtin_fp function)
 
 void	builtin_init(t_list *builtin_list)
 {
-	void	*builtin;
-
 	list_init(builtin_list);
 	builtin_add(builtin_list, "cd", bt_cd);
 	builtin_add(builtin_list, "echo", bt_echo);
@@ -59,3 +57,24 @@ int	check_word_cnt(char **cmd_vector)
 		i++;
 	return (i);
 }
+
+void	error_handler(char *cmd, char *word, int status)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	if (word)
+		ft_putstr_fd(": ", 2);
+	ft_putstr_fd(word, 2);
+	if (status == HOME_NOT)
+		ft_putstr_fd(": HOME not set\n", 2);
+	else if (status == CANT_CD)
+		ft_putstr_fd(": can't change directory\n", 2);
+	else if (status == MANY_ARG)
+		ft_putstr_fd(": too many arguments\n", 2);
+	else if (status == NOT_NUM_ARG)
+		ft_putstr_fd(": numeric argumnet required\n", 2);
+	else if (status == INVALID_ARG)
+		ft_putstr_fd(": not a valid identifier\n", 2);
+}
+
+//  all error message is not direct to STDOUT, only to STDERR

@@ -6,11 +6,13 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 13:09:45 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 16:14:01 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtin.h"
+
+void	print_export(t_list *envp_list);
 
 int	ft_findchr_i(char *str, char c)
 {
@@ -65,7 +67,7 @@ char **key, char **value, int *error_flag)
 	if (equal_i == 0)
 	{
 		*error_flag = EX_BT_FAIL;
-		perror("bash: export: not a valid identifier");
+		error_handler("export", word, INVALID_ARG);
 		return (1);
 	}
 	else if (equal_i == -1)
@@ -77,7 +79,7 @@ char **key, char **value, int *error_flag)
 	if (!is_proper_env(*key))
 	{
 		*error_flag = EX_BT_FAIL;
-		perror("bash: export: not a valid identifier");
+		error_handler("export", word, INVALID_ARG);
 		free(*key);
 		return (1);
 	}

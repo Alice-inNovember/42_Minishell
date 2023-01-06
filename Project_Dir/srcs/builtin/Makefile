@@ -12,7 +12,7 @@
 # SRCDIR		=	srcs
 
 all :
-	 cc -Wall -Wextra -Wall -g3 -fsanitize=address -lreadline bt_cd.c         bt_echo.c       bt_env.c        bt_exit.c       bt_export.c     bt_pwd.c        bt_unset.c      built_in.c          envp.a          libdll.a        libft.a
+	 cc -Wall -Wextra -Wall -g3 -fsanitize=address -lreadline bt_cd.c         bt_echo.c       bt_env.c        bt_exit.c       bt_export_1.c bt_export_2.c    bt_pwd.c        bt_unset.c      built_in.c  built_in_util.c         envp.a          libdll.a        libft.a
 
 # $(NAME) : $(OBJS)
 # 	$(MAKE) -C $(LFTDIR)

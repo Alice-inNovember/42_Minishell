@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:06:54 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 14:02:46 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:33:57 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**make_key_arr(t_list *envp_list)
 	char	**key_arr;
 
 	i = 0;
-	key_arr = ft_calloc(list_size(envp_list) + 1, sizeof(char *));
+	key_arr = (char **)ft_calloc(list_size(envp_list) + 1, sizeof(char *));
 	cur_node = list_peek_first_node(envp_list);
 	while (cur_node->next)
 	{

@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:33 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/05 22:50:36 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 15:29:25 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	bt_unset(char **cmd_vector, t_list *envp_list)
 		if (!is_proper_env(cmd_vector[word_i]))
 		{
 			error_flag = EX_BT_FAIL;
-			perror("minishell: unset : not a valid identifier");
+			error_handler("unset", cmd_vector[word_i], INVALID_ARG);
 			word_i++;
 			continue ;
 		}
