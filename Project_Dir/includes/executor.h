@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/05 16:50:22 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:55:20 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	child_redirect(t_proc_data *proc_data, int *pip, int read_end);
 int		open_redirect(t_redir *redir_data);
 void	cmd_argv_free(char **cmd_argv);
 int		wexitstatus(int status);
+void	pid_list_add(t_list *pidlist, pid_t pid);
 
 #endif

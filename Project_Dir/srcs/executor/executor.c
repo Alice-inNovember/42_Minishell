@@ -6,35 +6,29 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/05 10:33:36 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:36:08 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <stdio.h>
+#include <sys/wait.h>
 #include <unistd.h>
+
+int	g_last_exit_status;
 
 int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 {
 	t_proc_data		*proc_data;
 	t_builtin_fp	bt_fp;
-	int				stdpip[2];
-	int				prev_stdio[2];
 	char			**cmd_argv;
 
 	proc_data = list_peek_first_content(&data->proc_data_list);
 	cmd_argv = cmd_list2arr(&proc_data->cmd_list);
 	bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
-	stdpip[1] = STDOUT_FILENO;
 	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
-		prev_stdio[0] = dup(STDIN_FILENO);
-		prev_stdio[1] = dup(STDOUT_FILENO);
-		child_redirect(proc_data, stdpip, 0);
 		bt_fp(cmd_argv, envp_list);
-		dup2(prev_stdio[0], STDIN_FILENO);
-		dup2(prev_stdio[1], STDOUT_FILENO);
-		close(prev_stdio[0]);
-		close(prev_stdio[1]);
 		cmd_argv_free(cmd_argv);
 		return (1);
 	}
@@ -43,13 +37,14 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 
 void	wait_child(t_data *data)
 {
-	t_node	*pid_node;
+	t_node	*node;
+	int		status;
 
-	pid_node = list_peek_first_node(&data->pid_list);
-	while (pid_node != NULL)
+	node = list_peek_first_node(&data->pid_list);
+	while (node->next != NULL)
 	{
-		waitpid(*(pid_t *)pid_node->content, &g_last_exit_status, 0);
-		pid_node = pid_node->next;
+		waitpid(*((pid_t *)node->content), &status, 1);
+		g_last_exit_status = wexitstatus(status);
 	}
 }
 
@@ -80,14 +75,13 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 void	make_child(t_data *data)
 {
 	t_node	*proc_node;
-	pid_t	*pid;
+	pid_t	pid;
 
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
-		pid = ft_calloc(1, sizeof(pid_t));
-		*pid = do_fork(data, proc_node->content);
-		list_append(&data->pid_list, (void *)pid);
+		pid = do_fork(data, proc_node->content);
+		pid_list_add(&data->pid_list, pid);
 		proc_node = proc_node->next;
 	}
 }

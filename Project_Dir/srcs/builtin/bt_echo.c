@@ -6,21 +6,14 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:26 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/05 19:22:46 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 12:37:47 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/minishell.h"
 #include "../../includes/builtin.h"
 
-int	check_word_cnt(char **cmd_vector)
-{
-	int	i;
-
-	i = 0;
-	while (cmd_vector[i])
-		i++;
-	return (i);
-}
+extern int	g_last_exit_status;
 
 void	print_word(char *word)
 {

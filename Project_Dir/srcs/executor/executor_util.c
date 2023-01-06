@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/05 16:49:59 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:12:10 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**cmd_list2arr(t_list *cmd_list)
 
 	node = list_peek_first_node(cmd_list);
 	cmdlen = list_size(cmd_list);
-	cmdarr = (char **)ft_malloc(cmdlen + 1);
+	cmdarr = (char **)ft_malloc(sizeof(char *) * (cmdlen + 1));
 	i = 0;
 	while (i < cmdlen)
 	{
@@ -47,8 +47,6 @@ char	**get_path(t_data *data)
 	return (returnpath);
 }
 
-
-// comment by minseok2 혹시 경로를 못찾으면 NULL을 반환 시키는 게 좋을지 + **path 문자열 free
 char	*get_cmd_path(t_data *data, char **cmd_argv)
 {
 	char	**path;
@@ -68,19 +66,12 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 		free(cmdpath);
 		i++;
 	}
-	return (cmd_argv[0]);
+	ft_free_vector(path);
+	return (NULL);
 }
 
 void	cmd_argv_free(char **cmd_argv)
 {
-	int	i;
-
-	i = 0;
-	while (cmd_argv[i])
-	{
-		free(cmd_argv[i]);
-		i++;
-	}
 	free(cmd_argv);
 }
 

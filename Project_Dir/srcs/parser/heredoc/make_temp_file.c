@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:43:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 17:40:47 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:15:38 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*make_temp_file(t_data *data)
 		fname = make_file_using_mktemp(data, mktemp_path, mktemp_argv);
 	else
 		fname = make_random_name_file();
-	cmd_argv_free(mktemp_argv);
+	ft_free_vector(mktemp_argv);
 	free(mktemp_path);
 	return (fname);
 }

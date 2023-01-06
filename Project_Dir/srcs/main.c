@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 19:29:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:39:50 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	init_data(t_data *data, char **envp)
 	if (first_call_flag == ON)
 	{
 		envp_init(&data->envp_list, envp);
+		builtin_init(&data->envp_list);
 		first_call_flag = OFF;
 	}
 	list_init(&data->token_list);
 	list_init(&data->proc_data_list);
-	list_init(&data->builtin_list);
 	list_init(&data->pid_list);
 	data->syntax_err_flag = 0;
 }
@@ -33,7 +33,6 @@ void	clear_data(t_data *data)
 	list_clear(&data->token_list, del_s_token);
 	list_clear(&data->proc_data_list, del_s_proc_data);
 	list_clear(&data->pid_list, NULL);
-	//list_clear(&data->builtin_list, NULL);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -47,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 		make_token_list(&data);
 		print_token_list(&data);
 		parser(&data);
-		//executor(&data);
+		executor(&data);
 		print_syntax_err(&data);
 		clear_data(&data);
 	}

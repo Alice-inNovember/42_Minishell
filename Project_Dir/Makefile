@@ -63,8 +63,16 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
 				$(EXECDIR)/executor_util.c \
+				$(EXECDIR)/executor_util2.c \
 				$(BUIDIR)/built_in.c \
 				$(BUIDIR)/built_in_util.c \
+				$(BUIDIR)/bt_cd.c \
+				$(BUIDIR)/bt_echo.c \
+				$(BUIDIR)/bt_env.c \
+				$(BUIDIR)/bt_exit.c \
+				$(BUIDIR)/bt_export.c \
+				$(BUIDIR)/bt_pwd.c \
+				$(BUIDIR)/bt_unset.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c
 OBJS		=	${SRCS:.c=.o}
