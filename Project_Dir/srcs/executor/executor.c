@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 12:36:08 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:42:17 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 	bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
 	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
+		single_bt_redirect(origin_io, proc_data);
 		bt_fp(cmd_argv, envp_list);
 		cmd_argv_free(cmd_argv);
 		dup2(origin_io[READ_END], STDIN_FILENO);
@@ -60,19 +61,16 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 	int			pip[2];
 	int			pipe_stat;
 	static int	prev_read_end = -1;
+	static int	cur_write_end = -1;
 
 	if (prev_read_end != -1)
 		close(prev_read_end);
 	pipe_stat = pipe(pip);
 	if (pipe_stat != 0)
-	{
-		wait_child(data);
-		perror("minishell");
-		exit(EXIT_FAILURE);
-	}
+		(wait_child(data), perror("minishell"), exit(EXIT_FAILURE));
 	pid = fork();
 	if (pid == 0)
-		execute_child(data, proc_data, pip, prev_read_end);
+		execute_child(data, proc_data, cur_write_end, prev_read_end);
 	prev_read_end = pip[0];
 	close(pip[1]);
 	return (pid);
