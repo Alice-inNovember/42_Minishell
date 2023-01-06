@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 16:33:48 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 17:14:58 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 	pid = fork();
 	if (pid == 0)
 		execute_child(data, proc_data, cur_write_end, prev_read_end);
-	if (prev_read_end != -1)
+	if (prev_read_end != 0)
 		close(prev_read_end);
 	prev_read_end = pip[0];
 	if (!is_last_cmd(data, proc_data))

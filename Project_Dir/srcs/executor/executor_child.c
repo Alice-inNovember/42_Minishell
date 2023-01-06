@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:30:38 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 17:20:17 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	child_pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {
 	t_node	*node;
 
-	if (read_end != -1)
+	if (read_end != 0)
 	{
 		dup2(read_end, STDIN_FILENO);
 		close(read_end);
