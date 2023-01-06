@@ -111,8 +111,8 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
 	t_redir	*redir;
 	t_type	type;
-	t_token	*fname_token;
-	char	*fname;
+	t_token	*filename_token;
+	char	*filename;
 
 	if (is_return_case(data, token_list, E_NONE))
 		return ;
@@ -120,11 +120,11 @@ void	parse_io_file(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	list_append(&proc_data->redir_list, new_node((void *)redir));
 	type = ((t_token *)list_peek_first_content(token_list))->type;
 	set_redir_type(redir, type);
-	fname_token = (t_token *)list_peek_last_content(token_list);
-	if (is_redir(fname_token->type))
-		set_redir_err_flag(data, fname_token);
+	filename_token = (t_token *)list_peek_last_content(token_list);
+	if (is_redir(filename_token->type))
+		set_redir_err_flag(data, filename_token);
 	else
-		fname = ft_strdup((char *)fname_token->value);
+		filename = ft_strdup((char *)filename_token->value);
 	list_clear(token_list, del_s_token);
 	free(token_list);
 }

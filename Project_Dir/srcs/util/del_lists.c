@@ -34,7 +34,7 @@ void	del_s_redir(void *content)
 	t_redir	*redir;
 
 	redir = content;
-	free(redir->fname);
+	free(redir->filename);
 	free(redir);
 }
 

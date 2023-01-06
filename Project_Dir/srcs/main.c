@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 11:50:45 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 12:39:50 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 		make_token_list(&data);
 		print_token_list(&data);
 		parser(&data);
-		//executor(&data);
+		executor(&data);
 		print_syntax_err(&data);
 		clear_data(&data);
 	}

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:04:54 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 12:36:08 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-extern int	g_last_exit_status;
+int	g_last_exit_status;
 
 int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 {
@@ -48,6 +48,7 @@ void	wait_child(t_data *data)
 	node = list_peek_first_node(&data->pid_list);
 	while (node->next != NULL)
 	{
+		waitpid(*((pid_t *)node->content), &status, 1);
 		waitpid(*((pid_t *)node->content), &status, 0);
 		g_last_exit_status = wexitstatus(status);
 	}

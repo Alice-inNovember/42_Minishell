@@ -90,7 +90,7 @@ typedef struct s_builtin
 typedef struct s_redir
 {
 	t_type	type;
-	char	*fname;
+	char	*filename;
 }	t_redir;
 
 typedef struct s_proc_data
