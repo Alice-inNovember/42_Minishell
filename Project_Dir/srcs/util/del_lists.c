@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:10:20 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/05 09:30:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:24:18 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,12 @@ void	del_s_proc_data(void *content)
 	list_clear(&proc_data->cmd_list, del_s_cmd);
 	list_clear(&proc_data->redir_list, del_s_redir);
 	free(proc_data);
+}
+
+void	del_s_pid(void *content)
+{
+	pid_t	*pid;
+
+	pid = content;
+	free(pid);
 }

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_herdoc_input.c                                 :+:      :+:    :+:   */
+/*   get_heredoc_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:41:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:50:46 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/data.h"
 #include "../../../includes/parser.h"
-#include <readline/history.h>
-#include <stdio.h>
+#include <readline/readline.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
-void	get_herdoc_input(char *filename, char *limiter)
+void	get_heredoc_input(char *filename, char *limiter)
 {
 	int		fd;
 	pid_t	pid;
@@ -29,9 +29,14 @@ void	get_herdoc_input(char *filename, char *limiter)
 		while (1)
 		{
 			input_line = readline("> ");
-
+			if (ft_strcmp(input_line, limiter) == 0)
+			{
+				free(input_line);
+				break ;
+			}
+			ft_putendl_fd(input_line, ft_strlen(input_line));
+			free(input_line);
 		}
-
 	}
 	close(fd);
 }
