@@ -6,11 +6,11 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:26 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 17:52:48 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:59:22 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <stdio.h>
 #include "../../includes/builtin.h"
 
 extern int	g_last_exit_status;
