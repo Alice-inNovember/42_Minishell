@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:45:38 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 15:52:38 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	error_handler(char *cmd, char *word, int status)
 	ft_putstr_fd(word, 2);
 	if (status == HOME_NOT)
 		ft_putstr_fd(": HOME not set\n", 2);
+	else if (status == CANT_CD)
+		ft_putstr_fd(": can't change directory\n", 2);
 	else if (status == MANY_ARG)
 		ft_putstr_fd(": too many arguments\n", 2);
 	else if (status == NOT_NUM_ARG)
@@ -74,3 +76,5 @@ void	error_handler(char *cmd, char *word, int status)
 	else if (status == INVALID_ARG)
 		ft_putstr_fd(": not a valid identifier\n", 2);
 }
+
+//  all error message is not direct to STDOUT, only to STDERR
