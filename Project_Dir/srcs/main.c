@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 14:53:46 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:19:31 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	(*func)(int);
 void	signal_handler(int signo)
 {
 	printf("ctrl + c\n");
-	printf("ctrl + c\n");
-	printf("ctrl + c\n");
 	signal(SIGINT, func);
 }
 
@@ -57,13 +55,16 @@ int	main(int argc, char **argv, char **envp)
 	{
 		init_data(&data, envp);
 		data.line = readline("minishell> ");
-		add_history(data.line);
-		make_token_list(&data);
-		//print_token_list(&data);
-		parser(&data);
-		executor(&data);
-		print_syntax_err(&data);
-		clear_data(&data);
+		if (data.line[0] != '\0')
+		{
+			add_history(data.line);
+			make_token_list(&data);
+			//print_token_list(&data);
+			parser(&data);
+			executor(&data);
+			print_syntax_err(&data);
+			clear_data(&data);
+		}
 	}
 	return (0);
 }
