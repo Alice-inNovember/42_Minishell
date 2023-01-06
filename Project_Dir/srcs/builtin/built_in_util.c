@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:45:01 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 15:45:38 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	builtin_add(t_list *builtin_list, char *key, t_builtin_fp function)
 
 void	builtin_init(t_list *builtin_list)
 {
-	void	*builtin;
-
 	list_init(builtin_list);
 	builtin_add(builtin_list, "cd", bt_cd);
 	builtin_add(builtin_list, "echo", bt_echo);
