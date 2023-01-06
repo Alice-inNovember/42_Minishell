@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 16:30:52 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 16:33:48 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,20 @@ void	make_child(t_data *data)
 {
 	t_node	*proc_node;
 	pid_t	pid;
+	int		origin_io[2];
 
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
+		origin_io[READ_END] = dup(STDIN_FILENO);
+		origin_io[WRITE_END] = dup(STDOUT_FILENO);
 		pid = do_fork(data, proc_node->content);
 		pid_list_add(&data->pid_list, pid);
 		proc_node = proc_node->next;
+		dup2(origin_io[READ_END], STDIN_FILENO);
+		dup2(origin_io[WRITE_END], STDOUT_FILENO);
+		close(origin_io[READ_END]);
+		close(origin_io[WRITE_END]);
 	}
 }
 
