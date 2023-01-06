@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 11:59:11 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:42:44 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <sys/fcntl.h>
 #include <unistd.h>
 
-void	child_redirect(t_proc_data *proc_data, int *pip, int read_end)
+void	child_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {
 	t_node	*node;
 
@@ -53,13 +53,13 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	exit(EXIT_FAILURE);
 }
 
-void	execute_child(t_data *data, t_proc_data *proc, int *pip, int read_end)
+void	execute_child(t_data *data, t_proc_data *proc, int write_end, int read_end)
 {
 	t_builtin_fp	builtin_fp;
 	char			**cmd_argv;
 	char			**cmd_envp;
 
-	child_redirect(proc, pip, read_end);
+	child_redirect(proc, write_end, read_end);
 	cmd_argv = cmd_list2arr(&proc->cmd_list);
 	cmd_envp = envp2arr(&data->envp_list);
 	builtin_fp = builtin_find(&data->builtin_list, cmd_argv[0]);

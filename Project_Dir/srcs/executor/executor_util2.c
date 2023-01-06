@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:08:16 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:39:25 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ void	pid_list_add(t_list *pidlist, pid_t pid)
 	list_append(pidlist, new_node(pidptr));
 }
 
-int	open_redirect(t_redir *redir_data)
+int	open_redirect(t_redir *redir)
 {
 	int	fd;
 
-	if (redir_data->type == T_GREAT || redir_data->type == T_DGREAT)
+	if (redir->type == T_GREAT || redir->type == T_DGREAT)
 	{
-		if (redir_data->type == T_GREAT)
-			fd = open(redir_data->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redir_data->type == T_DGREAT)
-			fd = open(redir_data->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (redir->type == T_GREAT)
+			fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (redir->type == T_DGREAT)
+			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			(perror("Could not open file"), exit(EXIT_FAILURE));
 		(dup2(fd, STDOUT_FILENO), close(fd));
 	}
 	else
 	{
-		fd = open(redir_data->filename, O_RDONLY, 0644);
+		fd = open(redir->filename, O_RDONLY, 0644);
 		if (fd == -1)
 			(perror("Could not open file"), exit(EXIT_FAILURE));
 		(dup2(fd, STDIN_FILENO), close(fd));

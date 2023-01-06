@@ -72,7 +72,8 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(BUIDIR)/bt_echo.c \
 				$(BUIDIR)/bt_env.c \
 				$(BUIDIR)/bt_exit.c \
-				$(BUIDIR)/bt_export.c \
+				$(BUIDIR)/bt_export_1.c \
+				$(BUIDIR)/bt_export_2.c \
 				$(BUIDIR)/bt_pwd.c \
 				$(BUIDIR)/bt_unset.c \
 				$(UTILDIR)/syntax_err.c \

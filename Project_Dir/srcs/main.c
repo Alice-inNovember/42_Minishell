@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 12:39:50 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:13:34 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_data(t_data *data, char **envp)
 	if (first_call_flag == ON)
 	{
 		envp_init(&data->envp_list, envp);
-		builtin_init(&data->envp_list);
+		builtin_init(&data->builtin_list);
 		first_call_flag = OFF;
 	}
 	list_init(&data->token_list);
