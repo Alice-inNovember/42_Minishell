@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 14:49:06 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:26:37 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 	bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
 	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
-		single_bt_redirect(origin_io, proc_data);
+		origin_io[READ_END] = dup(STDIN_FILENO);
+		origin_io[WRITE_END] = dup(STDOUT_FILENO);
+		do_redirect(proc_data);
 		bt_fp(cmd_argv, envp_list);
 		cmd_argv_free(cmd_argv);
 		dup2(origin_io[READ_END], STDIN_FILENO);
@@ -60,8 +62,8 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 	pid_t		pid;
 	int			pip[2];
 	int			pipe_stat;
+	int			cur_write_end;
 	static int	prev_read_end = -1;
-	static int	cur_write_end = -1;
 
 	if (prev_read_end != -1)
 		close(prev_read_end);
@@ -70,16 +72,16 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 	else
 	{
 		pipe_stat = pipe(pip);
-		cur_write_end = pip[WRITE_END];
 		if (pipe_stat != 0)
 			(wait_child(data), perror("minishell"), exit(EXIT_FAILURE));
+		cur_write_end = pip[WRITE_END];
 	}
 	pid = fork();
 	if (pid == 0)
 		execute_child(data, proc_data, cur_write_end, prev_read_end);
 	prev_read_end = pip[0];
 	if (!is_last_cmd(data, proc_data))
-		close(pip[1]);
+		close(pip[WRITE_END]);
 	return (pid);
 }
 

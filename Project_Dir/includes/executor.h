@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:58:55 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 15:18:12 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		open_redirect(t_redir *redir_data);
 void	cmd_argv_free(char **cmd_argv);
 int		wexitstatus(int status);
 void	pid_list_add(t_list *pidlist, pid_t pid);
-void	single_bt_redirect(int *origin_io, t_proc_data *proc_data);
+void	do_redirect(t_proc_data *proc_data);
 int		is_last_cmd(t_data *data, t_proc_data *proc_data);
 
 #endif
