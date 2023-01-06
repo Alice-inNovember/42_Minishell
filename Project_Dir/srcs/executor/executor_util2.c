@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 13:02:26 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 13:08:16 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int	open_redirect(t_redir *redir_data)
 	if (redir_data->type == T_GREAT || redir_data->type == T_DGREAT)
 	{
 		if (redir_data->type == T_GREAT)
-			fd = open(redir_data->fname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			fd = open(redir_data->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (redir_data->type == T_DGREAT)
-			fd = open(redir_data->fname, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			fd = open(redir_data->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			(perror("Could not open file"), exit(EXIT_FAILURE));
 		(dup2(fd, STDOUT_FILENO), close(fd));
 	}
 	else
 	{
-		fd = open(redir_data->fname, O_RDONLY, 0644);
+		fd = open(redir_data->filename, O_RDONLY, 0644);
 		if (fd == -1)
 			(perror("Could not open file"), exit(EXIT_FAILURE));
 		(dup2(fd, STDIN_FILENO), close(fd));
