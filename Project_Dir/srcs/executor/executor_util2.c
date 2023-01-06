@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_util2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 17:17:59 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:57:44 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,13 @@ int	is_last_cmd(t_data *data, t_proc_data *proc_data)
 	t_node	*node;
 
 	node = list_peek_last_node(&data->proc_data_list);
+	return (node->content == proc_data);
+}
+
+int	is_first_cmd(t_data *data, t_proc_data *proc_data)
+{
+	t_node	*node;
+
+	node = list_peek_first_node(&data->proc_data_list);
 	return (node->content == proc_data);
 }
