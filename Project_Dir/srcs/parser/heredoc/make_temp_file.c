@@ -14,17 +14,17 @@
 
 char	*make_temp_file(t_data *data)
 {
-	char	*fname;
+	char	*filename;
 	char	**mktemp_argv;
 	char	*mktemp_path;
 
 	mktemp_argv = ft_split("mktemp", '\0');
 	mktemp_path = get_cmd_path(data, mktemp_argv);
 	if (mktemp_path != NULL)
-		fname = make_file_using_mktemp(data, mktemp_path, mktemp_argv);
+		filename = make_file_using_mktemp(data, mktemp_path, mktemp_argv);
 	else
-		fname = make_random_name_file();
+		filename = make_random_name_file();
 	ft_free_vector(mktemp_argv);
 	free(mktemp_path);
-	return (fname);
+	return (filename);
 }
