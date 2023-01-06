@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 17:14:58 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:26:18 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,8 @@ pid_t	do_fork(t_data *data, t_proc_data *proc_data)
 	int			pip[2];
 	int			pipe_stat;
 	int			cur_write_end;
-	static int	prev_read_end = -1;
+	static int	prev_read_end;
 
-	if (prev_read_end == -1)
-		prev_read_end = 0;
 	if (is_last_cmd(data, proc_data))
 		cur_write_end = STDOUT_FILENO;
 	else
