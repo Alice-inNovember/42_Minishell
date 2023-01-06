@@ -109,9 +109,11 @@ fclean : clean
 	$(MAKE) -C $(GNLDIR) fclean
 	$(RM) $(NAME)
 
-re : fclean all
+re :
+	$(MAKE) fclean
+	$(MAKE) -j8 all
 
 rebug	: fclean
-	$(MAKE) IF_DEBUG=1 all
+	$(MAKE) -j8 IF_DEBUG=1 all
 
 .PHONY : all clean fclean re
