@@ -12,6 +12,8 @@
 
 #include "../includes/minishell.h"
 
+int		g_last_exit_status;
+
 void	init_data(t_data *data, char **envp)
 {
 	static int	first_call_flag = ON;
