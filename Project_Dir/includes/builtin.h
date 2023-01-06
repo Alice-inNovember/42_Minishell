@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:01 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:27:01 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:57:19 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ t_builtin_fp	builtin_find(t_list *builtin_list, char *key);
 int				check_word_cnt(char **cmd_vector);
 void			error_handler(char *cmd, char *word, int status);
 void			print_export(t_list *envp_list);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 19:34:18 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:59:40 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "../../includes/builtin.h"
 #include "../../includes/envp.h"
 #include "../../includes/lexer.h"
-
-void	print_export(t_list *envp_list);
 
 int	ft_findchr_i(char *str, char c)
 {
