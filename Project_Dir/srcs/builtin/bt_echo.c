@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:26 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 15:47:48 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 17:52:48 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 	}
 	while (cmd_vector[i])
 	{
-		printf("%s", cmd_vector[i]);
+		ft_putstr_fd(cmd_vector[i], 1);
 		if (!cmd_vector[i + 1])
 			break ;
-		ft_putchar_fd(' ', 1);
+		ft_putchar_fd('c', 1);
 		i++;
 	}
 	if (new_line_flag == 1)
