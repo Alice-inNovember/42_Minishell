@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/05 20:30:30 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 13:18:38 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	envp_add(t_list *envp_list, char *key, char *value)
 		return (envp_edit(envp_list, key, value));
 	e_node = (t_envp *)ft_calloc(1, sizeof(t_envp));
 	e_node->key = ft_strdup(key);
-	if (!value)
+	if (value)
 		e_node->value = ft_strdup(value);
 	else
 		e_node->value = 0;
