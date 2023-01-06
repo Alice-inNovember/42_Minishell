@@ -60,6 +60,8 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(PARSEDIR)/heredoc/make_temp_file.c \
 				$(PARSEDIR)/heredoc/make_file_using_mktemp.c \
 				$(PARSEDIR)/heredoc/make_random_name_file.c \
+				$(PARSEDIR)/heredoc/get_heredoc_input.c \
+				$(PARSEDIR)/heredoc/get_limiter.c \
 				$(EXECDIR)/executor.c \
 				$(EXECDIR)/executor_child.c \
 				$(EXECDIR)/executor_util1.c \
