@@ -77,7 +77,8 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(BUIDIR)/bt_pwd.c \
 				$(BUIDIR)/bt_unset.c \
 				$(UTILDIR)/syntax_err.c \
-				$(UTILDIR)/del_lists.c
+				$(UTILDIR)/del_lists.c \
+				$(UTILDIR)/etc.c
 OBJS		=	${SRCS:.c=.o}
 
 ifdef IF_DEBUG
