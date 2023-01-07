@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 13:30:12 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:38:45 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,8 @@ typedef struct s_data
 	t_list	pid_list;
 	t_error	syntax_err_flag;
 }	t_data;
+
+void	init_data(t_data *data, char **envp);
+void	clear_data(t_data *data);
 
 #endif

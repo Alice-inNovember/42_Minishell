@@ -6,13 +6,13 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:52:38 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/06 19:38:19 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "../../libraries/dllist/includes/dllist.h"
+#include "../../includes/builtin.h"
 
 void	builtin_add(t_list *builtin_list, char *key, t_builtin_fp function)
 {

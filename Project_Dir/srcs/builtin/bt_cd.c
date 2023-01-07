@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/builtin.h"
+#include "../../includes/envp.h"
 
 int	is_to_home_dir(char **cmd_vector)
 {

@@ -6,11 +6,12 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:37:12 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 20:24:58 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:40:20 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/lexer.h"
+#include "../../includes/data.h"
 
 void	make_token_list(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:01 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 15:27:39 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/07 14:19:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define BUILTIN_H
 
 # include "data.h"
-# include "envp.h"
-# include "lexer.h"
-# include "minishell.h"
-# include "../libraries/libft/includes/libft.h"
-# include <sys/types.h>
-# include <dirent.h>
-# include "../libraries/dllist/includes/dllist.h"
-# include <stdio.h>  
-# include <readline/readline.h>
-# include <readline/history.h>
 
 typedef enum e_bt_error_stat
 {
@@ -50,4 +40,5 @@ t_builtin_fp	builtin_find(t_list *builtin_list, char *key);
 int				check_word_cnt(char **cmd_vector);
 void			error_handler(char *cmd, char *word, int status);
 void			print_export(t_list *envp_list);
+
 #endif
