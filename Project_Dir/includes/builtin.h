@@ -6,14 +6,14 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:01 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:57:19 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:19:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-#include "data.h"
+# include "data.h"
 
 typedef enum e_bt_error_stat
 {
