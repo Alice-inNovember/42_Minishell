@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 19:59:40 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/08 07:13:34 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	bt_export(char **cmd_vector, t_list *envp_list)
 		word_i++;
 		if (check_word_sep_key_val(word, &key, &value, &error_flag))
 			continue ;
-		printf("key : \"%s\" \n value \"%s\" \n", key, value);
 		envp_add(envp_list, key, value);
 		(free(key), free(value));
 	}
