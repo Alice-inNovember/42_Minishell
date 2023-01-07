@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/07 01:20:21 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:32:56 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,30 @@ void	clear_data(t_data *data)
 	list_clear(&data->pid_list, free);
 }
 
-void	(*func)(int);
-
-void	signal_handler(int signo)
+int	is_line_empty(char *line)
 {
-	printf("ctrl + c\n");
-	signal(SIGINT, func);
+	char	*line_cp;
+
+	line_cp = line;
+	while (*line && ((*line >= 9 && *line <= 13) || *line == 32))
+		line++;
+	if (*line == '\0')
+	{
+		free(line_cp);
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	//func = signal(SIGINT, signal_handler);
 	while (1)
 	{
 		init_data(&data, envp);
 		data.line = readline("minishell> ");
-		if (data.line && data.line[0] == 0)
+		if (is_line_empty(data.line))
 			continue ;
 		add_history(data.line);
 		make_token_list(&data);
