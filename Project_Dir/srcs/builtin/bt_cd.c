@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/07 15:33:11 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/07 22:51:55 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	is_to_home_dir(char **cmd_vector)
 {
-	if (check_word_cnt(cmd_vector) == 2)
+	if (check_word_cnt(cmd_vector) == 1)
 		return (1);
 	else if (check_word_cnt(cmd_vector) == 2 && !ft_strcmp(cmd_vector[1], "~"))
 		return (1);
@@ -23,21 +23,35 @@ int	is_to_home_dir(char **cmd_vector)
 		return (0);
 }
 
-int	bt_cd(char **cmd_vector, t_list *envp_list)
+int	error_handler_for_cd(char *cmd, char *word, int status)
 {
-	char	*path;
-
-	if (is_to_home_dir(cmd_vector))
-	{
-		path = envp_find(envp_list, "HOME");
-		if (en)
-	}
-	else (check_word_cnt > 2)
-	{
-		
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	if (word)
+		ft_putstr_fd(": ", 2);
+	ft_putstr_fd(word, 2);
+	if (status == HOME_NOT)
+		ft_putstr_fd(": HOME not set\n", 2);
+	else if (status == CANT_CD)
+		ft_putstr_fd(": can't change directory\n", 2);
+	else if (status == MANY_ARG)
+		ft_putstr_fd(": too many arguments\n", 2);
+	return (EX_BT_FAIL);
 }
 
+// int	bt_cd(char **cmd_vector, t_list *envp_list)
+// {
+// 	char	*path;
+
+// 	if (is_to_home_dir(cmd_vector))
+// 	{
+// 		path = envp_find(envp_list, "HOME");
+// 		if (en)
+// 	}
+// 	else (check_word_cnt > 2)
+// 	{
+// 	}
+// }
 
 int	bt_cd(char **cmd_vector, t_list *envp_list)
 {
@@ -45,42 +59,25 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 	char	*new_pwd;
 	char	*old_pwd;
 
-	if (check_word_cnt(cmd_vector) == 1 || \
-	(check_word_cnt(cmd_vector) == 2 && !ft_strcmp(cmd_vector[1], "~")))
+	if (is_to_home_dir(cmd_vector))
 	{
 		path = envp_find(envp_list, "HOME");
 		if (!path)
-		{
-			error_handler("cd", 0, HOME_NOT);
-			return (EX_BT_FAIL);
-		}
+			return (error_handler_for_cd("cd", 0, HOME_NOT));
 	}
 	else if (check_word_cnt(cmd_vector) == 2)
 		path = cmd_vector[1];
 	else
-	{
-		error_handler("cd", 0, MANY_ARG);
-		return (EX_BT_FAIL);
-	}
-
+		return (error_handler_for_cd("cd", 0, MANY_ARG));
 	if (getcwd(0, 0) == NULL)
-	{
 		path = old_pwd;
-		old_pwd = getcwd(0, 0);
-	}
-	else
-		old_pwd = getcwd(0, 0);
-		
+	old_pwd = getcwd(0, 0);
 	if (chdir(path))
-	{
-		error_handler("cd", path, CANT_CD);
-		return (EX_BT_FAIL);
-	}
-	
+		return (error_handler_for_cd("cd", path, CANT_CD));
 	new_pwd = getcwd(0, 0);
-	printf ("old : %s\nnew : %s\n", old_pwd, new_pwd);
 	envp_add(envp_list, "PWD", new_pwd);
 	envp_add(envp_list, "OLDPWD", old_pwd);
 	return (EX_SUCCESS);
 }
 
+// printf ("old : %s\nnew : %s\n", old_pwd, new_pwd);
