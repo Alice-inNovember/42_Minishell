@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/04 13:32:07 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:20:37 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ void	print_syntax_err(t_data *data)
 	if (flag == E_NONE)
 		return ;
 	else if (flag == E_SINGLE_QUOTE)
-		printf("minishell: syntax error: unclosed quote\n");
+		ft_putendl_fd("minishell: syntax error: unclosed quote", STDERR_FILENO);
 	else if (flag == E_SINGLE_DQUOTE)
-		printf("minishell: syntax error: unclosed dquote\n");
+		ft_putendl_fd("minishell: syntax error: unclosed dquote", STDERR_FILENO);
 	else if (flag == E_NEAR_PIPE)
-		printf("minishell: syntax error near unexpected token '|'\n");
+		ft_putendl_fd("minishell: syntax error near unexpected token '|'", STDERR_FILENO);
 	else if (flag == E_NEAR_LESS)
-		printf("minishell: syntax error near unexpected token '<'\n");
+		ft_putendl_fd("minishell: syntax error near unexpected token '<'", STDERR_FILENO);
 	else if (flag == E_NEAR_GREAT)
-		printf("minishell: syntax error near unexpected token '>'\n");
+		ft_putendl_fd("minishell: syntax error near unexpected token '>'", STDERR_FILENO);
 	else if (flag == E_NEAR_DGREAT)
-		printf("minishell: syntax error near unexpected token '>>'\n");
+		ft_putendl_fd("minishell: syntax error near unexpected token '>>'", STDERR_FILENO);
 	else if (flag == E_NEAR_DLESS)
-		printf("minishell: syntax error near unexpected token '<<'\n");
+		ft_putendl_fd("minishell: syntax error near unexpected token '<<'", STDERR_FILENO);
 	else if (flag == E_NEAR_NEWLINE)
-		printf("minishell: syntax error near unexpected token 'newline'\n");
+		ft_putendl_fd("minishell: syntax error near unexpected token 'newline'", STDERR_FILENO);
 }
