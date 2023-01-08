@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/07 18:43:51 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/07 23:38:03 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	is_line_empty(char *line)
 {
 	char	*line_cp;
 
+	if (line == NULL)
+		return (1);
 	line_cp = line;
 	while (*line && ((*line >= 9 && *line <= 13) || *line == 32))
 		line++;
