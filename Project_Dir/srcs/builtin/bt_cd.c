@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/07 22:51:55 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/08 10:50:17 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	is_to_home_dir(char **cmd_vector)
 	if (check_word_cnt(cmd_vector) == 1)
 		return (1);
 	else if (check_word_cnt(cmd_vector) == 2 && !ft_strcmp(cmd_vector[1], "~"))
+		return (1);
+	else if (getcwd(0, 0) == NULL)
 		return (1);
 	else
 		return (0);
@@ -69,8 +71,6 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 		path = cmd_vector[1];
 	else
 		return (error_handler_for_cd("cd", 0, MANY_ARG));
-	if (getcwd(0, 0) == NULL)
-		path = old_pwd;
 	old_pwd = getcwd(0, 0);
 	if (chdir(path))
 		return (error_handler_for_cd("cd", path, CANT_CD));
