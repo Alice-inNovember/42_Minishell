@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/07 23:38:03 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/08 10:18:13 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../../includes/util.h"
 #include "../../includes/envp.h"
 #include "../../includes/builtin.h"
+
+extern int		g_last_exit_status;
 
 void	init_data(t_data *data, char **envp)
 {
@@ -43,7 +45,7 @@ int	is_line_empty(char *line)
 	char	*line_cp;
 
 	if (line == NULL)
-		return (1);
+		exit (g_last_exit_status);
 	line_cp = line;
 	while (*line && ((*line >= 9 && *line <= 13) || *line == 32))
 		line++;
