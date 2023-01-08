@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:24:07 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/08 11:14:51 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	envp_edit(t_list *envp_list, char *key, char *value)
 	while (node->content && ft_strcmp(((t_envp *)node->content)->key, key))
 		node = node->next;
 	free(((t_envp *)node->content)->value);
-	((t_envp *)node->content)->value = ft_strdup(value);
+	if (value)
+		((t_envp *)node->content)->value = ft_strdup(value);
+	else
+		((t_envp *)node->content)->value = 0;
 }
 
 void	envp_add(t_list *envp_list, char *key, char *value)
