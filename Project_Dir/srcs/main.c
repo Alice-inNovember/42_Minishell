@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 10:27:45 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/08 22:45:43 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		add_history(data.line);
-		make_token_list(&data);
-		//print_token_list(&data);
-		parser(&data);
-		executor(&data);
+		tokenizer(&data);
+		print_token_list(&data);
+		//parser(&data);
+		//executor(&data);
 		print_syntax_err(&data);
 		clear_data(&data);
 	}

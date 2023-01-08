@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   add_buf_dgreat.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 19:23:52 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 19:24:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../../includes/lexer.h"
 
-char	*make_buf(char input)
+void	add_buf_dgreat(t_state *state, t_asset *asset)
 {
-	char	*buf;
+	const char	input = asset->line[asset->index];
+	char		*buf;
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	buf = make_buf(input);
+	list_append(&asset->buf_list, new_node(buf));
+	asset->index++;
+	*state = MAKE_DGREAT_TOKEN;
 }

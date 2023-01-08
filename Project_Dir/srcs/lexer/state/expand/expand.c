@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 20:09:23 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 21:44:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../../includes/lexer.h"
 
-char	*make_buf(char input)
+void	expand(t_state *state, t_asset *asset)
 {
-	char	*buf;
+	char	*expanded_line;
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	expanded_line = make_expanded_line(asset);
+	free(asset->line);
+	asset->line = expanded_line;
+	*state = MAKE_WORD_TOKEN_EXPAND;
 }

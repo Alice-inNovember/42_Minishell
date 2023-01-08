@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/08 10:18:13 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/08 17:33:21 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_data(t_data *data, char **envp)
 
 void	clear_data(t_data *data)
 {
+	free(data->line);
 	list_clear(&data->token_list, del_s_token);
 	list_clear(&data->proc_data_list, del_s_proc_data);
 	list_clear(&data->pid_list, free);

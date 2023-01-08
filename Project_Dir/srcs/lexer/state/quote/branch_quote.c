@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   branch_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 19:34:43 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 19:38:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../../includes/lexer.h"
 
-char	*make_buf(char input)
+void	branch_quote(t_state *state, t_asset *asset)
 {
-	char	*buf;
+	const char	input = asset->line[asset->index];
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	if (input == '\0')
+		*state = OPEN_QUOTE_ERROR;
+	else if (input == '\'')
+		*state = CLOSE_QUOTE;
+	else
+		*state = ADD_BUF_IN_QUOTE;
 }

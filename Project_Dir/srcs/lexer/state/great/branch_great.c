@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   branch_great.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 19:24:34 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 19:24:53 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../../includes/lexer.h"
 
-char	*make_buf(char input)
+void	branch_great(t_state *state, t_asset *asset)
 {
-	char	*buf;
+	const char	input = asset->line[asset->index];
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	if (input == '>')
+		*state = ADD_BUF_DGREAT;
+	else
+		*state = MAKE_GREAT_TOKEN;
 }
