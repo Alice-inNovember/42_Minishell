@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/09 01:57:46 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 02:03:19 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ int	is_line_empty(char *line)
 	while (*line && ((*line >= 9 && *line <= 13) || *line == 32))
 		line++;
 	if (*line == '\0')
-	{
-		free(line_cp);
 		return (1);
-	}
 	return (0);
 }
 
