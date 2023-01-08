@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 23:08:23 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/09 01:57:58 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 #include "../includes/executor.h"
 #include "../includes/util.h"
 
-int		g_last_exit_status;
+int	g_last_exit_status;
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	((void) argv, (void) argc);
+	(void) argv;
+	if (!check_argc(argc))
+		return (1);
 	while (1)
 	{
 		init_data(&data, envp);

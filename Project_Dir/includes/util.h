@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:41 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/07 18:39:09 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 01:56:44 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	del_s_pid(void *content);
 
 void	print_syntax_err(t_data *data);
 int		is_line_empty(char *line);
+int		check_argc(int argc);
 
 #endif

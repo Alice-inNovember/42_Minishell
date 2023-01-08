@@ -5,7 +5,7 @@ CC			=	cc
 RM			=	rm -rf
 LIBC		=	ar rcs
 #FLAGS
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	
 DFLAGS		=	-g3 -fsanitize=address
 #DIRS
 LFTDIR		=	libraries/libft
