@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/08 17:33:21 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/09 01:57:46 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ int	is_line_empty(char *line)
 		return (1);
 	}
 	return (0);
+}
+
+int	check_argc(int argc)
+{
+	if (argc > 1)
+	{
+		ft_putendl_fd("minishell: Our minishell doesn't support this mode", STDERR_FILENO);
+		return (0);
+	}
+	return (1);
 }
