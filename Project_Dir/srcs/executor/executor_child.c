@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_child.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/07 08:14:43 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/08 10:28:27 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 
 void	child_pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {
-	t_node	*node;
-
 	if (read_end != 0)
 	{
 		dup2(read_end, STDIN_FILENO);
