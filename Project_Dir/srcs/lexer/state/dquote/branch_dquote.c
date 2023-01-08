@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   branch_dquote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 22:13:39 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 22:57:52 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../../includes/lexer.h"
 
-char	*make_buf(char input)
+void	branch_dquote(t_state *state, t_asset *asset)
 {
-	char	*buf;
+	const char	input = asset->line[asset->index];
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	if (input == '\\')
+		*state = SKIP_BACKSLASH_IN_DQUOTE;
+	else if (input == '\0')
+		*state = OPEN_DQUOTE_ERROR;
+	else if (input == '$')
+		*state = CHECK_EXPAND_DQUOTE;
+	else if (input == '\"')
+		*state = CLOSE_DQUOTE;
+	else
+		*state = ADD_BUF_IN_DQUOTE;
 }

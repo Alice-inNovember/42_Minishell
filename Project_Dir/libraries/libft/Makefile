@@ -6,7 +6,7 @@
 #    By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 11:00:34 by minseok2          #+#    #+#              #
-#    Updated: 2023/01/06 09:11:51 by minseok2         ###   ########.fr        #
+#    Updated: 2023/01/08 22:02:18 by minseok2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,8 @@ SRCS = ft_isalpha.c \
 		ft_strdup.c \
 		ft_substr.c \
 		ft_strjoin.c \
+		ft_str3join.c \
+		ft_str4join.c \
 		ft_strtrim.c \
 		ft_split.c \
 		ft_strmapi.c \

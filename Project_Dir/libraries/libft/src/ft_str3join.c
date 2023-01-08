@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   ft_str3join.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 21:58:18 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 22:00:11 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../includes/libft.h"
 
-char	*make_buf(char input)
+char	*ft_str3join(char const *s1, char const *s2, char const *s3)
 {
-	char	*buf;
+	char	*joined_str;
+	char	*temp_str;
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	temp_str = ft_strjoin(s1, s2);
+	joined_str = ft_strjoin(temp_str, s3);
+	free(temp_str);
+	return (joined_str);
 }

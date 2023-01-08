@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buf.c                                         :+:      :+:    :+:   */
+/*   check_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 18:06:22 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 18:07:22 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/08 19:53:25 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 22:16:41 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/lexer.h"
+#include "../../../../includes/lexer.h"
 
-char	*make_buf(char input)
+void	check_expand(t_state *state, t_asset *asset)
 {
-	char	*buf;
+	const char	next_input = asset->line[asset->index + 1];
+	char		*env_start;
 
-	buf = (char *)ft_calloc(1, sizeof(char));
-	*buf = input;
-	return (buf);
+	env_start = &asset->line[asset->index + 1];
+	if (next_input == '?')
+		*state = QUESTION_MARK_EXPAND;
+	else if (get_env_length(env_start) > 0 && !is_limiter(asset->token_list))
+		*state = EXPAND;
+	else
+		*state = ADD_BUF_IN_EXPAND;
 }

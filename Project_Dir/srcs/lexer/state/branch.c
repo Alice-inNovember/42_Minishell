@@ -5,35 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 13:13:49 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 15:48:32 by jincpark         ###   ########.fr       */
+/*   Created: 2023/01/08 17:55:52 by minseok2          #+#    #+#             */
+/*   Updated: 2023/01/08 22:44:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/lexer.h"
 
-void	branch(t_state *state, t_data *data, t_list *buf_list, int *idx)
+void	branch(t_state *state, t_asset *asset)
 {
-	const char	input = data->line[*idx];
+	const char	input = asset->line[asset->index];
 
-	if (input == ' ')
-		*state = SKIP_SPACE;
-	else if (input == '\0')
+	if (input == '\0')
 		*state = CLEAR;
-	else if (input == '$' && \
-				is_expansion(data->line, *idx, &data->token_list))
-		*state = EXPAND;
+	else if (ft_strchr(" \b\t\n\v\f\r", input))
+		*state = SKIP_SPACE;
+	else if (input == '$')
+		*state = CHECK_EXPAND;
 	else if (input == '|')
-		*state = MAKING_PIPE;
+		*state = ADD_BUF_PIPE;
 	else if (input == '<')
-		*state = MAKING_LESS;
+		*state = ADD_BUF_LESS;
 	else if (input == '>')
-		*state = MAKING_GREAT;
+		*state = ADD_BUF_GREAT;
 	else if (input == '\'')
-		*state = QUOTE_BRANCH;
+		*state = OPEN_QUOTE;
 	else if (input == '\"')
-		*state = DQUOTE_BRANCH;
+		*state = OPEN_DQUOTE;
 	else
-		*state = MAKING_WORD;
-	(t_unused)buf_list;
+		*state = ADD_BUF_WORD;
 }

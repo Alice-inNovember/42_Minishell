@@ -26,30 +26,56 @@ INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
-				$(LEXERDIR)/make_token_list.c \
+				$(LEXERDIR)/tokenizer.c \
+				$(LEXERDIR)/print_token_list.c \
+				$(LEXERDIR)/utils/join_buf.c \
+				$(LEXERDIR)/utils/make_buf.c \
+				$(LEXERDIR)/utils/expand/get_env_length.c \
+				$(LEXERDIR)/utils/expand/is_limiter.c \
+				$(LEXERDIR)/utils/expand/make_expanded_line.c \
+				$(LEXERDIR)/utils/expand/make_question_mark_expanded_line.c \
+				$(LEXERDIR)/state/start.c \
 				$(LEXERDIR)/state/branch.c \
 				$(LEXERDIR)/state/skip_space.c \
-				$(LEXERDIR)/state/dquote_branch.c \
-				$(LEXERDIR)/state/dquote_close.c \
-				$(LEXERDIR)/state/dquote_expand.c \
-				$(LEXERDIR)/state/dquote_making_word.c \
-				$(LEXERDIR)/state/expand.c \
-				$(LEXERDIR)/state/init.c \
-				$(LEXERDIR)/state/making_dgreat.c \
-				$(LEXERDIR)/state/making_dless.c \
-				$(LEXERDIR)/state/making_great.c \
-				$(LEXERDIR)/state/making_less.c \
-				$(LEXERDIR)/state/making_pipe.c \
-				$(LEXERDIR)/state/making_word.c \
-				$(LEXERDIR)/state/quote_branch.c \
-				$(LEXERDIR)/state/quote_close.c \
-				$(LEXERDIR)/state/quote_making_word.c \
 				$(LEXERDIR)/state/clear.c \
-				$(LEXERDIR)/expand/expand_logic.c \
-				$(LEXERDIR)/expand/expand_utils.c \
-				$(LEXERDIR)/utils/make_buf.c \
-				$(LEXERDIR)/utils/make_token.c \
-				$(LEXERDIR)/utils/print_token_list.c \
+				$(LEXERDIR)/state/pipe/add_buf_pipe.c \
+				$(LEXERDIR)/state/pipe/make_pipe_token.c \
+				$(LEXERDIR)/state/less/add_buf_less.c \
+				$(LEXERDIR)/state/less/branch_less.c \
+				$(LEXERDIR)/state/less/make_less_token.c \
+				$(LEXERDIR)/state/less/add_buf_dless.c \
+				$(LEXERDIR)/state/less/make_dless_token.c \
+				$(LEXERDIR)/state/great/add_buf_great.c \
+				$(LEXERDIR)/state/great/branch_great.c \
+				$(LEXERDIR)/state/great/make_great_token.c \
+				$(LEXERDIR)/state/great/add_buf_dgreat.c \
+				$(LEXERDIR)/state/great/make_dgreat_token.c \
+				$(LEXERDIR)/state/word/add_buf_word.c \
+				$(LEXERDIR)/state/word/make_word_token.c \
+				$(LEXERDIR)/state/expand/add_buf_in_expand.c \
+				$(LEXERDIR)/state/expand/branch_expand.c \
+				$(LEXERDIR)/state/expand/check_expand.c \
+				$(LEXERDIR)/state/expand/expand.c \
+				$(LEXERDIR)/state/expand/expand_end.c \
+				$(LEXERDIR)/state/expand/make_word_token_expand.c \
+				$(LEXERDIR)/state/expand/question_mark_expand.c \
+				$(LEXERDIR)/state/expand/skip_space_in_expand.c \
+				$(LEXERDIR)/state/quote/add_buf_in_quote.c \
+				$(LEXERDIR)/state/quote/branch_quote.c \
+				$(LEXERDIR)/state/quote/close_quote.c \
+				$(LEXERDIR)/state/quote/make_word_token_quote.c \
+				$(LEXERDIR)/state/quote/open_quote.c \
+				$(LEXERDIR)/state/quote/open_quote_error.c \
+				$(LEXERDIR)/state/dquote/add_buf_in_dquote.c \
+				$(LEXERDIR)/state/dquote/branch_dquote.c \
+				$(LEXERDIR)/state/dquote/close_dquote.c \
+				$(LEXERDIR)/state/dquote/make_word_token_dquote.c \
+				$(LEXERDIR)/state/dquote/open_dquote.c \
+				$(LEXERDIR)/state/dquote/open_dquote_error.c \
+				$(LEXERDIR)/state/dquote/skip_backslash_in_dquote.c \
+				$(LEXERDIR)/state/dquote/expand_dquote/check_expand_dquote.c \
+				$(LEXERDIR)/state/dquote/expand_dquote/expand_dquote.c \
+				$(LEXERDIR)/state/dquote/expand_dquote/question_mark_expand_dquote.c \
 				$(PARSEDIR)/parser.c \
 				$(PARSEDIR)/parse_suffix_prefix.c \
 				$(PARSEDIR)/parse_word_redir.c \
