@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/07 08:36:29 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/08 10:14:26 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../../includes/executor.h"
 #include "../../includes/builtin.h"
 
-int	g_last_exit_status;
+extern int	g_last_exit_status;
 
 int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 {
