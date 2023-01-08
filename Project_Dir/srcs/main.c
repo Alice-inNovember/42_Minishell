@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 07:06:04 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/08 10:27:45 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	((void) argv, (void) argc);
 	while (1)
 	{
 		init_data(&data, envp);

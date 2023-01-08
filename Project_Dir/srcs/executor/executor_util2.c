@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:23:41 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/08 10:39:47 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	open_redirect(t_redir *redir)
 	{
 		if (redir->type == T_GREAT)
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redir->type == T_DGREAT)
+		else
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			(perror("Could not open file"), exit(EXIT_FAILURE));
