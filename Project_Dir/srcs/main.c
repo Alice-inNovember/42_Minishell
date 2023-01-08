@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 01:57:58 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 02:12:50 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,8 @@ int	main(int argc, char **argv, char **envp)
 		init_data(&data, envp);
 		// readline returns NULL if EOF is only input
 		data.line = readline("minishell> ");
-		
-		if (is_line_empty(data.line))
-		{
-			clear_data(&data);
+		if (is_line_empty(&data))
 			continue ;
-		}
 		add_history(data.line);
 		tokenizer(&data);
 		print_token_list(&data);

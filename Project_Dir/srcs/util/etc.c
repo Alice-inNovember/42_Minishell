@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/09 02:03:19 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 02:12:14 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,20 @@ void	clear_data(t_data *data)
 	list_clear(&data->pid_list, free);
 }
 
-int	is_line_empty(char *line)
+int	is_line_empty(t_data *data)
 {
 	char	*line_cp;
 
-	if (line == NULL)
+	if (data->line == NULL)
 		exit (g_last_exit_status);
-	line_cp = line;
-	while (*line && ((*line >= 9 && *line <= 13) || *line == 32))
-		line++;
-	if (*line == '\0')
+	line_cp = data->line;
+	while (*line_cp && ((*line_cp >= 9 && *line_cp <= 13) || *line_cp == 32))
+		line_cp++;
+	if (*line_cp == '\0')
+	{
+		clear_data(data);
 		return (1);
+	}
 	return (0);
 }
 
