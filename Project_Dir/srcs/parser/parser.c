@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 19:41:24 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:51:51 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	parser(t_data *data)
 	t_node	*first_node;
 	t_node	*last_node;
 
-	if (data->syntax_err_flag != E_NONE)
+	if (data->syntax_err_flag != E_NONE || data->token_list.size == 0)
 		return ;
 	first_node = list_peek_first_node(&data->token_list);
 	last_node = list_peek_last_node(&data->token_list);
