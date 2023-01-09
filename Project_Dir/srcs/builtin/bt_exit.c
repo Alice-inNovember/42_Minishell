@@ -6,11 +6,12 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:08 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 15:58:14 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 21:46:11 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtin.h"
+#include <unistd.h>
 
 void	ft_error_manage(int	*flag)
 {
@@ -58,7 +59,8 @@ int	bt_exit(char **cmd_vector, t_list *envp_list)
 	int	num;
 	int	flag;
 
-	ft_putstr_fd("exit\n", 2);
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+		ft_putstr_fd("exit\n", 2);
 	(void)envp_list;
 	flag = 0;
 	if (check_word_cnt(cmd_vector) == 1)
