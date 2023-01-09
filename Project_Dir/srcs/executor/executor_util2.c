@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 11:33:59 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 13:59:30 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	open_redirect(t_redir *redir)
 	else
 	{
 		fd = open(redir->filename, O_RDONLY, 0644);
-		if (redir->type == T_DLESS)
-			unlink(redir->filename);
 		if (fd == -1)
 			return (perror(err_msg), free(err_msg), -1);
+		if (redir->type == T_DLESS)
+			unlink(redir->filename);
 		(dup2(fd, STDIN_FILENO), close(fd));
 	}
 	free(err_msg);

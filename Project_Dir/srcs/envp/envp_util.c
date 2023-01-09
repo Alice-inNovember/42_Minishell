@@ -6,16 +6,19 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:17:33 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 12:34:33 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 14:50:08 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
+#include <stdio.h>
 
 char	*ft_strcat(char *dest, char *src)
 {
 	char	*temp;
 
+	if (!src)
+		return (dest);
 	temp = dest;
 	while (*dest)
 		dest++;
@@ -36,9 +39,9 @@ char	*str3join(char *str1, char *str2, char *str3)
 	size_t	str3len;
 	char	*returnstr;
 
+	str3len = ft_strlen(str3);
 	str1len = ft_strlen(str1);
 	str2len = ft_strlen(str2);
-	str3len = ft_strlen(str3);
 	returnstr = (char *)ft_malloc(str1len + str2len + str3len + 1);
 	if (!returnstr)
 		return (0);
