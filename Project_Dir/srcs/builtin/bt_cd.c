@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 14:38:14 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 15:30:50 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	is_to_home_dir(char **cmd_vector)
 	else
 		return (0);
 }
+
+//When  pwd == getcwd(0, 0), pwd == null return (1) and go home
 
 int	error_handler_for_cd(char *cmd, char *word, int status)
 {
