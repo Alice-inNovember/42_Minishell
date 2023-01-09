@@ -138,9 +138,9 @@ fclean : clean
 
 re :
 	$(MAKE) fclean
-	$(MAKE) -j8 all
+	$(MAKE) -j6 all
 
 rebug	: fclean
-	$(MAKE) -j8 IF_DEBUG=1 all
+	$(MAKE) -j6 IF_DEBUG=1 all
 
 .PHONY : all clean fclean re
