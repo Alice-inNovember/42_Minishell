@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:35 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 12:21:47 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 18:02:44 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,5 @@ int	bt_env(char **cmd_vector, t_list *envp_list)
 	}	
 	return (EX_SUCCESS);
 }
+
+//line 32 : when "export a", export : key = a value = NULL, not print
