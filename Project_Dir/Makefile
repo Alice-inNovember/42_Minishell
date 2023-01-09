@@ -92,7 +92,6 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(EXECDIR)/executor_child.c \
 				$(EXECDIR)/executor_util1.c \
 				$(EXECDIR)/executor_util2.c \
-				$(BUIDIR)/built_in.c \
 				$(BUIDIR)/built_in_util.c \
 				$(BUIDIR)/bt_cd.c \
 				$(BUIDIR)/bt_echo.c \
