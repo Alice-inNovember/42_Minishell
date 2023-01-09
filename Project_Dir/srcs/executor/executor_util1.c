@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:21:36 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:15:47 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <sys/unistd.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "../../includes/envp.h"
 
 char	**cmd_list2arr(t_list *cmd_list)
@@ -43,6 +44,8 @@ char	**get_path(t_data *data)
 	char	**returnpath;
 
 	path = envp_find(&data->envp_list, "PATH");
+	if (!path)
+		return (0);
 	returnpath = ft_split(path, ':');
 	return (returnpath);
 }
@@ -53,10 +56,11 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	char	*cmdpath;
 	size_t	i;
 
-	path = get_path(data);
 	if (ft_strchr(cmd_argv[0], '/'))
-		if (access(cmd_argv[0], F_OK | X_OK) == 0)
-			return (cmd_argv[0]);
+		return (cmd_argv[0]);
+	path = get_path(data);
+	if (!path)
+		return (NULL);
 	i = 0;
 	while (path[i])
 	{
