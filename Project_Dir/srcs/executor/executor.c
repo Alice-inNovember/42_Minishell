@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 10:48:02 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 11:01:26 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	make_child(t_data *data)
 	origin[READ_END] = dup(STDIN_FILENO);
 	origin[WRITE_END] = dup(STDOUT_FILENO);
 	pipe(pip[PREV]);
-	close(pip[PREV][WRITE_END]);
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
@@ -91,8 +90,11 @@ void	make_child(t_data *data)
 		if (pid == 0)
 			execute_child(data, proc_node->content, pip, origin);
 		pid_list_add(&data->pid_list, pid);
-		(close(pip[PREV][READ_END]), close(pip[NOW][WRITE_END]));
+		close(pip[PREV][WRITE_END]);
+		close(pip[PREV][READ_END]);
+		close(pip[NOW][WRITE_END]);
 		pip[PREV][READ_END] = pip[NOW][READ_END];
+		pip[PREV][WRITE_END] = pip[NOW][WRITE_END];
 		proc_node = proc_node->next;
 	}
 	close(pip[NOW][READ_END]);
