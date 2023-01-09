@@ -6,11 +6,12 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/06 09:54:45 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/09 22:01:53 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+#include "../../../includes/signal_handler.h"
 
 static void	execve_cmd(t_data *data, int pip[2], char *cmd_path, char **cmd_argv)
 {

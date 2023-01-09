@@ -19,6 +19,7 @@
 #include "../includes/envp.h"
 #include "../includes/builtin.h"
 #include "../includes/executor.h"
+#include "../includes/signal_handler.h"
 #include "../includes/util.h"
 
 int	g_last_exit_status;
@@ -40,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 ");
 	while (1)
 	{
+		set_signal();
 		init_data(&data, envp);
 		// readline returns NULL if EOF is only input
 		data.line = readline("minishell> ");

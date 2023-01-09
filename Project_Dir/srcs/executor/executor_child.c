@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 16:49:11 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 22:01:26 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "../../includes/envp.h"
 #include "../../includes/builtin.h"
 #include "../../includes/executor.h"
+#include "../../includes/signal_handler.h"
 
 void	pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {

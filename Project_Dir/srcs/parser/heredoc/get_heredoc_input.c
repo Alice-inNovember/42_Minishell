@@ -6,18 +6,20 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 09:38:09 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/09 22:10:10 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+#include <readline/readline.h>
 #include "../../../includes/data.h"
 #include "../../../includes/parser.h"
-#include <readline/readline.h>
-#include <fcntl.h>
+#include "../../../includes/signal_handler.h"
 
 void	get_heredoc_input(char *filename, char *limiter)
 {
 	int		fd;
+	int		wstatus;
 	pid_t	pid;
 	char	*input_line;
 
@@ -38,6 +40,6 @@ void	get_heredoc_input(char *filename, char *limiter)
 		}
 		exit(EXIT_SUCCESS);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &wstatus, 0);
 	close(fd);
 }
