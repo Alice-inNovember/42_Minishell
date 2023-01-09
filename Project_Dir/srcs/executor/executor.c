@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 11:13:29 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 14:55:48 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	make_child(t_data *data)
 
 void	executor(t_data *data)
 {
-	if (data->syntax_err_flag != E_NONE)
+	if (data->syntax_err_flag != E_NONE || data->token_list.size == 0)
 		return ;
 	if (check_and_exec_single_builtin(data, &data->envp_list))
 		return ;
