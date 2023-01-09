@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 14:34:04 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 16:49:11 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/fcntl.h>
+#include <sys/unistd.h>
 #include <unistd.h>
 #include "../../includes/data.h"
 #include "../../includes/envp.h"
@@ -49,8 +50,15 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	char	*msg;
 
 	cmd_path = get_cmd_path(data, cmd_argv);
-	if (access(cmd_path, F_OK | X_OK) == 0)
+	if (cmd_path)
 	{
+		if (access(cmd_path, X_OK) == -1)
+		{
+			msg = str3join("minishell: Permission denied: ", cmd_argv[0], "\n");
+			ft_putstr_fd(msg, STDERR_FILENO);
+			free(msg);
+			exit(EXIT_FAILURE);
+		}
 		execve(cmd_path, cmd_argv, cmd_envp);
 		perror("minishell");
 	}
