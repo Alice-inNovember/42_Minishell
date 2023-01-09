@@ -6,11 +6,10 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 14:35:38 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 15:25:38 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../../includes/builtin.h"
 #include "../../includes/envp.h"
 #include "../../includes/lexer.h"
