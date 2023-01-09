@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:17:33 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 14:50:08 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 16:18:30 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,18 @@ char	**envp2arr(t_list *envp_list)
 	}
 	envparr[i] = NULL;
 	return (envparr);
+}
+
+int	envp_exist(t_list *envp_list, char *key)
+{
+	t_node	*node;
+
+	node = list_peek_first_node(envp_list);
+	while (node->next)
+	{
+		if (!ft_strcmp(((t_envp *)node->content)->key, key))
+			return (1);
+		node = node->next;
+	}
+	return (0);
 }
