@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 02:12:50 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:03:07 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		add_history(data.line);
 		tokenizer(&data);
-		print_token_list(&data);
+		// print_token_list(&data);
 		parser(&data);
 		executor(&data);
 		print_syntax_err(&data);

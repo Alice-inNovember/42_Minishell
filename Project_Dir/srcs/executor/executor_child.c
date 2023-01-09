@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 11:02:04 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 11:10:42 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	execute_child(t_data *data, t_proc_data *proc, int pip[2][2], int *ofd)
 	char			**cmd_argv;
 	char			**cmd_envp;
 
-	close(pip[PREV][WRITE_END]);
 	close(pip[NOW][READ_END]);
 	fl_redirect(data, proc, pip, ofd);
 	child_pip_redirect(proc, pip[NOW][WRITE_END], pip[PREV][READ_END]);
