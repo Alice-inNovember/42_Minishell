@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/07 08:02:52 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:38:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../../../includes/parser.h"
 #include <readline/readline.h>
 #include <fcntl.h>
-#include <stdlib.h>
 
 void	get_heredoc_input(char *filename, char *limiter)
 {
@@ -39,5 +38,6 @@ void	get_heredoc_input(char *filename, char *limiter)
 		}
 		exit(EXIT_SUCCESS);
 	}
+	waitpid(pid, NULL, 0);
 	close(fd);
 }
