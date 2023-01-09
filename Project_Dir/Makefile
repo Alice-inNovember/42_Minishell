@@ -22,8 +22,8 @@ UTILDIR		=	$(SRCDIR)/util
 SIGDIR		=	$(SRCDIR)/signal
 BONUSDIR	=	
 #FILES
-LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a -lreadline -L/Users/jincpark/.brew/opt/readline/lib
-INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR) -I/Users/jincpark/.brew/opt/readline/include
+LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a -lreadline -L${HOME}/.brew/opt/readline/lib
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR) -I${HOME}/.brew/opt/readline/include
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
