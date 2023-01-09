@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/07 18:38:45 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:33:05 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 // define pipe end
 # define READ_END	0
 # define WRITE_END	1
+
+// define pipe
+# define NOW	0
+# define PREV	1
 
 // define unused type
 typedef void	t_unused;

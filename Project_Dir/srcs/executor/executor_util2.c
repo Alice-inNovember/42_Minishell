@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_util2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/08 20:12:45 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:18:26 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,32 @@ int	open_redirect(t_redir *redir)
 		else
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
-			(perror(err_msg), free(err_msg), exit(EXIT_FAILURE));
+			return (perror(err_msg), free(err_msg), -1);
 		(dup2(fd, STDOUT_FILENO), close(fd));
 	}
 	else
 	{
 		fd = open(redir->filename, O_RDONLY, 0644);
 		if (fd == -1)
-			(perror(err_msg), free(err_msg), exit(EXIT_FAILURE));
+			return (perror(err_msg), free(err_msg), -1);
 		(dup2(fd, STDIN_FILENO), close(fd));
 	}
 	free(err_msg);
 	return (fd);
 }
 
-void	do_redirect(t_proc_data *proc_data)
+int	do_redirect(t_proc_data *proc_data)
 {
 	t_node	*node;
 
 	node = list_peek_first_node(&proc_data->redir_list);
 	while (node->next != NULL)
 	{
-		open_redirect(((t_redir *)node->content));
+		if (open_redirect(((t_redir *)node->content)) < 0)
+			return (1);
 		node = node->next;
 	}
+	return (0);
 }
 
 int	is_last_cmd(t_data *data, t_proc_data *proc_data)

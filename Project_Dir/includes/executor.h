@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 18:58:48 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 10:15:05 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "data.h"
 
 void	executor(t_data *data);
-void	execute_child(t_data *data, t_proc_data *proc, int w_end, int r_end);
+void	execute_child(t_data *data, t_proc_data *proc, int pip[2][2], int *ofd);
 char	**cmd_list2arr(t_list *cmd_list);
 char	**get_path(t_data *data);
 char	*get_cmd_path(t_data *data, char **cmd_argv);
@@ -25,7 +25,7 @@ int		open_redirect(t_redir *redir_data);
 void	cmd_argv_free(char **cmd_argv);
 int		wexitstatus(int status);
 void	pid_list_add(t_list *pidlist, pid_t pid);
-void	do_redirect(t_proc_data *proc_data);
+int		do_redirect(t_proc_data *proc_data);
 int		is_last_cmd(t_data *data, t_proc_data *proc_data);
 int		is_first_cmd(t_data *data, t_proc_data *proc_data);
 

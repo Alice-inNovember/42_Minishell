@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_child.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/08 10:28:27 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 10:52:56 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,12 @@
 
 void	child_pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {
-	if (read_end != 0)
-	{
-		dup2(read_end, STDIN_FILENO);
-		close(read_end);
-	}
-	if (write_end != STDOUT_FILENO)
-	{
-		dup2(write_end, STDOUT_FILENO);
-		close(write_end);
-	}
-	do_redirect(proc_data);
+	dup2(read_end, STDIN_FILENO);
+	close(read_end);
+	dup2(write_end, STDOUT_FILENO);
+	close(write_end);
+	if (do_redirect(proc_data))
+		exit (EXIT_FAILURE);
 }
 
 void	execute_builtin(t_builtin_fp bt_fp, char **cmd_argv, t_list *envp_list)
@@ -53,13 +48,33 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	exit(EXIT_FAILURE);
 }
 
-void	execute_child(t_data *data, t_proc_data *proc, int w_end, int r_end)
+void	fl_redirect(t_data *data, t_proc_data *proc, int pip[2][2], int *origin)
+{
+	t_proc_data	*first;
+	t_proc_data	*last;
+
+	first = list_peek_first_content(&data->proc_data_list);
+	last = list_peek_last_content(&data->proc_data_list);
+	if (first == proc)
+	{
+		dup2(origin[READ_END], pip[PREV][READ_END]);
+	}
+	if (last == proc)
+	{
+		dup2(origin[WRITE_END], pip[NOW][WRITE_END]);
+	}
+}
+
+void	execute_child(t_data *data, t_proc_data *proc, int pip[2][2], int *ofd)
 {
 	t_builtin_fp	builtin_fp;
 	char			**cmd_argv;
 	char			**cmd_envp;
 
-	child_pip_redirect(proc, w_end, r_end);
+	close(pip[PREV][WRITE_END]);
+	close(pip[NOW][READ_END]);
+	fl_redirect(data, proc, pip, ofd);
+	child_pip_redirect(proc, pip[NOW][WRITE_END], pip[PREV][READ_END]);
 	cmd_argv = cmd_list2arr(&proc->cmd_list);
 	cmd_envp = envp2arr(&data->envp_list);
 	builtin_fp = builtin_find(&data->builtin_list, cmd_argv[0]);

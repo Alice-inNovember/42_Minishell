@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/08 23:03:00 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 10:48:02 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,22 @@ int	check_and_exec_single_builtin(t_data *data, t_list *envp_list)
 		{
 			origin_io[READ_END] = dup(STDIN_FILENO);
 			origin_io[WRITE_END] = dup(STDOUT_FILENO);
-			do_redirect(proc_data);
-			bt_fp(cmd_argv, envp_list);
-			cmd_argv_free(cmd_argv);
-			dup2(origin_io[READ_END], STDIN_FILENO);
-			dup2(origin_io[WRITE_END], STDOUT_FILENO);
-			close(origin_io[READ_END]);
-			close(origin_io[WRITE_END]);
-			return (1);
+			if (do_redirect(proc_data))
+				g_last_exit_status = 2;
+			else
+				g_last_exit_status = bt_fp(cmd_argv, envp_list);
+			(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
+			(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
+			return (cmd_argv_free(cmd_argv), 1);
 		}
 		if (list_size(&proc_data->cmd_list) == 0) // redirection만 들어오는 경우
 		{
 			origin_io[READ_END] = dup(STDIN_FILENO);
 			origin_io[WRITE_END] = dup(STDOUT_FILENO);
-			do_redirect(proc_data);
-			dup2(origin_io[READ_END], STDIN_FILENO);
-			dup2(origin_io[WRITE_END], STDOUT_FILENO);
-			close(origin_io[READ_END]);
-			close(origin_io[WRITE_END]);
+			if (do_redirect(proc_data))
+				g_last_exit_status = 1;
+			(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
+			(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
 			return (1);
 		}
 	}
@@ -74,55 +72,32 @@ void	wait_child(t_data *data)
 	}
 }
 
-pid_t	do_fork(t_data *data, t_proc_data *proc_data)
-{
-	pid_t		pid;
-	int			pip[2];
-	int			pipe_stat;
-	int			cur_write_end;
-	static int	prev_read_end;
-
-	if (is_first_cmd(data, proc_data))
-		prev_read_end = 0;
-	if (is_last_cmd(data, proc_data))
-		cur_write_end = STDOUT_FILENO;
-	else
-	{
-		pipe_stat = pipe(pip);
-		if (pipe_stat != 0)
-			(wait_child(data), perror("minishell"), exit(EXIT_FAILURE));
-		cur_write_end = pip[WRITE_END];
-	}
-	pid = fork();
-	if (pid == 0)
-		execute_child(data, proc_data, cur_write_end, prev_read_end);
-	if (prev_read_end != 0)
-		close(prev_read_end);
-	prev_read_end = pip[0];
-	if (!is_last_cmd(data, proc_data))
-		close(pip[WRITE_END]);
-	return (pid);
-}
-
 void	make_child(t_data *data)
 {
 	t_node	*proc_node;
 	pid_t	pid;
-	int		origin_io[2];
+	int		pip[2][2];
+	int		origin[2];
 
+	origin[READ_END] = dup(STDIN_FILENO);
+	origin[WRITE_END] = dup(STDOUT_FILENO);
+	pipe(pip[PREV]);
+	close(pip[PREV][WRITE_END]);
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
-		origin_io[READ_END] = dup(STDIN_FILENO);
-		origin_io[WRITE_END] = dup(STDOUT_FILENO);
-		pid = do_fork(data, proc_node->content);
+		pipe(pip[NOW]);
+		pid = fork();
+		if (pid == 0)
+			execute_child(data, proc_node->content, pip, origin);
 		pid_list_add(&data->pid_list, pid);
+		(close(pip[PREV][READ_END]), close(pip[NOW][WRITE_END]));
+		pip[PREV][READ_END] = pip[NOW][READ_END];
 		proc_node = proc_node->next;
-		dup2(origin_io[READ_END], STDIN_FILENO);
-		dup2(origin_io[WRITE_END], STDOUT_FILENO);
-		close(origin_io[READ_END]);
-		close(origin_io[WRITE_END]);
 	}
+	close(pip[NOW][READ_END]);
+	close(origin[READ_END]);
+	close(origin[WRITE_END]);
 }
 
 void	executor(t_data *data)
