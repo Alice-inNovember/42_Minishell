@@ -6,11 +6,10 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/08 10:32:07 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 15:25:38 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../../includes/builtin.h"
 #include "../../includes/envp.h"
 #include "../../includes/lexer.h"
@@ -54,20 +53,20 @@ char **key, char **value, int *error_flag)
 		error_handler("export", word, INVALID_ARG);
 		return (1);
 	}
-	else if (equal_i == -1)
-	{
-		*error_flag = EX_BT_FAIL;
-		return (1);
-	}
-	*key = ft_substr(word, 0, equal_i);
+	if (equal_i != -1)
+		*key = ft_substr(word, 0, equal_i);
+	else
+		*key = word;
 	if (!is_proper_env(*key))
 	{
 		*error_flag = EX_BT_FAIL;
 		error_handler("export", word, INVALID_ARG);
-		free(*key);
+		if (equal_i != -1)
+			free(*key);
 		return (1);
 	}
-	*value = ft_substr(word, equal_i + 1, ft_strlen(word) - equal_i - 1);
+	if (equal_i != -1)
+		*value = ft_substr(word, equal_i + 1, ft_strlen(word) - equal_i - 1);
 	return (0);
 }
 
@@ -80,6 +79,8 @@ int	bt_export(char **cmd_vector, t_list *envp_list)
 	char	*value;
 
 	error_flag = EX_SUCCESS;
+	key = 0;
+	value = 0;
 	word_i = 1;
 	if (check_word_cnt(cmd_vector) == 1)
 		print_export(envp_list);
@@ -90,7 +91,10 @@ int	bt_export(char **cmd_vector, t_list *envp_list)
 		if (check_word_sep_key_val(word, &key, &value, &error_flag))
 			continue ;
 		envp_add(envp_list, key, value);
-		(free(key), free(value));
+		if (word != key)
+			free(key);
+		if (value)
+			free(value);
 	}
 	return (error_flag);
 }

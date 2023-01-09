@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:35 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 19:30:16 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:02:44 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ int	bt_env(char **cmd_vector, t_list *envp_list)
 	{
 		key = ((t_envp *)cur_node->content)->key;
 		value = ((t_envp *)cur_node->content)->value;
-		printf("%s=%s\n", key, value);
+		if (value)
+			printf("%s=%s\n", key, value);
 		cur_node = cur_node->next;
 	}	
 	return (EX_SUCCESS);
 }
+
+//line 32 : when "export a", export : key = a value = NULL, not print

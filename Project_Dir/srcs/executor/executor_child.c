@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/fcntl.h>
+#include <sys/unistd.h>
 #include <unistd.h>
 #include "../../includes/data.h"
 #include "../../includes/envp.h"
@@ -21,7 +22,7 @@
 #include "../../includes/executor.h"
 #include "../../includes/signal_handler.h"
 
-void	child_pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
+void	pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {
 	dup2(read_end, STDIN_FILENO);
 	close(read_end);
@@ -29,6 +30,14 @@ void	child_pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 	close(write_end);
 	if (do_redirect(proc_data))
 		exit (EXIT_FAILURE);
+}
+
+void	fl_redirect(t_data *data, t_proc_data *proc, int pip[2][2], int *origin)
+{
+	if (is_first_cmd(data, proc))
+		dup2(origin[READ_END], pip[PREV][READ_END]);
+	if (is_last_cmd(data, proc))
+		dup2(origin[WRITE_END], pip[NOW][WRITE_END]);
 }
 
 void	execute_builtin(t_builtin_fp bt_fp, char **cmd_argv, t_list *envp_list)
@@ -42,29 +51,25 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	char	*msg;
 
 	cmd_path = get_cmd_path(data, cmd_argv);
-	if (access(cmd_path, F_OK | X_OK) == 0)
+	if (cmd_path)
+	{
+		if (access(cmd_path, X_OK) == -1)
+		{
+			msg = str3join("minishell: Permission denied: ", cmd_argv[0], "\n");
+			ft_putstr_fd(msg, STDERR_FILENO);
+			free(msg);
+			exit(EXIT_FAILURE);
+		}
 		execve(cmd_path, cmd_argv, cmd_envp);
-	msg = str3join("minishell: command not found: ", cmd_argv[0], "\n");
-	ft_putstr_fd(msg, STDERR_FILENO);
-	free(msg);
+		perror("minishell");
+	}
+	else
+	{
+		msg = str3join("minishell: command not found: ", cmd_argv[0], "\n");
+		ft_putstr_fd(msg, STDERR_FILENO);
+		free(msg);
+	}
 	exit(EXIT_FAILURE);
-}
-
-void	fl_redirect(t_data *data, t_proc_data *proc, int pip[2][2], int *origin)
-{
-	t_proc_data	*first;
-	t_proc_data	*last;
-
-	first = list_peek_first_content(&data->proc_data_list);
-	last = list_peek_last_content(&data->proc_data_list);
-	if (first == proc)
-	{
-		dup2(origin[READ_END], pip[PREV][READ_END]);
-	}
-	if (last == proc)
-	{
-		dup2(origin[WRITE_END], pip[NOW][WRITE_END]);
-	}
 }
 
 void	execute_child(t_data *data, t_proc_data *proc, int pip[2][2], int *ofd)
@@ -75,7 +80,7 @@ void	execute_child(t_data *data, t_proc_data *proc, int pip[2][2], int *ofd)
 
 	close(pip[NOW][READ_END]);
 	fl_redirect(data, proc, pip, ofd);
-	child_pip_redirect(proc, pip[NOW][WRITE_END], pip[PREV][READ_END]);
+	pip_redirect(proc, pip[NOW][WRITE_END], pip[PREV][READ_END]);
 	cmd_argv = cmd_list2arr(&proc->cmd_list);
 	cmd_envp = envp2arr(&data->envp_list);
 	builtin_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
