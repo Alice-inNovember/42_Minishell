@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/08 11:14:51 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 16:20:15 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
+#include "../../includes/envp.h"
 
 char	*envp_find(t_list *envp_list, char *key)
 {
@@ -42,7 +43,7 @@ void	envp_add(t_list *envp_list, char *key, char *value)
 {
 	t_envp	*e_node;
 
-	if (envp_find(envp_list, key))
+	if (envp_exist(envp_list, key))
 		return (envp_edit(envp_list, key, value));
 	e_node = (t_envp *)ft_calloc(1, sizeof(t_envp));
 	e_node->key = ft_strdup(key);
@@ -85,7 +86,7 @@ void	envp_delete(t_list *envp_list, char *key)
 		node = node->next;
 	if (!node->content)
 		return ;
-	free(((t_envp *)node->content)->value);  //혹시 key 값도 지우는게 맞는지 + list_delete - minseok2 
+	free(((t_envp *)node->content)->value);
 	free(node->content);
 	node->prev->next = node->next;
 	node->next->prev = node->prev;

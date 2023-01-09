@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 14:34:54 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 16:36:31 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	char	*cmdpath;
 	size_t	i;
 
-	if (ft_strchr(cmd_argv[0], '/'))
+	if (ft_strchr(cmd_argv[0], '/') && access(cmd_argv[0], F_OK) == 0)
 		return (cmd_argv[0]);
 	path = get_path_envp(data);
 	if (!path)
@@ -65,7 +65,7 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	while (path[i])
 	{
 		cmdpath = str3join(path[i], "/", cmd_argv[0]);
-		if (access(cmdpath, F_OK | X_OK) == 0)
+		if (access(cmdpath, F_OK) == 0)
 			return (cmdpath);
 		free(cmdpath);
 		i++;
