@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:26 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 15:34:27 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/09 16:47:41 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	bt_echo(char **cmd_vector, t_list *envp_list)
 		printf("\n");
 	return (EX_SUCCESS);
 }
+
 // line 42 : echo proper_option word option (x)
 // line 42 : echo proper_option word (o)

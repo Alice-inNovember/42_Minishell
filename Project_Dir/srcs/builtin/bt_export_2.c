@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bt_export_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:06:54 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 19:34:54 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:58:42 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ void	print_export(t_list *envp_list)
 	{
 		key = key_arr[i];
 		value = envp_find(envp_list, key);
-		printf("declare -x %s=\"%s\"\n", key, value);
+		if (value)
+			printf("declare -x %s=\"%s\"\n", key, value);
+		else
+			printf("declare -x %s\n", key);
 		i++;
 	}	
 	free(key_arr);
