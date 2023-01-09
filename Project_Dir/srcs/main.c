@@ -6,11 +6,10 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 11:03:07 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 21:57:24 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "../includes/lexer.h"
@@ -18,6 +17,7 @@
 #include "../includes/envp.h"
 #include "../includes/builtin.h"
 #include "../includes/executor.h"
+#include "../includes/signal_handler.h"
 #include "../includes/util.h"
 
 int	g_last_exit_status;
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	while (1)
 	{
+		set_signal();
 		init_data(&data, envp);
 		// readline returns NULL if EOF is only input
 		data.line = readline("minishell> ");

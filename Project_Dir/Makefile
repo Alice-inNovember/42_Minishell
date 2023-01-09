@@ -19,10 +19,11 @@ PARSEDIR	=	$(SRCDIR)/parser
 EXECDIR		= 	$(SRCDIR)/executor
 BUIDIR		=	$(SRCDIR)/builtin
 UTILDIR		=	$(SRCDIR)/util
+SIGDIR		=	$(SRCDIR)/signal
 BONUSDIR	=	
 #FILES
-LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a
-INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR)
+LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a -lreadline -L/Users/jincpark/.brew/opt/readline/lib
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR) -I/Users/jincpark/.brew/opt/readline/include
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
@@ -102,6 +103,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(BUIDIR)/bt_export_2.c \
 				$(BUIDIR)/bt_pwd.c \
 				$(BUIDIR)/bt_unset.c \
+				$(SIGDIR)/signal_handler.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c \
 				$(UTILDIR)/etc.c
@@ -117,7 +119,7 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(LFTDIR)
 	$(MAKE) -C $(DLLDIR)
 	$(MAKE) -C $(GNLDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) -lreadline
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 bonus : $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 11:13:29 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 22:07:08 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "../../includes/executor.h"
 #include "../../includes/builtin.h"
+#include "../../includes/signal_handler.h"
 
 extern int	g_last_exit_status;
 
@@ -88,6 +89,7 @@ void	make_child(t_data *data)
 	{
 		pipe(pip[NOW]);
 		pid = fork();
+		reset_signal(pid);
 		if (pid == 0)
 			execute_child(data, proc_node->content, pip, origin);
 		pid_list_add(&data->pid_list, pid);
