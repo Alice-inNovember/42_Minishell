@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:05:59 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/05 17:15:18 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:17:24 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ char	*make_random_name(int urandom_fd)
 {
 	const char		*charset = "abcdefghijklmnopqrstuvwxyz0123456789";
 	char			*filename;
-	unsigned int	buf[4];
-	char			concat_str[5];
+	unsigned int	buf[8];
+	char			concat_str[9];
 	int				i;
 
 	ft_memset(concat_str, 0, sizeof(concat_str));
 	while (1)
 	{
-		read(urandom_fd, buf, 4);
+		read(urandom_fd, buf, 8);
 		i = 0;
-		while (i < 4)
+		while (i < 8)
 		{
 			concat_str[i] = charset[buf[i] % 36];
 			i++;
