@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:35 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 18:02:44 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/10 14:16:49 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	bt_env(char **cmd_vector, t_list *envp_list)
 
 	if (check_word_cnt(cmd_vector) != 1)
 	{
-		error_handler("env", 0, MANY_ARG);
+		error_handler_for_bt("env", 0, MANY_ARG);
 		return (EX_CNOT_EXEC);
 	}
 	cur_node = list_peek_first_node(envp_list);

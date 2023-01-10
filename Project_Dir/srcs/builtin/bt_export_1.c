@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 15:25:38 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/10 14:16:49 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char **key, char **value, int *error_flag)
 	if (equal_i == 0)
 	{
 		*error_flag = EX_BT_FAIL;
-		error_handler("export", word, INVALID_ARG);
+		error_handler_for_bt("export", word, INVALID_ARG);
 		return (1);
 	}
 	if (equal_i != -1)
@@ -60,7 +60,7 @@ char **key, char **value, int *error_flag)
 	if (!is_proper_env(*key))
 	{
 		*error_flag = EX_BT_FAIL;
-		error_handler("export", word, INVALID_ARG);
+		error_handler_for_bt("export", word, INVALID_ARG);
 		if (equal_i != -1)
 			free(*key);
 		return (1);

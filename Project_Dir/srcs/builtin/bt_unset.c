@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:33 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/06 19:35:56 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:16:49 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	bt_unset(char **cmd_vector, t_list *envp_list)
 		if (!is_proper_env(cmd_vector[word_i]))
 		{
 			error_flag = EX_BT_FAIL;
-			error_handler("unset", cmd_vector[word_i], INVALID_ARG);
+			error_handler_for_bt("unset", cmd_vector[word_i], INVALID_ARG);
 			word_i++;
 			continue ;
 		}
