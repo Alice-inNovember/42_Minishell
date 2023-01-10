@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:17:46 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 21:07:21 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:26:49 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define SIGNAL_H
 
 void	set_signal(void);
-void	reset_signal(pid_t pid, int here_flag);
+void	reset_signal_before_fork(pid_t pid, int here_flag);
 
 #endif

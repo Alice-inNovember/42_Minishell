@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/10 23:02:36 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:27:24 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_heredoc_input(char *filename, char *limiter)
 
 	fd = open(filename, O_WRONLY);
 	pid = fork();
-	reset_signal(pid, 1);
+	reset_signal_before_fork(pid, 1);
 	if (pid == 0)
 	{
 		while (1)

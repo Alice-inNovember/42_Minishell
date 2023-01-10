@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 23:03:18 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:30:17 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ void	set_signal(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	reset_signal(pid_t pid, int here_flag)
+void	reset_signal_before_fork(pid_t pid, int here_flag)
 {
+	rl_catch_signals = 1;
 	if (pid == 0)
-	{
-		rl_catch_signals = 1;
 		signal(SIGINT, exit_proc);
-	}
 	else
 	{
 		if (here_flag)

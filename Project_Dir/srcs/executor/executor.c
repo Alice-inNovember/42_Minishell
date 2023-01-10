@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 00:06:28 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:26:02 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	make_child(t_data *data)
 	{
 		pipe(pip[NOW]);
 		pid = fork();
-		reset_signal(pid, 0);
+		reset_signal_before_fork(pid, 0);
 		if (pid == 0)
 			execute_child(data, proc_node->content, pip, origin);
 		pid_list_add(&data->pid_list, pid);
