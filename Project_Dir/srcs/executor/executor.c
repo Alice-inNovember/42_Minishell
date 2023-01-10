@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
 /*   Updated: 2023/01/10 15:31:18 by junlee2          ###   ########seoul.kr  */
@@ -36,7 +36,7 @@ int	check_single_builtin(t_data *data, t_list *envp_list)
 		origin_io[READ_END] = dup(STDIN_FILENO);
 		origin_io[WRITE_END] = dup(STDOUT_FILENO);
 		if (do_redirect(proc_data))
-			g_last_exit_status = 2;
+			g_last_exit_status = 1;
 		else
 			g_last_exit_status = bt_fp(cmd_argv, envp_list);
 		(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));

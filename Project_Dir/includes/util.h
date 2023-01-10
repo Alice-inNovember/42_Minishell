@@ -25,5 +25,7 @@ void	print_syntax_err(t_data *data);
 int		is_line_empty(t_data *data);
 int		check_argc(int argc);
 void	error_msg(char *target, int errnum);
+void	error_handler_for_bt(char *cmd, char *word, int status);
+
 
 #endif

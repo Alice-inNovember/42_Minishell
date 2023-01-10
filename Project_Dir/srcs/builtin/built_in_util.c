@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:54:10 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/06 19:38:19 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:16:49 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_word_cnt(char **cmd_vector)
 	return (i);
 }
 
-void	error_handler(char *cmd, char *word, int status)
+void	error_handler_for_bt(char *cmd, char *word, int status)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
