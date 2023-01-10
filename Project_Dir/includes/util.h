@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:41 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 13:54:14 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/10 14:16:49 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	del_s_pid(void *content);
 void	print_syntax_err(t_data *data);
 int		is_line_empty(t_data *data);
 int		check_argc(int argc);
-void	error_handler(char *cmd, char *word, int status);
+void	error_handler_for_bt(char *cmd, char *word, int status);
 
 #endif
