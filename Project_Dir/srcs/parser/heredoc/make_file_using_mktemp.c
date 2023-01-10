@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 22:01:53 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:15:42 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ static char	*read_filename_from_pipe(pid_t pid, int pip[2])
 
 	waitpid(pid, &wstatus, 0);
 	if (wexitstatus(wstatus) != 0)
-	{
-		ft_putendl_fd("mktemp failure", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
+		return (NULL);
 	filename = get_next_line(pip[READ_END]);
 	last_index = ft_strlen(filename) - 1;
 	if (filename[last_index] == '\n')
@@ -51,6 +48,8 @@ char	*make_file_using_mktemp(t_data *data, \
 	int		ret;
 	pid_t	pid;
 
+	if (mktemp_path == NULL)
+		return (NULL);
 	ret = pipe(pip);
 	pid = fork();
 	if (pid == 0)
