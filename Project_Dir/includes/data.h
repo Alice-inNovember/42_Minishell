@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 14:32:03 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 21:44:15 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef enum e_error
 	E_NEAR_DGREAT,
 	E_NEAR_LESS,
 	E_NEAR_DLESS,
-	E_NEAR_NEWLINE
+	E_NEAR_NEWLINE,
+	E_SIG_INT
 }	t_error;
 
 typedef enum e_errnum

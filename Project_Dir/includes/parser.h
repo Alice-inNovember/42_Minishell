@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:23:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/09 19:02:30 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:47:20 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char		*make_temp_file(t_data *data);
 char		*make_file_using_mktemp(t_data *data, \
 										char *mktemp_path, char **mktemp_argv);
 char		*make_random_name_file(void);
-void		get_heredoc_input(char *filename, char *limiter);
+int		get_heredoc_input(char *filename, char *limiter);
 char		*get_limiter(t_list *token_list);
 
 #endif
