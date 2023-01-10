@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 22:45:37 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 23:03:18 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	exit_proc(int signo)
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 1);
-		exit(EXIT_FAILURE);
+		exit(EX_BY_SIGNAL);
 	}
 }
 
