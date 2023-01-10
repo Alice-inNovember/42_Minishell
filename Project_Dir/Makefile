@@ -105,6 +105,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(SIGDIR)/signal_handler.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c \
+				$(UTILDIR)/error_msg.c \
 				$(UTILDIR)/etc.c
 OBJS		=	${SRCS:.c=.o}
 

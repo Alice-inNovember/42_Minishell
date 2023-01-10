@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 22:07:08 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:31:18 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int	check_single_builtin(t_data *data, t_list *envp_list)
 			g_last_exit_status = bt_fp(cmd_argv, envp_list);
 		(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
 		(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
-		return (cmd_argv_free(cmd_argv), 1);
+		free(cmd_argv);
+		return (1);
 	}
+	free(cmd_argv);
 	return (0);
 }
 
@@ -64,9 +66,11 @@ int	check_single_redirect(t_data *data, t_list *envp_list)
 				g_last_exit_status = 1;
 			(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
 			(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
+			free(cmd_argv);
 			return (1);
 		}
 	}
+	free(cmd_argv);
 	return (0);
 }
 
@@ -93,8 +97,7 @@ void	make_child(t_data *data)
 
 	origin[READ_END] = dup(STDIN_FILENO);
 	origin[WRITE_END] = dup(STDOUT_FILENO);
-	pipe(pip[PREV]);
-	close(pip[PREV][WRITE_END]);
+	(pipe(pip[PREV]), close(pip[PREV][WRITE_END]));
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{

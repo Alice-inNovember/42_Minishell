@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/09 09:33:05 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 14:32:03 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef enum e_error
 	E_NEAR_DLESS,
 	E_NEAR_NEWLINE
 }	t_error;
+
+typedef enum e_errnum
+{
+	EN_CNOT_FIND,
+	EN_PER_DENIED,
+	EN_IS_DIR
+}	t_errnum;
 
 // define exit code type
 typedef enum e_excode

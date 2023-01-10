@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 22:01:26 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:46:16 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include <stdlib.h>
 #include <sys/fcntl.h>
 #include <sys/unistd.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include "../../includes/data.h"
 #include "../../includes/envp.h"
+#include "../../includes/util.h"
 #include "../../includes/builtin.h"
 #include "../../includes/executor.h"
 #include "../../includes/signal_handler.h"
@@ -47,28 +49,20 @@ void	execute_builtin(t_builtin_fp bt_fp, char **cmd_argv, t_list *envp_list)
 
 void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 {
-	char	*cmd_path;
-	char	*msg;
+	struct stat	sb;
+	char		*cmd_path;
 
 	cmd_path = get_cmd_path(data, cmd_argv);
-	if (cmd_path)
-	{
-		if (access(cmd_path, X_OK) == -1)
-		{
-			msg = str3join("minishell: Permission denied: ", cmd_argv[0], "\n");
-			ft_putstr_fd(msg, STDERR_FILENO);
-			free(msg);
-			exit(EXIT_FAILURE);
-		}
-		execve(cmd_path, cmd_argv, cmd_envp);
-		perror("minishell");
-	}
-	else
-	{
-		msg = str3join("minishell: command not found: ", cmd_argv[0], "\n");
-		ft_putstr_fd(msg, STDERR_FILENO);
-		free(msg);
-	}
+	if (cmd_path == NULL)
+		(error_msg(cmd_argv[0], EN_CNOT_FIND), exit(EX_CNOT_FIND));
+	if (stat(cmd_path, &sb) == -1)
+		(perror("stat"), exit(EX_FAILURE));
+	if ((sb.st_mode & S_IFMT) == S_IFDIR)
+		(error_msg(cmd_argv[0], EN_IS_DIR), exit(EX_CNOT_EXEC));
+	else if (access(cmd_path, X_OK) == -1)
+		(error_msg(cmd_argv[0], EN_PER_DENIED), exit(EX_CNOT_EXEC));
+	execve(cmd_path, cmd_argv, cmd_envp);
+	perror("minishell");
 	exit(EXIT_FAILURE);
 }
 
