@@ -119,7 +119,7 @@ $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LFTDIR)
 	$(info making libft.a done)
 	@$(MAKE) -C $(DLLDIR)
-	$(info making dllist.a done)
+	$(info making libdll.a done)
 	@$(MAKE) -C $(GNLDIR)
 	$(info making libgnl.a done)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
@@ -132,15 +132,15 @@ clean :
 	@$(MAKE) -C $(LFTDIR) clean
 	$(info cleaning libft done)
 	@$(MAKE) -C $(DLLDIR) clean
-	$(info cleaning dllist done)
+	$(info cleaning libdll done)
 	@$(MAKE) -C $(GNLDIR) clean
-	$(info cleaning get_next_line done)
+	$(info cleaning libgnl done)
 	@$(RM) $(OBJS) $(BOBJS)
 	$(info cleaning object files done)
 
 fclean : clean
 	@$(RM) $(NAME)
-	$(info removing minishell done)
+	$(info cleaning minishell done)
 
 re :
 	@$(MAKE) fclean
