@@ -116,33 +116,38 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(MAKE) -C $(LFTDIR)
-	$(MAKE) -C $(DLLDIR)
-	$(MAKE) -C $(GNLDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-
-bonus : $(NAME)
+	@$(MAKE) -C $(LFTDIR)
+	$(info making libft.a done)
+	@$(MAKE) -C $(DLLDIR)
+	$(info making dllist.a done)
+	@$(MAKE) -C $(GNLDIR)
+	$(info making libgnl.a done)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+	$(info making minishell done)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
 
 clean :
-	$(MAKE) -C $(LFTDIR) clean
-	$(MAKE) -C $(DLLDIR) clean
-	$(MAKE) -C $(GNLDIR) clean
-	$(RM) $(OBJS) $(BOBJS)
+	@$(MAKE) -C $(LFTDIR) clean
+	$(info cleaning libft done)
+	@$(MAKE) -C $(DLLDIR) clean
+	$(info cleaning dllist done)
+	@$(MAKE) -C $(GNLDIR) clean
+	$(info cleaning get_next_line done)
+	@$(RM) $(OBJS) $(BOBJS)
+	$(info cleaning object files done)
 
 fclean : clean
-	$(MAKE) -C $(LFTDIR) fclean
-	$(MAKE) -C $(DLLDIR) fclean
-	$(MAKE) -C $(GNLDIR) fclean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	$(info removing minishell done)
 
 re :
-	$(MAKE) fclean
-	$(MAKE) -j6 all
+	@$(MAKE) fclean
+	@$(MAKE) -j6 all
 
-rebug	: fclean
-	$(MAKE) -j6 IF_DEBUG=1 all
+rebug	:
+	@$(MAKE) fclean
+	@$(MAKE) -j6 IF_DEBUG=1 all
 
 .PHONY : all clean fclean re
