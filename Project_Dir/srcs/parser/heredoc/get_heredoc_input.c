@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/10 22:40:10 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 23:02:36 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <readline/readline.h>
 #include "../../../includes/data.h"
 #include "../../../includes/parser.h"
+#include "../../../includes/executor.h"
 #include "../../../includes/signal_handler.h"
 
 int	get_heredoc_input(char *filename, char *limiter)
@@ -43,5 +44,5 @@ int	get_heredoc_input(char *filename, char *limiter)
 	}
 	waitpid(pid, &wstatus, 0);
 	close(fd);
-	return(WEXITSTATUS(wstatus));
+	return(wexitstatus(wstatus));
 }
