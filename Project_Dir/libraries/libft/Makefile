@@ -6,7 +6,7 @@
 #    By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 11:00:34 by minseok2          #+#    #+#              #
-#    Updated: 2023/01/08 22:02:18 by minseok2         ###   ########.fr        #
+#    Updated: 2023/01/11 01:41:54 by jincpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,20 +70,20 @@ OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 all: $(NAME)
 
 clean:
-	$(RM) $(RMFLAGS) $(OBJS_DIR)
+	@$(RM) $(RMFLAGS) $(OBJS_DIR)
 
 fclean: clean
-	$(RM) $(RMFLAGS) $(NAME)
+	@$(RM) $(RMFLAGS) $(NAME)
 
 re:
-	make fclean
-	make all
+	@make fclean
+	@make all
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+	@$(AR) $(ARFLAGS) $@ $^
 
 $(OBJS): $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR)
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER_DIR)
 
 .PHONY: all clean fclean re bonus
