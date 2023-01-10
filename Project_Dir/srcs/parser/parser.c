@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/09 14:51:51 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:35:53 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	parse_simple_cmd(t_data *data, t_list *token_list)
 	list_append(&data->proc_data_list, new_node((void *)proc_data));
 	first = list_peek_first_node(token_list);
 	cmd_node = get_cmd_node(data, token_list);
-	if (cmd_node == NULL)
-		return ;
 	last = list_peek_last_node(token_list);
 	parse_cmd_prefix(data, proc_data, sub_token_list(first, cmd_node->prev));
 	parse_cmd_word(data, proc_data, sub_token_list(cmd_node, cmd_node));
