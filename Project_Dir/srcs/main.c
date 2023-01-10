@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/10 21:27:57 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:47:06 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 		set_signal();
 		init_data(&data, envp);
 		// readline returns NULL if EOF is only input
-		data.line = readline("minishell> ");
+		data.line = readline("\033[32;1mminishell-1.0$\033[0m ");
 		if (is_line_empty(&data))
 			continue ;
 		add_history(data.line);
