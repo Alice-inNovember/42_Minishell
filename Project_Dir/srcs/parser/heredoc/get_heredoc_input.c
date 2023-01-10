@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 22:10:10 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:15:25 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "../../../includes/data.h"
 #include "../../../includes/parser.h"
 #include "../../../includes/signal_handler.h"
+
+void	display_new_prompt(int signo);
 
 void	get_heredoc_input(char *filename, char *limiter)
 {
@@ -25,6 +27,7 @@ void	get_heredoc_input(char *filename, char *limiter)
 
 	fd = open(filename, O_WRONLY);
 	pid = fork();
+	reset_signal(pid, 1);
 	if (pid == 0)
 	{
 		while (1)
