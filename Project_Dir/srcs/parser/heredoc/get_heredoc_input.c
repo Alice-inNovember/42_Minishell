@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/10 21:15:25 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:51:13 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 void	display_new_prompt(int signo);
 
-void	get_heredoc_input(char *filename, char *limiter)
+#include <stdio.h>
+int	get_heredoc_input(char *filename, char *limiter)
 {
 	int		fd;
 	int		wstatus;
@@ -45,4 +46,5 @@ void	get_heredoc_input(char *filename, char *limiter)
 	}
 	waitpid(pid, &wstatus, 0);
 	close(fd);
+	return(WEXITSTATUS(wstatus));
 }
