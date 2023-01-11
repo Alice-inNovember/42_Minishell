@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 13:23:22 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:56:25 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "../../../includes/parser.h"
 #include "../../../includes/executor.h"
 #include "../../../includes/signal_handler.h"
+
+extern t_exit_heredoc	g_exit_heredoc;
 
 int	get_heredoc_input(char *filename, char *limiter)
 {
@@ -37,11 +39,11 @@ int	get_heredoc_input(char *filename, char *limiter)
 				free(input_line);
 				break ;
 			}
-			ft_putendl_fd(input_line, fd);
-			free(input_line);
+			(ft_putendl_fd(input_line, fd), free(input_line));
 		}
 		exit(EXIT_SUCCESS);
 	}
 	(waitpid(pid, &wstatus, 0), close(fd));
+	g_exit_heredoc.heredoc_filename = NULL;
 	return (wexitstatus(wstatus));
 }
