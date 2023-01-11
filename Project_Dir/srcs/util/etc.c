@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/09 02:12:14 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:32:31 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	check_argc(int argc)
 {
 	if (argc > 1)
 	{
-		ft_putendl_fd("minishell: Our minishell doesn't support this mode", STDERR_FILENO);
+		ft_putendl_fd("minishell: \
+		Our minishell doesn't support this mode\
+		", STDERR_FILENO);
 		return (0);
 	}
 	return (1);

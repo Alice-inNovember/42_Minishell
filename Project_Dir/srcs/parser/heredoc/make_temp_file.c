@@ -6,11 +6,12 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:43:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/10 16:14:54 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:59:17 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../includes/parser.h"
+#include "../../../includes/executor.h"
 
 char	*make_temp_file(t_data *data)
 {

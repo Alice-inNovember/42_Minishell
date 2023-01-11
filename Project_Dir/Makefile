@@ -109,19 +109,11 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(UTILDIR)/etc.c
 OBJS		=	${SRCS:.c=.o}
 #COLOR
-Color_Off	=	'\033[0m'
-Black		=	'\033[0;30m'
-Red			=	'\033[0;31m'
-Green		=	'\033[0;32m'
-Yellow		=	'\033[0;33m'
-Blue		=	'\033[0;34m'
-Purple		=	'\033[0;35m'
-Cyan		=	'\033[0;36m'
-White		=	'\033[0;37m'
+Color_Off	=	"\033[0m"
 LRed		=	"\033[1;31m"
 LGreen		=	"\033[1;32m"
-LBlue		=	'\033[1;34m'
-LPurple		=	'\033[1;35m'
+LBlue		=	"\033[1;34m"
+LPurple		=	"\033[1;35m"
 LCyan		=	"\033[1;36m"
 INFO		=
 
@@ -132,40 +124,55 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	@$(MAKE) -C $(LFTDIR)
-	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)libft.a "  "✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LBlue)Compiling$(Color_Off)))
 	$(info $(INFO))
-	@$(MAKE) -C $(DLLDIR)
-	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)libdll.a " "✅$(Color_Off)))
+	@$(MAKE) -C $(LFTDIR) libft.a
+	$(eval INFO = $(shell echo $(LCyan)libft.a "  "✅$(Color_Off)))
 	$(info $(INFO))
-	@$(MAKE) -C $(GNLDIR)
-	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)libgnl.a " "✅$(Color_Off)))
+	@$(MAKE) -C $(DLLDIR) libdll.a
+	$(eval INFO = $(shell echo $(LCyan)libdll.a " "✅$(Color_Off)))
+	$(info $(INFO))
+	@$(MAKE) -C $(GNLDIR) libgnl.a
+	$(eval INFO = $(shell echo $(LCyan)libgnl.a " "✅$(Color_Off)))
 	$(info $(INFO))
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)minishell ""✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LPurple)minishell ""✅$(Color_Off)))
 	$(info $(INFO))
+	$(eval INFO = $(shell echo $(LGreen)Done!$(Color_Off)))
+	$(info $(INFO))
+	$(info )
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
 
 clean :
+	$(eval INFO = $(shell echo $(LRed)Cleaning$(Color_Off)))
+	$(info $(INFO))
 	@$(MAKE) -C $(LFTDIR) fclean
-	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libft "    "✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LCyan)libft "    "✅$(Color_Off)))
 	$(info $(INFO))
 	@$(MAKE) -C $(DLLDIR) fclean
-	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libdll "   "✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LCyan)libdll "   "✅$(Color_Off)))
 	$(info $(INFO))
 	@$(MAKE) -C $(GNLDIR) fclean
-	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libgnl "   "✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LCyan)libgnl "   "✅$(Color_Off)))
 	$(info $(INFO))
 	@$(RM) $(OBJS) $(BOBJS)
-	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)obj files ""✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LCyan)obj files ""✅$(Color_Off)))
 	$(info $(INFO))
+	$(eval INFO = $(shell echo $(LGreen)Done!$(Color_Off)))
+	$(info $(INFO))
+	$(info )
 
 fclean : clean
-	@$(RM) $(NAME)
-	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)minishell ""✅$(Color_Off)))
+	$(eval INFO = $(shell echo $(LRed)Removing$(Color_Off)))
 	$(info $(INFO))
+	@$(RM) $(NAME)
+	$(eval INFO = $(shell echo $(LPurple)minishell ""✅$(Color_Off)))
+	$(info $(INFO))
+	$(eval INFO = $(shell echo $(LGreen)Done!$(Color_Off)))
+	$(info $(INFO))
+	$(info )
 
 re :
 	@$(MAKE) fclean

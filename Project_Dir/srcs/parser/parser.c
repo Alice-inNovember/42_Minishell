@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 19:35:53 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:38:02 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	parse_expression(t_data *data, t_list *token_list)
 	{
 		if ((get_token(curr))->type == T_PIPE)
 		{
-			if (get_token(curr->prev) && is_redir((get_token(curr->prev))->type))
+			if (get_token(curr->prev) && \
+			is_redir((get_token(curr->prev))->type))
 				data->syntax_err_flag = E_NEAR_PIPE;
 			parse_expression(data, sub_token_list(first, curr->prev));
 			parse_simple_cmd(data, sub_token_list(curr->next, last));
 			clear_and_free_token_list(token_list);
-			
 			return ;
 		}
 		curr = curr->prev;

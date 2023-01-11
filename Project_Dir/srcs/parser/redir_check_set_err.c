@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_check_set_err.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:13:52 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 19:42:01 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:37:24 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_redir(t_type type)
 {
-	if (type == T_LESS || type == T_GREAT || type == T_DLESS || type == T_DGREAT)
+	if (type == T_LESS || type == T_GREAT || \
+	type == T_DLESS || type == T_DGREAT)
 		return (1);
 	return (0);
 }
