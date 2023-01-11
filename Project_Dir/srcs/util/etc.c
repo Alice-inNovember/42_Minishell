@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 15:29:58 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:18:32 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_line_empty(t_data *data)
 	if (data->line == NULL)
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
-		exit (g_exit_heredoc.exit_status);
+		exit (EXIT_FAILURE);
 	}
 	line_cp = data->line;
 	while (*line_cp && ((*line_cp >= 9 && *line_cp <= 13) || *line_cp == 32))
@@ -62,14 +62,13 @@ int	is_line_empty(t_data *data)
 	return (0);
 }
 
-int	check_argc(int argc)
+void	check_argc(int argc)
 {
 	if (argc > 1)
 	{
 		ft_putendl_fd("minishell: \
-		Our minishell doesn't support this mode\
+Our minishell doesn't support this mode\
 		", STDERR_FILENO);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
-	return (1);
 }
