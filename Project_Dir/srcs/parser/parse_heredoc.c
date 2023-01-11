@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 17:24:40 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:59:20 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 #include <unistd.h>
 
-extern t_exit_heredoc	g_exit_heredoc;
+extern int	g_exit_status;
 
 void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
@@ -27,7 +27,7 @@ void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	limiter = get_limiter(token_list);
 	if (get_heredoc_input(filename, limiter) == EX_BY_SIGNAL)
 	{
-		g_exit_heredoc.exit_status = EX_BY_SIGNAL + SIGINT;
+		g_exit_status = EX_BY_SIGNAL + SIGINT;
 		data->syntax_err_flag = E_SIGINT;
 		clear_and_free_token_list(token_list);
 		unlink(filename);

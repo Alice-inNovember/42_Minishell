@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 14:08:32 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:59:20 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../includes/envp.h"
 #include "../../includes/builtin.h"
 
-extern t_exit_heredoc	g_exit_heredoc;
+extern int	g_exit_status;
 
 void	init_data(t_data *data, char **envp)
 {
@@ -46,7 +46,7 @@ int	is_line_empty(t_data *data)
 	char	*line_cp;
 
 	if (data->line == NULL)
-		exit (g_exit_heredoc.exit_status);
+		exit (g_exit_status);
 	line_cp = data->line;
 	while (*line_cp && ((*line_cp >= 9 && *line_cp <= 13) || *line_cp == 32))
 		line_cp++;

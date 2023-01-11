@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 16:09:45 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 21:00:19 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #include "readline/readline.h"
 #include "../../includes/data.h"
 
-extern t_exit_heredoc	g_exit_heredoc;
+extern int	g_exit_status;
 
 void	display_new_prompt(int signo)
 {
 	if (signo == SIGINT)
 	{
-		g_exit_heredoc.exit_status = 1;
+		g_exit_status = 1;
 		rl_replace_line("", 1);
 		printf("\n");
 		if (rl_on_new_line() == -1)
@@ -37,8 +37,6 @@ void	exit_proc(int signo)
 {
 	if (signo == SIGINT)
 	{
-		if (g_exit_heredoc.heredoc_filename != NULL)
-			unlink(g_exit_heredoc.heredoc_filename);
 		ft_putendl_fd("", STDERR_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 1);
