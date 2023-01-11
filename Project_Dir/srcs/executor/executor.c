@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 14:06:57 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:52:30 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_single_builtin(t_data *data, t_list *envp_list)
 	return (0);
 }
 
-int	check_single_redirect(t_data *data, t_list *envp_list)
+int	check_single_redirect(t_data *data)
 {
 	t_proc_data		*proc_data;
 	char			**cmd_argv;
@@ -125,7 +125,7 @@ void	executor(t_data *data)
 		return ;
 	if (check_single_builtin(data, &data->envp_list))
 		return ;
-	if (check_single_redirect(data, &data->envp_list))
+	if (check_single_redirect(data))
 		return ;
 	make_child(data);
 	wait_child(data);
