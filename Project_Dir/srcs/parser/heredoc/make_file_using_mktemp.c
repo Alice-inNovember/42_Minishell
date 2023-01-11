@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 11:52:37 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 02:58:45 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@ char	*make_file_using_mktemp(t_data *data, \
 {
 	char	*filename;
 	int		pip[2];
-	int		ret;
 	pid_t	pid;
 
 	if (mktemp_path == NULL)
 		return (NULL);
-	ret = ft_pipe(pip);
+	ft_pipe(pip);
 	pid = ft_fork();
 	if (pid == 0)
 		execve_cmd(data, pip, mktemp_path, mktemp_argv);
