@@ -6,10 +6,11 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 20:59:20 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/11 17:18:32 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "readline/readline.h"
 #include "../../libraries/dllist/includes/dllist.h"
 #include "../../includes/util.h"
 #include "../../includes/envp.h"
@@ -46,7 +47,10 @@ int	is_line_empty(t_data *data)
 	char	*line_cp;
 
 	if (data->line == NULL)
-		exit (g_exit_status);
+	{
+		ft_putendl_fd("exit", STDOUT_FILENO);
+		exit (EXIT_FAILURE);
+	}
 	line_cp = data->line;
 	while (*line_cp && ((*line_cp >= 9 && *line_cp <= 13) || *line_cp == 32))
 		line_cp++;
@@ -58,14 +62,13 @@ int	is_line_empty(t_data *data)
 	return (0);
 }
 
-int	check_argc(int argc)
+void	check_argc(int argc)
 {
 	if (argc > 1)
 	{
 		ft_putendl_fd("minishell: \
-		Our minishell doesn't support this mode\
+Our minishell doesn't support this mode\
 		", STDERR_FILENO);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
-	return (1);
 }
