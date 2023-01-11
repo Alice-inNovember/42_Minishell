@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:53:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 13:59:04 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 09:48:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ void	check_expand(t_state *state, t_asset *asset)
 	char		*env_start;
 
 	env_start = &asset->line[asset->index + 1];
-	if (next_input == '?')
-		*state = QUESTION_MARK_EXPAND;
-	else if (get_env_length(env_start) > 0 && !is_limiter(asset->token_list))
-		*state = EXPAND;
+	if (!is_limiter(asset->token_list))
+	{
+		if (next_input == '?')
+			*state = QUESTION_MARK_EXPAND;
+		else if (get_env_length(env_start) > 0)
+			*state = EXPAND;
+		else
+			*state = ADD_BUF_WORD;
+	}
 	else
 		*state = ADD_BUF_WORD;
 }

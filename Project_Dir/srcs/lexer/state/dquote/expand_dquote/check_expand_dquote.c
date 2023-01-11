@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:15:16 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 22:24:13 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 09:47:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ void	check_expand_dquote(t_state *state, t_asset *asset)
 	char		*env_start;
 
 	env_start = &asset->line[asset->index + 1];
-	if (next_input == '?')
-		*state = QUESTION_MARK_EXPAND_DQUOTE;
-	else if (get_env_length(env_start) > 0 && !is_limiter(asset->token_list))
-		*state = EXPAND_DQUOTE;
-	else
-		*state = ADD_BUF_IN_DQUOTE;
+	if (!is_limiter(asset->token_list))
+	{
+		if (next_input == '?')
+			*state = QUESTION_MARK_EXPAND_DQUOTE;
+		else if (get_env_length(env_start) > 0)
+			*state = EXPAND_DQUOTE;
+		else
+			*state = ADD_BUF_IN_DQUOTE;
+	}
 }
