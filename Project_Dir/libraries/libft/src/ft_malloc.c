@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:03:11 by minseok2          #+#    #+#             */
-/*   Updated: 2022/11/10 12:05:51 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:35:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	*ft_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (ptr == NULL)
-		ft_exit("malloc assertion failure", STDERR_FILENO, EXIT_FAILURE);
+	{
+		perror("malloc error occurred");
+		exit(EXIT_FAILURE);
+	}
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:31:44 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 22:01:06 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:33:26 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <limits.h>
 
 int		ft_isalpha(int c);

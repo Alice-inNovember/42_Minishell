@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 10:30:23 by minseok2          #+#    #+#             */
-/*   Updated: 2022/11/10 11:54:08 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:31:44 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ int	ft_atoi(char *string)
 
 	i = 0;
 	sign = get_sign(&string);
-	if ((*string) == '\0')
-		ft_exit("Error", STDERR_FILENO, EXIT_FAILURE);
+	if (string == NULL || *string == '\0')
+		return (0);
 	number = 0;
 	while (ft_isspace(*string))
 		string++;
 	while (string[i])
 	{
 		if (!(ft_isdigit(string[i])))
-			ft_exit("Error", STDERR_FILENO, EXIT_FAILURE);
+			return (0);
 		number *= 10;
 		number += (string[i] - '0');
 		if ((sign == POS && number > 2147483647) || \
 				(sign == NEG && number > 2147483648))
-			ft_exit("Error", STDERR_FILENO, EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	return ((int)(sign * number));

@@ -18,13 +18,13 @@
 #include "readline/readline.h"
 #include "../../includes/data.h"
 
-extern int	g_last_exit_status;
+extern t_exit_heredoc	g_exit_heredoc;
 
 void	display_new_prompt(int signo)
 {
 	if (signo == SIGINT)
 	{
-		g_last_exit_status = 1;
+		g_exit_heredoc.exit_status = 1;
 		rl_replace_line("", 1);
 		printf("\n");
 		if (rl_on_new_line() == -1)

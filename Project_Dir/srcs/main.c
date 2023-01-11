@@ -22,7 +22,7 @@
 #include "../includes/signal_handler.h"
 #include "../includes/util.h"
 
-int	g_last_exit_status;
+t_exit_heredoc	g_exit_heredoc;
 
 int	main(int argc, char **argv, char **envp)
 {
