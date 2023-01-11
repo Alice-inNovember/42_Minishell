@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 21:00:19 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/11 17:28:52 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	display_new_prompt(int signo)
 	}
 }
 
-void	exit_proc(int signo)
+void	sigint_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
@@ -57,13 +57,27 @@ void	set_signal(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	reset_signal_before_fork(pid_t pid)
+void	sigquit_handler(int signo)
+{
+	if (signo == SIGQUIT)
+	{
+		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		exit(EX_BY_SIGNAL);
+	}
+}
+
+void	reset_signal(pid_t pid, int here_flag)
 {
 	rl_catch_signals = 1;
 	if (pid == 0)
 	{
-		signal(SIGINT, exit_proc);
-		signal(SIGQUIT, exit_proc);
+		signal(SIGINT, sigint_handler);
+		if (here_flag)
+			signal(SIGQUIT, SIG_IGN);
+		else
+			signal(SIGQUIT, sigquit_handler);
 	}
 	else
 		signal(SIGINT, SIG_IGN);
