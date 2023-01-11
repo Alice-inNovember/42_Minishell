@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/09 15:30:50 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/11 21:29:30 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 	new_pwd = getcwd(0, 0);
 	envp_add(envp_list, "PWD", new_pwd);
 	envp_add(envp_list, "OLDPWD", old_pwd);
+	(free(old_pwd), free(new_pwd));
 	return (EX_SUCCESS);
 }
