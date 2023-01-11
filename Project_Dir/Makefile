@@ -121,7 +121,8 @@ ifdef IF_DEBUG
 	CFLAGS += $(DFLAGS)
 endif
 
-all : $(NAME)
+all : 
+	@make -j6 $(NAME)
 
 $(NAME) : $(OBJS)
 	$(eval INFO = $(shell echo $(LBlue)Compiling$(Color_Off)))

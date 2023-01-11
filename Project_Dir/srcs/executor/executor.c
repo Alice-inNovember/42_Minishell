@@ -75,11 +75,14 @@ void	wait_child(t_data *data)
 {
 	t_node	*node;
 	int		status;
+	int		status_tmp;
 
+	status_tmp = 0;
 	node = list_peek_first_node(&data->pid_list);
 	while (node->next != NULL)
 	{
 		waitpid(*((pid_t *)node->content), &status, 0);
+		status_tmp = status;
 		if (status == 2)
 			status = EX_BY_SIGNAL + SIGINT;
 		else
@@ -87,6 +90,9 @@ void	wait_child(t_data *data)
 		g_exit_heredoc.exit_status = status;
 		node = node->next;
 	}
+	if (status_tmp == 2)
+		ft_putendl_fd("", STDOUT_FILENO);
+	signal(SIGINT, print_new_line);
 }
 // SIGINT 종료 시 2 반환됨
 
@@ -105,7 +111,7 @@ void	make_child(t_data *data)
 	{
 		pipe(pip[NOW]);
 		pid = fork();
-		reset_signal_before_fork(pid, 0);
+		reset_signal_before_fork(pid);
 		if (pid == 0)
 			execute_child(data, proc_node->content, pip, origin);
 		pid_list_add(&data->pid_list, pid);
