@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 17:28:52 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:47:38 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ void	sigint_handler(int signo)
 		rl_replace_line("", 1);
 		exit(EX_BY_SIGNAL);
 	}
-}
-
-void	print_new_line(int signo)
-{
-	if (signo == SIGINT)
-		printf("\n");
 }
 
 void	set_signal(void)
