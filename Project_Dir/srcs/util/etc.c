@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
 /*   Updated: 2023/01/11 17:18:32 by jincpark         ###   ########.fr       */
@@ -16,7 +16,7 @@
 #include "../../includes/envp.h"
 #include "../../includes/builtin.h"
 
-extern t_exit_heredoc	g_exit_heredoc;
+extern int	g_exit_status;
 
 void	init_data(t_data *data, char **envp)
 {

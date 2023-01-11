@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
 /*   Updated: 2023/01/11 17:25:23 by jincpark         ###   ########.fr       */
@@ -14,7 +14,7 @@
 #include "../../includes/builtin.h"
 #include "../../includes/signal_handler.h"
 
-extern t_exit_heredoc	g_exit_heredoc;
+extern int	g_exit_status;
 
 int	check_single_builtin(t_data *data, t_list *envp_list)
 {
@@ -33,9 +33,9 @@ int	check_single_builtin(t_data *data, t_list *envp_list)
 		origin_io[READ_END] = dup(STDIN_FILENO);
 		origin_io[WRITE_END] = dup(STDOUT_FILENO);
 		if (do_redirect(proc_data))
-			g_exit_heredoc.exit_status = 1;
+			g_exit_status = 1;
 		else
-			g_exit_heredoc.exit_status = bt_fp(cmd_argv, envp_list);
+			g_exit_status = bt_fp(cmd_argv, envp_list);
 		(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
 		(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
 		free(cmd_argv);
@@ -60,7 +60,7 @@ int	check_single_redirect(t_data *data)
 			origin_io[READ_END] = dup(STDIN_FILENO);
 			origin_io[WRITE_END] = dup(STDOUT_FILENO);
 			if (do_redirect(proc_data))
-				g_exit_heredoc.exit_status = 1;
+				g_exit_status = 1;
 			(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
 			(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
 			free(cmd_argv);
@@ -89,7 +89,7 @@ void	wait_child(t_data *data)
 		}
 		else
 			status = wexitstatus(status);
-		g_exit_heredoc.exit_status = status;
+		g_exit_status = status;
 		node = node->next;
 	}
 	if (WIFSIGNALED(status_tmp))
