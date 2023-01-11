@@ -6,7 +6,7 @@
 #    By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 11:00:34 by minseok2          #+#    #+#              #
-#    Updated: 2023/01/11 22:44:56 by minseok2         ###   ########.fr        #
+#    Updated: 2023/01/11 22:59:23 by minseok2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRCS = ft_isalpha.c \
 		ft_dup2.c \
 		ft_unlink.c \
 		ft_waitpid.c \
-		ft_execve.c
+		ft_execve.c \
+		ft_stat.c
 
 OBJS_DIR = objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)

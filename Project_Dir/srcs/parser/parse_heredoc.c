@@ -30,7 +30,7 @@ void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		g_exit_status = EX_BY_SIGNAL + SIGINT;
 		data->syntax_err_flag = E_SIGINT;
 		clear_and_free_token_list(token_list);
-		unlink(filename);
+		ft_unlink(filename);
 		free(filename);
 		return ;
 	}
