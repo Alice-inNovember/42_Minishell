@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 17:25:23 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:54:13 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,14 @@ void	wait_child(t_data *data)
 	{
 		waitpid(*((pid_t *)node->content), &status, 0);
 		status_tmp = status;
-		if (WIFSIGNALED(status))
-		{
-			status = EX_BY_SIGNAL + WTERMSIG(status);
-		}
+		if (wifsignaled(status))
+			status = EX_BY_SIGNAL + wtermsig(status);
 		else
 			status = wexitstatus(status);
 		g_exit_status = status;
 		node = node->next;
 	}
-	if (WIFSIGNALED(status_tmp))
+	if (wifsignaled(status_tmp))
 	{
 		if (status_tmp == SIGQUIT)
 			ft_putendl_fd("Quit: 3", STDOUT_FILENO);

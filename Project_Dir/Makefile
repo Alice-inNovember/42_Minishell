@@ -102,6 +102,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(BUIDIR)/bt_pwd.c \
 				$(BUIDIR)/bt_unset.c \
 				$(SIGDIR)/signal_handler.c \
+				$(SIGDIR)/signal_utils.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c \
 				$(UTILDIR)/error_msg.c \
