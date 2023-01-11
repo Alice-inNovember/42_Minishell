@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:17:46 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 00:26:49 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:30:05 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
+#ifndef SIGNAL_HANDLER_H
+# define SIGNAL_HANDLER_H
+
+# include <unistd.h>
 
 void	set_signal(void);
 void	reset_signal_before_fork(pid_t pid, int here_flag);

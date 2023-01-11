@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 00:26:02 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:31:44 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	wait_child(t_data *data)
 	while (node->next != NULL)
 	{
 		waitpid(*((pid_t *)node->content), &status, 0);
-		if (status == 2) // SIGINT 종료 시 2 반환됨
+		if (status == 2)
 			status = EX_BY_SIGNAL + SIGINT;
 		else
 			status = wexitstatus(status);
@@ -91,6 +91,7 @@ void	wait_child(t_data *data)
 		node = node->next;
 	}
 }
+// SIGINT 종료 시 2 반환됨
 
 void	make_child(t_data *data)
 {

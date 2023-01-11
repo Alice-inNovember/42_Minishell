@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 00:27:24 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:39:14 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	get_heredoc_input(char *filename, char *limiter)
 		}
 		exit(EXIT_SUCCESS);
 	}
-	waitpid(pid, &wstatus, 0);
-	close(fd);
-	return(wexitstatus(wstatus));
+	(waitpid(pid, &wstatus, 0), close(fd));
+	return (wexitstatus(wstatus));
 }
