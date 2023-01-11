@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 13:59:33 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 20:58:21 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "../includes/signal_handler.h"
 #include "../includes/util.h"
 
-t_exit_heredoc	g_exit_heredoc;
+int	g_exit_status;
 
 int	main(int argc, char **argv, char **envp)
 {
