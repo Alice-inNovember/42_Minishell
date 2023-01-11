@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 14:09:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:26:04 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	exit_proc(int signo)
 {
 	if (signo == SIGINT)
 	{
-		printf("\n");
+		ft_putendl_fd("", STDERR_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		exit(EX_BY_SIGNAL);
@@ -57,16 +57,11 @@ void	set_signal(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	reset_signal_before_fork(pid_t pid, int here_flag)
+void	reset_signal_before_fork(pid_t pid)
 {
 	rl_catch_signals = 1;
 	if (pid == 0)
 		signal(SIGINT, exit_proc);
 	else
-	{
-		if (here_flag)
-			signal(SIGINT, SIG_IGN);
-		else
-			signal(SIGINT, print_new_line);
-	}
+		signal(SIGINT, SIG_IGN);
 }

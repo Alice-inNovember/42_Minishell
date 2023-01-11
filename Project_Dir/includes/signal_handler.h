@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:17:46 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:30:05 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 13:25:33 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 
 void	set_signal(void);
-void	reset_signal_before_fork(pid_t pid, int here_flag);
+void	reset_signal_before_fork(pid_t pid);
+void	print_new_line(int signo);
 
 #endif
