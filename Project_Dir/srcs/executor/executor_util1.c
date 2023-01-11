@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 11:55:14 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 17:13:42 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	{
 		cmdpath = str3join(path[i], "/", cmd_argv[0]);
 		if (access(cmdpath, F_OK) == 0)
+		{
+			ft_free_vector(path);
 			return (cmdpath);
+		}
 		free(cmdpath);
 		i++;
 	}

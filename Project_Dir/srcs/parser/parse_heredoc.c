@@ -6,11 +6,12 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 14:07:37 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:24:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
+#include <unistd.h>
 
 extern t_exit_heredoc	g_exit_heredoc;
 
@@ -29,6 +30,8 @@ void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		g_exit_heredoc.exit_status = EX_BY_SIGNAL + SIGINT;
 		data->syntax_err_flag = E_SIGINT;
 		clear_and_free_token_list(token_list);
+		unlink(filename);
+		free(filename);
 		return ;
 	}
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
