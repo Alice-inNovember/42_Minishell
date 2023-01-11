@@ -108,6 +108,22 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(UTILDIR)/error_msg.c \
 				$(UTILDIR)/etc.c
 OBJS		=	${SRCS:.c=.o}
+#COLOR
+Color_Off	=	'\033[0m'
+Black		=	'\033[0;30m'
+Red			=	'\033[0;31m'
+Green		=	'\033[0;32m'
+Yellow		=	'\033[0;33m'
+Blue		=	'\033[0;34m'
+Purple		=	'\033[0;35m'
+Cyan		=	'\033[0;36m'
+White		=	'\033[0;37m'
+LRed		=	"\033[1;31m"
+LGreen		=	"\033[1;32m"
+LBlue		=	'\033[1;34m'
+LPurple		=	'\033[1;35m'
+LCyan		=	"\033[1;36m"
+INFO		=
 
 ifdef IF_DEBUG
 	CFLAGS += $(DFLAGS)
@@ -117,30 +133,39 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@$(MAKE) -C $(LFTDIR)
-	$(info making libft.a done)
+	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)libft.a "  "✅$(Color_Off)))
+	$(info $(INFO))
 	@$(MAKE) -C $(DLLDIR)
-	$(info making libdll.a done)
+	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)libdll.a " "✅$(Color_Off)))
+	$(info $(INFO))
 	@$(MAKE) -C $(GNLDIR)
-	$(info making libgnl.a done)
+	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)libgnl.a " "✅$(Color_Off)))
+	$(info $(INFO))
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
-	$(info making minishell done)
+	$(eval INFO = $(shell echo $(LBlue)making "  "$(LGreen)minishell ""✅$(Color_Off)))
+	$(info $(INFO))
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
 
 clean :
 	@$(MAKE) -C $(LFTDIR) clean
-	$(info cleaning libft done)
+	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libft "    "✅$(Color_Off)))
+	$(info $(INFO))
 	@$(MAKE) -C $(DLLDIR) clean
-	$(info cleaning libdll done)
+	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libdll "   "✅$(Color_Off)))
+	$(info $(INFO))
 	@$(MAKE) -C $(GNLDIR) clean
-	$(info cleaning libgnl done)
+	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libgnl "   "✅$(Color_Off)))
+	$(info $(INFO))
 	@$(RM) $(OBJS) $(BOBJS)
-	$(info cleaning object files done)
+	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)obj files ""✅$(Color_Off)))
+	$(info $(INFO))
 
 fclean : clean
 	@$(RM) $(NAME)
-	$(info cleaning minishell done)
+	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)minishell ""✅$(Color_Off)))
+	$(info $(INFO))
 
 re :
 	@$(MAKE) fclean
