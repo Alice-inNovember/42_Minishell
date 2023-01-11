@@ -6,10 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 14:08:32 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:29:58 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "readline/readline.h"
 #include "../../libraries/dllist/includes/dllist.h"
 #include "../../includes/util.h"
 #include "../../includes/envp.h"
@@ -46,7 +47,10 @@ int	is_line_empty(t_data *data)
 	char	*line_cp;
 
 	if (data->line == NULL)
+	{
+		ft_putendl_fd("exit", STDOUT_FILENO);
 		exit (g_exit_heredoc.exit_status);
+	}
 	line_cp = data->line;
 	while (*line_cp && ((*line_cp >= 9 && *line_cp <= 13) || *line_cp == 32))
 		line_cp++;
