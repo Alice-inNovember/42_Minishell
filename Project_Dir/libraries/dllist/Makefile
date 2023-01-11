@@ -6,7 +6,7 @@
 #    By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/13 15:36:02 by minseok2          #+#    #+#              #
-#    Updated: 2023/01/11 01:42:55 by jincpark         ###   ########.fr        #
+#    Updated: 2023/01/11 10:50:49 by minseok2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,6 @@ AR = ar
 ARFLAGS = -rcs
 RM = rm
 RMFLAGS = -rf
-
-LIBFT_DIR = ../libft
-LIBFT_NAME = ft
 
 HEADER_DIR = includes
 
@@ -36,7 +33,6 @@ OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 all: $(NAME)
 
 clean:
-	@make fclean -C $(LIBFT_DIR)
 	@$(RM) $(RMFLAGS) $(OBJS_DIR)
 
 fclean: clean
@@ -47,7 +43,6 @@ re:
 	@make all
 
 $(NAME): $(OBJS)
-	@make all -C $(LIBFT_DIR)
 	@$(AR) $(ARFLAGS) $@ $^
 
 $(OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c

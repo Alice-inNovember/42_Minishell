@@ -149,13 +149,13 @@ $(NAME) : $(OBJS)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
 
 clean :
-	@$(MAKE) -C $(LFTDIR) clean
+	@$(MAKE) -C $(LFTDIR) fclean
 	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libft "    "✅$(Color_Off)))
 	$(info $(INFO))
-	@$(MAKE) -C $(DLLDIR) clean
+	@$(MAKE) -C $(DLLDIR) fclean
 	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libdll "   "✅$(Color_Off)))
 	$(info $(INFO))
-	@$(MAKE) -C $(GNLDIR) clean
+	@$(MAKE) -C $(GNLDIR) fclean
 	$(eval INFO = $(shell echo $(LRed)cleaning $(LCyan)libgnl "   "✅$(Color_Off)))
 	$(info $(INFO))
 	@$(RM) $(OBJS) $(BOBJS)
