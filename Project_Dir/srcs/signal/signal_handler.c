@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 14:56:09 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:09:45 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	reset_signal_before_fork(pid_t pid)
 {
 	rl_catch_signals = 1;
 	if (pid == 0)
+	{
 		signal(SIGINT, exit_proc);
+		signal(SIGQUIT, exit_proc);
+	}
 	else
 		signal(SIGINT, SIG_IGN);
 }
