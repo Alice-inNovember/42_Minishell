@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 16:09:49 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 17:25:23 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,12 @@ void	wait_child(t_data *data)
 		node = node->next;
 	}
 	if (WIFSIGNALED(status_tmp))
-		ft_putendl_fd("", STDOUT_FILENO);
-	signal(SIGINT, print_new_line);
+	{
+		if (status_tmp == SIGQUIT)
+			ft_putendl_fd("Quit: 3", STDOUT_FILENO);
+		else
+			ft_putendl_fd("", STDOUT_FILENO);
+	}
 }
 // SIGINT 종료 시 2 반환됨
 
@@ -113,7 +117,7 @@ void	make_child(t_data *data)
 	{
 		pipe(pip[NOW]);
 		pid = fork();
-		reset_signal_before_fork(pid);
+		reset_signal(pid, 0);
 		if (pid == 0)
 			execute_child(data, proc_node->content, pip, origin);
 		pid_list_add(&data->pid_list, pid);
