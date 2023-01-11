@@ -6,11 +6,13 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:05:59 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/10 16:17:24 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:56:50 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include "../../../libraries/libft/includes/libft.h"
 
 char	*make_random_name(int urandom_fd)
 {
