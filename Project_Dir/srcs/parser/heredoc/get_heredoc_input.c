@@ -17,8 +17,6 @@
 #include "../../../includes/executor.h"
 #include "../../../includes/signal_handler.h"
 
-extern t_exit_heredoc	g_exit_heredoc;
-
 int	get_heredoc_input(char *filename, char *limiter)
 {
 	int		fd;
@@ -44,6 +42,5 @@ int	get_heredoc_input(char *filename, char *limiter)
 		exit(EXIT_SUCCESS);
 	}
 	(waitpid(pid, &wstatus, 0), close(fd));
-	g_exit_heredoc.heredoc_filename = NULL;
 	return (wexitstatus(wstatus));
 }

@@ -6,14 +6,12 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:43:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 14:52:29 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:27:19 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/parser.h"
 #include "../../../includes/executor.h"
-
-extern t_exit_heredoc	g_exit_heredoc;
 
 char	*make_temp_file(t_data *data)
 {
@@ -26,7 +24,6 @@ char	*make_temp_file(t_data *data)
 	filename = make_file_using_mktemp(data, mktemp_path, mktemp_argv);
 	if (filename == NULL)
 		filename = make_random_name_file();
-	g_exit_heredoc.heredoc_filename = filename;
 	ft_free_vector(mktemp_argv);
 	free(mktemp_path);
 	return (filename);
