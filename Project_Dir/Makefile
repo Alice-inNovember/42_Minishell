@@ -121,8 +121,8 @@ ifdef IF_DEBUG
 	CFLAGS += $(DFLAGS)
 endif
 
-all : 
-	@make -j6 $(NAME)
+all :
+	@$(MAKE) -j6 $(NAME)
 
 $(NAME) : $(OBJS)
 	$(eval INFO = $(shell echo $(LBlue)Compiling$(Color_Off)))
@@ -177,10 +177,10 @@ fclean : clean
 
 re :
 	@$(MAKE) fclean
-	@$(MAKE) -j6 all
+	@$(MAKE) all
 
 rebug	:
 	@$(MAKE) fclean
-	@$(MAKE) -j6 IF_DEBUG=1 all
+	@$(MAKE) IF_DEBUG=1 all
 
 .PHONY : all clean fclean re
