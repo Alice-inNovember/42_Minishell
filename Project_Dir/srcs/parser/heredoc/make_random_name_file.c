@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_random_name_file.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:05:59 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 12:56:50 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:44:45 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,19 @@ char	*make_random_name_file(void)
 	int		temp_file_fd;
 
 	urandom_fd = open("/dev/urandom", O_RDONLY);
+	if (urandom_fd == -1)
+	{
+		perror("/dev/urandom");
+		exit (-1);
+	}
 	filename = make_random_name(urandom_fd);
 	close(urandom_fd);
 	temp_file_fd = open(filename, O_WRONLY | O_CREAT, 0644);
+	if (temp_file_fd == -1)
+	{
+		perror(filename);
+		exit (-1);
+	}
 	close(temp_file_fd);
 	return (filename);
 }
