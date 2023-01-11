@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 14:00:46 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 21:41:16 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:40:02 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	pid_list_add(t_list *pidlist, pid_t pid);
 int		do_redirect(t_proc_data *proc_data);
 int		is_last_cmd(t_data *data, t_proc_data *proc_data);
 int		is_first_cmd(t_data *data, t_proc_data *proc_data);
+void	save_origin_io(int origin_io[2]);
+void	restore_origin_io(int origin_io[2]);
 
 #endif
