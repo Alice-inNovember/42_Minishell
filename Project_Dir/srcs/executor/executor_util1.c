@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 17:13:42 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:57:06 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,4 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	}
 	ft_free_vector(path);
 	return (NULL);
-}
-
-int	wexitstatus(int status)
-{
-	int	exit_status;
-
-	exit_status = ((unsigned)status >> 8) & 0xff;
-	return (exit_status);
 }
