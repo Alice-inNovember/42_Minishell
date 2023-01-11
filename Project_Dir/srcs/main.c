@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 13:01:35 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:02:16 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "../includes/signal_handler.h"
 #include "../includes/util.h"
 
-int	g_last_exit_status;
+t_exit_heredoc	g_exit_heredoc;
 
 int	main(int argc, char **argv, char **envp)
 {

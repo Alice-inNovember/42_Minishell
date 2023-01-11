@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 00:30:17 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:09:29 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #include "readline/readline.h"
 #include "../../includes/data.h"
 
-extern int	g_last_exit_status;
+extern t_exit_heredoc	g_exit_heredoc;
 
 void	display_new_prompt(int signo)
 {
 	if (signo == SIGINT)
 	{
-		g_last_exit_status = 1;
+		g_exit_heredoc.exit_status = 1;
 		rl_replace_line("", 1);
 		printf("\n");
 		if (rl_on_new_line() == -1)
