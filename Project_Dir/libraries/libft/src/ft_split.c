@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 14:33:59 by minseok2          #+#    #+#             */
-/*   Updated: 2022/11/10 12:15:41 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:42:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static char	**allocate_splited_str(char const *s, char c)
 	size_t	word_count;
 
 	word_count = 0;
-	if (s == NULL)
-		ft_exit("Error", STDERR_FILENO, EXIT_FAILURE);
 	while (*s && *s == c)
 		s++;
 	while (*s)
@@ -62,6 +60,8 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	splited_str = allocate_splited_str(s, c);
 	while (*s && *s == c)
 		s++;

@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:00:43 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/09 14:48:47 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 12:42:36 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	length;
 
 	length = 0;
-	if (!s)
+	if (s == NULL)
 		return (0);
 	while (s[length])
 		length++;
