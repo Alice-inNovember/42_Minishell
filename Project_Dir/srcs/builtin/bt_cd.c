@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/11 22:01:48 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/11 22:26:36 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ int	is_to_home_dir(char **cmd_vector)
 
 int	error_handler_for_cd(char *cmd, char *word, int status)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
 	if (word)
-		ft_putstr_fd(": ", 2);
-	ft_putstr_fd(word, 2);
+		ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(word, STDERR_FILENO);
 	if (status == HOME_NOT)
-		ft_putstr_fd(": HOME not set\n", 2);
+		ft_putstr_fd(": HOME not set\n", STDERR_FILENO);
 	else if (status == CANT_CD)
-		ft_putstr_fd(": can't change directory\n", 2);
+		ft_putstr_fd(": can't change directory\n", STDERR_FILENO);
 	else if (status == MANY_ARG)
-		ft_putstr_fd(": too many arguments\n", 2);
+		ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
 	return (EX_BT_FAIL);
 }
 
