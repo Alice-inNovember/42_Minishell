@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:05 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/11 21:29:30 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/11 22:01:48 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 
 int	is_to_home_dir(char **cmd_vector)
 {
+	char	*temp;
+
 	if (check_word_cnt(cmd_vector) == 1)
 		return (1);
-	else if (check_word_cnt(cmd_vector) == 2 && getcwd(0, 0) == NULL)
+	temp = getcwd(0, 0);
+	if (check_word_cnt(cmd_vector) == 2 && temp == NULL)
 		return (1);
 	else
-		return (0);
+		return (free(temp), 0);
 }
 
 //When  pwd == getcwd(0, 0), pwd == null return (1) and go home
@@ -60,7 +63,10 @@ int	bt_cd(char **cmd_vector, t_list *envp_list)
 		return (error_handler_for_cd("cd", 0, MANY_ARG));
 	old_pwd = getcwd(0, 0);
 	if (path[0] && chdir(path))
+	{
+		free (old_pwd);
 		return (error_handler_for_cd("cd", path, CANT_CD));
+	}
 	new_pwd = getcwd(0, 0);
 	envp_add(envp_list, "PWD", new_pwd);
 	envp_add(envp_list, "OLDPWD", old_pwd);
