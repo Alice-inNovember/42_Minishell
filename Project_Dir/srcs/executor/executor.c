@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 14:52:30 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 16:09:49 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,16 @@ void	wait_child(t_data *data)
 	{
 		waitpid(*((pid_t *)node->content), &status, 0);
 		status_tmp = status;
-		if (status == 2)
-			status = EX_BY_SIGNAL + SIGINT;
+		if (WIFSIGNALED(status))
+		{
+			status = EX_BY_SIGNAL + WTERMSIG(status);
+		}
 		else
 			status = wexitstatus(status);
 		g_exit_heredoc.exit_status = status;
 		node = node->next;
 	}
-	if (status_tmp == 2)
+	if (WIFSIGNALED(status_tmp))
 		ft_putendl_fd("", STDOUT_FILENO);
 	signal(SIGINT, print_new_line);
 }
