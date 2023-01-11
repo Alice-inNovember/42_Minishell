@@ -6,13 +6,13 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/10 23:02:47 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:07:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 
-extern int	g_last_exit_status;
+extern t_exit_heredoc	g_exit_heredoc;
 
 void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 {
@@ -26,7 +26,7 @@ void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	limiter = get_limiter(token_list);
 	if (get_heredoc_input(filename, limiter) == EX_BY_SIGNAL)
 	{
-		g_last_exit_status = EX_BY_SIGNAL + SIGINT;
+		g_exit_heredoc.exit_status = EX_BY_SIGNAL + SIGINT;
 		data->syntax_err_flag = E_SIGINT;
 		clear_and_free_token_list(token_list);
 		return ;

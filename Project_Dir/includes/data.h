@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:50:50 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 14:01:52 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,12 @@ typedef struct s_data
 	t_list	pid_list;
 	t_error	syntax_err_flag;
 }	t_data;
+
+typedef struct s_exit_heredoc
+{
+	int		exit_status;
+	char	*heredoc_filename;
+}	t_exit_heredoc;
 
 void	init_data(t_data *data, char **envp);
 void	clear_data(t_data *data);
