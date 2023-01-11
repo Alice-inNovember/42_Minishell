@@ -6,14 +6,12 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:36:26 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/10 14:06:37 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/11 15:22:35 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../includes/builtin.h"
-
-extern int	g_last_exit_status;
 
 int	is_proper_opt(char *word, char opt_chr)
 {

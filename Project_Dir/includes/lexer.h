@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:51:02 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 22:41:55 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:25:11 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ typedef void	(*t_state_fp)(t_state *state, t_asset *asset);
 
 // tokenizer
 void	tokenizer(t_data *data);
-
-// print_token_list
-void	print_token_list(t_data *data);
 
 // utils
 char	*make_buf(char input);
