@@ -6,11 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:10:20 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 13:24:18 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:58:54 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/data.h"
 
 void	del_s_token(void *content)
 {

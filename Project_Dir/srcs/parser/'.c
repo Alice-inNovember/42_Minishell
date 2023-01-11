@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   '                                                  :+:      :+:    :+:   */
+/*   '.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 13:45:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:46:04 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 12:00:46 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/data.h"
 #include "../../includes/lexer.h"
+#include "../../includes/parser.h"
 
 int	is_err_occured(t_data *data)
 {

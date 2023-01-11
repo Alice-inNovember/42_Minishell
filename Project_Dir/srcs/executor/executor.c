@@ -6,13 +6,10 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 11:31:44 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:58:40 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <sys/wait.h>
-#include <unistd.h>
 #include "../../includes/executor.h"
 #include "../../includes/builtin.h"
 #include "../../includes/signal_handler.h"

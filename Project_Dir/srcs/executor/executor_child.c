@@ -6,18 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/10 14:46:16 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:58:09 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <sys/fcntl.h>
-#include <sys/unistd.h>
 #include <sys/stat.h>
-#include <unistd.h>
-#include "../../includes/data.h"
 #include "../../includes/envp.h"
 #include "../../includes/util.h"
 #include "../../includes/builtin.h"

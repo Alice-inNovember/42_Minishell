@@ -6,11 +6,10 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 16:20:15 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:57:34 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/data.h"
 #include "../../includes/envp.h"
 
 char	*envp_find(t_list *envp_list, char *key)

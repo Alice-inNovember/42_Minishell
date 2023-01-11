@@ -6,11 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:36:11 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:59:12 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../includes/data.h"
 
 void	print_syntax_err(t_data *data)
 {

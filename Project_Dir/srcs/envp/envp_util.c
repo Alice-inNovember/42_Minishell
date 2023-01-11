@@ -6,12 +6,11 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:17:33 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/09 16:18:30 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:57:01 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
-#include <stdio.h>
 
 char	*ft_strcat(char *dest, char *src)
 {

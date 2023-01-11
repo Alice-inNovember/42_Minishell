@@ -6,11 +6,14 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 11:39:50 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:52:37 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../includes/data.h"
+#include "../../../includes/envp.h"
+#include "../../../includes/executor.h"
+#include "../../../libraries/get_next_line/includes/get_next_line.h"
 #include "../../../includes/signal_handler.h"
 
 static void	execve_cmd(t_data *data, int pip[2], char *cmdpath, char **cmdargv)
