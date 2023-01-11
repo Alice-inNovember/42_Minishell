@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:31:44 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 22:42:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:57:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -73,5 +74,6 @@ int		ft_dup2(int fildes, int fildes2);
 int		ft_unlink(const char *path);
 pid_t	ft_waitpid(pid_t pid, int *stat_loc, int options);
 int		ft_execve(const char *path, char *const argv[], char *const envp[]);
+int		ft_stat(const char *path, struct stat *buf);
 
 #endif

@@ -22,9 +22,9 @@ static void	execve_cmd(t_data *data, int pip[2], char *cmdpath, char **cmdargv)
 
 	envp = envp2arr(&data->envp_list);
 	close(pip[READ_END]);
-	dup2(pip[WRITE_END], STDOUT_FILENO);
+	ft_dup2(pip[WRITE_END], STDOUT_FILENO);
 	close(pip[WRITE_END]);
-	execve(cmdpath, cmdargv, envp);
+	ft_execve(cmdpath, cmdargv, envp);
 }
 
 static char	*read_filename_from_pipe(pid_t pid, int pip[2])
@@ -53,8 +53,8 @@ char	*make_file_using_mktemp(t_data *data, \
 
 	if (mktemp_path == NULL)
 		return (NULL);
-	ret = pipe(pip);
-	pid = fork();
+	ret = ft_pipe(pip);
+	pid = ft_fork();
 	if (pid == 0)
 		execve_cmd(data, pip, mktemp_path, mktemp_argv);
 	close(pip[WRITE_END]);

@@ -25,7 +25,7 @@ int	get_heredoc_input(char *filename, char *limiter)
 	char	*input_line;
 
 	fd = open(filename, O_WRONLY);
-	pid = fork();
+	pid = ft_fork();
 	reset_signal(pid, 1);
 	if (pid == 0)
 	{

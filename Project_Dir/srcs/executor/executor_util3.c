@@ -15,14 +15,14 @@
 
 void	save_origin_io(int origin_io[2])
 {
-	origin_io[READ_END] = dup(STDIN_FILENO);
-	origin_io[WRITE_END] = dup(STDOUT_FILENO);
+	origin_io[READ_END] = ft_dup(STDIN_FILENO);
+	origin_io[WRITE_END] = ft_dup(STDOUT_FILENO);
 }
 
 void	restore_origin_io(int origin_io[2])
 {
-	dup2(origin_io[READ_END], STDIN_FILENO);
+	ft_dup2(origin_io[READ_END], STDIN_FILENO);
 	close(origin_io[READ_END]);
-	dup2(origin_io[WRITE_END], STDOUT_FILENO);
+	ft_dup2(origin_io[WRITE_END], STDOUT_FILENO);
 	close(origin_io[WRITE_END]);
 }

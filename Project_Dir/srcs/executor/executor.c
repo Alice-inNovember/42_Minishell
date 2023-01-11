@@ -104,12 +104,12 @@ void	make_child(t_data *data)
 	int		origin_io[2];
 
 	save_origin_io(origin_io);
-	(pipe(pip[PREV]), close(pip[PREV][WRITE_END]));
+	(ft_pipe(pip[PREV]), close(pip[PREV][WRITE_END]));
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
-		pipe(pip[NOW]);
-		pid = fork();
+		ft_pipe(pip[NOW]);
+		pid = ft_fork();
 		reset_signal(pid, 0);
 		if (pid == 0)
 			execute_child(data, proc_node->content, pip, origin_io);
