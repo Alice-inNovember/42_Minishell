@@ -28,7 +28,6 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
 				$(LEXERDIR)/tokenizer.c \
-				$(LEXERDIR)/print_token_list.c \
 				$(LEXERDIR)/utils/join_buf.c \
 				$(LEXERDIR)/utils/make_buf.c \
 				$(LEXERDIR)/utils/expand/get_env_length.c \
