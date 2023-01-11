@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 14:26:04 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:56:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	exit_proc(int signo)
 {
 	if (signo == SIGINT)
 	{
+		if (g_exit_heredoc.heredoc_filename != NULL)
+			unlink(g_exit_heredoc.heredoc_filename);
 		ft_putendl_fd("", STDERR_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 1);
