@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 14:21:31 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 21:01:12 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(t_unused)argv;
 	check_argc(argc);
-	//ft_putstr_fd(MINIHEADER, 2);
+	ft_putstr_fd(MINIHEADER, 2);
 	while (1)
 	{
 		set_signal();
