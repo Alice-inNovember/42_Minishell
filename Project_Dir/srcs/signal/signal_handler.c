@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 13:54:31 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 23:05:22 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/13 08:28:48 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	child_sig_handler(int signo)
 		ft_putendl_fd("", STDERR_FILENO);
 	else if (signo == SIGQUIT)
 		ft_putendl_fd("Quit: 3", STDOUT_FILENO);
-	exit(EX_BY_SIGNAL);
+	exit(EX_BY_SIGNAL + signo);
 }
 
 void	set_signal(void)
