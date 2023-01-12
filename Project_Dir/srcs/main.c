@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 13:12:08 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 13:13:30 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		set_signal();
 		init_data(&data, envp);
 		data.line = readline("\033[32;1mminishell v1.0 >\033[0m ");
-		if (is_line_empty(&data))
-			continue ;
+		check_eof(data.line);
 		add_history(data.line);
 		tokenizer(&data);
 		parser(&data);
