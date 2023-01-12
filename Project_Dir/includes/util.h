@@ -24,6 +24,7 @@ void	del_s_pid(void *content);
 void	print_syntax_err(t_data *data);
 int		is_line_empty(t_data *data);
 void	check_argc(int argc);
+void	check_eof(char *line);
 void	error_msg(char *target, int errnum);
 void	error_handler_for_bt(char *cmd, char *word, int status);
 

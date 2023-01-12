@@ -36,8 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		set_signal();
 		init_data(&data, envp);
 		data.line = readline("\033[32;1mminishell v1.0 >\033[0m ");
-		if (is_line_empty(&data))
-			continue ;
+		check_eof(data.line);
 		add_history(data.line);
 		tokenizer(&data);
 		parser(&data);

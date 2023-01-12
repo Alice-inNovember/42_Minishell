@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 17:25:38 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:51:43 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	get_heredoc_input(char *filename, char *limiter)
 		}
 		exit(EXIT_SUCCESS);
 	}
-	(waitpid(pid, &wstatus, 0), close(fd));
+	(ft_waitpid(pid, &wstatus, 0), close(fd));
 	return (wexitstatus(wstatus));
 }

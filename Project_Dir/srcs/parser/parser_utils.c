@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:13:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/06 19:41:49 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:48:40 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ t_list	*sub_token_list(t_node *first, t_node *last)
 	{
 		token_cp = ft_calloc(1, sizeof(t_token));
 		token_cp->type = ((t_token *)curr->content)->type;
-		if (token_cp->type == T_WORD)
-			token_cp->value = ft_strdup(((t_token *)curr->content)->value);
+		token_cp->value = ft_strdup(((t_token *)curr->content)->value);
 		list_append(new_list, new_node((void *)token_cp));
 		curr = curr->next;
 	}
