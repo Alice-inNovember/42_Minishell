@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 13:12:08 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 14:21:31 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(t_unused)argv;
 	check_argc(argc);
-	printf(MINIHEADER, "\033[34m", "\033[37m");
+	//ft_putstr_fd(MINIHEADER, 2);
 	while (1)
 	{
 		set_signal();
@@ -47,5 +47,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-		// readline returns NULL if EOF is only input
-		// print_token_list(&data);
+// readline returns NULL if EOF is only input
+// print_token_list(&data);

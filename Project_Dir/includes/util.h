@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:44:41 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/12 13:12:01 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 14:15:32 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_argc(int argc);
 void	error_msg(char *target, int errnum);
 void	error_handler_for_bt(char *cmd, char *word, int status);
 
-# define MINIHEADER "\n%s\
+# define MINIHEADER "\n\033[34m\
   ██╗██╗██████╗   ███╗   ███╗██╗███╗  ██╗██╗ ██████╗██╗  ██╗███████╗██╗     ██╗     \n\
  ██╔╝██║╚════██╗  ████╗ ████║██║████╗ ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     \n\
 ██╔╝ ██║  ███╔═╝  ██╔████╔██║██║██╔██╗██║██║╚█████╗ ███████║█████╗  ██║     ██║     \n\
@@ -35,6 +35,6 @@ void	error_handler_for_bt(char *cmd, char *word, int status);
 ╚════██║███████╗  ██║ ╚═╝ ██║██║██║ ╚███║██║██████╔╝██║  ██║███████╗███████╗███████╗\n\
      ╚═╝╚══════╝  ╚═╝     ╚═╝╚═╝╚═╝  ╚══╝╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n\
 OH MY MINISHELL!                                                           - ver 1.0\
-%s\n\n"
+\033[37m\n\n"
 
 #endif
