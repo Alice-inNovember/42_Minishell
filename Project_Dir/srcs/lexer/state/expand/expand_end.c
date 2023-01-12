@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 21:28:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 21:50:39 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:38:36 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	expand_end(t_state *state, t_asset *asset)
 	t_token		*token;
 
 	if (list_size(&asset->buf_list) > 0 && \
-			(input == '\0' || ft_strchr(" \b\t\n\v\f\r|<>", input)))
+			(input == '\0' || ft_isspace(input) || ft_strchr("|<>", input)))
 	{
 		token = (t_token *)ft_calloc(1, sizeof(t_token));
 		token->type = T_WORD;
