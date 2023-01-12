@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 17:26:06 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:13:30 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ OH MY MINISHELL!                                                           - ver
 		set_signal();
 		init_data(&data, envp);
 		data.line = readline("\033[32;1mminishell v1.0 >\033[0m ");
-		if (is_line_empty(&data))
-			continue ;
+		check_eof(data.line);
 		add_history(data.line);
 		tokenizer(&data);
 		parser(&data);
