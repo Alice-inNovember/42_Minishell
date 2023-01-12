@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 17:18:32 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 11:13:31 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "../../includes/util.h"
 #include "../../includes/envp.h"
 #include "../../includes/builtin.h"
-
-extern int	g_exit_status;
 
 void	init_data(t_data *data, char **envp)
 {
