@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 22:42:17 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:52:16 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	wait_child(t_data *data)
 	node = list_peek_first_node(&data->pid_list);
 	while (node->next != NULL)
 	{
-		waitpid(*((pid_t *)node->content), &status, 0);
+		ft_waitpid(*((pid_t *)node->content), &status, 0);
 		status_tmp = status;
 		if (wifsignaled(status))
 			status = EX_BY_SIGNAL + wtermsig(status);
