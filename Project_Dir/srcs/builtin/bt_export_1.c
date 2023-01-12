@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:33:49 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/10 14:16:49 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/12 14:32:48 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ int	bt_export(char **cmd_vector, t_list *envp_list)
 	char	*value;
 
 	error_flag = EX_SUCCESS;
-	key = 0;
-	value = 0;
 	word_i = 1;
 	if (check_word_cnt(cmd_vector) == 1)
 		print_export(envp_list);
 	while (cmd_vector[word_i])
 	{
+		key = NULL;
+		value = NULL;
 		word = cmd_vector[word_i];
 		word_i++;
 		if (check_word_sep_key_val(word, &key, &value, &error_flag))
