@@ -6,11 +6,12 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 21:57:06 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:56:39 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/envp.h"
+#include "../../includes/util.h"
 
 char	**cmd_list2arr(t_list *cmd_list)
 {
@@ -51,8 +52,13 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	char	*cmdpath;
 	size_t	i;
 
-	if (ft_strchr(cmd_argv[0], '/') && access(cmd_argv[0], F_OK) == 0)
-		return (cmd_argv[0]);
+	if (ft_strchr(cmd_argv[0], '/'))
+	{
+		if (access(cmd_argv[0], F_OK) == 0)
+			return (cmd_argv[0]);
+		else
+			(error_msg(cmd_argv[0], EN_FNOT_FIND), exit(EX_CNOT_FIND));
+	}
 	path = get_path_envp(data);
 	if (!path)
 		return (NULL);
@@ -61,13 +67,9 @@ char	*get_cmd_path(t_data *data, char **cmd_argv)
 	{
 		cmdpath = str3join(path[i], "/", cmd_argv[0]);
 		if (access(cmdpath, F_OK) == 0)
-		{
-			ft_free_vector(path);
-			return (cmdpath);
-		}
+			return (ft_free_vector(path), cmdpath);
 		free(cmdpath);
 		i++;
 	}
-	ft_free_vector(path);
-	return (NULL);
+	return (ft_free_vector(path), NULL);
 }
