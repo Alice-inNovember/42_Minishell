@@ -6,12 +6,11 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:04:10 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 20:59:20 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/12 11:06:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/lexer.h"
-#include "../../../../includes/envp.h"
 
 extern int	g_exit_status;
 
