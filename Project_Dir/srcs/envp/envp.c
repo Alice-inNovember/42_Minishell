@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:19:19 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 11:57:34 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 14:10:49 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	envp_delete(t_list *envp_list, char *key)
 		node = node->next;
 	if (!node->content)
 		return ;
+	free(((t_envp *)node->content)->key);
 	free(((t_envp *)node->content)->value);
 	free(node->content);
 	node->prev->next = node->next;
