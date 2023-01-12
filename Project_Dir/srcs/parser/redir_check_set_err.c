@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:13:52 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:37:24 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 19:39:23 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_redir_err_flag(t_data *data, t_token *token)
 		data->syntax_err_flag = E_NEAR_DLESS;
 }
 
-void	set_redir_type(t_redir *redir, t_type type)
+void	set_s_redir(t_redir *redir, t_type type, char *filename)
 {
 	if (type == T_LESS)
 		redir->type = T_LESS;
@@ -53,4 +53,5 @@ void	set_redir_type(t_redir *redir, t_type type)
 		redir->type = T_GREAT;
 	else
 		redir->type = T_DGREAT;
+	redir->filename = ft_strdup(filename);
 }

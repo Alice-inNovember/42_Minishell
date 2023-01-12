@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 18:23:08 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:50:13 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 19:36:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			is_redir(t_type type);
 int			is_redir_form(t_data *data, t_node *node);
 
 void		set_redir_err_flag(t_data *data, t_token *token);
-void		set_redir_type(t_redir *redir, t_type type);
+void		set_s_redir(t_redir *redir, t_type type, char *filename);
 
 t_list		*sub_token_list(t_node *first, t_node *last);
 t_proc_data	*new_proc_data(void);

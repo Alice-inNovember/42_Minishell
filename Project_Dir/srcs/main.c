@@ -6,18 +6,14 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 21:01:12 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 20:57:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdio.h>
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "../includes/lexer.h"
 #include "../includes/parser.h"
-#include "../includes/envp.h"
-#include "../includes/builtin.h"
 #include "../includes/executor.h"
 #include "../includes/signal_handler.h"
 #include "../includes/util.h"
