@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 20:59:20 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/13 08:40:12 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	parse_io_here(t_data *data, t_proc_data *proc_data, t_list *token_list)
 		return ;
 	filename = make_temp_file(data);
 	limiter = get_limiter(token_list);
-	if (get_heredoc_input(filename, limiter) == EX_BY_SIGNAL)
+	if (get_heredoc_input(filename, limiter))
 	{
-		g_exit_status = EX_BY_SIGNAL + SIGINT;
 		data->syntax_err_flag = E_SIGINT;
 		clear_and_free_token_list(token_list);
 		ft_unlink(filename);
