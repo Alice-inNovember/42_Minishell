@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 16:34:51 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 11:38:36 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 19:22:04 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ void	parse_cmd_word(t_data *data, t_proc_data *proc_data, t_list *token_list)
 	if (is_return_case(data, token_list, E_NONE))
 		return ;
 	token = list_peek_first_content(token_list);
-	if (token->type == T_WORD)
-	{
-		cmd_word = ft_strdup((char *)token->value);
-		list_append(&proc_data->cmd_list, new_node((void *)cmd_word));
-	}
-	else
-		set_redir_err_flag(data, token);
+	cmd_word = ft_strdup((char *)token->value);
+	list_append(&proc_data->cmd_list, new_node((void *)cmd_word));
 	clear_and_free_token_list(token_list);
 }
 
