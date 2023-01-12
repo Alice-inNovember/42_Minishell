@@ -6,18 +6,14 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 14:21:31 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 20:57:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <stdio.h>
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "../includes/lexer.h"
 #include "../includes/parser.h"
-#include "../includes/envp.h"
-#include "../includes/builtin.h"
 #include "../includes/executor.h"
 #include "../includes/signal_handler.h"
 #include "../includes/util.h"
@@ -30,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(t_unused)argv;
 	check_argc(argc);
-	//ft_putstr_fd(MINIHEADER, 2);
+//	ft_putstr_fd(MINIHEADER, 2);
 	while (1)
 	{
 		set_signal();
