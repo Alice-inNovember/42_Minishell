@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/12 12:01:23 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/12 14:58:57 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef enum e_errnum
 {
 	EN_CNOT_FIND,
 	EN_PER_DENIED,
-	EN_IS_DIR
+	EN_IS_DIR,
+	EN_FNOT_FIND
 }	t_errnum;
 
 // define exit code type

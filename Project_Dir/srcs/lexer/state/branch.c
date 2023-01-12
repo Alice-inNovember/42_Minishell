@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 17:55:52 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 22:44:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:33:09 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	branch(t_state *state, t_asset *asset)
 
 	if (input == '\0')
 		*state = CLEAR;
-	else if (ft_strchr(" \b\t\n\v\f\r", input))
+	else if (ft_isspace(input))
 		*state = SKIP_SPACE;
 	else if (input == '$')
 		*state = CHECK_EXPAND;

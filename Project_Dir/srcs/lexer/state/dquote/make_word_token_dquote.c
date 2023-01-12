@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:12:38 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/08 22:49:41 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:35:39 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	make_word_token_dquote(t_state *state, t_asset *asset)
 	const char	input = asset->line[asset->index];
 	t_token		*token;
 
-	if (input == '\0' || ft_strchr(" \b\t\n\v\f\r|<>", input))
+	if (input == '\0' || ft_isspace(input) || ft_strchr("|<>", input))
 	{
 		token = (t_token *)ft_calloc(1, sizeof(t_token));
 		token->type = T_WORD;

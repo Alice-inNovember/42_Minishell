@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 22:56:34 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:50:14 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	struct stat	sb;
 	char		*cmd_path;
 
+	if (cmd_argv[0][0] == 0)
+		(error_msg(cmd_argv[0], EN_CNOT_FIND), exit(EX_CNOT_FIND));
 	cmd_path = get_cmd_path(data, cmd_argv);
 	if (cmd_path == NULL)
 		(error_msg(cmd_argv[0], EN_CNOT_FIND), exit(EX_CNOT_FIND));
