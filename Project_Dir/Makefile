@@ -63,13 +63,11 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(LEXERDIR)/state/quote/add_buf_in_quote.c \
 				$(LEXERDIR)/state/quote/branch_quote.c \
 				$(LEXERDIR)/state/quote/close_quote.c \
-				$(LEXERDIR)/state/quote/make_word_token_quote.c \
 				$(LEXERDIR)/state/quote/open_quote.c \
 				$(LEXERDIR)/state/quote/open_quote_error.c \
 				$(LEXERDIR)/state/dquote/add_buf_in_dquote.c \
 				$(LEXERDIR)/state/dquote/branch_dquote.c \
 				$(LEXERDIR)/state/dquote/close_dquote.c \
-				$(LEXERDIR)/state/dquote/make_word_token_dquote.c \
 				$(LEXERDIR)/state/dquote/open_dquote.c \
 				$(LEXERDIR)/state/dquote/open_dquote_error.c \
 				$(LEXERDIR)/state/dquote/skip_backslash_in_dquote.c \
