@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(t_unused)argv;
 	check_argc(argc);
-//	ft_putstr_fd(MINIHEADER, 2);
+	ft_putstr_fd(MINIHEADER, 2);
 	while (1)
 	{
 		set_signal();

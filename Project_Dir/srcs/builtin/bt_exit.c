@@ -59,8 +59,7 @@ int	bt_exit(char **cmd_vector, t_list *envp_list)
 	int	num;
 	int	flag;
 
-	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
-		ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 2);
 	(void)envp_list;
 	flag = 0;
 	if (check_word_cnt(cmd_vector) == 1)
