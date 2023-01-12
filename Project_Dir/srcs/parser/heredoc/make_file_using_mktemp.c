@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 13:51:36 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:05:05 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ char	*make_file_using_mktemp(t_data *data, \
 		execve_cmd(data, pip, mktemp_path, mktemp_argv);
 	close(pip[WRITE_END]);
 	filename = read_filename_from_pipe(pid, pip);
+	close(pip[READ_END]);
 	return (filename);
 }
