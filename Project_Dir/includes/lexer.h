@@ -6,7 +6,7 @@
 /*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:51:02 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 15:25:11 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:25:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "data.h"
 
-# define TOTAL_STATE	43
+# define TOTAL_STATE	41
 
 typedef enum e_state
 {
@@ -49,7 +49,6 @@ typedef enum e_state
 	OPEN_QUOTE_ERROR,
 	ADD_BUF_IN_QUOTE,
 	CLOSE_QUOTE,
-	MAKE_WORD_TOKEN_QUOTE,
 	OPEN_DQUOTE,
 	BRANCH_DQUOTE,
 	SKIP_BACKSLASH_IN_DQUOTE,
@@ -59,7 +58,6 @@ typedef enum e_state
 	EXPAND_DQUOTE,
 	QUESTION_MARK_EXPAND_DQUOTE,
 	CLOSE_DQUOTE,
-	MAKE_WORD_TOKEN_DQUOTE,
 	CLEAR,
 	FINISH
 }	t_state;
@@ -133,7 +131,6 @@ void	branch_quote(t_state *state, t_asset *asset);
 void	open_quote_error(t_state *state, t_asset *asset);
 void	add_buf_in_quote(t_state *state, t_asset *asset);
 void	close_quote(t_state *state, t_asset *asset);
-void	make_word_token_quote(t_state *state, t_asset *asset);
 
 // state - dquote
 void	open_dquote(t_state *state, t_asset *asset);
@@ -142,7 +139,6 @@ void	skip_backslash_in_dquote(t_state *state, t_asset *asset);
 void	open_dquote_error(t_state *state, t_asset *asset);
 void	add_buf_in_dquote(t_state *state, t_asset *asset);
 void	close_dquote(t_state *state, t_asset *asset);
-void	make_word_token_dquote(t_state *state, t_asset *asset);
 
 // state - dquote - expand
 void	check_expand_dquote(t_state *state, t_asset *asset);
