@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 11:52:37 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 02:58:45 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	execve_cmd(t_data *data, int pip[2], char *cmdpath, char **cmdargv)
 
 	envp = envp2arr(&data->envp_list);
 	close(pip[READ_END]);
-	dup2(pip[WRITE_END], STDOUT_FILENO);
+	ft_dup2(pip[WRITE_END], STDOUT_FILENO);
 	close(pip[WRITE_END]);
-	execve(cmdpath, cmdargv, envp);
+	ft_execve(cmdpath, cmdargv, envp);
 }
 
 static char	*read_filename_from_pipe(pid_t pid, int pip[2])
@@ -48,13 +48,12 @@ char	*make_file_using_mktemp(t_data *data, \
 {
 	char	*filename;
 	int		pip[2];
-	int		ret;
 	pid_t	pid;
 
 	if (mktemp_path == NULL)
 		return (NULL);
-	ret = pipe(pip);
-	pid = fork();
+	ft_pipe(pip);
+	pid = ft_fork();
 	if (pid == 0)
 		execve_cmd(data, pip, mktemp_path, mktemp_argv);
 	close(pip[WRITE_END]);

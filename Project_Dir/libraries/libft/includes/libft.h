@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 11:31:44 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 12:33:26 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:57:37 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -65,5 +67,13 @@ void	*ft_malloc(size_t size);
 void	*ft_calloc(size_t count, size_t data_type_size);
 void	ft_exit(const char *signal, int fd, int status);
 void	ft_free_vector(char **vector);
+int		ft_pipe(int fildes[2]);
+pid_t	ft_fork(void);
+int		ft_dup(int fildes);
+int		ft_dup2(int fildes, int fildes2);
+int		ft_unlink(const char *path);
+pid_t	ft_waitpid(pid_t pid, int *stat_loc, int options);
+int		ft_execve(const char *path, char *const argv[], char *const envp[]);
+int		ft_stat(const char *path, struct stat *buf);
 
 #endif

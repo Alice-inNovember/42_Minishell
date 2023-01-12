@@ -6,23 +6,23 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 13:40:20 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 15:58:00 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:56:34 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <sys/stat.h>
 #include "../../includes/envp.h"
 #include "../../includes/util.h"
 #include "../../includes/builtin.h"
 #include "../../includes/executor.h"
 #include "../../includes/signal_handler.h"
+#include "../../libraries/libft/includes/libft.h"
 
 void	pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 {
-	dup2(read_end, STDIN_FILENO);
+	ft_dup2(read_end, STDIN_FILENO);
 	close(read_end);
-	dup2(write_end, STDOUT_FILENO);
+	ft_dup2(write_end, STDOUT_FILENO);
 	close(write_end);
 	if (do_redirect(proc_data))
 		exit (EXIT_FAILURE);
@@ -31,9 +31,9 @@ void	pip_redirect(t_proc_data *proc_data, int write_end, int read_end)
 void	fl_redirect(t_data *data, t_proc_data *proc, int pip[2][2], int *origin)
 {
 	if (is_first_cmd(data, proc))
-		dup2(origin[READ_END], pip[PREV][READ_END]);
+		ft_dup2(origin[READ_END], pip[PREV][READ_END]);
 	if (is_last_cmd(data, proc))
-		dup2(origin[WRITE_END], pip[NOW][WRITE_END]);
+		ft_dup2(origin[WRITE_END], pip[NOW][WRITE_END]);
 }
 
 void	execute_builtin(t_builtin_fp bt_fp, char **cmd_argv, t_list *envp_list)
@@ -49,15 +49,12 @@ void	execute_execve(t_data *data, char **cmd_argv, char **cmd_envp)
 	cmd_path = get_cmd_path(data, cmd_argv);
 	if (cmd_path == NULL)
 		(error_msg(cmd_argv[0], EN_CNOT_FIND), exit(EX_CNOT_FIND));
-	if (stat(cmd_path, &sb) == -1)
-		(perror("stat"), exit(EX_FAILURE));
+	ft_stat(cmd_path, &sb);
 	if ((sb.st_mode & S_IFMT) == S_IFDIR)
 		(error_msg(cmd_argv[0], EN_IS_DIR), exit(EX_CNOT_EXEC));
 	else if (access(cmd_path, X_OK) == -1)
 		(error_msg(cmd_argv[0], EN_PER_DENIED), exit(EX_CNOT_EXEC));
-	execve(cmd_path, cmd_argv, cmd_envp);
-	perror("minishell");
-	exit(EXIT_FAILURE);
+	ft_execve(cmd_path, cmd_argv, cmd_envp);
 }
 
 void	execute_child(t_data *data, t_proc_data *proc, int pip[2][2], int *ofd)

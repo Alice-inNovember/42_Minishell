@@ -92,6 +92,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(EXECDIR)/executor_child.c \
 				$(EXECDIR)/executor_util1.c \
 				$(EXECDIR)/executor_util2.c \
+				$(EXECDIR)/executor_util3.c \
 				$(BUIDIR)/built_in_util.c \
 				$(BUIDIR)/bt_cd.c \
 				$(BUIDIR)/bt_echo.c \
@@ -102,6 +103,7 @@ SRCS		=	$(SRCDIR)/main.c \
 				$(BUIDIR)/bt_pwd.c \
 				$(BUIDIR)/bt_unset.c \
 				$(SIGDIR)/signal_handler.c \
+				$(SIGDIR)/signal_utils.c \
 				$(UTILDIR)/syntax_err.c \
 				$(UTILDIR)/del_lists.c \
 				$(UTILDIR)/error_msg.c \

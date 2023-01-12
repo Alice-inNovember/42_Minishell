@@ -37,7 +37,7 @@ int	open_redirect(t_redir *redir)
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd == -1)
 			return (perror(err_msg), free(err_msg), -1);
-		(dup2(fd, STDOUT_FILENO), close(fd));
+		(ft_dup2(fd, STDOUT_FILENO), close(fd));
 	}
 	else
 	{
@@ -45,8 +45,8 @@ int	open_redirect(t_redir *redir)
 		if (fd == -1)
 			return (perror(err_msg), free(err_msg), -1);
 		if (redir->type == T_DLESS)
-			unlink(redir->filename);
-		(dup2(fd, STDIN_FILENO), close(fd));
+			ft_unlink(redir->filename);
+		(ft_dup2(fd, STDIN_FILENO), close(fd));
 	}
 	free(err_msg);
 	return (fd);

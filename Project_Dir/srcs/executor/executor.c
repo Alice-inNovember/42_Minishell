@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 17:25:23 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:42:17 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ int	check_single_builtin(t_data *data, t_list *envp_list)
 		bt_fp = builtin_find(&data->builtin_list, cmd_argv[0]);
 	if (list_size(&data->proc_data_list) == 1 && bt_fp != NULL)
 	{
-		origin_io[READ_END] = dup(STDIN_FILENO);
-		origin_io[WRITE_END] = dup(STDOUT_FILENO);
+		save_origin_io(origin_io);
 		if (do_redirect(proc_data))
 			g_exit_status = 1;
 		else
 			g_exit_status = bt_fp(cmd_argv, envp_list);
-		(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
-		(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
+		restore_origin_io(origin_io);
 		free(cmd_argv);
 		return (1);
 	}
@@ -57,12 +55,10 @@ int	check_single_redirect(t_data *data)
 	{
 		if (list_size(&proc_data->cmd_list) == 0)
 		{
-			origin_io[READ_END] = dup(STDIN_FILENO);
-			origin_io[WRITE_END] = dup(STDOUT_FILENO);
+			save_origin_io(origin_io);
 			if (do_redirect(proc_data))
 				g_exit_status = 1;
-			(dup2(origin_io[READ_END], 0), close(origin_io[READ_END]));
-			(dup2(origin_io[WRITE_END], 1), close(origin_io[WRITE_END]));
+			restore_origin_io(origin_io);
 			free(cmd_argv);
 			return (1);
 		}
@@ -83,16 +79,14 @@ void	wait_child(t_data *data)
 	{
 		waitpid(*((pid_t *)node->content), &status, 0);
 		status_tmp = status;
-		if (WIFSIGNALED(status))
-		{
-			status = EX_BY_SIGNAL + WTERMSIG(status);
-		}
+		if (wifsignaled(status))
+			status = EX_BY_SIGNAL + wtermsig(status);
 		else
 			status = wexitstatus(status);
 		g_exit_status = status;
 		node = node->next;
 	}
-	if (WIFSIGNALED(status_tmp))
+	if (wifsignaled(status_tmp))
 	{
 		if (status_tmp == SIGQUIT)
 			ft_putendl_fd("Quit: 3", STDOUT_FILENO);
@@ -107,19 +101,18 @@ void	make_child(t_data *data)
 	t_node	*proc_node;
 	pid_t	pid;
 	int		pip[2][2];
-	int		origin[2];
+	int		origin_io[2];
 
-	origin[READ_END] = dup(STDIN_FILENO);
-	origin[WRITE_END] = dup(STDOUT_FILENO);
-	(pipe(pip[PREV]), close(pip[PREV][WRITE_END]));
+	save_origin_io(origin_io);
+	(ft_pipe(pip[PREV]), close(pip[PREV][WRITE_END]));
 	proc_node = list_peek_first_node(&data->proc_data_list);
 	while (proc_node->next != NULL)
 	{
-		pipe(pip[NOW]);
-		pid = fork();
+		ft_pipe(pip[NOW]);
+		pid = ft_fork();
 		reset_signal(pid, 0);
 		if (pid == 0)
-			execute_child(data, proc_node->content, pip, origin);
+			execute_child(data, proc_node->content, pip, origin_io);
 		pid_list_add(&data->pid_list, pid);
 		close(pip[PREV][READ_END]);
 		close(pip[NOW][WRITE_END]);
@@ -127,8 +120,8 @@ void	make_child(t_data *data)
 		proc_node = proc_node->next;
 	}
 	close(pip[NOW][READ_END]);
-	close(origin[READ_END]);
-	close(origin[WRITE_END]);
+	close(origin_io[READ_END]);
+	close(origin_io[WRITE_END]);
 }
 
 void	executor(t_data *data)
