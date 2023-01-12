@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 02:58:45 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:51:36 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*read_filename_from_pipe(pid_t pid, int pip[2])
 	int		last_index;
 	int		wstatus;
 
-	waitpid(pid, &wstatus, 0);
+	ft_waitpid(pid, &wstatus, 0);
 	if (wexitstatus(wstatus) != 0)
 		return (NULL);
 	filename = get_next_line(pip[READ_END]);
