@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/12 13:52:16 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:07:56 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	wait_child(t_data *data)
 			ft_putendl_fd("", STDOUT_FILENO);
 	}
 }
-// SIGINT 종료 시 2 반환됨
 
 void	make_child(t_data *data)
 {
