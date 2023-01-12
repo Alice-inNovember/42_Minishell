@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/11 17:18:32 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/12 11:38:00 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_data(t_data *data, char **envp)
 	list_init(&data->token_list);
 	list_init(&data->proc_data_list);
 	list_init(&data->pid_list);
-	data->syntax_err_flag = 0;
+	data->syntax_err_flag = E_NONE;
 }
 
 void	clear_data(t_data *data)
@@ -40,6 +40,7 @@ void	clear_data(t_data *data)
 	list_clear(&data->token_list, del_s_token);
 	list_clear(&data->proc_data_list, del_s_proc_data);
 	list_clear(&data->pid_list, free);
+	data->syntax_err_flag = E_NONE;
 }
 
 int	is_line_empty(t_data *data)
