@@ -16,8 +16,6 @@
 #include "../../includes/envp.h"
 #include "../../includes/builtin.h"
 
-extern int	g_exit_status;
-
 void	init_data(t_data *data, char **envp)
 {
 	static int	first_call_flag = ON;
