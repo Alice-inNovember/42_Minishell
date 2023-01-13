@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 13:54:31 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/13 10:00:23 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2023/01/13 12:34:47 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/13 12:38:48 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_random_name_file.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jincpark <jincpark@student.42seoul.kr>       +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 17:05:59 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/13 10:01:33 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2023/01/05 17:05:59 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/13 12:28:04 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

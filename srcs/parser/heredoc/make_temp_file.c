@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_temp_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: jincpark <jincpark@student.42seoul.kr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 13:43:14 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/11 17:27:19 by minseok2         ###   ########.fr       */
+/*   Created: 2023/01/05 13:43:14 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/13 12:28:18 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

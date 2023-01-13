@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minseok2 <minseok2@student.42seoul.kr      +#+  +:+       +#+         #
+#    By: jincpark <jincpark@student.42seoul.kr      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/13 09:54:10 by minseok2          #+#    #+#              #
-#    Updated: 2023/01/13 09:54:12 by minseok2         ###   ########.fr        #
+#    Created: 2023/01/13 09:54:10 by jincpark          #+#    #+#              #
+#    Updated: 2023/01/13 12:51:57 by jincpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

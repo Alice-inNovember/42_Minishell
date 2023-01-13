@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor_util2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 14:43:41 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/11 11:58:29 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2022/12/29 14:43:41 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/13 12:31:29 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
