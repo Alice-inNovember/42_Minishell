@@ -6,13 +6,13 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:19:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/13 12:37:34 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:07:47 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "../../includes/parser.h"
 
 extern int	g_exit_status;
 

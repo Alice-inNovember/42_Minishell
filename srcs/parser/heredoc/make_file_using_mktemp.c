@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_file_using_mktemp.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr>       +#+  +:+       +#+      */
+/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:04:25 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/13 12:27:43 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:07:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

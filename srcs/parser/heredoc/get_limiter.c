@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_limiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jincpark <jincpark@student.42seoul.kr      +#+  +:+       +#+        */
+/*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:50:56 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/13 12:27:17 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:06:12 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
