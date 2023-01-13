@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_heredoc_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 10:16:11 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/12 13:51:43 by minseok2         ###   ########.fr       */
+/*   Updated: 2023/01/13 08:39:48 by junlee2          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "../../../includes/parser.h"
 #include "../../../includes/executor.h"
 #include "../../../includes/signal_handler.h"
+
+extern int	g_exit_status;
 
 int	get_heredoc_input(char *filename, char *limiter)
 {
