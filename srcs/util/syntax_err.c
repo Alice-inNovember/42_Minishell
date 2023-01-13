@@ -5,17 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 14:48:29 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/13 10:00:23 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/13 19:05:01 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/data.h"
 
+extern int	g_exit_status;
+
 void	print_syntax_err(t_data *data)
 {
 	t_error	flag;
 
+	g_exit_status = 258;
 	flag = data->syntax_err_flag;
 	if (flag == E_NONE)
 		return ;

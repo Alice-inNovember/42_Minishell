@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/07 18:34:38 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/13 10:00:23 by junlee2          ###   ########seoul.kr  */
+/*   Created: 2023/01/07 18:34:38 by jincpark          #+#    #+#             */
+/*   Updated: 2023/01/13 19:03:20 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	check_eof(char *line)
 	if (line == NULL)
 	{
 		ft_putendl_fd("exit", STDOUT_FILENO);
-		exit (EXIT_FAILURE);
+		exit (EXIT_SUCCESS);
 	}
 }
 
