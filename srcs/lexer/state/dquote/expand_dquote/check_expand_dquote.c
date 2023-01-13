@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:15:16 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/13 12:37:00 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/13 20:46:54 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	check_expand_dquote(t_state *state, t_asset *asset)
 	char		*env_start;
 
 	env_start = &asset->line[asset->index + 1];
-	if (!is_limiter(asset->token_list))
+	if (is_limiter(asset->token_list))
+		*state = ADD_BUF_IN_DQUOTE;
+	else
 	{
 		if (next_input == '?')
 			*state = QUESTION_MARK_EXPAND_DQUOTE;
