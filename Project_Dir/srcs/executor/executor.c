@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:19:28 by junlee2           #+#    #+#             */
-/*   Updated: 2023/01/12 17:07:56 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:06:37 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	wait_child(t_data *data)
 		g_exit_status = status;
 		node = node->next;
 	}
-	if (wifsignaled(status_tmp))
+	if (status_tmp == SIGINT || status_tmp == SIGQUIT)
 	{
 		if (status_tmp == SIGQUIT)
 			ft_putendl_fd("Quit: 3", STDOUT_FILENO);
