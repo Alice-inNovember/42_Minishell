@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 14:43:30 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/13 12:37:53 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/14 17:37:15 by minseok2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,18 @@ typedef enum e_excode
 	EX_BY_SIGNAL = 128,
 	EX_OUTOF_RANGE = 255
 }	t_excode;
-// 0		성공
-// 1		일반적인 에러
-// 2		builtin shell command 에러
-// 126		command가 존재하지만 실행 불가
-// 127		command 존재 x
-// 128		not used on shell
-// 128+N	signal N 으로 종료된 경우
-// 255		범위 밖인 경우
+
+/*
+ * <exit code>
+ * 0       => Success
+ * 1       => General Error
+ * 2       => Built-in Shell Command Error
+ * 126     => Command is found but is not Executable
+ * 127     => Command not found
+ * 128     => not used on shell
+ * 128 + N => exit by signal N
+ * 255     => Out of Range
+ */
 
 // define envp node
 typedef struct s_envp
