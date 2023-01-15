@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:13:42 by minseok2          #+#    #+#             */
-/*   Updated: 2023/01/13 10:00:23 by junlee2          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 08:47:31 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		set_signal();
 		init_data(&data, envp);
-		data.line = readline("\033[32;1mminishell v1.0 >\033[0m ");
+		data.line = readline("\033[32;1mminishell v2.0 >\033[0m ");
 		check_eof(data.line);
 		add_history(data.line);
 		tokenizer(&data);
@@ -42,5 +42,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-// readline returns NULL if EOF is only input
-// print_token_list(&data);
