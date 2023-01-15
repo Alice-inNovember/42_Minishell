@@ -6,7 +6,7 @@
 /*   By: tyi <tyi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 17:35:08 by tyi               #+#    #+#             */
-/*   Updated: 2023/01/13 12:37:00 by tyi              ###   ########.fr       */
+/*   Updated: 2023/01/16 08:46:35 by tyi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	bt_exit(char **cmd_vector, t_list *envp_list)
 	flag = 0;
 	if (check_word_cnt(cmd_vector) == 1)
 		num = 0;
-	else if (check_word_cnt(cmd_vector) == 2)
+	else
 	{
 		num = bt_atoi(cmd_vector[1], &flag);
 		if (flag)
@@ -73,7 +73,7 @@ int	bt_exit(char **cmd_vector, t_list *envp_list)
 			exit (EX_OUTOF_RANGE);
 		}
 	}
-	else
+	if (check_word_cnt(cmd_vector) > 2)
 	{
 		error_handler_for_bt("exit", 0, MANY_ARG);
 		return (EX_BT_FAIL);
