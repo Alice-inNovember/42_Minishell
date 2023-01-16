@@ -6,7 +6,7 @@
 /*   By: junlee2 <junlee2@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 14:48:29 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/13 19:05:01 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:33:25 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	print_syntax_err(t_data *data)
 {
 	t_error	flag;
 
-	g_exit_status = 258;
 	flag = data->syntax_err_flag;
 	if (flag == E_NONE)
 		return ;
-	else if (flag == E_SINGLE_QUOTE)
+	g_exit_status = 258;
+	if (flag == E_SINGLE_QUOTE)
 		ft_putendl_fd("minishell: syntax error\
 : unclosed quote", STDERR_FILENO);
 	else if (flag == E_SINGLE_DQUOTE)
