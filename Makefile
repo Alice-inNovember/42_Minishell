@@ -20,6 +20,7 @@ LIBC		=	ar rcs
 CFLAGS		=	-Wall -Wextra -Werror
 DFLAGS		=	-g3 -fsanitize=address
 #DIRS
+RDLDIR         =        /opt/homebrew/Cellar/readline/8.2.13
 LFTDIR		=	libraries/libft
 DLLDIR		=	libraries/dllist
 GNLDIR		=	libraries/get_next_line
@@ -34,8 +35,8 @@ UTILDIR		=	$(SRCDIR)/util
 SIGDIR		=	$(SRCDIR)/signal
 BONUSDIR	=	
 #FILES
-LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a -lreadline -L${HOME}/.brew/opt/readline/lib
-INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR) -I${HOME}/.brew/opt/readline/include
+LIBS		=	$(LFTDIR)/libft.a $(DLLDIR)/libdll.a $(GNLDIR)/libgnl.a -lreadline -L$(RDLDIR)/lib
+INCS		=	-I $(LFTDIR) -I $(DLLDIR) -I $(GNLDIR) -I $(INCDIR) -I$(RDLDIR)/include
 SRCS		=	$(SRCDIR)/main.c \
 				$(ENVPDIR)/envp.c \
 				$(ENVPDIR)/envp_util.c \
