@@ -1,7 +1,7 @@
 <img width="703" alt="image" src="https://github.com/user-attachments/assets/d7a034a1-f52f-4867-96f9-27849709df31">
 
 ## About
-This is one of the 42 cursus core curriculum projects. Here, we implemented a shell program like `bash`. Our program handles command history, path-based executable searching and launching, redirections and pipes, environment variable expansion, handling of control characters, and several built-in commands like `cd, echo, env, exit, export, pwd, unset`.
+This is one of the 42 cursus core curriculum projects. Here, we implemented a shell program like `bash` in `C`. Our program handles command history, path-based executable searching and launching, redirections and pipes, environment variable expansion, handling of control characters, and several built-in commands like `cd, echo, env, exit, export, pwd, unset`.
 
 ## Prerequisites (This is only tested on OS X)
 1. You need to install `readline` first to run.
