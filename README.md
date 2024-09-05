@@ -37,7 +37,7 @@ ARFLAGS = -rcs
 
 ## How to run
 ```
-git clone 
+git clone https://github.com/Alice-inNovember/42_Minishell.git
 cd ./42_Minishell
 make
 ./minishell
