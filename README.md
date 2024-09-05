@@ -46,38 +46,38 @@ make
 ## BNF Grammar
 We have implemented our parser from this BNF grammar below, which is `Recursive Descent Parser`.
 ```
-program		: expression
-					;
-expression 	: simple_command
-						| expression '|' simple_command
-						;
-simple_cmd  : cmd_prefix cmd_word cmd_suffix
-						| cmd_prefix cmd_word
-			  		| cmd_prefix
-						| cmd_word cmd_suffix
-						| cmd_word
-						;
-cmd_word	: WORD
-					;
-cmd_prefix  : io_redirect
-						| cmd_prefix io_redirect
-						;
-cmd_suffix  : io_redirect
-						| cmd_suffix io_redirect
-						| WORD
-						| cmd_suffix WORD
-						;
-io_redirect : io_file
-						| io_here
-						;
+program	    :	expression
+		;
+expression  :   simple_command
+		| expression '|' simple_command
+		;
+simple_cmd  : 	cmd_prefix cmd_word cmd_suffix
+		| cmd_prefix cmd_word
+		| cmd_prefix
+		| cmd_word cmd_suffix
+		| cmd_word
+		;
+cmd_word    :	WORD
+		;
+cmd_prefix  :	io_redirect
+		| cmd_prefix io_redirect
+		;
+cmd_suffix  :	io_redirect
+		| cmd_suffix io_redirect
+		| WORD
+		| cmd_suffix WORD
+		;
+io_redirect :	io_file
+		| io_here
+		;
 io_file  	: '<' filename
-				 	| '>' filename
-				 	| '>>' filename
-					;
-filename	: WORD
-					;
-io_here  	: '<<' here_end
-					;
+		| '>' filename
+		| '>>' filename
+		;
+filename    :	WORD
+		;
+io_here     :	'<<' here_end
+		;
 here_end	: WORD
-					;
+		;
 ```
